@@ -1,0 +1,18 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {
+    port: 80,
+    host: 'http://0.0.0.0:8080',
+    mongoHost: 'mongodb://db/nextfree',
+    secret: '****',
+  },
+  production: {
+    port: 80,
+    host: 'http://api.nextfree.com.ua',
+    mongoHost: 'mongodb://db/nextfree',
+    secret: '****',
+  }
+}
+
+module.exports = config[env]

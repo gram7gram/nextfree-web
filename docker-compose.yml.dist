@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+    ports:
+      - '80:80'
+#      - '443:443'
+    networks:
+      - backend
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+#      - '/etc/letsencrypt/live/nextfree.com.ua/fullchain.pem:/etc/nginx/certs/nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/nextfree.com.ua/privkey.pem:/etc/nginx/certs/nextfree.com.ua.key'
+
+  www:
+    build: ./www/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=nextfree.com.ua,www.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './www:/var/www'
+
+  api:
+    build: ./api/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=api.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './api:/var/www'
+
+  admin:
+    build: ./admin/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=admin.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './admin:/var/www'
+
+  db:
+    image: mongo:4
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=nextfree
+    networks:
+      - backend
+    volumes:
+      - '.persistency/mongo/data:/data/db'
+
+networks:
+  backend:
+    driver: "bridge"
