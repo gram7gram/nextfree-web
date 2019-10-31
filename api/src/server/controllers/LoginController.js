@@ -154,7 +154,7 @@ router.post('/login', async (req, res) => {
 
       const token = AuthService.generateAuthToken(match)
 
-      res.cookie('token', token).status(200).json({
+      res.status(200).json({
         ...match,
         token
       })

@@ -9,21 +9,30 @@ const StoreService = require('../../services/StoreService');
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/companies/:id/stores', isAdmin, async (req, res) => {
+router.get('/stores', isAdmin, async (req, res) => {
 
   try {
 
-    let page = parseInt(req.query.page)
-    let limit = parseInt(req.query.limit)
-    let filter = {}
+    let page = 1, limit = 10
 
-    if (isNaN(page) || page < 0) page = 1
-    if (isNaN(limit) || limit < 0) limit = 10
+    if (req.query.limit !== undefined) {
+      limit = parseInt(req.query.limit)
+      if (isNaN(limit) || limit < 0) limit = 10
+    }
+
+    if (req.query.page !== undefined) {
+      page = parseInt(req.query.page)
+      if (isNaN(page) || page < 0) page = 10
+    }
+
+    let filter = {}
 
     let items = []
     const total = await StoreRepository.countByFilter(filter)
     if (total > 0) {
       items = await StoreRepository.findByFilter(filter, page, limit)
+
+      items = items.map(item => StoreService.serialize(item))
     }
 
     res.status(200).json({
@@ -39,11 +48,13 @@ router.get('/companies/:id/stores', isAdmin, async (req, res) => {
   }
 })
 
-router.get('/companies/:id/stores/:id', isAdmin, checkId, async (req, res) => {
+router.get('/stores/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    const entity = await StoreRepository.findOneByFilter({_id: req.params.id})
+    const entity = await StoreRepository.findOneByFilter({
+      _id: req.params.id,
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
@@ -57,24 +68,13 @@ router.get('/companies/:id/stores/:id', isAdmin, checkId, async (req, res) => {
   }
 })
 
-router.delete('/companies/:id/stores/:id', isAdmin, checkId, async (req, res) => {
+router.post('/stores', isAdmin, async (req, res) => {
 
   try {
 
-    await StoreService.remove(req.params.id)
-
-    res.status(204).send()
-
-  } catch (e) {
-    ErrorHandler.handle(res, e)
-  }
-})
-
-router.post('/companies/:id/stores', isAdmin, async (req, res) => {
-
-  try {
-
-    const result = await StoreService.create(req.body)
+    const result = await StoreService.create({
+      ...req.body,
+    })
 
     res.status(201).json(StoreService.serialize(result))
 
@@ -83,20 +83,46 @@ router.post('/companies/:id/stores', isAdmin, async (req, res) => {
   }
 })
 
-router.put('/companies/:id/stores/:id', isAdmin, checkId, async (req, res) => {
+router.put('/stores/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    const entity = await Store.findById(req.params.id)
+    const entity = await Store.findOne({
+      _id: req.params.id,
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
       })
     }
 
-    const result = await StoreService.update(entity, req.body)
+    const result = await StoreService.update(entity, {
+      ...req.body,
+    })
 
     res.status(200).json(StoreService.serialize(result))
+
+  } catch (e) {
+    ErrorHandler.handle(res, e)
+  }
+})
+
+router.delete('/stores/:id', isAdmin, checkId, async (req, res) => {
+
+  try {
+
+    const entity = await StoreRepository.findOneByFilter({
+      _id: req.params.id,
+    })
+    if (!entity) {
+      res.status(404).json({
+        message: 'Not found'
+      })
+    }
+
+    await StoreService.remove(entity._id)
+
+    res.status(204).send()
 
   } catch (e) {
     ErrorHandler.handle(res, e)

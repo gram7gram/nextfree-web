@@ -32,7 +32,7 @@ describe('ProfileController for Staff', () => {
     const newPosition = cid(), newName = cid()
 
     const res = await app.post('/api/v1/staff/profile')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
       .set('Content-Type', 'application/json')
       .send(JSON.stringify({
         position: newPosition,
@@ -57,7 +57,7 @@ describe('ProfileController for Staff', () => {
     const token = authorizeStaff(entity)
 
     const res = await app.get('/api/v1/staff/profile')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")

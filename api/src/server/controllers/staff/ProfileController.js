@@ -10,7 +10,7 @@ router.post('/profile', isStaff, async (req, res) => {
 
   try {
 
-    const entity = await Staff.findById(req.user.user._id)
+    const entity = await Staff.findById(req.currentUser.user._id)
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
@@ -30,7 +30,7 @@ router.get('/profile', isStaff, async (req, res) => {
 
   try {
 
-    res.status(200).json(StaffService.serialize(req.user.user))
+    res.status(200).json(StaffService.serialize(req.currentUser))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

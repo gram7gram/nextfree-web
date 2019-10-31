@@ -1,4 +1,5 @@
 const Store = require('../../database/model/Store').Store
+const _merge = require('lodash/merge')
 
 const StoreService = {
 
@@ -14,7 +15,9 @@ const StoreService = {
 
   update: async (entity, content) => {
 
-    entity.set(content)
+    entity.set(
+      _merge(entity.toObject(), content)
+    )
 
     const validator = await entity.validate();
     if (validator) {

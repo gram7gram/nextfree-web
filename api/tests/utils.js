@@ -1,15 +1,49 @@
 const Staff = require('../src/database/model/Staff').Staff
 const Customer = require('../src/database/model/Customer').Customer
 const Owner = require('../src/database/model/Owner').Owner
+const Store = require('../src/database/model/Store').Store
+const Company = require('../src/database/model/Company').Company
 const AuthService = require('../src/server/services/AuthService')
 
 const cid = (length = 5) => Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substr(0, length);
 
-const createStaff = async () => {
+const createCompany = async (ownerId) => {
+
+  let entity = new Company({
+    ownerId,
+    isEnabled: true,
+    bonusCondition: cid(),
+    name: cid(),
+  })
+
+  await entity.save()
+
+  return entity.toObject()
+}
+
+const createStore = async (companyId) => {
+
+  let entity = new Store({
+    companyId,
+    isEnabled: true,
+    bonusCondition: cid(),
+    city: cid(),
+    address: cid(),
+    lng: 0,
+    lat: 0,
+  })
+
+  await entity.save()
+
+  return entity.toObject()
+}
+
+const createStaff = async (isAdmin = false) => {
   const password = cid(), email = cid()
 
   let entity = new Staff({
     user: {
+      isAdmin,
       email,
       password,
     },
@@ -25,19 +59,20 @@ const createStaff = async () => {
   return entity
 }
 
-const authorizeStaff = (user, isAdmin = false) => {
+const authorizeStaff = (user) => {
   return AuthService.generateAuthToken({
     isStaff: true,
-    isAdmin,
+    isAdmin: user.user.isAdmin === true,
     user
   })
 }
 
-const createOwner = async () => {
+const createOwner = async (isAdmin = false) => {
   const password = cid(), email = cid()
 
   let entity = new Owner({
     user: {
+      isAdmin,
       email,
       password,
     },
@@ -53,19 +88,20 @@ const createOwner = async () => {
   return entity
 }
 
-const authorizeOwner = (user, isAdmin = false) => {
+const authorizeOwner = (user) => {
   return AuthService.generateAuthToken({
     isOwner: true,
-    isAdmin,
+    isAdmin: user.user.isAdmin === true,
     user
   })
 }
 
-const createCustomer = async () => {
+const createCustomer = async (isAdmin = false) => {
   const password = cid(), email = cid()
 
   let entity = new Customer({
     user: {
+      isAdmin,
       email,
       password,
     },
@@ -81,10 +117,10 @@ const createCustomer = async () => {
   return entity
 }
 
-const authorizeCustomer = (user, isAdmin = false) => {
+const authorizeCustomer = (user) => {
   return AuthService.generateAuthToken({
     isCustomer: true,
-    isAdmin,
+    isAdmin: user.user.isAdmin === true,
     user
   })
 }
@@ -97,4 +133,6 @@ module.exports = {
   authorizeOwner,
   createCustomer,
   authorizeCustomer,
+  createCompany,
+  createStore,
 }

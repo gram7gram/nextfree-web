@@ -24,6 +24,8 @@ router.get('/owners', isAdmin, async (req, res) => {
     const total = await OwnerRepository.countByFilter(filter)
     if (total > 0) {
       items = await OwnerRepository.findByFilter(filter, page, limit)
+
+      items = items.map(item => OwnerService.serialize(item))
     }
 
     res.status(200).json({

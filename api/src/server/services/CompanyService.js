@@ -1,4 +1,5 @@
 const Company = require('../../database/model/Company').Company
+const _merge = require('lodash/merge')
 
 const CompanyService = {
 
@@ -14,7 +15,25 @@ const CompanyService = {
 
   update: async (entity, content) => {
 
-    entity.set(content)
+    entity.set(
+      _merge(entity.toObject(), content)
+    )
+
+    if (entity.isModified('name')) {
+
+      const match = await Company.findOne({
+        '_id': {$not: {$eq: entity._id}},
+        'name': entity.name,
+        'ownerId': entity.ownerId,
+      }).select('_id').lean()
+      if (match) {
+        throw {
+          code: 400,
+          message: `There is already company with such name`,
+        }
+      }
+
+    }
 
     const validator = await entity.validate();
     if (validator) {

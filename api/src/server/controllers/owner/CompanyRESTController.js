@@ -12,18 +12,28 @@ const router = new express.Router({mergeParams: true});
 router.get('/companies', isOwner, async (req, res) => {
 
   try {
+    let page = 1, limit = 10
 
-    let page = parseInt(req.query.page)
-    let limit = parseInt(req.query.limit)
-    let filter = {}
+    if (req.query.limit !== undefined) {
+      limit = parseInt(req.query.limit)
+      if (isNaN(limit) || limit < 0) limit = 10
+    }
 
-    if (isNaN(page) || page < 0) page = 1
-    if (isNaN(limit) || limit < 0) limit = 10
+    if (req.query.page !== undefined) {
+      page = parseInt(req.query.page)
+      if (isNaN(page) || page < 0) page = 10
+    }
+
+    let filter = {
+      'ownerId': req.currentUser.user._id
+    }
 
     let items = []
     const total = await CompanyRepository.countByFilter(filter)
     if (total > 0) {
       items = await CompanyRepository.findByFilter(filter, page, limit)
+
+      items = items.map(item => CompanyService.serialize(item))
     }
 
     res.status(200).json({
@@ -43,7 +53,10 @@ router.get('/companies/:id', isOwner, checkId, async (req, res) => {
 
   try {
 
-    const entity = await CompanyRepository.findOneByFilter({_id: req.params.id})
+    const entity = await CompanyRepository.findOneByFilter({
+      _id: req.params.id,
+      ownerId: req.currentUser.user._id
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
@@ -61,7 +74,17 @@ router.delete('/companies/:id', isOwner, checkId, async (req, res) => {
 
   try {
 
-    await CompanyService.remove(req.params.id)
+    const entity = await CompanyRepository.findOneByFilter({
+      _id: req.params.id,
+      ownerId: req.currentUser.user._id
+    })
+    if (!entity) {
+      res.status(404).json({
+        message: 'Not found'
+      })
+    }
+
+    await CompanyService.remove(entity._id)
 
     res.status(204).send()
 
@@ -74,7 +97,10 @@ router.post('/companies', isOwner, async (req, res) => {
 
   try {
 
-    const result = await CompanyService.create(req.body)
+    const result = await CompanyService.create({
+      ...req.body,
+      ownerId: req.currentUser.user._id
+    })
 
     res.status(201).json(CompanyService.serialize(result))
 
@@ -87,14 +113,20 @@ router.put('/companies/:id', isOwner, checkId, async (req, res) => {
 
   try {
 
-    const entity = await Company.findById(req.params.id)
+    const entity = await Company.findOne({
+      _id: req.params.id,
+      ownerId: req.currentUser.user._id,
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
       })
     }
 
-    const result = await CompanyService.update(entity, req.body)
+    const result = await CompanyService.update(entity, {
+      ...req.body,
+      ownerId: req.currentUser.user._id,
+    })
 
     res.status(200).json(CompanyService.serialize(result))
 

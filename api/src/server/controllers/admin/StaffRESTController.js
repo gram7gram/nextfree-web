@@ -24,6 +24,8 @@ router.get('/staff', isAdmin, async (req, res) => {
     const total = await StaffRepository.countByFilter(filter)
     if (total > 0) {
       items = await StaffRepository.findByFilter(filter, page, limit)
+
+      items = items.map(item => StaffService.serialize(item))
     }
 
     res.status(200).json({

@@ -24,6 +24,8 @@ router.get('/customers', isAdmin, async (req, res) => {
     const total = await CustomerRepository.countByFilter(filter)
     if (total > 0) {
       items = await CustomerRepository.findByFilter(filter, page, limit)
+
+      items = items.map(item => CustomerService.serialize(item))
     }
 
     res.status(200).json({

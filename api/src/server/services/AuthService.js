@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken')
 const params = require('../../../parameters')
 
-const getToken = req => req.cookies.token;
+const getToken = req => req.headers['authorization'];
 
 const isAdmin = (req, res, next) => {
 
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token cookie"
+      message: "Missing token"
     });
     return
   }
@@ -23,7 +23,7 @@ const isAdmin = (req, res, next) => {
       return
     }
 
-    req.user = decoded;
+    req.currentUser = decoded;
 
     next();
 
@@ -41,7 +41,7 @@ const isOwner = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token cookie"
+      message: "Missing token"
     });
     return
   }
@@ -56,7 +56,7 @@ const isOwner = (req, res, next) => {
       return
     }
 
-    req.user = decoded;
+    req.currentUser = decoded;
 
     next();
 
@@ -74,7 +74,7 @@ const isStaff = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token cookie"
+      message: "Missing token"
     });
     return
   }
@@ -89,7 +89,7 @@ const isStaff = (req, res, next) => {
       return
     }
 
-    req.user = decoded;
+    req.currentUser = decoded;
 
     next();
 
@@ -107,7 +107,7 @@ const isCustomer = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token cookie"
+      message: "Missing token"
     });
     return
   }
@@ -122,7 +122,7 @@ const isCustomer = (req, res, next) => {
       return
     }
 
-    req.user = decoded;
+    req.currentUser = decoded;
 
     next();
 
@@ -140,7 +140,7 @@ const isAuthenticated = (req, res, next) => {
   const token = getToken(req)
   if (!token) {
     res.status(401).json({
-      message: "Missing token cookie"
+      message: "Missing token"
     });
     return
   }
@@ -156,7 +156,7 @@ const isAuthenticated = (req, res, next) => {
       return
     }
 
-    req.user = decoded;
+    req.currentUser = decoded;
 
     next();
 

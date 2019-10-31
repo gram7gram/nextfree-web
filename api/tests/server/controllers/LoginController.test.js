@@ -99,7 +99,7 @@ describe('LoginController', () => {
     const token = authorizeStaff(entity)
 
     const res = await app.post('/api/v1/login-check')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.body.token, 'Missing token').not.toBe(undefined)
@@ -117,7 +117,7 @@ describe('LoginController', () => {
     const token = authorizeCustomer(entity)
 
     const res = await app.post('/api/v1/login-check')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.body.token, 'Missing token').not.toBe(undefined)
@@ -135,7 +135,7 @@ describe('LoginController', () => {
     const token = authorizeOwner(entity)
 
     const res = await app.post('/api/v1/login-check')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.body.token, 'Missing token').not.toBe(undefined)

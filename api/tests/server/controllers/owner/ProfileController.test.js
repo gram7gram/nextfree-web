@@ -32,7 +32,7 @@ describe('ProfileController for Owner', () => {
     const newName = cid()
 
     const res = await app.post('/api/v1/owner/profile')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
       .set('Content-Type', 'application/json')
       .send(JSON.stringify({
         user: {
@@ -55,7 +55,7 @@ describe('ProfileController for Owner', () => {
     const token = authorizeOwner(entity)
 
     const res = await app.get('/api/v1/owner/profile')
-      .set('Cookie', `token=${token}`)
+      .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")
