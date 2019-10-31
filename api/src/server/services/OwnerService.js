@@ -1,4 +1,5 @@
 const Owner = require('../../database/model/Owner').Owner
+const _merge = require('lodash/merge')
 
 const OwnerService = {
 
@@ -18,16 +19,16 @@ const OwnerService = {
 
   update: async (entity, content) => {
 
-    entity.set(content)
+    entity.set(
+      _merge(entity.toObject(), content)
+    )
 
-    if (entity.isModified("email")) {
+    if (entity.isModified('user.email')) {
 
       const match = await Owner.findOne({
         _id: {$not: {$eq: entity._id}},
-        user: {
-          email: entity.email
-        }
-      }).select('_id email').lean()
+        'user.email': entity.user.email
+      }).select('_id user.email').lean()
       if (match) {
         throw {
           code: 400,

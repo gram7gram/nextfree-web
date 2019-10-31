@@ -1,4 +1,5 @@
 const Staff = require('../../database/model/Staff').Staff
+const _merge = require('lodash/merge')
 
 const StaffService = {
 
@@ -18,19 +19,23 @@ const StaffService = {
 
   update: async (entity, content) => {
 
-    entity.set(content)
+    entity.set(
+      _merge(entity.toObject(), content)
+    )
 
-    const match = await Staff.findOne({
-      _id: {$not: {$eq: entity._id}},
-      user: {
-        email: entity.email
+    if (entity.isModified('user.email')) {
+
+      const match = await Staff.findOne({
+        _id: {$not: {$eq: entity._id}},
+        'user.email': entity.user.email
+      }).select('_id user.email').lean()
+      if (match) {
+        throw {
+          code: 400,
+          message: `There is already staff with such email`,
+        }
       }
-    }).select('_id email').lean()
-    if (match) {
-      throw {
-        code: 400,
-        message: `There is already staff with such email`,
-      }
+
     }
 
     const validator = await entity.validate();

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const params = require('../../../parameters')
 
-const getToken = req => req.cookie.token;
+const getToken = req => req.cookies.token;
 
 const isAdmin = (req, res, next) => {
 
@@ -184,6 +184,7 @@ const verifyToken = token => {
 }
 
 module.exports = {
+  getToken,
   isAuthenticated,
   isAdmin,
   isCustomer,

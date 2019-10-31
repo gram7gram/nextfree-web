@@ -154,15 +154,13 @@ router.post('/login', async (req, res) => {
 
       const token = AuthService.generateAuthToken(match)
 
-      res.status(200).json({
+      res.cookie('token', token).status(200).json({
         ...match,
         token
       })
 
     }).catch(e => {
-      res.status(e.code || 500).json({
-        message: e.message
-      })
+      ErrorHandler.handle(res, e)
     })
 
   } catch (e) {
@@ -174,7 +172,7 @@ router.post('/login-check', async (req, res) => {
 
   try {
 
-    const token = req.cookie.token
+    const token = AuthService.getToken(req)
     if (!token) {
       res.status(400).json({
         message: 'Bad request'
