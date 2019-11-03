@@ -17,6 +17,7 @@ const OwnerStoreRESTController = require('./server/controllers/owner/StoreRESTCo
 const OwnerStaffRESTController = require('./server/controllers/owner/StaffRESTController');
 
 const StaffProfileController = require('./server/controllers/staff/ProfileController');
+const StaffPurchaseRESTController = require('./server/controllers/staff/PurchaseRESTController');
 
 const CustomerProfileController = require('./server/controllers/customer/ProfileController');
 
@@ -44,6 +45,7 @@ app.use('/api/v1/owner', OwnerProfileController);
 
 //Staff API
 app.use('/api/v1/staff', StaffProfileController);
+app.use('/api/v1/staff', StaffPurchaseRESTController);
 
 //Customer API
 app.use('/api/v1/customer', CustomerProfileController);

@@ -54,6 +54,7 @@ module.exports = {
 
     console.info(`Dropping database at @ ${host}`);
 
-    mongoose.connection.db.dropDatabase();
+    if (mongoose.connection && mongoose.connection.db)
+      mongoose.connection.db.dropDatabase();
   },
 };

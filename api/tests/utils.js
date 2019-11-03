@@ -21,7 +21,7 @@ const createCompany = async (ownerId) => {
   return entity.toObject()
 }
 
-const createStore = async (companyId) => {
+const createStore = async (companyId, store = {}) => {
 
   let entity = new Store({
     companyId,
@@ -31,6 +31,7 @@ const createStore = async (companyId) => {
     address: cid(),
     lng: 0,
     lat: 0,
+    ...store
   })
 
   await entity.save()
@@ -38,7 +39,7 @@ const createStore = async (companyId) => {
   return entity.toObject()
 }
 
-const createStaff = async (isAdmin = false) => {
+const createStaff = async (isAdmin = false, staff = {}) => {
   const password = cid(), email = cid()
 
   let entity = new Staff({
@@ -47,7 +48,8 @@ const createStaff = async (isAdmin = false) => {
       email,
       password,
     },
-    isEnabled: true
+    isEnabled: true,
+    ...staff
   })
 
   await entity.save()

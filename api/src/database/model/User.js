@@ -5,7 +5,6 @@ const schema = new mongoose.Schema({
   email: {
     type: String,
     lowercase: true,
-    unique: true,
     required: true
   },
   isAdmin: {
@@ -14,7 +13,7 @@ const schema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: false
   },
   firstName: {
     type: String,
@@ -36,7 +35,7 @@ const schema = new mongoose.Schema({
 
 schema.pre("save", function (next) {
 
-  if (this.isModified("password")) {
+  if (this.isModified("password") && this.password) {
     this.password = bcrypt.hashSync(this.password, 10);
   }
 
