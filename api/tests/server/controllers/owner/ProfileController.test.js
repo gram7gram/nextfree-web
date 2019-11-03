@@ -43,7 +43,7 @@ describe('ProfileController for Owner', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body.user.firstName).toBe(newName)
 
-    await Owner.deleteOne(entity)
+    await Owner.deleteOne({_id: entity._id})
 
     done()
   })
@@ -60,7 +60,7 @@ describe('ProfileController for Owner', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")
 
-    await Owner.deleteOne(entity)
+    await Owner.deleteOne({_id: entity._id})
 
     done()
   })

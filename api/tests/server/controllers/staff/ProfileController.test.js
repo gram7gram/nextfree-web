@@ -45,7 +45,7 @@ describe('ProfileController for Staff', () => {
     expect(res.body.position).toBe(newPosition)
     expect(res.body.user.firstName).toBe(newName)
 
-    await Staff.deleteOne(entity)
+    await Staff.deleteOne({_id: entity._id})
 
     done()
   })
@@ -62,7 +62,7 @@ describe('ProfileController for Staff', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")
 
-    await Staff.deleteOne(entity)
+    await Staff.deleteOne({_id: entity._id})
 
     done()
   })

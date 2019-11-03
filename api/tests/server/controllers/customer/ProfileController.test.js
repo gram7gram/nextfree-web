@@ -43,7 +43,7 @@ describe('ProfileController for Customer', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body.user.firstName).toBe(newName)
 
-    await Customer.deleteOne(entity)
+    await Customer.deleteOne({_id: entity._id})
 
     done()
   })
@@ -60,7 +60,7 @@ describe('ProfileController for Customer', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")
 
-    await Customer.deleteOne(entity)
+    await Customer.deleteOne({_id: entity._id})
 
     done()
   })

@@ -12,7 +12,17 @@ const config = {
     host: 'http://api.nextfree.com.ua',
     mongoHost: 'mongodb://db/nextfree',
     secret: '****',
+  },
+  test: {
+    port: 80,
+    host: 'http://api',
+    mongoHost: 'mongodb://db/nextfree-test',
+    secret: '****',
   }
+}
+
+if (config[env] === undefined) {
+  throw `Missing parameters for ${env} environment`
 }
 
 module.exports = config[env]

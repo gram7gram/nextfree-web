@@ -6,7 +6,8 @@ const StaffService = {
   serialize: entity => {
     const result = {...entity}
 
-    delete result.user.password
+    if (result.user)
+      delete result.user.password
 
     return result
   },

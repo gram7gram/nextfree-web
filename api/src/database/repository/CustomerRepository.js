@@ -3,15 +3,26 @@ const Customer = require('../model/Customer').Customer
 const findByFilter = async (filter, page, limit) => {
   const skip = page > 0 && limit > 0 ? limit * (page - 1) : 0
 
-  return await Customer.find(filter, {createdAt: 'desc'}, {skip, limit})
-    .select('-user.password')
-    .lean()
+  const items = await Customer.find(filter, {createdAt: 'desc'}, {skip, limit}).lean()
+
+  return items.map(item => {
+
+    if (item.user)
+      delete item.user.password
+
+    return item
+  })
 }
 
 const findOneByFilter = async (filter) => {
-  return await Customer.findOne(filter)
-    .select('-user.password')
-    .lean()
+  const item = await Customer.findOne(filter).lean()
+
+  if (item) {
+    if (item.user)
+      delete item.user.password
+  }
+
+  return item
 }
 
 const countByFilter = async (filter) => {

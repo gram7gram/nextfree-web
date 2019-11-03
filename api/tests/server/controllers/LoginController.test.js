@@ -45,7 +45,7 @@ describe('LoginController', () => {
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
 
-    await Customer.deleteOne(entity)
+    await Customer.deleteOne({_id: entity._id})
 
     done()
   })
@@ -66,7 +66,7 @@ describe('LoginController', () => {
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
 
-    await Owner.deleteOne(entity)
+    await Owner.deleteOne({_id: entity._id})
 
     done()
   })
@@ -87,7 +87,7 @@ describe('LoginController', () => {
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
 
-    await Staff.deleteOne(entity)
+    await Staff.deleteOne({_id: entity._id})
 
     done()
 
@@ -105,7 +105,7 @@ describe('LoginController', () => {
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isStaff, 'Not a Staff').toBe(true)
 
-    await Staff.deleteOne(entity)
+    await Staff.deleteOne({_id: entity._id})
 
     done()
 
@@ -123,7 +123,7 @@ describe('LoginController', () => {
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isCustomer, 'Not a Customer').toBe(true)
 
-    await Customer.deleteOne(entity)
+    await Customer.deleteOne({_id: entity._id})
 
     done()
 
@@ -141,7 +141,7 @@ describe('LoginController', () => {
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isOwner, 'Not a Owner').toBe(true)
 
-    await Owner.deleteOne(entity)
+    await Owner.deleteOne({_id: entity._id})
 
     done()
 

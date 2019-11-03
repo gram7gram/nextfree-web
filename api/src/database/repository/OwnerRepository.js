@@ -3,15 +3,26 @@ const Owner = require('../model/Owner').Owner
 const findByFilter = async (filter, page, limit) => {
   const skip = page > 0 && limit > 0 ? limit * (page - 1) : 0
 
-  return await Owner.find(filter, {createdAt: 'desc'}, {skip, limit})
-    .select('-user.password')
-    .lean()
+  const items = await Owner.find(filter, {createdAt: 'desc'}, {skip, limit}).lean()
+
+  return items.map(item => {
+
+    if (item.user)
+      delete item.user.password
+
+    return item
+  })
 }
 
 const findOneByFilter = async (filter) => {
-  return await Owner.findOne(filter)
-    .select('-user.password')
-    .lean()
+  const item = await Owner.findOne(filter).lean()
+
+  if (item) {
+    if (item.user)
+      delete item.user.password
+  }
+
+  return item
 }
 
 const countByFilter = async (filter) => {

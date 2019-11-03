@@ -79,7 +79,7 @@ describe('StoreRESTController for Owner', () => {
     expect(res.body._id + "").toBe(entity._id + "")
     expect(res.body.address + "").toBe(newAddress)
 
-    await Store.deleteOne(entity)
+    await Store.deleteOne({_id: entity._id})
 
     done()
   })
@@ -93,7 +93,7 @@ describe('StoreRESTController for Owner', () => {
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(204)
 
-    await Store.deleteOne(entity)
+    await Store.deleteOne({_id: entity._id})
 
     done()
   })

@@ -71,7 +71,7 @@ describe('CompanyRESTController for Admin', () => {
     expect(res.body._id + "").toBe(entity._id + "")
     expect(res.body.name + "").toBe(newName)
 
-    await Company.deleteOne(entity)
+    await Company.deleteOne({_id: entity._id})
 
     done()
   })
@@ -85,7 +85,7 @@ describe('CompanyRESTController for Admin', () => {
 
     expect(res.statusCode).toBe(204)
 
-    await Company.deleteOne(entity)
+    await Company.deleteOne({_id: entity._id})
 
     done()
   })

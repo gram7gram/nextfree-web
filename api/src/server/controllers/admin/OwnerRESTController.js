@@ -13,12 +13,19 @@ router.get('/owners', isAdmin, async (req, res) => {
 
   try {
 
-    let page = parseInt(req.query.page)
-    let limit = parseInt(req.query.limit)
-    let filter = {}
+    let page = 1, limit = 10
 
-    if (isNaN(page) || page < 0) page = 1
-    if (isNaN(limit) || limit < 0) limit = 10
+    if (req.query.limit !== undefined) {
+      limit = parseInt(req.query.limit)
+      if (isNaN(limit) || limit < 0) limit = 10
+    }
+
+    if (req.query.page !== undefined) {
+      page = parseInt(req.query.page)
+      if (isNaN(page) || page < 0) page = 10
+    }
+
+    const filter = {}
 
     let items = []
     const total = await OwnerRepository.countByFilter(filter)

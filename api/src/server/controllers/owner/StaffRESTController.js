@@ -5,20 +5,52 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 
 const Staff = require('../../../database/model/Staff').Staff;
 const StaffRepository = require('../../../database/repository/StaffRepository');
+const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const StaffService = require('../../services/StaffService');
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/staff', isOwner, async (req, res) => {
+const checkCompanyId = (req, res, next) => {
+
+  if (!/^[0-9a-fA-F]{24}$/.test(req.params.company)) {
+    res.status(400).json({
+      message: 'Invalid `company` in request',
+    })
+    return
+  }
+
+  next()
+}
+
+router.get('/companies/:company/staff', isOwner, checkCompanyId, async (req, res) => {
 
   try {
 
-    let page = parseInt(req.query.page)
-    let limit = parseInt(req.query.limit)
-    let filter = {}
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: req.currentUser.user._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: 'No company found'
+      })
+    }
 
-    if (isNaN(page) || page < 0) page = 1
-    if (isNaN(limit) || limit < 0) limit = 10
+    let page = 1, limit = 10
+
+    if (req.query.limit !== undefined) {
+      limit = parseInt(req.query.limit)
+      if (isNaN(limit) || limit < 0) limit = 10
+    }
+
+    if (req.query.page !== undefined) {
+      page = parseInt(req.query.page)
+      if (isNaN(page) || page < 0) page = 10
+    }
+
+    const filter = {
+      companyId: company._id
+    }
 
     let items = []
     const total = await StaffRepository.countByFilter(filter)
@@ -41,11 +73,33 @@ router.get('/staff', isOwner, async (req, res) => {
   }
 })
 
-router.get('/staff/:id', isOwner, checkId, async (req, res) => {
+router.get('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, async (req, res) => {
 
   try {
 
-    const entity = await StaffRepository.findOneByFilter({_id: req.params.id})
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: req.currentUser.user._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: 'No company found'
+      })
+    }
+
+    const entity = await StaffRepository.findOneByFilter({
+      $and: [
+        {
+          _id: req.params.id
+        },
+        {
+          $or: [
+            {companyId: company._id},
+            {companyId: null},
+          ]
+        }
+      ]
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
@@ -59,11 +113,40 @@ router.get('/staff/:id', isOwner, checkId, async (req, res) => {
   }
 })
 
-router.delete('/staff/:id', isOwner, checkId, async (req, res) => {
+router.delete('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, async (req, res) => {
 
   try {
 
-    await StaffService.remove(req.params.id)
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: req.currentUser.user._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: 'No company found'
+      })
+    }
+
+    const entity = await Staff.findOne({
+      $and: [
+        {
+          _id: req.params.id
+        },
+        {
+          $or: [
+            {companyId: company._id},
+            {companyId: null},
+          ]
+        }
+      ]
+    })
+    if (!entity) {
+      res.status(404).json({
+        message: 'Not found'
+      })
+    }
+
+    await StaffService.remove(entity._id)
 
     res.status(204).send()
 
@@ -72,11 +155,24 @@ router.delete('/staff/:id', isOwner, checkId, async (req, res) => {
   }
 })
 
-router.post('/staff', isOwner, async (req, res) => {
+router.post('/companies/:company/staff', isOwner, checkCompanyId, async (req, res) => {
 
   try {
 
-    const result = await StaffService.create(req.body)
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: req.currentUser.user._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: 'No company found'
+      })
+    }
+
+    const result = await StaffService.create({
+      ...req.body,
+      companyId: company._id
+    })
 
     res.status(201).json(StaffService.serialize(result))
 
@@ -85,11 +181,33 @@ router.post('/staff', isOwner, async (req, res) => {
   }
 })
 
-router.put('/staff/:id', isOwner, checkId, async (req, res) => {
+router.put('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, async (req, res) => {
 
   try {
 
-    const entity = await Staff.findById(req.params.id)
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: req.currentUser.user._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: 'No company found'
+      })
+    }
+
+    const entity = await Staff.findOne({
+      $and: [
+        {
+          _id: req.params.id
+        },
+        {
+          $or: [
+            {companyId: company._id},
+            {companyId: null},
+          ]
+        }
+      ]
+    })
     if (!entity) {
       res.status(404).json({
         message: 'Not found'

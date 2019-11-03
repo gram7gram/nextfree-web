@@ -1,18 +1,36 @@
 const ErrorHandler = {
 
-  handle: (res, e) => {
+  detectMessage: e => {
+    let message = e.message
 
-    console.error(e);
+    if (!message && e.name === 'MongoError') {
+      message = e.errmsg
+    }
 
+    return message
+  },
+
+  detectStatusCode: e => {
     let code = 500
 
     if (e.code >= 400 && e.code < 510) {
       code = e.code
     }
 
-    delete e.code
+    return code
+  },
 
-    res.status(code).json(e)
+  handle: (res, e) => {
+
+    console.error(e, e.stack);
+
+    const code = ErrorHandler.detectStatusCode(e)
+    const message = ErrorHandler.detectMessage(e)
+
+    res.status(code).json({
+      message,
+      e
+    })
   }
 
 }

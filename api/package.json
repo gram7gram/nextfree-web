@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "babel-node src/runner.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "jest": "^24.9.0",

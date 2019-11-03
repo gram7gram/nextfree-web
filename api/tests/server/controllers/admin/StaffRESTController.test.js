@@ -1,11 +1,12 @@
 const {boot, tearDown} = require('../../../WebTestCase')
 
+const Staff = require('../../../../src/database/model/Staff').Staff
 const Store = require('../../../../src/database/model/Store').Store
 const Company = require('../../../../src/database/model/Company').Company
 const Owner = require('../../../../src/database/model/Owner').Owner
-const {createOwner, authorizeOwner, cid, createCompany, createStore} = require('../../../utils')
+const {createOwner, authorizeOwner, cid, createCompany, createStore, createStaff} = require('../../../utils')
 
-let app, admin, token, company
+let app, admin, token, company, store
 
 beforeAll(async (done) => {
 
@@ -17,6 +18,8 @@ beforeAll(async (done) => {
 
   company = await createCompany(admin._id)
 
+  store = await createStore(company._id)
+
   done()
 })
 
@@ -24,6 +27,7 @@ afterAll(async done => {
 
   await Owner.deleteOne(admin)
   await Company.deleteOne(company)
+  await Store.deleteOne(store)
 
   await tearDown();
 
@@ -31,25 +35,27 @@ afterAll(async done => {
   admin = null
   token = null
   company = null
+  store = null
 
   done();
 });
 
-describe('StoreRESTController for Admin', () => {
+describe('StaffRESTController for Admin', () => {
 
-  it('POST /api/v1/admin/stores as Admin is successful', async (done) => {
+  it('POST /api/v1/admin/staff as Admin is successful', async (done) => {
 
     const entity = {
       companyId: company._id,
-      isEnabled: true,
-      bonusCondition: cid(),
-      city: cid(),
-      address: cid(),
-      lng: 0,
-      lat: 0,
+      storeId: store._id,
+      position: cid(),
+      user: {
+        email: cid(),
+        password: cid(),
+      },
+      isEnabled: true
     }
 
-    const res = await app.post(`/api/v1/admin/stores`)
+    const res = await app.post(`/api/v1/admin/staff`)
       .set('Authorization', `${token}`)
       .set('Content-Type', 'application/json')
       .send(JSON.stringify(entity))
@@ -57,51 +63,53 @@ describe('StoreRESTController for Admin', () => {
     expect(res.statusCode, JSON.stringify(res.body)).toBe(201)
     expect(res.body._id).not.toBe(undefined)
     expect(res.body.companyId + "").toBe(company._id + "")
+    expect(res.body.storeId + "").toBe(store._id + "")
+    expect(res.body.position).toBe(entity.position)
 
-    await Store.deleteOne({_id: res.body._id})
+    await Staff.deleteOne({_id: res.body._id})
 
     done()
   })
 
-  it('PUT /api/v1/admin/stores/:id as Admin is successful', async (done) => {
+  it('PUT /api/v1/admin/staff/:id as Admin is successful', async (done) => {
 
-    const entity = await createStore(company._id)
+    const entity = await createStaff()
 
-    const newAddress = cid(10)
-
-    const res = await app.put(`/api/v1/admin/stores/${entity._id}`)
+    const res = await app.put(`/api/v1/admin/staff/${entity._id}`)
       .set('Authorization', `${token}`)
       .set('Content-Type', 'application/json')
       .send(JSON.stringify({
-        address: newAddress
+        storeId: store._id,
+        isEnabled: false
       }))
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(200)
     expect(res.body._id + "").toBe(entity._id + "")
-    expect(res.body.address + "").toBe(newAddress)
+    expect(res.body.storeId + "").toBe(store._id + "")
+    expect(res.body.isEnabled).toBe(false)
 
-    await Store.deleteOne({_id: entity._id})
+    await Staff.deleteOne({_id: entity._id})
 
     done()
   })
 
-  it('DELETE /api/v1/admin/stores/:id as Admin is successful', async (done) => {
+  it('DELETE /api/v1/admin/staff/:id as Admin is successful', async (done) => {
 
-    const entity = await createStore(company._id)
+    const entity = await createStaff()
 
-    const res = await app.del(`/api/v1/admin/stores/${entity._id}`)
+    const res = await app.del(`/api/v1/admin/staff/${entity._id}`)
       .set('Authorization', `${token}`)
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(204)
 
-    await Store.deleteOne({_id: entity._id})
+    await Staff.deleteOne({_id: entity._id})
 
     done()
   })
 
-  it('GET /api/v1/admin/stores as Admin is successful', async (done) => {
+  it('GET /api/v1/admin/staff as Admin is successful', async (done) => {
 
-    const res = await app.get(`/api/v1/admin/stores`)
+    const res = await app.get(`/api/v1/admin/staff`)
       .set('Authorization', `${token}`)
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(200)
@@ -113,9 +121,9 @@ describe('StoreRESTController for Admin', () => {
     done()
   })
 
-  it('GET /api/v1/admin/stores?page=100&limit=100 as Admin is successful', async (done) => {
+  it('GET /api/v1/admin/staff?page=100&limit=100 as Admin is successful', async (done) => {
 
-    const res = await app.get(`/api/v1/admin/stores?page=100&limit=100`)
+    const res = await app.get(`/api/v1/admin/staff?page=100&limit=100`)
       .set('Authorization', `${token}`)
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(200)
@@ -125,9 +133,9 @@ describe('StoreRESTController for Admin', () => {
     done()
   })
 
-  it('GET /api/v1/admin/stores?page=0&limit=0 as Admin is successful', async (done) => {
+  it('GET /api/v1/admin/staff?page=0&limit=0 as Admin is successful', async (done) => {
 
-    const res = await app.get(`/api/v1/admin/stores?page=0&limit=0`)
+    const res = await app.get(`/api/v1/admin/staff?page=0&limit=0`)
       .set('Authorization', `${token}`)
 
     expect(res.statusCode, JSON.stringify(res.body)).toBe(200)
