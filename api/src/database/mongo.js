@@ -13,7 +13,7 @@ const params = {
 
 const connect = (host, opts = {}) => {
 
-  console.info(`Connecting to database @ ${host} ...`);
+  // console.info(`Connecting to database @ ${host} ...`);
 
   opts.useNewUrlParser = true
   opts.useFindAndModify = false
@@ -24,7 +24,7 @@ const connect = (host, opts = {}) => {
 
 mongoose.connection.on('connected', () => {
 
-  console.info(`Connected to database @ ${host}`);
+  // console.info(`Connected to database @ ${host}`);
 
 })
 
@@ -37,7 +37,7 @@ mongoose.connection.on('error', (err) => {
 
 mongoose.connection.on('disconnected', () => {
 
-  console.info(`Disconnected from database @ ${host}`);
+  // console.info(`Disconnected from database @ ${host}`);
 
   if (process.env.NODE_ENV === 'production') {
     setTimeout(() => {
@@ -52,7 +52,7 @@ module.exports = {
   disconnect: () => mongoose.disconnect(),
   dropdb: () => {
 
-    console.info(`Dropping database at @ ${host}`);
+    // console.info(`Dropping database at @ ${host}`);
 
     if (mongoose.connection && mongoose.connection.db)
       mongoose.connection.db.dropDatabase();

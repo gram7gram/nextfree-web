@@ -1,20 +1,19 @@
 const express = require('express');
 const ErrorHandler = require('../../services/ErrorHandler');
-const isStaff = require('../../services/AuthService').isStaff;
+const isOwner = require('../../services/AuthService').isOwner;
 const checkId = require('../../services/RequestParamsValidator').checkId;
 
 const PurchaseService = require('../../services/PurchaseService');
 const CustomerRepository = require('../../../database/repository/CustomerRepository');
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
-const StoreRepository = require('../../../database/repository/StoreRepository');
 
 const router = new express.Router({mergeParams: true});
 
-router.post('/customers/:id/purchases', isStaff, checkId, async (req, res) => {
+router.post('/customers/:id/purchases', isOwner, checkId, async (req, res) => {
 
   try {
 
-    const staff = {...req.currentUser.user}
+    const owner = {...req.currentUser.user}
 
     const customer = await CustomerRepository.findOneByFilter({
       _id: req.params.id,
@@ -27,15 +26,8 @@ router.post('/customers/:id/purchases', isStaff, checkId, async (req, res) => {
       }
     }
 
-    if (!(staff.companyId && staff.storeId)) {
-      throw {
-        code: 400,
-        message: 'Staff is not assigned to a store'
-      }
-    }
-
     const company = await CompanyRepository.findOneByFilter({
-      _id: staff.companyId,
+      ownerId: owner._id,
       isEnabled: true,
     })
     if (!company) {
@@ -45,23 +37,13 @@ router.post('/customers/:id/purchases', isStaff, checkId, async (req, res) => {
       }
     }
 
-    const store = await StoreRepository.findOneByFilter({
-      _id: staff.storeId,
-      isEnabled: true,
-    })
-    if (!store) {
-      throw {
-        code: 404,
-        message: 'No store found'
-      }
-    }
-
     const item = await PurchaseService.create({
       company,
-      store,
-      staff,
       customer,
-      bonusCondition: store.bonusCondition,
+      bonusCondition: company.bonusCondition,
+      staff: {
+        ...owner
+      },
     })
 
     res.status(201).json(PurchaseService.serialize(item))

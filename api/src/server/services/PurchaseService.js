@@ -32,29 +32,34 @@ const PurchaseService = {
 
   checkBonusCondition: async purchase => {
 
-    if (purchase.store.bonusCondition === Conditions.BC_4_PLUS_1) {
+    const bonusCondition = purchase.store ? purchase.store.bonusCondition : purchase.company.bonusCondition
+
+    if (bonusCondition === Conditions.BC_4_PLUS_1) {
       await PurchaseService.check4Plus1Condition(purchase)
     } else {
       throw {
         code: 501,
-        message: `Unknown bonus condition "${purchase.store.bonusCondition}" in store "${purchase.store._id}"`
+        message: `Unknown bonus condition "${bonusCondition}" in store "${purchase.store._id}"`
       }
     }
 
   },
 
-  check4Plus1Condition: async purchase => {
+  check4Plus1Condition: async (purchase) => {
+
+    const bonusCondition = Conditions.BC_4_PLUS_1
+
     const previousBonus = await Purchase.findOne({
       'customer._id': purchase.customer._id,
-      'store._id': purchase.store._id,
-      'bonusCondition': purchase.store.bonusCondition,
+      'company._id': purchase.company._id,
+      'bonusCondition': bonusCondition,
       'isBonus': true
     }, {createdAt: 'desc'}).select('_id createdAt').lean()
 
     const bonusQuery = {
       'customer._id': purchase.customer._id,
-      'store._id': purchase.store._id,
-      'bonusCondition': purchase.store.bonusCondition,
+      'company._id': purchase.company._id,
+      'bonusCondition': bonusCondition,
       'isBonus': false,
     }
 

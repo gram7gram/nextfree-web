@@ -30,7 +30,7 @@ router.get('/profile', isCustomer, async (req, res) => {
 
   try {
 
-    res.status(200).json(CustomerService.serialize(req.currentUser))
+    res.status(200).json(CustomerService.serialize(req.currentUser.user))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

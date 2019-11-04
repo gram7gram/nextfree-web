@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 
 const db = require('../src/database/mongo')
-const server = require('../src')
+const server = require('../src/server/express')
 
 module.exports = {
   tearDown: async () => {

@@ -8,7 +8,7 @@ const Store = require('./Store').schema;
 const schema = new mongoose.Schema({
   store: {
     type: Store,
-    required: true
+    required: false
   },
   staff: {
     type: Staff,

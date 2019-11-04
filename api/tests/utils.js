@@ -7,13 +7,14 @@ const AuthService = require('../src/server/services/AuthService')
 
 const cid = (length = 5) => Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substr(0, length);
 
-const createCompany = async (ownerId) => {
+const createCompany = async (ownerId, company = {}) => {
 
   let entity = new Company({
     ownerId,
     isEnabled: true,
     bonusCondition: cid(),
     name: cid(),
+    ...company
   })
 
   await entity.save()

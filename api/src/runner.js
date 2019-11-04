@@ -16,7 +16,7 @@ db.connect().catch(e => {
   console.error(e)
 })
 
-const server = require('./index');
+const server = require('./server/express');
 
 server.listen(parameters.port, () => {
   console.log('Server started')
