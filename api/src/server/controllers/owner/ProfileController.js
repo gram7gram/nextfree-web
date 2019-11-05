@@ -30,7 +30,14 @@ router.get('/profile', isOwner, async (req, res) => {
 
   try {
 
-    res.status(200).json(OwnerService.serialize(req.currentUser.user))
+    const entity = await Owner.findById(req.currentUser.user._id).lean()
+    if (!entity) {
+      res.status(404).json({
+        message: 'Not found'
+      })
+    }
+
+    res.status(200).json(OwnerService.serialize(entity))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

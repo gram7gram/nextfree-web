@@ -1,4 +1,5 @@
 const parameters = require('../parameters')
+const provision = require('./provision')
 
 console.log(`Starting app in ${process.env.NODE_ENV} environment...`)
 
@@ -12,9 +13,11 @@ process.on('unhandledRejection', (reason, p) => {
 
 const db = require('./database/mongo');
 
-db.connect().catch(e => {
-  console.error(e)
-})
+db.connect()
+  .then(provision)
+  .catch(e => {
+    console.error(e)
+  })
 
 const server = require('./server/express');
 

@@ -39,7 +39,7 @@ mongoose.connection.on('disconnected', () => {
 
   // console.info(`Disconnected from database @ ${host}`);
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV !== 'test') {
     setTimeout(() => {
       connect(host, params)
     }, 1000)

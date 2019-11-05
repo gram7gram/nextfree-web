@@ -1,0 +1,12 @@
+.intl-tel-input.expanded {
+    z-index: initial;
+}
+
+.intl-tel-input {
+    width: 100%;
+    z-index: 0;
+}
+
+.intl-tel-input .country-list {
+    color: black !important;
+}
