@@ -33,15 +33,7 @@ class Navigation extends PureComponent {
           </li>}
 
           {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE} className="nav-link">{i18n.t('navigation.company')}</Link>
-          </li>}
-
-          {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE} className="nav-link">{i18n.t('navigation.store')}</Link>
-          </li>}
-
-          {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE} className="nav-link">{i18n.t('navigation.staff')}</Link>
+            <Link to={Pages.STAFF} className="nav-link">{i18n.t('navigation.staff')}</Link>
           </li>}
 
         </ul>
@@ -54,7 +46,7 @@ class Navigation extends PureComponent {
 
           {!isAuthenticated && <li className="nav-ite mx-1">
             <Link className="btn btn-success"
-                  to={Pages.LOGIN}>{i18n.t('navigation.register')}</Link>
+                  to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
           </li>}
 
           {isAuthenticated && <li className="nav-item mx-1">

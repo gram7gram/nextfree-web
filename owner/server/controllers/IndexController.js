@@ -6,10 +6,14 @@ const router = new express.Router({mergeParams: true});
 const routes = [
   '/',
 
-  '/profile',
-
   '/login',
+  '/register',
 
+  '/staff',
+  '/staff/new',
+  '/staff/:id',
+
+  '/profile',
   '/logout',
 ]
 
@@ -23,8 +27,6 @@ const index = (req, res) => {
 routes.forEach(route => {
   router.get(route, index);
 })
-
-router.get('*', (req, res) => res.redirect('/'))
 
 module.exports = router;
 

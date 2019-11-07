@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const LoginController = require('./controllers/LoginController');
-const RegisterController = require('./controllers/RegisterController');
 
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
@@ -16,6 +15,7 @@ const OwnerProfileController = require('./controllers/owner/ProfileController');
 const OwnerStoreRESTController = require('./controllers/owner/StoreRESTController');
 const OwnerStaffRESTController = require('./controllers/owner/StaffRESTController');
 const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTController');
+const OwnerRegisterController = require('./controllers/owner/RegisterController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 //Public API
 app.use('/api/v1', LoginController);
-app.use('/api/v1', RegisterController);
+app.use('/api/v1', OwnerRegisterController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

@@ -10,6 +10,7 @@ import {createRouter} from './router';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootswatch/dist/slate/bootstrap.min.css';
+import './style/style.css';
 
 const rootElement = document.getElementById('root');
 

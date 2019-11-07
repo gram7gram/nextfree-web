@@ -8,9 +8,12 @@ import Loading from '../components/Loading';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-import Home from '../screens/Home/components';
 import Login from '../screens/Login/components';
+import Register from '../screens/Register/components';
+
+import Home from '../screens/Home/components';
 import Profile from '../screens/Profile/components';
+import Staff from '../screens/Staff/components';
 import ErrorBoundary from "../components/ErrorBoundary";
 
 export function createRouter(store) {
@@ -51,10 +54,13 @@ export function createRouter(store) {
 
         <Switch>
           <PublicRoute exact path={Pages.LOGIN} component={Login}/>
+          <PublicRoute exact path={Pages.REGISTER} component={Register}/>
 
           <PrivateRoute exact path={Pages.HOME} component={Home}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+
+          <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
 
           <Redirect path="*" to={Pages.HOME}/>
 

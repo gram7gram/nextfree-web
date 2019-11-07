@@ -32,8 +32,11 @@
     "remove_success": "Removed!",
     "save_success": "Saved!"
   },
+  "register": {
+    "title": "Добро пожаловать!"
+  },
   "login": {
-    "title": "Добро пожаловать, мастер",
+    "title": "Добро пожаловать!",
     "login": "Email",
     "placeholder": "Ваш email",
     "password": "Пароль",

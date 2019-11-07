@@ -14,11 +14,11 @@ const schema = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true
+    required: false
   },
   address: {
     type: String,
-    required: true
+    required: false
   },
   lng: {
     type: Number,

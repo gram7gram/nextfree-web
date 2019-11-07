@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
-import model from './model'
+
+import owner from './owner'
+import company from './company'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
@@ -14,6 +16,15 @@ const serverErrors = (prev = [], action) => {
     case Action.SAVE_SUCCESS:
     case Action.SAVE_BEFORE:
       return []
+    default:
+      return prev
+  }
+}
+
+const isRegisterSuccess = (prev = false, action) => {
+  switch (action.type) {
+    case Action.SAVE_SUCCESS:
+      return true
     default:
       return prev
   }
@@ -33,14 +44,11 @@ const isValid = (prev = false, action) => {
 
 const isLoading = (prev = false, action) => {
   switch (action.type) {
-    case Action.FETCH_FAILURE:
-    case Action.FETCH_SUCCESS:
+    case Action.SAVE_BEFORE:
+      return true
     case Action.SAVE_SUCCESS:
     case Action.SAVE_FAILURE:
       return false
-    case Action.FETCH_BEFORE:
-    case Action.SAVE_BEFORE:
-      return true
     default:
       return prev
   }
@@ -48,13 +56,10 @@ const isLoading = (prev = false, action) => {
 
 const initialValidator = {
   count: 0,
-  messages: [],
   errors: {}
 }
 const validator = (prev = initialValidator, action) => {
   switch (action.type) {
-    case Action.FETCH_BEFORE:
-    case Action.FETCH_SUCCESS:
     case Action.VALIDATE_SUCCESS:
       return initialValidator
     case Action.VALIDATE_FAILURE:
@@ -66,8 +71,8 @@ const validator = (prev = initialValidator, action) => {
 
 const changes = (prev = {}, action) => {
   switch (action.type) {
-    case Action.FETCH_BEFORE:
-    case Action.FETCH_SUCCESS:
+    case Action.SAVE_BEFORE:
+    case Action.SAVE_SUCCESS:
       return {}
     case Action.MODEL_CHANGED:
 
@@ -84,11 +89,12 @@ const changes = (prev = {}, action) => {
 }
 
 export default combineReducers({
+  company,
+  owner,
+  serverErrors,
+  changes,
+  validator,
   isValid,
   isLoading,
-  validator,
-  model,
-  changes,
-  serverErrors,
+  isRegisterSuccess,
 })
-
