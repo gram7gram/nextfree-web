@@ -1,42 +1,39 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
+import {FETCH_STORES_BEFORE, FETCH_STORES_FAILURE, FETCH_STORES_SUCCESS} from '../actions'
 
-export default (page, limit) => (dispatch, getState) => {
+export default () => (dispatch, getState) => {
 
-  const state = getState()
+  const state = getState();
   const token = state.App.token
   const company = state.App.defaultCompany
 
   if (!company) return
 
   const query = [
-    'page=' + page,
-    'limit=' + limit,
+    'limit=0',
   ]
 
   dispatch({
-    type: FETCH_BEFORE
+    type: FETCH_STORES_BEFORE
   })
 
-  request.get(parameters.apiHost + `/api/v1/owner/companies/${company._id}/staff?`+ query.join('&'), {
+  request.get(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores?` + query.join('&'), {
     headers: {
       Authorization: token
     }
   })
     .then(({data}) => {
       dispatch({
-        type: FETCH_SUCCESS,
+        type: FETCH_STORES_SUCCESS,
         payload: data
       })
     })
     .catch(e => {
-      console.log(e);
-
       if (!e.response) return
 
       dispatch({
-        type: FETCH_FAILURE,
+        type: FETCH_STORES_FAILURE,
         payload: {
           status: e.response.status,
           data: e.response.data

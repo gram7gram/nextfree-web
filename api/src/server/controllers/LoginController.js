@@ -1,12 +1,18 @@
 const express = require('express');
+
 const Customer = require('../../database/model/Customer').Customer;
 const Staff = require('../../database/model/Staff').Staff;
 const Owner = require('../../database/model/Owner').Owner;
+const Company = require('../../database/model/Company').Company;
+const Store = require('../../database/model/Store').Store;
+
 const AuthService = require('../services/AuthService')
 const ErrorHandler = require('../services/ErrorHandler')
 const StaffService = require('../services/StaffService')
 const OwnerService = require('../services/OwnerService')
 const CustomerService = require('../services/CustomerService')
+const CompanyService = require('../services/CompanyService')
+const StoreService = require('../services/StoreService')
 
 const router = new express.Router({mergeParams: true});
 
@@ -21,44 +27,6 @@ router.post('/login', async (req, res) => {
         message: 'Bad request'
       })
     }
-
-    const getOwner = new Promise((resolve, reject) => {
-      Owner.findOne({"user.email": email}, (e, entity) => {
-
-        if (e) {
-          reject(e)
-          return
-        }
-
-        if (!entity) {
-          resolve(null)
-          return
-        }
-
-        if (!entity.isEnabled) {
-          reject({
-            code: 401,
-            message: 'Your account is deactivated. Contact administrator for details'
-          })
-        }
-
-        if (entity.user.comparePassword(password)) {
-
-          const user = entity.toObject()
-
-          resolve({
-            isOwner: true,
-            isAdmin: user.user.isAdmin === true,
-            user: OwnerService.serialize(user)
-          })
-        } else {
-          reject({
-            code: 401,
-            message: 'Bad credentials'
-          })
-        }
-      })
-    });
 
     const getStaff = new Promise((resolve, reject) => {
       Staff.findOne({"user.email": email}, (e, entity) => {
@@ -142,7 +110,6 @@ router.post('/login', async (req, res) => {
     Promise.all([
       getCustomer,
       getStaff,
-      getOwner,
     ]).then(results => {
 
       const match = results.find(result => !!result && result.user)

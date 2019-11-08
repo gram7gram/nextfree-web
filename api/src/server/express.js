@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
-const LoginController = require('./controllers/LoginController');
-
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
 const AdminStaffRESTController = require('./controllers/admin/StaffRESTController');
@@ -16,9 +14,11 @@ const OwnerStoreRESTController = require('./controllers/owner/StoreRESTControlle
 const OwnerStaffRESTController = require('./controllers/owner/StaffRESTController');
 const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTController');
 const OwnerRegisterController = require('./controllers/owner/RegisterController');
+const OwnerLoginController = require('./controllers/owner/LoginController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
+const StaffLoginController = require('./controllers/staff/LoginController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 
@@ -28,8 +28,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Public API
-app.use('/api/v1', LoginController);
 app.use('/api/v1', OwnerRegisterController);
+app.use('/api/v1', OwnerLoginController);
+app.use('/api/v1', StaffLoginController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

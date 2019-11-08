@@ -12,7 +12,7 @@ const Card = ({model}) => {
         <img src={avatar} alt="" className="img-fluid"/>
       </div>
       <div className="card-footer p-1">
-        <p className="m-0 text-truncate">{model.user.lastName} {model.model.user.firstName}</p>
+        <p className="m-0 text-truncate">{model.user.lastName} {model.user.firstName}</p>
         <p className="m-0 text-truncate">{model.user.email}</p>
       </div>
     </Link>

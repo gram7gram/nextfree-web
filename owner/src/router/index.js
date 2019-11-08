@@ -14,6 +14,8 @@ import Register from '../screens/Register/components';
 import Home from '../screens/Home/components';
 import Profile from '../screens/Profile/components';
 import Staff from '../screens/Staff/components';
+import StaffEdit from '../screens/StaffEdit/components';
+
 import ErrorBoundary from "../components/ErrorBoundary";
 
 export function createRouter(store) {
@@ -61,6 +63,8 @@ export function createRouter(store) {
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 
           <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
+          <PrivateRoute exact path={Pages.STAFF_NEW} component={StaffEdit}/>
+          <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
           <Redirect path="*" to={Pages.HOME}/>
 

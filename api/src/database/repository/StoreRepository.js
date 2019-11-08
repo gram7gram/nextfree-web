@@ -3,7 +3,9 @@ const Store = require('../model/Store').Store
 const findByFilter = async (filter, page, limit) => {
   const skip = page > 0 && limit > 0 ? limit * (page - 1) : 0
 
-  return await Store.find(filter, {createdAt: 'desc'}, {skip, limit}).lean()
+  return await Store.find(filter, null, {skip, limit})
+    .sort({createdAt: 'desc'})
+    .lean()
 }
 
 const findOneByFilter = async (filter) => {

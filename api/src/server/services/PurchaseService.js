@@ -54,7 +54,7 @@ const PurchaseService = {
       'company._id': purchase.company._id,
       'bonusCondition': bonusCondition,
       'isBonus': true
-    }, {createdAt: 'desc'}).select('_id createdAt').lean()
+    }).sort({createdAt: 'desc'}).select('_id createdAt').lean()
 
     const bonusQuery = {
       'customer._id': purchase.customer._id,

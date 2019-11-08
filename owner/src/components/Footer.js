@@ -3,9 +3,9 @@ import i18n from '../i18n';
 
 const Footer = () => {
 
-  return <footer>
+  return <footer className="position-absolute w-100 border-top">
 
-    <div className="container border-top">
+    <div className="container">
 
       <div className="row my-3">
         <div className="col-4">

@@ -4,6 +4,7 @@ import Login from './screens/Login/sagas';
 import Profile from './screens/Profile/sagas';
 import Staff from './screens/Staff/sagas';
 import Register from './screens/Register/sagas';
+import StaffEdit from './screens/StaffEdit/sagas';
 
 export default function* root() {
   yield all([
@@ -11,5 +12,6 @@ export default function* root() {
     fork(Profile),
     fork(Register),
     fork(Staff),
+    fork(StaffEdit),
   ]);
 }

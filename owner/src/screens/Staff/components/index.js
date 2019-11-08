@@ -40,6 +40,12 @@ class Staff extends React.Component {
   renderContent = () => {
     const {items} = this.props.Staff
 
+    if (items.length === 0) {
+      return <div className="text-center pt-4">
+        <h4>{i18n.t('staff.no_items_title')}</h4>
+      </div>
+    }
+
     return <div className="row no-gutters">{items.map(model =>
       <Card model={model} key={model._id}/>
     )}</div>
@@ -57,7 +63,7 @@ class Staff extends React.Component {
                   <h3 className="m-0">{i18n.t('staff.title')}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
-                  <Link className="btn btn-primary transition-3d-hover"
+                  <Link className="btn btn-success btn-sm"
                         to={Pages.STAFF_NEW}>
                     <i className="fa fa-plus"/>&nbsp;{i18n.t('staff.new_action')}
                   </Link>
