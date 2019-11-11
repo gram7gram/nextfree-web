@@ -7,6 +7,10 @@ import Profile from '../screens/Profile/reducers';
 import Staff from '../screens/Staff/reducers';
 import StaffEdit from '../screens/StaffEdit/reducers';
 import Register from '../screens/Register/reducers';
+import Store from '../screens/Store/reducers';
+import StoreEdit from '../screens/StoreEdit/reducers';
+import Company from '../screens/Company/reducers';
+import CompanyEdit from '../screens/CompanyEdit/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -16,6 +20,10 @@ const createRootReducer = (history) => combineReducers({
   Staff,
   StaffEdit,
   Register,
+  Company,
+  CompanyEdit,
+  Store,
+  StoreEdit,
 });
 
 export default createRootReducer

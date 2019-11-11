@@ -6,6 +6,7 @@ import {routerMiddleware} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
 import Cookie from 'js-cookie'
 
+import {prepareTranslations} from './i18n'
 import sagas from './sagas'
 import reducers from './reducers'
 import LoginCheck from './screens/Login/actions/LoginCheck'
@@ -18,6 +19,11 @@ let middleware = [promise, thunk, sagaMiddleware, routerMiddleware(history)]
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
+let locale = Cookie.get('locale')
+if (!locale) {
+  locale = 'ua'
+}
+
 let token = Cookie.get('token')
 if (!token) {
   token = null
@@ -28,6 +34,7 @@ const initial = {
     isAuthenticated: !!token,
     isLoadingVisible: !!token,
     token,
+    locale,
   }
 }
 
@@ -42,6 +49,8 @@ export default () => {
   )
 
   sagaMiddleware.run(sagas)
+
+  prepareTranslations(locale)
 
   if (token) {
     store.dispatch(LoginCheck({token}))

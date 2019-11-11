@@ -9,6 +9,16 @@ import {LOGOUT} from "../screens/Login/actions";
 
 class Navigation extends PureComponent {
 
+  state = {
+    isNavOpen: false
+  }
+
+  toggleMobileNavigation = () => {
+    this.setState(({
+      isNavOpen: !this.state.isNavOpen
+    }))
+  }
+
   logout = () => {
     this.props.dispatch({
       type: LOGOUT
@@ -19,37 +29,57 @@ class Navigation extends PureComponent {
 
     const {isAuthenticated} = this.props
 
-    return <nav className="navbar navbar-expand navbar-dark bg-primary">
+    return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
       <Link className="navbar-brand" to={Pages.HOME}>
         {i18n.t('navigation.logo')}
       </Link>
 
-      <div className="collapse navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+      <button className="navbar-toggler"
+              type="button"
+              onClick={this.toggleMobileNavigation}>
+        <i className="fa fa-bars"/>
+      </button>
+
+      <div className={"navbar-collapse collapse" + (this.state.isNavOpen ? " show" : "")}>
+        <ul className="navbar-nav mr-auto text-center">
 
           {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE} className="nav-link">{i18n.t('navigation.profile')}</Link>
+            <Link to={Pages.QR_CODE} className="nav-link text-white">
+              <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
+            </Link>
           </li>}
 
           {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.STAFF} className="nav-link">{i18n.t('navigation.staff')}</Link>
+            <Link to={Pages.PROFILE} className="nav-link text-white">{i18n.t('navigation.profile')}</Link>
+          </li>}
+
+          {isAuthenticated && <li className="nav-item">
+            <Link to={Pages.COMPANIES} className="nav-link text-white">{i18n.t('navigation.companies')}</Link>
+          </li>}
+
+          {isAuthenticated && <li className="nav-item">
+            <Link to={Pages.STORES} className="nav-link text-white">{i18n.t('navigation.stores')}</Link>
+          </li>}
+
+          {isAuthenticated && <li className="nav-item">
+            <Link to={Pages.STAFF} className="nav-link text-white">{i18n.t('navigation.staff')}</Link>
           </li>}
 
         </ul>
-        <ul className="navbar-nav ml-auto">
+        <ul className="navbar-nav ml-auto text-center">
 
-          {!isAuthenticated && <li className="nav-item mx-1">
+          {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
             <Link className="btn btn-outline-success"
                   to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
           </li>}
 
-          {!isAuthenticated && <li className="nav-ite mx-1">
+          {!isAuthenticated && <li className="nav-ite mx-1 mb-1 mb-lg-0">
             <Link className="btn btn-success"
                   to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
           </li>}
 
-          {isAuthenticated && <li className="nav-item mx-1">
+          {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
             <button className="btn btn-outline-success"
                     onClick={this.logout}>{i18n.t('navigation.logout')}</button>
           </li>}

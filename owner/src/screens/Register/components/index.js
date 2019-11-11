@@ -62,7 +62,7 @@ class Register extends React.Component {
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.owner_subtitle')}</h6>
 
         <div className="form-group">
-          <label className="m-0 required">{i18n.t('owner.email')}</label>
+          <label className="m-0 required">{i18n.t('register.email')}</label>
           <input type="email"
                  className="form-control"
                  onChange={this.onOwnerChange('user.email')}
@@ -71,7 +71,7 @@ class Register extends React.Component {
         </div>
 
         <div className="form-group">
-          <label className="m-0 required">{i18n.t('owner.firstName')}</label>
+          <label className="m-0 required">{i18n.t('register.firstName')}</label>
           <input type="text"
                  className="form-control"
                  onChange={this.onOwnerChange('user.firstName')}
@@ -80,7 +80,7 @@ class Register extends React.Component {
         </div>
 
         <div className="form-group">
-          <label className="m-0 required">{i18n.t('owner.lastName')}</label>
+          <label className="m-0 required">{i18n.t('register.lastName')}</label>
           <input type="text"
                  className="form-control"
                  onChange={this.onOwnerChange('user.lastName')}
@@ -104,7 +104,7 @@ class Register extends React.Component {
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.company_subtitle')}</h6>
 
         <div className="form-group">
-          <label className="m-0 required">{i18n.t('owner.company.name')}</label>
+          <label className="m-0 required">{i18n.t('register.companyName')}</label>
           <input type="text"
                  className="form-control"
                  onChange={this.onCompanyChange('name')}

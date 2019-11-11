@@ -7,7 +7,7 @@ import {createStructuredSelector} from "reselect";
 
 const Home = (props) => {
 
-  const {firstName, email} = props.user.user
+  const {firstName, email} = props.owner.user
 
   return <div className="container py-5">
     <div className="row">
@@ -33,7 +33,7 @@ const Home = (props) => {
 }
 
 const selectors = createStructuredSelector({
-  user: store => store.App.user
+  owner: store => store.App.owner
 })
 
 export default connect(selectors)(Home)

@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Select from '../../../components/Select';
 import {FETCH_SUCCESS, MODEL_CHANGED} from '../actions';
-import FetchStores from '../actions/FetchStores';
 import Fetch from '../actions/Fetch';
 import Remove from '../actions/Remove';
 import Save from '../actions/Save';
@@ -14,19 +12,23 @@ class StaffEdit extends React.Component {
 
   componentDidMount() {
 
-    const {id} = this.props.match.params
+    const {defaultStore, match} = this.props
+
+    const {id} = match.params
 
     if (id) {
       this.props.dispatch(Fetch(id))
     } else {
       this.props.dispatch({
         type: FETCH_SUCCESS,
-        payload: {},
-        flatten: {}
+        payload: {
+          storeId: defaultStore._id
+        },
+        flatten: {
+          storeId: defaultStore._id
+        }
       })
     }
-
-    this.props.dispatch(FetchStores())
   }
 
   deactivate = () => {
@@ -68,10 +70,6 @@ class StaffEdit extends React.Component {
       [key]: value
     }
   })
-
-  changeStore = selected => {
-    this.change('storeId', selected ? selected.value : null)
-  }
 
   changeString = name => e => this.change(name, e.target.value)
 
@@ -153,7 +151,6 @@ class StaffEdit extends React.Component {
 
     const {
       model,
-      stores,
       isValid,
       isLoading,
       serverErrors,
@@ -234,18 +231,6 @@ class StaffEdit extends React.Component {
                            onChange={this.changeString('user.lastName')}
                            value={model.user.lastName || ''}/>
                     {this.getError('user.lastName')}
-                  </div>
-
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('staff_edit.store')}</label>
-                    <Select
-                      onChange={this.changeStore}
-                      value={model.storeId || ''}
-                      options={stores.map(store => ({
-                        value: store._id,
-                        label: store.address || store._id
-                      }))}/>
-                    {this.getError('storeId')}
                   </div>
 
                   <div className="form-group">

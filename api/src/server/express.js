@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path')
 const cors = require('cors')
 
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
@@ -26,6 +27,8 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(express.static(path.resolve(__dirname, `../public`)))
 
 //Public API
 app.use('/api/v1', OwnerRegisterController);

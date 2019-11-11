@@ -1,15 +1,17 @@
 import i18n from 'i18n-js';
 
-const defaultLocale = 'ru'
-
 const translations = {
-  ru: () => require("./translations/ru.json"),
   ua: () => require("./translations/ua.json"),
 }
 
-i18n.fallbacks = true;
-i18n.translations = {[defaultLocale]: translations[defaultLocale]()};
-i18n.locale = defaultLocale;
-i18n.missingTranslation = (name) => name;
+export const prepareTranslations = (locale = 'ua') => {
+
+  i18n.fallbacks = true;
+  i18n.translations = {
+    [locale]: translations[locale](),
+  };
+  i18n.locale = locale;
+  i18n.missingTranslation = (name) => name;
+}
 
 export default i18n;

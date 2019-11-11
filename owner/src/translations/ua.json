@@ -1,48 +1,136 @@
 {
   "navigation": {
-    "welcome": "Welcome",
-    "login": "Login",
-    "logout": "Logout",
-    "admins": "Admins",
-    "owners": "Owners",
-    "profile": "Profile"
+    "logo": "NextFree",
+    "register": "Реєстрація",
+    "login": "Логін",
+    "logout": "Вихід",
+    "qr": "QR код",
+    "companies": "Компанії",
+    "stores": "Точки продажу",
+    "staff": "Співробітники",
+    "profile": "Профіль"
   },
   "profile": {
-    "action": "Save",
-    "name": "First name",
-    "surname": "Last name",
-    "email": "Email",
-    "title": "My profile",
-    "security_title": "Security",
-    "password1": "New password",
-    "password2": "Repeat new password"
+    "title": "Мій профіль",
+    "action": "Зберегти",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Емейл",
+    "security_title": "Безпека",
+    "password1": "Новий пароль",
+    "password2": "Повторіть пароль"
+  },
+  "qr": {
+    "help": "Зчитайте QR-код будь-яким сканером QR-кодів та перейдіть за посиланням у ньому для оформлення покупки"
   },
   "placeholder": {
-    "date": "Choose date"
+    "date": "Виберіть дату"
   },
   "validation": {
-    "required": "Value is required",
-    "invalid_email": "Email is invalid",
-    "password_mismatch": "Passwords do not match",
-    "weak_password1": "Password is too weak"
+    "required": "Значення обов'язкове",
+    "invalid_email": "Емейл не повноцінний",
+    "password_mismatch": "Паролі не співпадають",
+    "weak_password1": "Пароль недостатньо сильний"
+  },
+  "store": {
+    "title": "Мої торгові точки",
+    "not_found_title": "Нічого не знайдено"
+  },
+  "staff": {
+    "title": "Мої співробітники",
+    "new_action": "Додати",
+    "not_found_title": "Нічого не знайдено"
+  },
+  "staff_edit": {
+    "title": "Редагування",
+    "security_title": "Безпека",
+    "security_subtitle": "Як власник компанії, Ви можете власноруч оновити пароль співробітнику",
+    "remove_content": "Повне видалення співробітника з системи. Можливо Ви бажаєте лише тимчасово обмежити доступ співробітнику до системи? Тоді використайте кнопку 'Деативувати'",
+    "remove_action": "Видалити",
+    "remove_confirm_title": "Будь-ласка, підтвердіть видалення",
+    "password1": "Новий пароль",
+    "password2": "Повторити пароль",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Емейл",
+    "position": "Посада",
+    "save_action": "Зберегти",
+    "activate_action": "Активувати",
+    "deactivate_action": "Деактивувати"
+  },
+  "store_edit": {
+    "title": "Редагування",
+    "address": "Адреса точки",
+    "conditions_title": "Умови бонусної продажі",
+    "conditions_subtitle": "Якщо для продажі виконується бонусна умова, то ця продажа вважається бонусною. Співпадає з бонусною умовою з компанії, до якої належить точка продажу, але може бути встановленно індивідуально.",
+    "save_action": "Зберегти",
+    "activate_action": "Активувати",
+    "deactivate_action": "Деактивувати"
+  },
+  "company_edit": {
+    "title": "Редагування",
+    "name": "Назва компанії",
+    "conditions_title": "Умови бонусної продажі",
+    "conditions_subtitle": "Якщо для продажі виконується бонусна умова, то ця продажа вважається бонусною. Зміна значення умови у компанії оновить умову у торгових точках цієї компанії.",
+    "save_action": "Зберегти",
+    "activate_action": "Активувати",
+    "deactivate_action": "Деактивувати"
+  },
+  "bonus_conditions": {
+    "4+1": {
+      "title": "4+1",
+      "description": "Кожна 5 покупка вважається бонусною. Покупка будь-якого товару здійсненна у будь-якій точці продажу поточної компанії."
+    }
+  },
+  "company": {
+    "title": "Мої компанії",
+    "not_found_title": "Нічого не знайдено"
   },
   "footer": {
+    "resources": "Корисно знати",
+    "privacy": "Політика приватності",
+    "terms": "Правила користування",
     "copyright": "Copyright"
   },
   "notification": {
-    "remove_success": "Removed!",
-    "save_success": "Saved!"
+    "remove_success": "Виделено!",
+    "save_success": "Сбережено!"
   },
   "login": {
-    "title": "Welcome, admin",
-    "login": "Email",
-    "placeholder": "Enter email",
-    "password": "Password",
-    "action": "Sign in",
-    "subtitle": "Sign in to proceed"
+    "title": "NextFree",
+    "login": "Емейл",
+    "placeholder": "Введіть емейл",
+    "password": "Пароль",
+    "action": "Увійти",
+    "subtitle": "Система управління бонусами для власника компанії"
+  },
+  "register": {
+    "title": "Приєднатися до NextFree",
+    "subtitle": "Ви збираєтеся зареєструватися як власник компанії. Вам буде доступний широкий спектр можливостей для ефективного управління торговими точками та програмою лояльності для Ваших покупців",
+    "save_action": "Зареєструватися!",
+    "terms_and_conditions": "Я ознайомленний та погожуюсь з:",
+    "terms_link": "Правила користування",
+    "privacy_link": "Політика приватності",
+    "security_title": "Безпека",
+    "security_subtitle": "Вкажіть пароль доступу в систему",
+    "company_title": "Ваша компанія",
+    "company_subtitle": "Вкажіть дані компанії",
+    "email": "Емейл",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "password1": "Пароль",
+    "password2": "Повторіть пароль",
+    "companyName": "Назва",
+    "owner_title": "Ваш профіль",
+    "owner_subtitle": "Вкажіть персональні дані та способи зв'язку"
+  },
+  "home": {
+    "welcome_title": "Ласкаво просимо, _NAME_!",
+    "welcome_text": "",
+    "profile": "Мій профіль"
   },
   "view_error": {
-    "title": "Unable to display information. Sorry",
+    "title": "Неможливо відобразити інформацію. Вибачте",
     "subtitle": "ヽ(`⌒´メ)ノ"
   }
 }

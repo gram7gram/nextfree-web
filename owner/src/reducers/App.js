@@ -47,11 +47,14 @@ const token = (prev = null, action) => {
   }
 }
 
-const user = (prev = null, action) => {
+const owner = (prev = null, action) => {
   switch (action.type) {
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
-      return action.payload
+      if (action.payload.user !== undefined) {
+        return action.payload.user
+      }
+      return null
     case LoginActions.LOGOUT:
     case LoginActions.LOGIN_FAILURE:
     case LoginActions.LOGIN_CHECK_FAILURE:
@@ -65,7 +68,7 @@ const defaultCompany = (prev = null, action) => {
   switch (action.type) {
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
-      if(action.payload.company !== undefined) {
+      if (action.payload.company !== undefined) {
         return action.payload.company
       }
       return null
@@ -82,7 +85,7 @@ const defaultStore = (prev = null, action) => {
   switch (action.type) {
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
-      if(action.payload.store !== undefined) {
+      if (action.payload.store !== undefined) {
         return action.payload.store
       }
       return null
@@ -95,11 +98,14 @@ const defaultStore = (prev = null, action) => {
   }
 }
 
+const locale = (prev = null) => prev
+
 export default combineReducers({
   isLoadingVisible,
   isAuthenticated,
   token,
-  user,
+  owner,
   defaultCompany,
   defaultStore,
+  locale,
 });

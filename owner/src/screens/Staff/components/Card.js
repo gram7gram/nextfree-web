@@ -14,6 +14,7 @@ const Card = ({model}) => {
       <div className="card-footer p-1">
         <p className="m-0 text-truncate">{model.user.lastName} {model.user.firstName}</p>
         <p className="m-0 text-truncate">{model.user.email}</p>
+        <p className="m-0 text-truncate">{model.position}</p>
       </div>
     </Link>
   </div>

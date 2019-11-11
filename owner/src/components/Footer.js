@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="col-4">
           <h4>{i18n.t('footer.resources')}</h4>
 
-          <ul>
+          <ul className="m-0">
             <li>
               <a href="/privacy">{i18n.t('footer.privacy')}</a>
             </li>
