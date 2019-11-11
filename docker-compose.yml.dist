@@ -16,6 +16,12 @@ services:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
 #      - '/etc/letsencrypt/live/nextfree.com.ua/fullchain.pem:/etc/nginx/certs/nextfree.com.ua.crt'
 #      - '/etc/letsencrypt/live/nextfree.com.ua/privkey.pem:/etc/nginx/certs/nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/customer.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/customer.nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/customer.nextfree.com.ua/privkey.pem:/etc/nginx/certs/customer.nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/owner.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/owner.nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/owner.nextfree.com.ua/privkey.pem:/etc/nginx/certs/owner.nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/api.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/api.nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/api.nextfree.com.ua/privkey.pem:/etc/nginx/certs/api.nextfree.com.ua.key'
 
   www:
     build: ./www/env
@@ -39,16 +45,27 @@ services:
     volumes:
       - './api:/var/www'
 
-  admin:
-    build: ./admin/env
+  customer:
+    build: ./customer/env
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=admin.nextfree.com.ua
+      - VIRTUAL_HOST=customer.nextfree.com.ua
     networks:
       - backend
     volumes:
-      - './admin:/var/www'
+      - './customer:/var/www'
+
+  owner:
+    build: ./owner/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=owner.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './owner:/var/www'
 
   db:
     image: mongo:4
