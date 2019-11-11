@@ -6,7 +6,7 @@ export default (model, changes) => {
 
   const validator = {
     total: 0,
-    errors: []
+    errors: {}
   }
 
   const {owner, company} = model
@@ -20,7 +20,7 @@ export default (model, changes) => {
     ++validator.total
 
     if (changes['owner.user.email'])
-      validator.errors['owner.user.email'] = i18n.t('validation.invalid')
+      validator.errors['owner.user.email'] = i18n.t('validation.invalid_email')
   }
 
   if (!owner.user.firstName) {

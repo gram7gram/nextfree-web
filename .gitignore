@@ -1,4 +1,4 @@
-admin/node_modules
+customer/node_modules
 api/node_modules
 owner/node_modules
 
@@ -8,23 +8,20 @@ owner/node_modules
 
 npm-debug.log*
 
-admin/package-lock.json
+customer/package-lock.json
 api/package-lock.json
 owner/package-lock.json
 
-admin/src/parameters.js
+customer/src/parameters.js
 owner/src/parameters.js
 api/parameters.js
 
 docker-compose.yml
 
 api/env/Dockerfile
-admin/env/Dockerfile
+customer/env/Dockerfile
 www/env/Dockerfile
 owner/env/Dockerfile
-
-api/logs/*.log
-admin/logs/*.log
 
 .persistency
 

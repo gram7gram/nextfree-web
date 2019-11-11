@@ -22,6 +22,8 @@ const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTCon
 const StaffLoginController = require('./controllers/staff/LoginController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
+const CustomerLoginController = require('./controllers/customer/LoginController');
+const CustomerRegisterController = require('./controllers/customer/RegisterController');
 
 const app = express();
 
@@ -31,6 +33,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, `../public`)))
 
 //Public API
+app.use('/api/v1', CustomerRegisterController);
+app.use('/api/v1', CustomerLoginController);
 app.use('/api/v1', OwnerRegisterController);
 app.use('/api/v1', OwnerLoginController);
 app.use('/api/v1', StaffLoginController);

@@ -2,8 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {MODEL_CHANGED} from '../actions';
 import Save from '../actions/Save';
+import * as Pages from '../../../router/Pages';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
+import {Link} from "react-router-dom";
 
 class Register extends React.Component {
 
@@ -51,7 +53,7 @@ class Register extends React.Component {
     return <small className="feedback invalid-feedback d-block m-0">{errors[key]}</small>
   }
 
-  renderStaff() {
+  renderProfile() {
 
     const {owner} = this.props.Register
 
@@ -156,16 +158,29 @@ class Register extends React.Component {
       return <div className="alert alert-success text-center">
         <h3>{i18n.t('register.success_title')}</h3>
         <p>{i18n.t('register.success_subtitle')}</p>
+
+        <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('register.success_action')}</Link>
       </div>
     }
 
     return <React.Fragment>
 
+      <div className="row">
+        <div className="col-12">
+
+          <div className="mb-4">
+            <h2 className="h3">{i18n.t('register.title')}</h2>
+            <p>{i18n.t('register.subtitle')}</p>
+          </div>
+
+        </div>
+      </div>
+
       {serverErrors.length > 0 && <div className="alert alert-danger">
         <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
       </div>}
 
-      {this.renderStaff()}
+      {this.renderProfile()}
 
       {this.renderCompany()}
 
@@ -216,17 +231,6 @@ class Register extends React.Component {
     return <div className="container py-5">
       <div className="row no-gutters">
         <div className="col-8 col-lg-7 col-xl-6 mx-auto">
-
-          <div className="row">
-            <div className="col-12">
-
-              <div className="mb-4">
-                <h2 className="h3">{i18n.t('register.title')}</h2>
-                <p>{i18n.t('register.subtitle')}</p>
-              </div>
-
-            </div>
-          </div>
 
           {this.renderContent()}
 

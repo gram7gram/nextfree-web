@@ -28,6 +28,7 @@
   },
   "validation": {
     "required": "Значення обов'язкове",
+    "invalid": "Значення не правильне",
     "invalid_email": "Емейл не повноцінний",
     "password_mismatch": "Паролі не співпадають",
     "weak_password1": "Пароль недостатньо сильний"
@@ -120,6 +121,9 @@
     "lastName": "Прізвище",
     "password1": "Пароль",
     "password2": "Повторіть пароль",
+    "success_title": "Ви успішно приєдналися до NextFree як власник!",
+    "success_subtitle": "Бажаємо Вам успіхів!",
+    "success_action": "Почати",
     "companyName": "Назва",
     "owner_title": "Ваш профіль",
     "owner_subtitle": "Вкажіть персональні дані та способи зв'язку"

@@ -18,7 +18,7 @@ export default (model, changes) => {
     ++validator.total
 
     if (changes['user.email'])
-      validator.errors['user.email'] = i18n.t('validation.invalid')
+      validator.errors['user.email'] = i18n.t('validation.invalid_email')
   }
 
   if (!model.storeId) {

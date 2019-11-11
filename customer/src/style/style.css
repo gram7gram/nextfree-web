@@ -1,0 +1,17 @@
+label.required:after {
+     content: " *";
+     color: red
+ }
+
+main {
+    min-height: 75vh;
+}
+
+footer {
+    background-color: #1c1e22;
+}
+
+.qr-container img {
+    width: 50vh;
+    height: 50vh;
+}
