@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+sudo mkdir -p /var/www
+
+sudo chmod 777 /var/www
+
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+nvm install 10
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh
+
+sudo usermod -aG docker $USER
+
+sudo apt update
+
+sudo apt install -y git
+
+git config --global core.fileMode false

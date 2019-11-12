@@ -14,21 +14,21 @@ services:
       - backend
     volumes:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
-#      - '/etc/letsencrypt/live/nextfree.com.ua/fullchain.pem:/etc/nginx/certs/nextfree.com.ua.crt'
-#      - '/etc/letsencrypt/live/nextfree.com.ua/privkey.pem:/etc/nginx/certs/nextfree.com.ua.key'
-#      - '/etc/letsencrypt/live/customer.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/customer.nextfree.com.ua.crt'
-#      - '/etc/letsencrypt/live/customer.nextfree.com.ua/privkey.pem:/etc/nginx/certs/customer.nextfree.com.ua.key'
-#      - '/etc/letsencrypt/live/owner.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/owner.nextfree.com.ua.crt'
-#      - '/etc/letsencrypt/live/owner.nextfree.com.ua/privkey.pem:/etc/nginx/certs/owner.nextfree.com.ua.key'
-#      - '/etc/letsencrypt/live/api.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/api.nextfree.com.ua.crt'
-#      - '/etc/letsencrypt/live/api.nextfree.com.ua/privkey.pem:/etc/nginx/certs/api.nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/nextfree.cf/fullchain.pem:/etc/nginx/certs/nextfree.cf.crt'
+#      - '/etc/letsencrypt/live/nextfree.cf/privkey.pem:/etc/nginx/certs/nextfree.cf.key'
+#      - '/etc/letsencrypt/live/customer.nextfree.cf/fullchain.pem:/etc/nginx/certs/customer.nextfree.cf.crt'
+#      - '/etc/letsencrypt/live/customer.nextfree.cf/privkey.pem:/etc/nginx/certs/customer.nextfree.cf.key'
+#      - '/etc/letsencrypt/live/owner.nextfree.cf/fullchain.pem:/etc/nginx/certs/owner.nextfree.cf.crt'
+#      - '/etc/letsencrypt/live/owner.nextfree.cf/privkey.pem:/etc/nginx/certs/owner.nextfree.cf.key'
+#      - '/etc/letsencrypt/live/api.nextfree.cf/fullchain.pem:/etc/nginx/certs/api.nextfree.cf.crt'
+#      - '/etc/letsencrypt/live/api.nextfree.cf/privkey.pem:/etc/nginx/certs/api.nextfree.cf.key'
 
   www:
     build: ./www/env
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=nextfree.com.ua,www.nextfree.com.ua
+      - VIRTUAL_HOST=nextfree.cf,www.nextfree.cf
     networks:
       - backend
     volumes:
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=api.nextfree.com.ua
+      - VIRTUAL_HOST=api.nextfree.cf
     networks:
       - backend
     volumes:
@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=staff.nextfree.com.ua
+      - VIRTUAL_HOST=staff.nextfree.cf
     networks:
       - backend
     volumes:
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=customer.nextfree.com.ua
+      - VIRTUAL_HOST=customer.nextfree.cf
     networks:
       - backend
     volumes:
@@ -72,7 +72,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=owner.nextfree.com.ua
+      - VIRTUAL_HOST=owner.nextfree.cf
     networks:
       - backend
     volumes:

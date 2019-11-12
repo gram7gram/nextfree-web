@@ -9,7 +9,7 @@ const config = {
   },
   production: {
     port: 80,
-    host: 'http://api.nextfree.com.ua',
+    host: 'https://api.nextfree.cf',
     mongoHost: 'mongodb://db/nextfree',
     secret: '****',
   },

@@ -1,0 +1,29 @@
+apt install certbot
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/www/public \
+    -m gram7gram@gmail.com \
+    -d nextfree.cf
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/api/public \
+    -m gram7gram@gmail.com \
+    -d api.nextfree.cf
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/owner/build \
+    -m gram7gram@gmail.com \
+    -d owner.nextfree.cf
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/staff/build \
+    -m gram7gram@gmail.com \
+    -d staff.nextfree.cf
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/customer/build \
+    -m gram7gram@gmail.com \
+    -d customer.nextfree.cf
+
+cron
+0 0 1 * * certbot renew
