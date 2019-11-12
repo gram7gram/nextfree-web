@@ -5,6 +5,7 @@ import FetchMe from '../actions/FetchMe';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
+import Date from "../../../components/Date";
 
 class Profile extends React.Component {
 
@@ -26,6 +27,12 @@ class Profile extends React.Component {
   })
 
   changeString = name => e => this.change(name, e.target.value)
+
+  changeDate = name => value => this.change(name, value)
+
+  changePhone = name => e => {
+    this.change(name, e.target.value.replace(/[^\d+]/g, ''))
+  }
 
   getError = key => {
     const {errors} = this.props.Profile.validator
@@ -87,15 +94,25 @@ class Profile extends React.Component {
       serverErrors,
     } = this.props.Profile
 
-    return <div className="container">
+    return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
-          <div className="card shadow-sm my-3">
+
+          {serverErrors.length > 0 && <div className="alert alert-danger">
+            {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
+          </div>}
+
+          <div className="card shadow-sm mb-3">
             <div className="card-header">
               <div className="row">
                 <div className="col">
-                  <h3 className="m-0">{i18n.t('profile.title')}</h3>
+                  <h3 className="m-0">{model.user.email}</h3>
+
+                  {model.user.isAdmin ? <div className="badge badge-danger">
+                    <i className="fa fa-user"/>&nbsp;{i18n.t('profile.admin_badge')}
+                  </div> : null}
+
                 </div>
                 <div className="col-12 col-md-auto text-right">
                   <button className="btn btn-success btn-sm"
@@ -109,38 +126,51 @@ class Profile extends React.Component {
             </div>
             <div className="card-body">
 
-              {serverErrors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
-
-              <div className="form-group">
-                <label className="m-0 required">{i18n.t('profile.email')}</label>
-                <input type="email"
-                       name="email"
-                       className="form-control"
-                       onChange={this.changeString('email')}
-                       value={model.user.email || ''}/>
-                {this.getError('email')}
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('profile.firstName')}</label>
+                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                           className="form-control"
+                           onChange={this.changeString('firstName')}
+                           value={model.user.firstName || ''}/>
+                    {this.getError('firstName')}
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('profile.lastName')}</label>
+                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                           className="form-control"
+                           onChange={this.changeString('lastName')}
+                           value={model.user.lastName || ''}/>
+                    {this.getError('lastName')}
+                  </div>
+                </div>
               </div>
 
-              <div className="form-group">
-                <label className="m-0 required">{i18n.t('profile.firstName')}</label>
-                <input type="text"
-                       className="form-control"
-                       onChange={this.changeString('firstName')}
-                       value={model.user.firstName || ''}/>
-                {this.getError('firstName')}
-              </div>
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.phone')}</label>
+                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                      className="form-control"
+                      onChange={this.changePhone('phone')}
+                      value={model.user.phone || ''}/>
+                    {this.getError('phone')}
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.birthday')}</label>
+                    <Date
+                      onChange={this.changeDate('birthday')}
+                      value={model.user.birthday || ''}/>
+                    {this.getError('birthday')}
+                  </div>
+                </div>
 
-              <div className="form-group">
-                <label className="m-0 required">{i18n.t('profile.lastName')}</label>
-                <input type="text"
-                       className="form-control"
-                       onChange={this.changeString('lastName')}
-                       value={model.user.lastName || ''}/>
-                {this.getError('lastName')}
               </div>
-
             </div>
           </div>
         </div>
@@ -158,8 +188,6 @@ class Profile extends React.Component {
 }
 
 const selectors = createStructuredSelector({
-  defaultStore: store => store.App.defaultStore,
-  defaultCompany: store => store.App.defaultCompany,
   Profile: store => store.Profile,
 })
 

@@ -25,5 +25,10 @@ certbot certonly \
     -m gram7gram@gmail.com \
     -d customer.nextfree.cf
 
+certbot certonly \
+    --webroot --webroot-path /var/www/munhauzen-web/admin/build \
+    -m gram7gram@gmail.com \
+    -d admin.nextfree.cf
+
 crontab -e
 0 0 1 * * certbot renew

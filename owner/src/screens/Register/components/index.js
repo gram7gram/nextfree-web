@@ -74,7 +74,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.firstName')}</label>
-          <input type="text"
+          <input type="text" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onOwnerChange('user.firstName')}
                  value={owner.user.firstName || ''}/>
@@ -83,7 +83,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.lastName')}</label>
-          <input type="text"
+          <input type="text" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onOwnerChange('user.lastName')}
                  value={owner.user.lastName || ''}/>
@@ -107,7 +107,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.companyName')}</label>
-          <input type="text"
+          <input type="text" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onCompanyChange('name')}
                  value={company.name || ''}/>

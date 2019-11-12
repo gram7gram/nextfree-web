@@ -1,0 +1,34 @@
+label.required:after {
+    content: " *";
+    color: red
+}
+
+main {
+    min-height: 75vh;
+}
+
+footer {
+    background-color: #1c1e22;
+}
+
+.qr-scanner-container video {
+    width: 50vh;
+    height: 50vh;
+}
+
+.qr-container img {
+    width: 50vh;
+    height: 50vh;
+}
+
+.company-card img,
+.staff-card img,
+.store-card img{
+    max-height: 150px;
+}
+
+.company-card .card-image,
+.staff-card .card-image,
+.store-card .card-image {
+    text-align: center;
+}

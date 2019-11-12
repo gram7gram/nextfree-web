@@ -125,7 +125,7 @@ class StoreEdit extends React.Component {
 
                   <div className="form-group">
                     <label className="m-0 required">{i18n.t('store_edit.address')}</label>
-                    <input type="text"
+                    <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
                            onChange={this.changeString('address')}
                            value={model.address || ''}/>

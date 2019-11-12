@@ -22,6 +22,8 @@ services:
 #      - '/etc/letsencrypt/live/owner.nextfree.cf/privkey.pem:/etc/nginx/certs/owner.nextfree.cf.key'
 #      - '/etc/letsencrypt/live/api.nextfree.cf/fullchain.pem:/etc/nginx/certs/api.nextfree.cf.crt'
 #      - '/etc/letsencrypt/live/api.nextfree.cf/privkey.pem:/etc/nginx/certs/api.nextfree.cf.key'
+#      - '/etc/letsencrypt/live/admin.nextfree.cf/fullchain.pem:/etc/nginx/certs/admin.nextfree.cf.crt'
+#      - '/etc/letsencrypt/live/admin.nextfree.cf/privkey.pem:/etc/nginx/certs/admin.nextfree.cf.key'
 
   www:
     build: ./www/env
@@ -44,6 +46,17 @@ services:
       - backend
     volumes:
       - './api:/var/www'
+
+  admin:
+    build: ./admin/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=admin.nextfree.cf
+    networks:
+      - backend
+    volumes:
+      - './admin:/var/www'
 
   staff:
     build: ./staff/env

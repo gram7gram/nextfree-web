@@ -7,7 +7,7 @@
     "qr": "QR код",
     "qr_scanner": "QR сканер",
     "companies": "Компанії",
-    "stores": "Точки продажу",
+    "stores": "Торгові точки",
     "staff": "Співробітники",
     "profile": "Профіль"
   },
@@ -104,7 +104,7 @@
   },
   "notification": {
     "remove_success": "Виделено!",
-    "save_success": "Сбережено!"
+    "save_success": "Збережено!"
   },
   "login": {
     "title": "NextFree",

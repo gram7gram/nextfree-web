@@ -4,7 +4,7 @@ const createAdminOwner = async () => {
   const admin = new Owner({
     user : {
       isAdmin: true,
-      email: 'admin',
+      email: 'admin@nextfree.cf',
       firstName: 'Admin',
       lastName: 'Owner',
       password: 'admin',

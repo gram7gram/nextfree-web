@@ -1,0 +1,16 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {
+    apiHost: 'http://0.0.0.0:7601',
+  },
+  production: {
+    apiHost: 'https://api.nextfree.cf',
+  }
+}
+
+if (config[env] === undefined) {
+  throw new Error(`Missing parameters for ${env} environment`)
+}
+
+export default config[env]

@@ -40,7 +40,7 @@ class Company extends React.Component {
 
     if (items.length === 0) {
       return <div className="text-center pt-4">
-        <h4>{i18n.t('company.no_items_title')}</h4>
+        <h4>{i18n.t('company.not_found_title')}</h4>
       </div>
     }
 

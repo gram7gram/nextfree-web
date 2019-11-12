@@ -63,7 +63,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.firstName')}</label>
-          <input type="text"
+          <input type="text" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onStringChange('user.firstName')}
                  value={customer.user.firstName || ''}/>
@@ -72,7 +72,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.lastName')}</label>
-          <input type="text"
+          <input type="text" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onStringChange('user.lastName')}
                  value={customer.user.lastName || ''}/>
