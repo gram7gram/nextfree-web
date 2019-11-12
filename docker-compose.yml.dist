@@ -45,6 +45,17 @@ services:
     volumes:
       - './api:/var/www'
 
+  staff:
+    build: ./staff/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=staff.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './staff:/var/www'
+
   customer:
     build: ./customer/env
     restart: unless-stopped

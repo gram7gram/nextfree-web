@@ -45,6 +45,12 @@ class Navigation extends PureComponent {
         <ul className="navbar-nav mr-auto text-center">
 
           {isAuthenticated && <li className="nav-item">
+            <Link to={Pages.QR_SCAN} className="nav-link text-white">
+              <i className="fa fa-camera"/>&nbsp;{i18n.t('navigation.qr_scanner')}
+            </Link>
+          </li>}
+
+          {isAuthenticated && <li className="nav-item">
             <Link to={Pages.QR_CODE} className="nav-link text-white">
               <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
             </Link>

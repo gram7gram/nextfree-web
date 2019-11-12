@@ -81,6 +81,24 @@ const storeId = (prev = null, action) => {
   }
 }
 
+const companyId = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_SUCCESS:
+    case Action.FETCH_SUCCESS:
+      if (action.flatten['companyId'] !== undefined) {
+        return action.flatten['companyId']
+      }
+      return null
+    case Action.MODEL_CHANGED:
+      if (action.payload['companyId'] !== undefined) {
+        return action.payload['companyId']
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
 const isEnabled = (prev = false, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
@@ -104,6 +122,7 @@ export default combineReducers({
   isEnabled,
   user,
   position,
+  companyId,
   storeId,
   password1,
   password2,

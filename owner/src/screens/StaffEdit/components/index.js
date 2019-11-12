@@ -12,7 +12,7 @@ class StaffEdit extends React.Component {
 
   componentDidMount() {
 
-    const {defaultStore, match} = this.props
+    const {defaultStore, defaultCompany, match} = this.props
 
     const {id} = match.params
 
@@ -22,10 +22,12 @@ class StaffEdit extends React.Component {
       this.props.dispatch({
         type: FETCH_SUCCESS,
         payload: {
-          storeId: defaultStore._id
+          storeId: defaultStore._id,
+          companyId: defaultCompany._id,
         },
         flatten: {
-          storeId: defaultStore._id
+          storeId: defaultStore._id,
+          companyId: defaultCompany._id,
         }
       })
     }
@@ -258,6 +260,8 @@ class StaffEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
+  defaultStore: store => store.App.defaultStore,
+  defaultCompany: store => store.App.defaultCompany,
   StaffEdit: store => store.StaffEdit,
 })
 

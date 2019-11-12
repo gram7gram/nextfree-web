@@ -13,6 +13,7 @@ import Register from '../screens/Register/components';
 
 import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
+import QRScanner from '../screens/QRScanner/components';
 import Profile from '../screens/Profile/components';
 import Staff from '../screens/Staff/components';
 import StaffEdit from '../screens/StaffEdit/components';
@@ -68,6 +69,7 @@ export function createRouter(store) {
 
           <PrivateRoute exact path={Pages.HOME} component={Home}/>
           <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
+          <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 

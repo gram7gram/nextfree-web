@@ -1,10 +1,14 @@
 const express = require('express');
 
 const Staff = require('../../../database/model/Staff').Staff;
+const Company = require('../../../database/model/Company').Company;
+const Store = require('../../../database/model/Store').Store;
 
 const AuthService = require('../../services/AuthService')
 const ErrorHandler = require('../../services/ErrorHandler')
 const StaffService = require('../../services/StaffService')
+const CompanyService = require('../../services/CompanyService')
+const StoreService = require('../../services/StoreService')
 
 const router = new express.Router({mergeParams: true});
 
@@ -44,10 +48,26 @@ router.post('/login-staff', async (req, res) => {
 
     const staff = entity.toObject()
 
+    let company = null
+    if (staff.companyId) {
+      company = await Company.findOne({
+        _id: staff.companyId
+      }).lean()
+    }
+
+    let store = null
+    if (staff.storeId) {
+      store = await Store.findOne({
+        _id: staff.storeId
+      }).lean()
+    }
+
     const content = {
       isStaff: true,
       isAdmin: staff.user.isAdmin === true,
       user: StaffService.serialize(staff),
+      company: company ? CompanyService.serialize(company) : null,
+      store: store ? StoreService.serialize(store) : null,
     }
 
     const token = AuthService.generateAuthToken(content)
@@ -81,10 +101,28 @@ router.post('/login-check-staff', async (req, res) => {
       });
     }
 
+    const staff = decoded.user
+
+    let company = null
+    if (staff.companyId) {
+      company = await Company.findOne({
+        _id: staff.companyId
+      }).lean()
+    }
+
+    let store = null
+    if (staff.storeId) {
+      store = await Store.findOne({
+        _id: staff.storeId
+      }).lean()
+    }
+
     res.status(200).json({
       isStaff: true,
-      isAdmin: decoded.user.isAdmin === true,
-      user: StaffService.serialize(decoded.user),
+      isAdmin: staff.user.isAdmin === true,
+      user: StaffService.serialize(staff),
+      company: company ? CompanyService.serialize(company) : null,
+      store: store ? StoreService.serialize(store) : null,
       token
     })
 

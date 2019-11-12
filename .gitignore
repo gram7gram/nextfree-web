@@ -1,28 +1,29 @@
 customer/node_modules
 api/node_modules
 owner/node_modules
+staff/node_modules
 
-*.zip
-.DS_Store
-.idea
-
-npm-debug.log*
-
+staff/package-lock.json
 customer/package-lock.json
 api/package-lock.json
 owner/package-lock.json
 
+staff/src/parameters.js
 customer/src/parameters.js
 owner/src/parameters.js
 api/parameters.js
 
 docker-compose.yml
 
+staff/env/Dockerfile
 api/env/Dockerfile
 customer/env/Dockerfile
 www/env/Dockerfile
 owner/env/Dockerfile
 
 .persistency
-
+*.zip
+.DS_Store
+.idea
+npm-debug.log*
 backups

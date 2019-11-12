@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
 const cors = require('cors')
+const langParser = require('accept-language-parser')
+
+const i18n = require('../i18n')
 
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
@@ -31,6 +34,20 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(express.static(path.resolve(__dirname, `../public`)))
+
+app.use((req, res, next) => {
+
+  const supported = ['ua']
+
+  let locale = langParser.pick(supported, req.headers['accept-language'] || '')
+  if (!locale) {
+    locale = supported[0]
+  }
+
+  i18n.prepareTranslations(locale)
+
+  next()
+})
 
 //Public API
 app.use('/api/v1', CustomerRegisterController);

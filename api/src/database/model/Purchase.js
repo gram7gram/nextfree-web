@@ -6,13 +6,13 @@ const Staff = require('./Staff').schema;
 const Store = require('./Store').schema;
 
 const schema = new mongoose.Schema({
-  store: {
-    type: Store,
-    required: false
-  },
   staff: {
     type: Staff,
     required: true
+  },
+  store: {
+    type: Store,
+    required: false
   },
   company: {
     type: Company,

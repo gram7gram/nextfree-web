@@ -1,0 +1,96 @@
+{
+  "navigation": {
+    "logo": "NextFree",
+    "register": "Реєстрація",
+    "login": "Логін",
+    "logout": "Вихід",
+    "qr": "QR код",
+    "qr_scan": "QR сканер",
+    "profile": "Профіль"
+  },
+  "profile": {
+    "title": "Мій профіль",
+    "action": "Зберегти",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Емейл",
+    "security_title": "Безпека",
+    "password1": "Новий пароль",
+    "password2": "Повторіть пароль"
+  },
+  "qr": {
+    "help": "Пред'явіть цей QR-код продавцю для участі у програмі лояльності"
+  },
+  "qr_scanner": {
+    "help": "Зчитайте QR-код покупця. При успішному розпізнаванні стане доступна кнопка Оформити покупку",
+    "purchase_action": "Оформити покупку",
+    "purchase_bonus_title": "Так! Це бонус",
+    "purchase_bonus_subtitle": "Покупець заслуговує на безкоштовну покупку",
+    "purchase_success_title": "Не бонус, але на шаг ближче до нього!",
+    "purchase_success_subtitle": "Чекаємо на наступні покупки"
+  },
+  "placeholder": {
+    "date": "Виберіть дату"
+  },
+  "validation": {
+    "required": "Значення обов'язкове",
+    "invalid": "Значення не правильне",
+    "invalid_email": "Емейл не повноцінний",
+    "password_mismatch": "Паролі не співпадають",
+    "weak_password1": "Пароль недостатньо сильний"
+  },
+  "bonus_conditions": {
+    "4+1": {
+      "title": "4+1",
+      "description": "Кожна 5 покупка вважається бонусною. Покупка будь-якого товару здійсненна у будь-якій точці продажу поточної компанії."
+    }
+  },
+  "footer": {
+    "resources": "Корисно знати",
+    "privacy": "Політика приватності",
+    "terms": "Правила користування",
+    "copyright": "Copyright"
+  },
+  "notification": {
+    "remove_success": "Виделено!",
+    "save_success": "Сбережено!"
+  },
+  "login": {
+    "title": "NextFree",
+    "login": "Емейл",
+    "placeholder": "Введіть емейл",
+    "password": "Пароль",
+    "action": "Увійти",
+    "subtitle": "Система бонусних продаж та обслуговування покупців"
+  },
+  "register": {
+    "title": "Приєднатися до NextFree",
+    "subtitle": "Ви збираєтеся зареєструватися як співробітник",
+    "save_action": "Зареєструватися!",
+    "terms_and_conditions": "Я ознайомленний та погожуюсь з:",
+    "terms_link": "Правила користування",
+    "privacy_link": "Політика приватності",
+    "security_title": "Безпека",
+    "security_subtitle": "Вкажіть пароль доступу в систему",
+    "email": "Емейл",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "password1": "Пароль",
+    "password2": "Повторіть пароль",
+    "companyName": "Назва",
+    "success_title": "Ви успішно приєдналися до NextFree як співробітник!",
+    "success_subtitle": "Бажаємо Вам успіхів!",
+    "success_action": "Почати",
+    "staff_title": "Ваш профіль",
+    "staff_subtitle": "Вкажіть персональні дані та способи зв'язку"
+  },
+  "home": {
+    "welcome_title": "Ласкаво просимо, _NAME_!",
+    "welcome_text": "",
+    "profile": "Мій профіль"
+  },
+  "view_error": {
+    "title": "Неможливо відобразити інформацію. Вибачте",
+    "subtitle": "ヽ(`⌒´メ)ノ"
+  }
+}

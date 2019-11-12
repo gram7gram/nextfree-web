@@ -1,16 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import i18n from '../../../i18n';
-import * as Pages from '../../../router/Pages';
 import {createStructuredSelector} from "reselect";
 import QrCode from "../../../components/QrCode";
 
 const QR = (props) => {
 
-  const {_id} = props.owner
+  const {_id, user} = props.owner
 
-  const data = _id
+  const data = JSON.stringify({owner: _id, user: user._id})
 
   return <div className="container py-5">
     <div className="row">
