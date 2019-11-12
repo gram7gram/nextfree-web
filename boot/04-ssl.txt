@@ -25,5 +25,5 @@ certbot certonly \
     -m gram7gram@gmail.com \
     -d customer.nextfree.cf
 
-cron
+crontab -e
 0 0 1 * * certbot renew

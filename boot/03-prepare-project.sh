@@ -6,16 +6,13 @@ docker-compose build
 nvm use 10
 
 # Install dependencies
-cd ./owner && npm i --silent
+cd ./owner && npm i
 
-cd ./api && npm i --silent
+cd ./api && npm i
 
-cd ./admin && npm i --silent
+cd ./customer && npm i
+
+cd ./staff && npm i
 
 # Boot containers
 docker-compose up -d
-
-# Prepare production app
-cd ./owner && ./npm run build:prod
-
-cd ./admin && ./npm run build:prod
