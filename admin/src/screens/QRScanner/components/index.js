@@ -43,16 +43,20 @@ class QRScanner extends React.PureComponent {
   onResult = json => {
     console.log('decoded qr code:', json)
 
-    const data = JSON.parse(json)
+    try {
+      const data = JSON.parse(json)
 
-    if (!data || !data.customer) return
+      if (!data || !data.customer) return
 
-    this.props.dispatch({
-      type: MODEL_CHANGED,
-      payload: {
-        customer: data.customer
-      }
-    })
+      this.props.dispatch({
+        type: MODEL_CHANGED,
+        payload: {
+          customer: data.customer
+        }
+      })
+    } catch (e) {
+      console.log(e);
+    }
 
   }
 
@@ -99,28 +103,27 @@ class QRScanner extends React.PureComponent {
 
     return <div className="container py-5">
       <div className="row">
-        <div className="col-10 mx-auto mb-4">
 
+        <div className="col-12 mb-4">
           <div className="qr-scanner-container text-center w-100">
             <video ref={this.htmlVideo} className="bg-secondary"/>
           </div>
+        </div>
 
-          <div className="col-12 text-center">
+        <div className="col-12 text-center">
 
-            <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
+          <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
 
-            <Errors errors={serverErrors}/>
+          <Errors errors={serverErrors}/>
 
-            {this.renderSuccess()}
+          {this.renderSuccess()}
 
-            <button className="btn btn-success"
-                    onClick={this.purchase}
-                    disabled={!isValid || isLoading}>
-              <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>
-              &nbsp;{i18n.t('qr_scanner.purchase_action')}
-            </button>
-
-          </div>
+          <button className="btn btn-success"
+                  onClick={this.purchase}
+                  disabled={!isValid || isLoading}>
+            <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>
+            &nbsp;{i18n.t('qr_scanner.purchase_action')}
+          </button>
 
         </div>
       </div>
