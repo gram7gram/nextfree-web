@@ -20,7 +20,24 @@ class QRScanner extends React.PureComponent {
   }
 
   componentDidMount() {
+
+    try {
+      Scanner.hasCamera().then(result => {
+
+        console.log('Has camera?', result)
+
+      }).catch(ignore => {
+      })
+    } catch (ignore) {
+    }
+
     this.scanner = new Scanner(this.htmlVideo.current, this.onResult)
+
+    try {
+      this.scanner.start();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   onResult = json => {

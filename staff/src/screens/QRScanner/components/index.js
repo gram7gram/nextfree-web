@@ -5,6 +5,9 @@ import {createStructuredSelector} from "reselect";
 import Purchase from '../actions/Purchase'
 import Scanner from 'qr-scanner'
 import {MODEL_CHANGED, RESET} from "../actions";
+import Errors from "../../../components/Errors";
+
+Scanner.WORKER_PATH = '/qr-scanner-worker.min.js';
 
 class QRScanner extends React.PureComponent {
 
@@ -17,7 +20,24 @@ class QRScanner extends React.PureComponent {
   }
 
   componentDidMount() {
+
+    try {
+      Scanner.hasCamera().then(result => {
+
+        console.log('Has camera?', result)
+
+      }).catch(ignore => {
+      })
+    } catch (ignore) {
+    }
+
     this.scanner = new Scanner(this.htmlVideo.current, this.onResult)
+
+    try {
+      this.scanner.start();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   onResult = json => {
@@ -37,7 +57,6 @@ class QRScanner extends React.PureComponent {
   }
 
   purchase = () => {
-
     const {model} = this.props.QRScanner
 
     this.props.dispatch(Purchase(model))
@@ -90,9 +109,7 @@ class QRScanner extends React.PureComponent {
 
             <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
 
-            {serverErrors.length > 0 && <div className="alert alert-danger">
-              {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
-            </div>}
+            <Errors errors={serverErrors}/>
 
             {this.renderSuccess()}
 
