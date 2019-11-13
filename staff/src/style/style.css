@@ -12,11 +12,11 @@ footer {
 }
 
 .qr-scanner-container video {
-    width: 50vw;
-    height: 50vw;
+    width: 50vh;
+    height: 50vh;
 }
 
 .qr-container img {
-    width: 50vw;
-    height: 50vw;
+    width: 50vh;
+    height: 50vh;
 }

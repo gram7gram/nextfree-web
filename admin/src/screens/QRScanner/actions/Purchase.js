@@ -7,21 +7,34 @@ export default (model) => (dispatch, getState) => {
   const state = getState();
   const token = state.App.token
 
+  let promise
+
+  if (state.App.isStaff) {
+    promise = request.post(parameters.apiHost + `/api/v1/staff/users/${model.userId}/purchases`, null, {
+      headers: {
+        Authorization: token
+      }
+    })
+  } else if (state.App.isOwner) {
+    promise = request.post(parameters.apiHost + `/api/v1/owner/users/${model.userId}/purchases`, null, {
+      headers: {
+        Authorization: token
+      }
+    })
+  } else {
+    return
+  }
+
   dispatch({
     type: SAVE_BEFORE
   })
 
-  request.post(parameters.apiHost + `/api/v1/owner/customers/${model.customerId}/purchases`, null, {
-    headers: {
-      Authorization: token
-    }
-  })
-    .then(({data}) => {
-      dispatch({
-        type: SAVE_SUCCESS,
-        payload: data
-      })
+  promise.then(({data}) => {
+    dispatch({
+      type: SAVE_SUCCESS,
+      payload: data
     })
+  })
     .catch(e => {
       console.log(e);
 

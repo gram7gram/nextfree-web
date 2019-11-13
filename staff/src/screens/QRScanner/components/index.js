@@ -43,16 +43,23 @@ class QRScanner extends React.PureComponent {
   onResult = json => {
     console.log('decoded qr code:', json)
 
-    const data = JSON.parse(json)
+    if (!json) return
 
-    if (!data || !data.customer) return
+    try {
 
-    this.props.dispatch({
-      type: MODEL_CHANGED,
-      payload: {
-        customer: data.customer
-      }
-    })
+      const data = JSON.parse(json)
+
+      if (!data || !data.userId) return
+
+      this.props.dispatch({
+        type: MODEL_CHANGED,
+        payload: {
+          userId: data.userId
+        }
+      })
+    } catch (e) {
+      console.log(e);
+    }
 
   }
 
@@ -64,8 +71,12 @@ class QRScanner extends React.PureComponent {
 
   componentWillUnmount() {
 
-    this.scanner.destroy()
-    this.scanner = null
+    try {
+      this.scanner.destroy()
+      this.scanner = null
+    } catch (e) {
+      console.log(e);
+    }
 
     this.props.dispatch({
       type: RESET,
@@ -95,32 +106,31 @@ class QRScanner extends React.PureComponent {
 
     const {isLoading, model, serverErrors} = this.props.QRScanner
 
-    const isValid = !!model.customerId
+    const isValid = !!model.userId
 
     return <div className="container py-5">
       <div className="row">
-        <div className="col-10 mx-auto mb-4">
 
+        <div className="col-12 mb-4">
           <div className="qr-scanner-container text-center w-100">
             <video ref={this.htmlVideo} className="bg-secondary"/>
           </div>
+        </div>
 
-          <div className="col-12 text-center">
+        <div className="col-12 text-center">
 
-            <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
+          <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
 
-            <Errors errors={serverErrors}/>
+          <Errors errors={serverErrors}/>
 
-            {this.renderSuccess()}
+          {this.renderSuccess()}
 
-            <button className="btn btn-success"
-                    onClick={this.purchase}
-                    disabled={!isValid || isLoading}>
-              <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>
-              &nbsp;{i18n.t('qr_scanner.purchase_action')}
-            </button>
-
-          </div>
+          <button className="btn btn-success"
+                  onClick={this.purchase}
+                  disabled={!isValid || isLoading}>
+            <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>
+            &nbsp;{i18n.t('qr_scanner.purchase_action')}
+          </button>
 
         </div>
       </div>

@@ -6,8 +6,12 @@ const Staff = require('./Staff').schema;
 const Store = require('./Store').schema;
 
 const schema = new mongoose.Schema({
-  staff: {
+  seller: {
     type: Staff,
+    required: true
+  },
+  buyer: {
+    type: Customer,
     required: true
   },
   store: {
@@ -16,10 +20,6 @@ const schema = new mongoose.Schema({
   },
   company: {
     type: Company,
-    required: true
-  },
-  customer: {
-    type: Customer,
     required: true
   },
   bonusCondition: {

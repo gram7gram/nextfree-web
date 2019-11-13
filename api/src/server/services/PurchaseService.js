@@ -50,14 +50,14 @@ const PurchaseService = {
     const bonusCondition = Conditions.BC_4_PLUS_1
 
     const previousBonus = await Purchase.findOne({
-      'customer._id': purchase.customer._id,
+      'buyer._id': purchase.buyer._id,
       'company._id': purchase.company._id,
       'bonusCondition': bonusCondition,
       'isBonus': true
     }).sort({createdAt: 'desc'}).select('_id createdAt').lean()
 
     const bonusQuery = {
-      'customer._id': purchase.customer._id,
+      'buyer._id': purchase.buyer._id,
       'company._id': purchase.company._id,
       'bonusCondition': bonusCondition,
       'isBonus': false,

@@ -1,11 +1,13 @@
 {
   "purchase": {
     "staff_not_assigned_to_store": "Співробітник не назначений на торгову точку або компанію",
-    "no_customer_found": "Покупець не знайдений",
+    "customer_not_found": "Покупець не знайдений",
+    "staff_is_disabled": "Профіль покупця не активний",
+    "owner_is_disabled": "Профіль покупця не активний",
     "customer_is_disabled": "Профіль покупця не активний",
     "company_is_disabled": "Компанія не активна",
     "store_is_disabled": "Точка продажу не активна",
-    "no_company_found": "Компанія не знайдена",
-    "no_store_found": "торгова точка не знайдена"
+    "company_not_found": "Компанія не знайдена",
+    "store_not_found": "Торгова точка не знайдена"
   }
 }

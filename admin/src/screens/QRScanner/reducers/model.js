@@ -1,14 +1,14 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
 
-const customerId = (prev = null, action) => {
+const userId = (prev = null, action) => {
   switch (action.type) {
     case Action.RESET:
     case Action.SAVE_SUCCESS:
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.customerId !== undefined) {
-        return action.payload.customerId
+      if (action.payload.userId !== undefined) {
+        return action.payload.userId
       }
       return prev
     default:
@@ -17,5 +17,5 @@ const customerId = (prev = null, action) => {
 }
 
 export default combineReducers({
-  customerId,
+  userId,
 })

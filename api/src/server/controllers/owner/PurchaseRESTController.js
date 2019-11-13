@@ -8,32 +8,17 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const PurchaseService = require('../../services/PurchaseService');
 const StoreRepository = require('../../../database/repository/StoreRepository');
 const CustomerRepository = require('../../../database/repository/CustomerRepository');
+const OwnerRepository = require('../../../database/repository/OwnerRepository');
+const StaffRepository = require('../../../database/repository/StaffRepository');
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 
 const router = new express.Router({mergeParams: true});
 
-router.post('/customers/:id/purchases', isOwner, checkId, async (req, res) => {
+router.post('/users/:id/purchases', isOwner, checkId, async (req, res) => {
 
   try {
 
     const owner = {...req.currentUser.user}
-
-    const customer = await CustomerRepository.findOneByFilter({
-      _id: req.params.id,
-    })
-    if (!customer) {
-      throw {
-        code: 404,
-        message: i18n.t('purchase.no_customer_found')
-      }
-    }
-
-    if (!customer.isEnabled) {
-      throw {
-        code: 404,
-        message: i18n.t('purchase.customer_is_disabled')
-      }
-    }
 
     const company = await CompanyRepository.findOneByFilter({
       ownerId: owner._id,
@@ -70,17 +55,104 @@ router.post('/customers/:id/purchases', isOwner, checkId, async (req, res) => {
       }
     }
 
-    const item = await PurchaseService.create({
-      company,
-      store,
-      customer,
-      bonusCondition: company.bonusCondition,
-      staff: {
-        ...owner
-      },
+    const isBuyerCustomer = new Promise((resolve, reject) => {
+      (async () => {
+        const buyer = await CustomerRepository.findOneByFilter({
+          'user._id': req.params.id,
+        })
+
+        if (!buyer) {
+          resolve(null)
+          return
+        }
+
+        if (!buyer.isEnabled) {
+          reject({
+            code: 404,
+            message: i18n.t('purchase.customer_is_disabled')
+          })
+          return
+        }
+
+        resolve(buyer)
+
+      })()
     })
 
-    res.status(201).json(PurchaseService.serialize(item))
+    const isBuyerStaff = new Promise((resolve, reject) => {
+      (async () => {
+        const buyer = await StaffRepository.findOneByFilter({
+          'user._id': req.params.id,
+        })
+
+        if (!buyer) {
+          resolve(null)
+          return
+        }
+
+        if (!buyer.isEnabled) {
+          reject({
+            code: 404,
+            message: i18n.t('purchase.staff_is_disabled')
+          })
+          return
+        }
+
+        resolve(buyer)
+
+      })()
+    })
+
+    const isBuyerOwner = new Promise((resolve, reject) => {
+      (async () => {
+        const buyer = await OwnerRepository.findOneByFilter({
+          'user._id': req.params.id,
+        })
+
+        if (!buyer) {
+          resolve(null)
+          return
+        }
+
+        if (!buyer.isEnabled) {
+          reject({
+            code: 404,
+            message: i18n.t('purchase.owner_is_disabled')
+          })
+          return
+        }
+
+        resolve(buyer)
+
+      })()
+    })
+
+    Promise.all([
+      isBuyerCustomer,
+      isBuyerOwner,
+      isBuyerStaff
+    ]).then(async results => {
+
+      const buyer = results.find(result => !!result)
+      if (!buyer) {
+        res.status(404).json({
+          message: i18n.t('purchase.customer_not_found')
+        })
+      }
+
+      const item = await PurchaseService.create({
+        company,
+        store,
+        seller: owner,
+        buyer,
+        bonusCondition: store.bonusCondition,
+      })
+
+      res.status(201).json(PurchaseService.serialize(item))
+
+    }).catch(e => {
+      ErrorHandler.handle(res, e)
+    })
 
   } catch (e) {
     ErrorHandler.handle(res, e)

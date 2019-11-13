@@ -43,15 +43,18 @@ class QRScanner extends React.PureComponent {
   onResult = json => {
     console.log('decoded qr code:', json)
 
+    if (!json) return
+
     try {
+
       const data = JSON.parse(json)
 
-      if (!data || !data.customer) return
+      if (!data || !data.userId) return
 
       this.props.dispatch({
         type: MODEL_CHANGED,
         payload: {
-          customer: data.customer
+          userId: data.userId
         }
       })
     } catch (e) {
@@ -68,8 +71,12 @@ class QRScanner extends React.PureComponent {
 
   componentWillUnmount() {
 
-    this.scanner.destroy()
-    this.scanner = null
+    try {
+      this.scanner.destroy()
+      this.scanner = null
+    } catch (e) {
+      console.log(e);
+    }
 
     this.props.dispatch({
       type: RESET,
@@ -99,7 +106,7 @@ class QRScanner extends React.PureComponent {
 
     const {isLoading, model, serverErrors} = this.props.QRScanner
 
-    const isValid = !!model.customerId
+    const isValid = !!model.userId
 
     return <div className="container py-5">
       <div className="row">
