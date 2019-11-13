@@ -9,6 +9,8 @@ const routes = [
   '/login',
   '/register',
 
+  '/qr',
+
   '/profile',
   '/logout',
 ]

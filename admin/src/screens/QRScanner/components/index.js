@@ -7,6 +7,8 @@ import Scanner from 'qr-scanner'
 import {MODEL_CHANGED, RESET} from "../actions";
 import Errors from "../../../components/Errors";
 
+Scanner.WORKER_PATH = '/qr-scanner-worker.min.js';
+
 class QRScanner extends React.PureComponent {
 
   htmlVideo = null

@@ -9,6 +9,15 @@ const routes = [
   '/login',
   '/register',
 
+  '/qr',
+  '/scan',
+
+  '/companies',
+  '/companies/:id',
+
+  '/stores',
+  '/stores/:id',
+
   '/staff',
   '/staff/new',
   '/staff/:id',
