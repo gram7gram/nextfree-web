@@ -1,13 +1,15 @@
 const Owner = require('./database/model/Owner').Owner
+const Customer = require('./database/model/Customer').Customer
+const Staff = require('./database/model/Staff').Staff
 
 const createAdminOwner = async () => {
   const admin = new Owner({
-    user : {
+    user: {
       isAdmin: true,
       email: 'admin@nextfree.cf',
       firstName: 'Admin',
       lastName: 'Owner',
-      password: 'admin',
+      password: 'nextfree',
     },
     isEnabled: true
   })
@@ -15,7 +17,62 @@ const createAdminOwner = async () => {
   try {
     await Owner.deleteOne({'user.email': admin.user.email})
     await admin.save()
-  } catch (ignore) {}
+  } catch (ignore) {
+  }
+}
+
+const createOwner = async () => {
+  const owner = new Owner({
+    user: {
+      email: 'owner@nextfree.cf',
+      firstName: 'Simple',
+      lastName: 'Owner',
+      password: 'nextfree',
+    },
+    isEnabled: true
+  })
+
+  try {
+    await Owner.deleteOne({'user.email': owner.user.email})
+    await owner.save()
+  } catch (ignore) {
+  }
+}
+
+const createCustomer = async () => {
+  const customer = new Customer({
+    user: {
+      email: 'customer@nextfree.cf',
+      firstName: 'Simple',
+      lastName: 'Customer',
+      password: 'nextfree',
+    },
+    isEnabled: true
+  })
+
+  try {
+    await Customer.deleteOne({'user.email': customer.user.email})
+    await customer.save()
+  } catch (ignore) {
+  }
+}
+
+const createStaff = async () => {
+  const staff = new Staff({
+    user: {
+      email: 'staff@nextfree.cf',
+      firstName: 'Simple',
+      lastName: 'Staff',
+      password: 'nextfree',
+    },
+    isEnabled: true
+  })
+
+  try {
+    await Staff.deleteOne({'user.email': staff.user.email})
+    await staff.save()
+  } catch (ignore) {
+  }
 }
 
 const start = async () => {
@@ -23,6 +80,12 @@ const start = async () => {
   console.log('Running system provision...')
 
   await createAdminOwner()
+
+  await createOwner()
+
+  await createStaff()
+
+  await createCustomer()
 }
 
 module.exports = start
