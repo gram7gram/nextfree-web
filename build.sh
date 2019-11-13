@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-#docker-compose exec owner npm run build:prod
-#test $? -gt 0 && exit 1
-#
-#docker-compose exec customer npm run build:prod
-#test $? -gt 0 && exit 1
-#
-#docker-compose exec staff npm run build:prod
-#test $? -gt 0 && exit 1
+docker-compose exec owner npm run build:prod
+test $? -gt 0 && exit 1
+
+docker-compose exec customer npm run build:prod
+test $? -gt 0 && exit 1
+
+docker-compose exec staff npm run build:prod
+test $? -gt 0 && exit 1
 
 docker-compose exec admin npm run build:prod
 test $? -gt 0 && exit 1
