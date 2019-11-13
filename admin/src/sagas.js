@@ -9,7 +9,9 @@ import StoreEdit from './screens/StoreEdit/sagas';
 import Company from './screens/Company/sagas';
 import CompanyEdit from './screens/CompanyEdit/sagas';
 import Customer from './screens/Customer/sagas';
+import CustomerEdit from './screens/CustomerEdit/sagas';
 import Owner from './screens/Owner/sagas';
+import OwnerEdit from './screens/OwnerEdit/sagas';
 
 export default function* root() {
   yield all([
@@ -22,6 +24,8 @@ export default function* root() {
     fork(Company),
     fork(CompanyEdit),
     fork(Customer),
+    fork(CustomerEdit),
     fork(Owner),
+    fork(OwnerEdit),
   ]);
 }

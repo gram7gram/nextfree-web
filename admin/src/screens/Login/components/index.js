@@ -71,9 +71,8 @@ class Login extends React.Component {
 
               <form noValidate>
                 <div className="form-group">
-                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                  <input type="text"
                          className="form-control"
-                         name="login"
                          autoFocus={true}
                          placeholder={i18n.t('login.placeholder')}
                          onChange={this.onChangeIgnoreCase('email')}
@@ -83,7 +82,6 @@ class Login extends React.Component {
                 <div className="form-group">
                   <input type="password"
                          className="form-control"
-                         name="password"
                          placeholder='********'
                          onChange={this.onChange('password')}
                          onKeyDown={this.submitIfEnter}

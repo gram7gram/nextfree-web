@@ -6,6 +6,7 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Date from "../../../components/Date";
+import Errors from "../../../components/Errors";
 
 class Profile extends React.Component {
 
@@ -49,14 +50,9 @@ class Profile extends React.Component {
     } = this.props.Profile
 
     return <div className="card shadow-sm mb-3">
-      <div className="card-header">
-        <div className="row">
-          <div className="col">
-            <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
-          </div>
-        </div>
-      </div>
       <div className="card-body">
+
+        <h3 className="card-title">{i18n.t('profile.security_title')}</h3>
 
         <div className="row">
           <div className="col-12 col-md-6">
@@ -99,9 +95,7 @@ class Profile extends React.Component {
 
         <div className="col-12">
 
-          {serverErrors.length > 0 && <div className="alert alert-danger">
-            {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
-          </div>}
+          <Errors errors={serverErrors}/>
 
           <div className="card shadow-sm mb-3">
             <div className="card-header">

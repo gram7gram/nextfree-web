@@ -17,3 +17,4 @@ export const REMOVE_SUCCESS = prefix + '/REMOVE_SUCCESS';
 export const REMOVE_FAILURE = prefix + '/REMOVE_FAILURE';
 
 export const MODEL_CHANGED = prefix + '/MODEL_CHANGED';
+export const RESET = prefix + '/RESET';

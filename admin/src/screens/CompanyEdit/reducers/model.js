@@ -14,17 +14,17 @@ const id = (prev = null, action) => {
   }
 }
 
-const companyId = (prev = null, action) => {
+const ownerId = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
-      if (action.flatten['companyId'] !== undefined) {
-        return action.flatten['companyId']
+      if (action.flatten['ownerId'] !== undefined) {
+        return action.flatten['ownerId']
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload['companyId'] !== undefined) {
-        return action.payload['companyId']
+      if (action.payload['ownerId'] !== undefined) {
+        return action.payload['ownerId']
       }
       return prev
     default:
@@ -89,7 +89,7 @@ const isEnabled = (prev = false, action) => {
 export default combineReducers({
   id,
   isEnabled,
-  companyId,
+  ownerId,
   name,
   bonusCondition,
 })

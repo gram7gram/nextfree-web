@@ -11,6 +11,11 @@ footer {
     background-color: #1c1e22;
 }
 
+.condition-card {
+    border-width: 3px;
+    cursor: pointer;
+}
+
 .qr-scanner-container video {
     width: 50vh;
     height: 50vh;

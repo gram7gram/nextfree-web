@@ -32,11 +32,23 @@ export default (model) => (dispatch, getState) => {
     type: SAVE_BEFORE
   })
 
-  request.put(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores/${model.id}`, data, {
-    headers: {
-      Authorization: token
-    }
-  }).then(({data}) => {
+  let promise
+
+  if (model.id) {
+    promise = request.put(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores/${model.id}`, data, {
+      headers: {
+        Authorization: token
+      }
+    })
+  } else {
+    promise = request.post(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores`, data, {
+      headers: {
+        Authorization: token
+      }
+    })
+  }
+
+  promise.then(({data}) => {
     dispatch({
       type: SAVE_SUCCESS,
       payload: data,

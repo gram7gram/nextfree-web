@@ -1,18 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {FETCH_SUCCESS, MODEL_CHANGED} from '../actions';
+import {FETCH_SUCCESS, MODEL_CHANGED, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
 import Remove from '../actions/Remove';
 import Save from '../actions/Save';
+import FetchStores from '../../Store/actions/Fetch';
+import FetchCompanies from '../../Company/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
+import Errors from "../../../components/Errors";
+import Date from "../../../components/Date";
 
 class StaffEdit extends React.Component {
 
   componentDidMount() {
 
-    const {defaultStore, defaultCompany, match} = this.props
+    const {match} = this.props
 
     const {id} = match.params
 
@@ -21,16 +25,20 @@ class StaffEdit extends React.Component {
     } else {
       this.props.dispatch({
         type: FETCH_SUCCESS,
-        payload: {
-          storeId: defaultStore._id,
-          companyId: defaultCompany._id,
-        },
-        flatten: {
-          storeId: defaultStore._id,
-          companyId: defaultCompany._id,
-        }
+        payload: {},
+        flatten: {}
       })
     }
+
+    this.props.dispatch(FetchCompanies())
+
+    this.props.dispatch(FetchStores())
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: RESET
+    })
   }
 
   deactivate = () => {
@@ -74,6 +82,12 @@ class StaffEdit extends React.Component {
   })
 
   changeString = name => e => this.change(name, e.target.value)
+
+  changeDate = name => value => this.change(name, value)
+
+  changePhone = name => e => {
+    this.change(name, e.target.value.replace(/[^\d+]/g, ''))
+  }
 
   getError = key => {
     const {errors} = this.props.StaffEdit.validator
@@ -149,6 +163,63 @@ class StaffEdit extends React.Component {
     </div>
   }
 
+  renderPosition() {
+
+    const {companies, stores} = this.props
+    const {model} = this.props.StaffEdit
+
+    return <div className="card mb-4">
+      <div className="card-body">
+
+        <h4 className="card-title">{i18n.t('staff_edit.position_title')}</h4>
+        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_edit.position_subtitle')}</h6>
+
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label className="m-0 required">{i18n.t('staff_edit.company')}</label>
+              <select
+                value={model.companyId || ''}
+                onChange={this.changeString('companyId')}
+                className="form-control">
+                <option value="">{i18n.t('placeholder.select')}</option>
+                {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+              </select>
+              {this.getError('companyId')}
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+
+            <div className="form-group">
+              <label className="m-0 required">{i18n.t('staff_edit.store')}</label>
+              <select
+                value={model.storeId || ''}
+                disabled={!model.companyId}
+                onChange={this.changeString('storeId')}
+                className="form-control">
+                <option value="">{i18n.t('placeholder.select')}</option>
+                {stores
+                  .filter(item => item.companyId === model.companyId)
+                  .map(item => <option key={item._id} value={item._id}>{item.address || item._id}</option>)}
+              </select>
+              {this.getError('storeId')}
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className="m-0">{i18n.t('staff_edit.position')}</label>
+          <input type="text" placeholder={i18n.t('placeholder.text')}
+                 className="form-control"
+                 onChange={this.changeString('position')}
+                 value={model.position || ''}/>
+          {this.getError('position')}
+        </div>
+
+      </div>
+    </div>
+  }
+
   render() {
 
     const {
@@ -163,11 +234,18 @@ class StaffEdit extends React.Component {
 
         <div className="col-12">
 
+          <Errors errors={serverErrors}/>
+
           <div className="card mb-4">
             <div className="card-header">
               <div className="row">
                 <div className="col">
-                  <h3 className="m-0">{i18n.t('staff_edit.title')}</h3>
+                  <h3 className="m-0">{model.user.email}</h3>
+
+                  {model.user.isAdmin ? <div className="badge badge-danger">
+                    <i className="fa fa-user"/>&nbsp;{i18n.t('staff_edit.admin_badge')}
+                  </div> : null}
+
                 </div>
                 <div className="col-12 col-md-auto text-right">
 
@@ -201,22 +279,18 @@ class StaffEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              {serverErrors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
+
+              {!model.id ? <div className="form-group">
+                <label className="m-0 required">{i18n.t('staff_edit.email')}</label>
+                <input type="text" placeholder={i18n.t('placeholder.text')}
+                       className="form-control"
+                       onChange={this.changeString('user.email')}
+                       value={model.user.email || ''}/>
+                {this.getError('user.email')}
+              </div> : null}
 
               <div className="row">
-                <div className="col-12">
-
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('staff_edit.email')}</label>
-                    <input type="email"
-                           className="form-control"
-                           onChange={this.changeString('user.email')}
-                           value={model.user.email || ''}/>
-                    {this.getError('user.email')}
-                  </div>
-
+                <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label className="m-0 required">{i18n.t('staff_edit.firstName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
@@ -225,7 +299,9 @@ class StaffEdit extends React.Component {
                            value={model.user.firstName || ''}/>
                     {this.getError('user.firstName')}
                   </div>
+                </div>
 
+                <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label className="m-0 required">{i18n.t('staff_edit.lastName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
@@ -234,20 +310,36 @@ class StaffEdit extends React.Component {
                            value={model.user.lastName || ''}/>
                     {this.getError('user.lastName')}
                   </div>
+                </div>
+              </div>
 
+              <div className="row">
+                <div className="col-12 col-md-6">
                   <div className="form-group">
-                    <label className="m-0">{i18n.t('staff_edit.position')}</label>
+                    <label className="m-0">{i18n.t('staff_edit.phone')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
-                           onChange={this.changeString('position')}
-                           value={model.position || ''}/>
-                    {this.getError('position')}
+                           onChange={this.changePhone('user.phone')}
+                           value={model.user.phone || ''}/>
+                    {this.getError('user.phone')}
                   </div>
                 </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('staff_edit.birthday')}</label>
+                    <Date
+                      onChange={this.changeDate('user.birthday')}
+                      value={model.user.birthday || ''}/>
+                    {this.getError('user.birthday')}
+                  </div>
+                </div>
+
               </div>
 
             </div>
           </div>
+
+          {this.renderPosition()}
 
           {this.renderSecurity()}
 
@@ -260,9 +352,9 @@ class StaffEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
-  defaultStore: store => store.App.defaultStore,
-  defaultCompany: store => store.App.defaultCompany,
   StaffEdit: store => store.StaffEdit,
+  companies: store => store.Company.items,
+  stores: store => store.Store.items,
 })
 
 export default withRouter(

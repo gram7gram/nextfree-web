@@ -6,6 +6,7 @@ import Date from '../../../components/Date';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
+import Errors from "../../../components/Errors";
 
 class Profile extends React.Component {
 
@@ -48,15 +49,10 @@ class Profile extends React.Component {
       model,
     } = this.props.Profile
 
-    return <div className="card shadow-sm mb-3">
-      <div className="card-header">
-        <div className="row">
-          <div className="col">
-            <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
-          </div>
-        </div>
-      </div>
+    return <div className="card mb-3">
       <div className="card-body">
+
+        <h3 className="card-title">{i18n.t('profile.security_title')}</h3>
 
         <div className="row">
           <div className="col-12 col-md-6">
@@ -99,9 +95,7 @@ class Profile extends React.Component {
 
         <div className="col-12">
 
-          {serverErrors.length > 0 && <div className="alert alert-danger">
-            {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
-          </div>}
+          <Errors errors={serverErrors}/>
 
           <div className="card shadow-sm mb-3">
             <div className="card-header">
@@ -132,9 +126,9 @@ class Profile extends React.Component {
                     <label className="m-0 required">{i18n.t('profile.firstName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
-                           onChange={this.changeString('firstName')}
+                           onChange={this.changeString('user.firstName')}
                            value={model.user.firstName || ''}/>
-                    {this.getError('firstName')}
+                    {this.getError('user.firstName')}
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -142,9 +136,9 @@ class Profile extends React.Component {
                     <label className="m-0 required">{i18n.t('profile.lastName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
-                           onChange={this.changeString('lastName')}
+                           onChange={this.changeString('user.lastName')}
                            value={model.user.lastName || ''}/>
-                    {this.getError('lastName')}
+                    {this.getError('user.lastName')}
                   </div>
                 </div>
               </div>
@@ -155,18 +149,18 @@ class Profile extends React.Component {
                     <label className="m-0">{i18n.t('profile.phone')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                       className="form-control"
-                      onChange={this.changePhone('phone')}
+                      onChange={this.changePhone('user.phone')}
                       value={model.user.phone || ''}/>
-                    {this.getError('phone')}
+                    {this.getError('user.phone')}
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label className="m-0">{i18n.t('profile.birthday')}</label>
                     <Date
-                      onChange={this.changeDate('birthday')}
+                      onChange={this.changeDate('user.birthday')}
                       value={model.user.birthday || ''}/>
-                    {this.getError('birthday')}
+                    {this.getError('user.birthday')}
                   </div>
                 </div>
 
@@ -188,8 +182,6 @@ class Profile extends React.Component {
 }
 
 const selectors = createStructuredSelector({
-  defaultStore: store => store.App.defaultStore,
-  defaultCompany: store => store.App.defaultCompany,
   Profile: store => store.Profile,
 })
 

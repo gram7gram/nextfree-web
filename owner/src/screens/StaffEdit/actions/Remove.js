@@ -1,6 +1,5 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import flatten from '../../../utils/flatten'
 import {REMOVE_BEFORE, REMOVE_FAILURE, REMOVE_SUCCESS} from '../actions'
 
 export default (id) => (dispatch, getState) => {

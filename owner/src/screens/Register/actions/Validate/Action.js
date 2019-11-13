@@ -52,7 +52,7 @@ export default (model, changes) => {
   }
 
   if (owner.password1 && !password.validate(owner.password1)) {
-    ++validator.count
+    ++validator.total
 
     if (changes['owner.password1']) {
       validator.errors['owner.password1'] = i18n.t('validation.weak_password1')
@@ -61,7 +61,7 @@ export default (model, changes) => {
 
   if (owner.password1 && owner.password2) {
     if (owner.password1 !== owner.password2) {
-      ++validator.count
+      ++validator.total
 
       if (changes['owner.password2']) {
         validator.errors['owner.password2'] = i18n.t('validation.password_mismatch')

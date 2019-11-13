@@ -5,6 +5,7 @@ import {createStructuredSelector} from "reselect";
 import Purchase from '../actions/Purchase'
 import Scanner from 'qr-scanner'
 import {MODEL_CHANGED, RESET} from "../actions";
+import Errors from "../../../components/Errors";
 
 class QRScanner extends React.PureComponent {
 
@@ -89,9 +90,7 @@ class QRScanner extends React.PureComponent {
 
             <p className="text-muted">{i18n.t('qr_scanner.help')}</p>
 
-            {serverErrors.length > 0 && <div className="alert alert-danger">
-              {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
-            </div>}
+            <Errors errors={serverErrors}/>
 
             {this.renderSuccess()}
 

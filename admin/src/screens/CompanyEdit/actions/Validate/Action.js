@@ -14,5 +14,12 @@ export default (model, changes) => {
       validator.errors['name'] = i18n.t('validation.required')
   }
 
+  if (!model.ownerId) {
+    ++validator.total
+
+    if (changes['ownerId'])
+      validator.errors['ownerId'] = i18n.t('validation.required')
+  }
+
   return validator
 }

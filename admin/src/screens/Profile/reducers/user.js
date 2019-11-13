@@ -49,8 +49,8 @@ const firstName = (prev = null, action) => {
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.firstName !== undefined) {
-        return action.payload.firstName
+      if (action.payload['user.firstName'] !== undefined) {
+        return action.payload['user.firstName']
       }
       return prev
     default:
@@ -67,8 +67,8 @@ const lastName = (prev = null, action) => {
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.lastName !== undefined) {
-        return action.payload.lastName
+      if (action.payload['user.lastName'] !== undefined) {
+        return action.payload['user.lastName']
       }
       return prev
     default:
@@ -85,8 +85,8 @@ const birthday = (prev = null, action) => {
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload['birthday'] !== undefined) {
-        return action.payload['birthday']
+      if (action.payload['user.birthday'] !== undefined) {
+        return action.payload['user.birthday']
       }
       return prev
     default:
@@ -103,8 +103,8 @@ const phone = (prev = null, action) => {
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload['phone'] !== undefined) {
-        return action.payload['phone']
+      if (action.payload['user.phone'] !== undefined) {
+        return action.payload['user.phone']
       }
       return prev
     default:

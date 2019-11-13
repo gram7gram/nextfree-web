@@ -2,7 +2,7 @@ import request from 'axios'
 import parameters from '../../../parameters'
 import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
 
-export default (page, limit) => (dispatch, getState) => {
+export default (page = 0, limit = 0) => (dispatch, getState) => {
 
   const state = getState()
   const token = state.App.token
@@ -19,7 +19,7 @@ export default (page, limit) => (dispatch, getState) => {
     type: FETCH_BEFORE
   })
 
-  request.get(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores?`+ query.join('&'), {
+  request.get(parameters.apiHost + `/api/v1/owner/companies/${company._id}/stores?` + query.join('&'), {
     headers: {
       Authorization: token
     }

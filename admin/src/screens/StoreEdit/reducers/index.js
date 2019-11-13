@@ -4,6 +4,8 @@ import model from './model'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
+    case Action.RESET:
+      return []
     case Action.SAVE_FAILURE:
       if (action.payload.data.message !== undefined) {
         return [
@@ -23,6 +25,7 @@ const isValid = (prev = false, action) => {
   switch (action.type) {
     case Action.VALIDATE_SUCCESS:
       return true
+    case Action.RESET:
     case Action.VALIDATE_FAILURE:
     case Action.SAVE_FAILURE:
       return false
@@ -53,6 +56,7 @@ const initialValidator = {
 }
 const validator = (prev = initialValidator, action) => {
   switch (action.type) {
+    case Action.RESET:
     case Action.FETCH_BEFORE:
     case Action.FETCH_SUCCESS:
     case Action.VALIDATE_SUCCESS:
@@ -66,6 +70,7 @@ const validator = (prev = initialValidator, action) => {
 
 const changes = (prev = {}, action) => {
   switch (action.type) {
+    case Action.RESET:
     case Action.FETCH_BEFORE:
     case Action.FETCH_SUCCESS:
       return {}

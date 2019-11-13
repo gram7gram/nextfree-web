@@ -71,7 +71,7 @@ class Login extends React.Component {
 
               <form noValidate>
                 <div className="form-group">
-                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                  <input type="text"
                          className="form-control"
                          name="login"
                          autoFocus={true}

@@ -21,6 +21,13 @@ export default (model, changes) => {
       validator.errors['user.email'] = i18n.t('validation.invalid_email')
   }
 
+  if (!model.companyId) {
+    ++validator.total
+
+    if (changes['companyId'])
+      validator.errors['companyId'] = i18n.t('validation.required')
+  }
+
   if (!model.storeId) {
     ++validator.total
 
@@ -50,7 +57,7 @@ export default (model, changes) => {
   }
 
   if (!model.id && !model.password1) {
-    ++validator.count
+    ++validator.total
 
     if (changes['password1']) {
       validator.errors['password1'] = i18n.t('validation.required')
@@ -58,7 +65,7 @@ export default (model, changes) => {
   }
 
   if (model.password1 && !password.validate(model.password1)) {
-    ++validator.count
+    ++validator.total
 
     if (changes['password1']) {
       validator.errors['password1'] = i18n.t('validation.weak_password1')
@@ -67,7 +74,7 @@ export default (model, changes) => {
 
   if (model.password1 && model.password2) {
     if (model.password1 !== model.password2) {
-      ++validator.count
+      ++validator.total
 
       if (changes['password2']) {
         validator.errors['password2'] = i18n.t('validation.password_mismatch')

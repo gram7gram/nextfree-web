@@ -1,7 +1,7 @@
 label.required:after {
-     content: " *";
-     color: red
- }
+    content: " *";
+    color: red
+}
 
 main {
     min-height: 75vh;
@@ -9,6 +9,11 @@ main {
 
 footer {
     background-color: #1c1e22;
+}
+
+.condition-card {
+    border-width: 3px;
+    cursor: pointer;
 }
 
 .qr-scanner-container video {
@@ -19,4 +24,16 @@ footer {
 .qr-container img {
     width: 50vh;
     height: 50vh;
+}
+
+.company-card img,
+.staff-card img,
+.store-card img{
+    max-height: 150px;
+}
+
+.company-card .card-image,
+.staff-card .card-image,
+.store-card .card-image {
+    text-align: center;
 }

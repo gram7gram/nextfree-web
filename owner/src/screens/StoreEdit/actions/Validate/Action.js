@@ -14,11 +14,25 @@ export default (model, changes) => {
       validator.errors['companyId'] = i18n.t('validation.required')
   }
 
+  if (!model.city) {
+    ++validator.total
+
+    if (changes['city'])
+      validator.errors['city'] = i18n.t('validation.required')
+  }
+
   if (!model.address) {
     ++validator.total
 
     if (changes['address'])
       validator.errors['address'] = i18n.t('validation.required')
+  }
+
+  if (!model.bonusCondition) {
+    ++validator.total
+
+    if (changes['bonusCondition'])
+      validator.errors['bonusCondition'] = i18n.t('validation.required')
   }
 
   return validator

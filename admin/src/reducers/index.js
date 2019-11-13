@@ -12,7 +12,9 @@ import Company from '../screens/Company/reducers';
 import CompanyEdit from '../screens/CompanyEdit/reducers';
 import QRScanner from '../screens/QRScanner/reducers';
 import Customer from '../screens/Customer/reducers';
+import CustomerEdit from '../screens/CustomerEdit/reducers';
 import Owner from '../screens/Owner/reducers';
+import OwnerEdit from '../screens/OwnerEdit/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -27,7 +29,9 @@ const createRootReducer = (history) => combineReducers({
   StoreEdit,
   QRScanner,
   Customer,
+  CustomerEdit,
   Owner,
+  OwnerEdit,
 });
 
 export default createRootReducer

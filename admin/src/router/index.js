@@ -24,8 +24,10 @@ import Store from '../screens/Store/components';
 import StoreEdit from '../screens/StoreEdit/components';
 
 import Customer from '../screens/Customer/components';
+import CustomerEdit from '../screens/CustomerEdit/components';
 
 import Owner from '../screens/Owner/components';
+import OwnerEdit from '../screens/OwnerEdit/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 
@@ -87,12 +89,12 @@ export function createRouter(store) {
           <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
           <PrivateRoute exact path={Pages.OWNERS} component={Owner}/>
-          <PrivateRoute exact path={Pages.OWNER_NEW} component={Owner}/>
-          <PrivateRoute path={Pages.OWNER_EDIT} component={Owner}/>
+          <PrivateRoute exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
+          <PrivateRoute path={Pages.OWNER_EDIT} component={OwnerEdit}/>
 
           <PrivateRoute exact path={Pages.CUSTOMERS} component={Customer}/>
-          <PrivateRoute exact path={Pages.CUSTOMER_NEW} component={Customer}/>
-          <PrivateRoute path={Pages.CUSTOMER_EDIT} component={Customer}/>
+          <PrivateRoute exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
+          <PrivateRoute path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
 
           <Redirect path="*" to={Pages.HOME}/>
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {MODEL_CHANGED} from '../actions';
+import {MODEL_CHANGED, RESET, FETCH_SUCCESS} from '../actions';
 import Fetch from '../actions/Fetch';
+import FetchOwners from '../../Owner/actions/Fetch';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
+import Errors from "../../../components/Errors";
 
 class CompanyEdit extends React.Component {
 
@@ -18,7 +20,21 @@ class CompanyEdit extends React.Component {
 
     if (id) {
       this.props.dispatch(Fetch(id))
+    } else {
+      this.props.dispatch({
+        type: FETCH_SUCCESS,
+        payload: {},
+        flatten: {},
+      })
     }
+
+    this.props.dispatch(FetchOwners())
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: RESET
+    })
   }
 
   deactivate = () => {
@@ -66,6 +82,8 @@ class CompanyEdit extends React.Component {
 
   render() {
 
+    const {owners} = this.props
+
     const {
       model,
       isValid,
@@ -73,16 +91,25 @@ class CompanyEdit extends React.Component {
       serverErrors,
     } = this.props.CompanyEdit
 
+    let title = ''
+    if (!isLoading) {
+      title = model.id
+        ? i18n.t('company_edit.title')
+        : i18n.t('company_edit.new_title')
+    }
+
     return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
 
+          <Errors errors={serverErrors}/>
+
           <div className="card mb-4">
             <div className="card-header">
               <div className="row">
                 <div className="col">
-                  <h3 className="m-0">{i18n.t('company_edit.title')}</h3>
+                  <h3 className="m-0">{title}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
 
@@ -116,10 +143,6 @@ class CompanyEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              {serverErrors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
-
               <div className="row">
                 <div className="col-12">
 
@@ -130,6 +153,25 @@ class CompanyEdit extends React.Component {
                            onChange={this.changeString('name')}
                            value={model.name || ''}/>
                     {this.getError('name')}
+                  </div>
+
+                </div>
+                <div className="col-12">
+
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('company_edit.owner')}</label>
+                    <select
+                      className="form-control"
+                      onChange={this.changeString('ownerId')}
+                      value={model.ownerId || ''}>
+                      <option value="">{i18n.t('placeholder.select')}</option>
+                      {owners.map(item =>
+                        <option key={item._id} value={item._id}>
+                          {item.user.lastName} {item.user.firstName} ({item.user.email})
+                        </option>
+                      )}
+                    </select>
+                    {this.getError('ownerId')}
                   </div>
 
                 </div>
@@ -165,6 +207,7 @@ class CompanyEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
+  owners: store => store.Owner.items,
   CompanyEdit: store => store.CompanyEdit,
 })
 

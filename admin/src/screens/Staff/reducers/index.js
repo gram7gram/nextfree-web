@@ -19,7 +19,7 @@ const page = (prev = 1, action) => {
   }
 }
 
-const limit = (prev = 16, action) => {
+const limit = (prev = 0, action) => {
   switch (action.type) {
     case Action.FETCH_SUCCESS:
       return action.payload.limit

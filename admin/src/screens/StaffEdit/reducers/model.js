@@ -4,6 +4,8 @@ import user from './user'
 
 const id = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['_id'] !== undefined) {
@@ -17,6 +19,8 @@ const id = (prev = null, action) => {
 
 const position = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['position'] !== undefined) {
@@ -35,6 +39,8 @@ const position = (prev = null, action) => {
 
 const password1 = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       return null
@@ -50,6 +56,8 @@ const password1 = (prev = null, action) => {
 
 const password2 = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       return null
@@ -65,6 +73,8 @@ const password2 = (prev = null, action) => {
 
 const storeId = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['storeId'] !== undefined) {
@@ -83,6 +93,8 @@ const storeId = (prev = null, action) => {
 
 const companyId = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['companyId'] !== undefined) {
@@ -101,6 +113,8 @@ const companyId = (prev = null, action) => {
 
 const isEnabled = (prev = false, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return false
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['isEnabled'] !== undefined) {

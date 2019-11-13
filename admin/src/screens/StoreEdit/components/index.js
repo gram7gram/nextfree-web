@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {MODEL_CHANGED} from '../actions';
+import {MODEL_CHANGED, FETCH_SUCCESS, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
+import FetchCompanies from '../../Company/actions/Fetch';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
+import Errors from "../../../components/Errors";
 
 class StoreEdit extends React.Component {
 
@@ -18,7 +20,21 @@ class StoreEdit extends React.Component {
 
     if (id) {
       this.props.dispatch(Fetch(id))
+    } else {
+      this.props.dispatch({
+        type: FETCH_SUCCESS,
+        payload: {},
+        flatten: {},
+      })
     }
+
+    this.props.dispatch(FetchCompanies())
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: RESET
+    })
   }
 
   deactivate = () => {
@@ -66,6 +82,8 @@ class StoreEdit extends React.Component {
 
   render() {
 
+    const {companies} = this.props
+
     const {
       model,
       isValid,
@@ -73,16 +91,25 @@ class StoreEdit extends React.Component {
       serverErrors,
     } = this.props.StoreEdit
 
+    let title = ''
+    if (!isLoading) {
+      title = model.id
+        ? i18n.t('store_edit.title')
+        : i18n.t('store_edit.new_title')
+    }
+
     return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
 
+          <Errors errors={serverErrors}/>
+
           <div className="card mb-4">
             <div className="card-header">
               <div className="row">
                 <div className="col">
-                  <h3 className="m-0">{i18n.t('store_edit.title')}</h3>
+                  <h3 className="m-0">{title}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
 
@@ -116,13 +143,31 @@ class StoreEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              {serverErrors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
+              <div className="form-group">
+                <label className="m-0 required">{i18n.t('store_edit.company')}</label>
+                <select
+                  value={model.companyId || ''}
+                  onChange={this.changeString('companyId')}
+                  className="form-control">
+                  <option value="">{i18n.t('placeholder.select')}</option>
+                  {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+                </select>
+                {this.getError('companyId')}
+              </div>
 
               <div className="row">
-                <div className="col-12">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('store_edit.city')}</label>
+                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                           className="form-control"
+                           onChange={this.changeString('city')}
+                           value={model.city || ''}/>
+                    {this.getError('city')}
+                  </div>
+                </div>
 
+                <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label className="m-0 required">{i18n.t('store_edit.address')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
@@ -132,6 +177,28 @@ class StoreEdit extends React.Component {
                     {this.getError('address')}
                   </div>
 
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('store_edit.coordinates')}</label>
+
+                    <div className="input-group">
+                      <input type="text" placeholder={i18n.t('store_edit.lat')}
+                             className="form-control"
+                             onChange={this.changeString('lat')}
+                             value={model.lat || ''}/>
+                      <input type="text" placeholder={i18n.t('store_edit.lng')}
+                             className="form-control"
+                             onChange={this.changeString('lng')}
+                             value={model.lng || ''}/>
+                    </div>
+
+                    {this.getError('coordinates')}
+
+                  </div>
                 </div>
               </div>
 
@@ -155,7 +222,7 @@ class StoreEdit extends React.Component {
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -163,6 +230,7 @@ class StoreEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
+  companies: store => store.Company.items,
   StoreEdit: store => store.StoreEdit,
 })
 
