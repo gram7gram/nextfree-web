@@ -5,6 +5,7 @@ const cors = require('cors')
 const langParser = require('accept-language-parser')
 
 const i18n = require('../i18n').i18n
+const prepareTranslations = require('../i18n').prepareTranslations
 
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
@@ -44,7 +45,7 @@ app.use((req, res, next) => {
     locale = supported[0]
   }
 
-  i18n.prepareTranslations(locale)
+  prepareTranslations(locale)
 
   next()
 })
