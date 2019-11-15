@@ -3,32 +3,32 @@ apt install certbot
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/www/public \
     -m gram7gram@gmail.com \
-    -d nextfree.cf
+    -d nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/api/public \
     -m gram7gram@gmail.com \
-    -d api.nextfree.cf
+    -d api.nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/owner/build \
     -m gram7gram@gmail.com \
-    -d owner.nextfree.cf
+    -d owner.nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/staff/build \
     -m gram7gram@gmail.com \
-    -d staff.nextfree.cf
+    -d staff.nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/customer/build \
     -m gram7gram@gmail.com \
-    -d customer.nextfree.cf
+    -d customer.nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/admin/build \
     -m gram7gram@gmail.com \
-    -d admin.nextfree.cf
+    -d admin.nextfree.com.ua
 
 crontab -e
 0 0 1 * * certbot renew

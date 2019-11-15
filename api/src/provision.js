@@ -6,7 +6,7 @@ const createAdminOwner = async () => {
   const admin = new Owner({
     user: {
       isAdmin: true,
-      email: 'admin@nextfree.cf',
+      email: 'admin@nextfree.com.ua',
       firstName: 'Admin',
       lastName: 'Owner',
       password: 'nextfree',
@@ -24,7 +24,7 @@ const createAdminOwner = async () => {
 const createOwner = async () => {
   const owner = new Owner({
     user: {
-      email: 'owner@nextfree.cf',
+      email: 'owner@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Owner',
       password: 'nextfree',
@@ -42,7 +42,7 @@ const createOwner = async () => {
 const createCustomer = async () => {
   const customer = new Customer({
     user: {
-      email: 'customer@nextfree.cf',
+      email: 'customer@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Customer',
       password: 'nextfree',
@@ -60,7 +60,7 @@ const createCustomer = async () => {
 const createStaff = async () => {
   const staff = new Staff({
     user: {
-      email: 'staff@nextfree.cf',
+      email: 'staff@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Staff',
       password: 'nextfree',
