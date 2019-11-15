@@ -7,7 +7,7 @@ const Staff = require('../../../database/model/Staff').Staff;
 const StaffRepository = require('../../../database/repository/StaffRepository');
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const StaffService = require('../../services/StaffService');
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

@@ -1,4 +1,4 @@
-const i18n = require('../../i18n')
+const i18n = require('../../i18n').i18n
 
 const checkId = (req, res, next) => {
 

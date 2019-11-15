@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const params = require('../../../parameters')
-const i18n = require('../../i18n')
+const i18n = require('../../i18n').i18n
 
 const getToken = req => req.headers['authorization'];
 

@@ -6,7 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Owner = require('../../../database/model/Owner').Owner;
 const OwnerRepository = require('../../../database/repository/OwnerRepository');
 const OwnerService = require('../../services/OwnerService');
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

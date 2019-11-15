@@ -3,7 +3,7 @@ const isOwner = require('../../services/AuthService').isOwner;
 const ErrorHandler = require('../../services/ErrorHandler');
 const OwnerService = require('../../services/OwnerService');
 const Owner = require('../../../database/model/Owner').Owner;
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

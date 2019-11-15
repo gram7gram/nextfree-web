@@ -1,6 +1,6 @@
 const Owner = require('../../database/model/Owner').Owner
 const _merge = require('lodash/merge')
-const i18n = require('../../i18n')
+const i18n = require('../../i18n').i18n
 
 const OwnerService = {
 

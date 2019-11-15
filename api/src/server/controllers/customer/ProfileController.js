@@ -3,7 +3,7 @@ const isCustomer = require('../../services/AuthService').isCustomer;
 const ErrorHandler = require('../../services/ErrorHandler');
 const CustomerService = require('../../services/CustomerService');
 const Customer = require('../../../database/model/Customer').Customer;
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

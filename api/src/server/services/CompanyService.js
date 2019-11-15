@@ -1,6 +1,6 @@
 const Company = require('../../database/model/Company').Company
 const Store = require('../../database/model/Store').Store
-const i18n = require('../../i18n')
+const i18n = require('../../i18n').i18n
 const _merge = require('lodash/merge')
 
 const CompanyService = {

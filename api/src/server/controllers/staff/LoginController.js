@@ -9,7 +9,7 @@ const ErrorHandler = require('../../services/ErrorHandler')
 const StaffService = require('../../services/StaffService')
 const CompanyService = require('../../services/CompanyService')
 const StoreService = require('../../services/StoreService')
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

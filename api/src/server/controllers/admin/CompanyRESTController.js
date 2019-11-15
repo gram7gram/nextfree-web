@@ -6,7 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Company = require('../../../database/model/Company').Company;
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const CompanyService = require('../../services/CompanyService');
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

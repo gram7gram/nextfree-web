@@ -1,5 +1,5 @@
 const Purchase = require('../../database/model/Purchase').Purchase
-const i18n = require('../../i18n')
+const i18n = require('../../i18n').i18n
 const Conditions = require('../../BonusCondition');
 
 const PurchaseService = {

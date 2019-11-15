@@ -4,7 +4,7 @@ const path = require('path')
 const cors = require('cors')
 const langParser = require('accept-language-parser')
 
-const i18n = require('../i18n')
+const i18n = require('../i18n').i18n
 
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');

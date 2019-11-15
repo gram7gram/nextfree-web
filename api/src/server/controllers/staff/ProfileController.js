@@ -3,7 +3,7 @@ const isStaff = require('../../services/AuthService').isStaff;
 const ErrorHandler = require('../../services/ErrorHandler');
 const StaffService = require('../../services/StaffService');
 const Staff = require('../../../database/model/Staff').Staff;
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 

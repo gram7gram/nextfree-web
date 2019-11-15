@@ -8,7 +8,7 @@ const Store = require('../../../database/model/Store').Store;
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const StoreRepository = require('../../../database/repository/StoreRepository');
 const StoreService = require('../../services/StoreService');
-const i18n = require('../../../i18n');
+const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 
