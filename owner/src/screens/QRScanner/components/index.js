@@ -124,7 +124,7 @@ class QRScanner extends React.PureComponent {
 
           {this.renderSuccess()}
 
-          <button className="btn btn-success"
+          <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
                   onClick={this.purchase}
                   disabled={!isValid || isLoading}>
             <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>

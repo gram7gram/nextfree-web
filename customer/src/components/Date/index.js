@@ -44,6 +44,7 @@ class DateWrapper extends React.Component {
       viewMode="days"
       placeholderText={i18n.t('placeholder.date')}
       className="form-control"
+      onFocus={(e) => e.target.readOnly = true}
       {...this.props}
       value={displayValue}
       onChange={this.onChange}/>

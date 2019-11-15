@@ -1,4 +1,5 @@
 const Company = require('../../database/model/Company').Company
+const Store = require('../../database/model/Store').Store
 const _merge = require('lodash/merge')
 
 const CompanyService = {
@@ -42,6 +43,15 @@ const CompanyService = {
         message: 'Please, re-check company information for errors',
         errors: validator.errors
       }
+    }
+
+    if (entity._id && entity.isModified('bonusCondition')) {
+
+      await Store.updateMany(
+        {companyId: entity._id},
+        {bonusCondition: entity.bonusCondition}
+      )
+
     }
 
     await entity.save()

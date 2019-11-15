@@ -6,6 +6,7 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Date from "../../../components/Date";
+import Errors from "../../../components/Errors";
 
 class Profile extends React.Component {
 
@@ -62,7 +63,7 @@ class Profile extends React.Component {
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label className="m-0">{i18n.t('profile.password1')}</label>
-              <input type="password"
+              <input type="password" autoComplete="off"
                      className="form-control"
                      onChange={this.changeString('password1')}
                      value={model.password1 || ''}/>
@@ -72,7 +73,7 @@ class Profile extends React.Component {
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label className="m-0">{i18n.t('profile.password2')}</label>
-              <input type="password"
+              <input type="password" autoComplete="off"
                      className="form-control"
                      onChange={this.changeString('password2')}
                      value={model.password2 || ''}/>
@@ -99,9 +100,7 @@ class Profile extends React.Component {
 
         <div className="col-12">
 
-          {serverErrors.length > 0 && <div className="alert alert-danger">
-            {serverErrors.map((e, i) => <p key={i} className="mb-1">{e}</p>)}
-          </div>}
+          <Errors errors={serverErrors}/>
 
           <div className="card shadow-sm mb-3">
             <div className="card-header">

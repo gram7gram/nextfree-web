@@ -13,6 +13,12 @@ class Navigation extends PureComponent {
     isNavOpen: false
   }
 
+  hideMobileNavigation = () => {
+    this.setState(({
+      isNavOpen: false
+    }))
+  }
+
   toggleMobileNavigation = () => {
     this.setState(({
       isNavOpen: !this.state.isNavOpen
@@ -45,13 +51,17 @@ class Navigation extends PureComponent {
         <ul className="navbar-nav mr-auto text-center">
 
           {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.QR_CODE} className="nav-link text-white">
+            <Link to={Pages.QR_CODE}
+                  className="nav-link text-white"
+                  onClick={this.hideMobileNavigation}>
               <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
             </Link>
           </li>}
 
           {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE} className="nav-link text-white">{i18n.t('navigation.profile')}</Link>
+            <Link to={Pages.PROFILE}
+                  className="nav-link text-white"
+                  onClick={this.hideMobileNavigation}>{i18n.t('navigation.profile')}</Link>
           </li>}
 
         </ul>
@@ -59,11 +69,13 @@ class Navigation extends PureComponent {
 
           {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
             <Link className="btn btn-outline-success"
+                  onClick={this.hideMobileNavigation}
                   to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
           </li>}
 
           {!isAuthenticated && <li className="nav-ite mx-1 mb-1 mb-lg-0">
             <Link className="btn btn-success"
+                  onClick={this.hideMobileNavigation}
                   to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
           </li>}
 

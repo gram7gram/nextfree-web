@@ -8,7 +8,7 @@ const Footer = () => {
     <div className="container">
 
       <div className="row my-3">
-        <div className="col-4">
+        <div className="col-12 col-md-6 col-lg-4">
           <h4>{i18n.t('footer.resources')}</h4>
 
           <ul className="m-0">

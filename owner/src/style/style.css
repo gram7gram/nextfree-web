@@ -17,13 +17,13 @@ footer {
 }
 
 .qr-scanner-container video {
-    width: 50vh;
-    height: 50vh;
+    width: 50vw;
+    height: auto;
 }
 
 .qr-container img {
-    width: 50vh;
-    height: 50vh;
+    width: 50vw;
+    height: auto;
 }
 
 .company-card img,

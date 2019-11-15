@@ -12,6 +12,6 @@ footer {
 }
 
 .qr-container img {
-    width: 50vh;
-    height: 50vh;
+    width: 50vw;
+    height: auto;
 }

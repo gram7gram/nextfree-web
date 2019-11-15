@@ -28,12 +28,12 @@ export default (model, changes) => {
       validator.errors['user.firstName'] = i18n.t('validation.required')
   }
 
-  if (!model.user.lastName) {
-    ++validator.total
-
-    if (changes['user.lastName'])
-      validator.errors['user.lastName'] = i18n.t('validation.required')
-  }
+  // if (!model.user.lastName) {
+  //   ++validator.total
+  //
+  //   if (changes['user.lastName'])
+  //     validator.errors['user.lastName'] = i18n.t('validation.required')
+  // }
 
   if (!model.hasAccepted) {
     ++validator.total

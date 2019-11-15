@@ -212,7 +212,7 @@ class StoreEdit extends React.Component {
               <h6 className="card-subtitle mb-2 text-muted">{i18n.t('store_edit.conditions_subtitle')}</h6>
 
               <div className="row">
-                <div className="col-4">
+                <div className="col-12 col-md-6 col-lg-4">
                   <BonusCondition
                     onClick={this.setCondition('4+1')}
                     title={i18n.t('bonus_conditions.4+1.title')}

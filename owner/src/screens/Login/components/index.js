@@ -4,6 +4,7 @@ import {LOGIN_CREDENTIALS_CHANGED} from '../actions';
 import LoginAction from '../actions/Login';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
+import Errors from "../../../components/Errors";
 
 class Login extends React.Component {
 
@@ -65,9 +66,7 @@ class Login extends React.Component {
           <div className="row">
             <div className="col-12">
 
-              {errors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{errors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
+              <Errors errors={errors}/>
 
               <form noValidate>
                 <div className="form-group">

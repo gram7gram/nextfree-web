@@ -6,6 +6,7 @@ import * as Pages from '../../../router/Pages';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import {Link} from "react-router-dom";
+import Errors from "../../../components/Errors";
 
 class Register extends React.Component {
 
@@ -130,7 +131,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.password1')}</label>
-          <input type="password"
+          <input type="password" autoComplete="off"
                  className="form-control"
                  onChange={this.onOwnerChange('password1')}
                  value={owner.password1 || ''}/>
@@ -139,7 +140,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.password2')}</label>
-          <input type="password"
+          <input type="password" autoComplete="off"
                  className="form-control"
                  onChange={this.onOwnerChange('password2')}
                  value={owner.password2 || ''}/>
@@ -176,9 +177,7 @@ class Register extends React.Component {
         </div>
       </div>
 
-      {serverErrors.length > 0 && <div className="alert alert-danger">
-        <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-      </div>}
+      <Errors errors={serverErrors}/>
 
       {this.renderProfile()}
 

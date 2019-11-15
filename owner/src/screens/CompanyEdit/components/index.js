@@ -7,6 +7,7 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
+import Errors from "../../../components/Errors";
 
 class CompanyEdit extends React.Component {
 
@@ -78,6 +79,8 @@ class CompanyEdit extends React.Component {
 
         <div className="col-12">
 
+          <Errors errors={serverErrors}/>
+
           <div className="card mb-4">
             <div className="card-header">
               <div className="row">
@@ -116,10 +119,6 @@ class CompanyEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              {serverErrors.length > 0 && <div className="alert alert-danger">
-                <ul className="m-0">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-              </div>}
-
               <div className="row">
                 <div className="col-12">
 
@@ -146,7 +145,7 @@ class CompanyEdit extends React.Component {
               <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
 
               <div className="row">
-                <div className="col-4">
+                <div className="col-12 col-md-6 col-lg-4">
                   <BonusCondition
                     onClick={this.setCondition('4+1')}
                     title={i18n.t('bonus_conditions.4+1.title')}

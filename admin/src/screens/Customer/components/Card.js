@@ -10,7 +10,7 @@ const Card = ({model}) => {
     name = (model.user.lastName  + ' ' + model.user.firstName).trim()
   }
 
-  return <div className="col-3 col-lg-2">
+  return <div className="col-6 col-md-3 col-lg-2">
     <Link to={Pages.CUSTOMER_EDIT.replace(':id', model._id)}
           className="card shadow-sm mb-1 mr-1 staff-card">
       <div className="card-image">

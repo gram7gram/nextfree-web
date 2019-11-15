@@ -139,7 +139,7 @@ class StaffEdit extends React.Component {
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label className="m-0 required">{i18n.t('staff_edit.password1')}</label>
-              <input type="password"
+              <input type="password" autoComplete="off"
                      className="form-control"
                      onChange={this.changeString('password1')}
                      value={model.password1 || ''}/>
@@ -149,7 +149,7 @@ class StaffEdit extends React.Component {
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label className="m-0 required">{i18n.t('staff_edit.password2')}</label>
-              <input type="password"
+              <input type="password" autoComplete="off"
                      className="form-control"
                      onChange={this.changeString('password2')}
                      value={model.password2 || ''}/>
