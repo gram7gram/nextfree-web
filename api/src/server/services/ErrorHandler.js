@@ -22,7 +22,7 @@ const ErrorHandler = {
 
   handle: (res, e) => {
 
-    console.error(e, e.stack);
+    console.error(JSON.stringify(e), JSON.stringify(e.stack));
 
     const code = ErrorHandler.detectStatusCode(e)
     const message = ErrorHandler.detectMessage(e)
