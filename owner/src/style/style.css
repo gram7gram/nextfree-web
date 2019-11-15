@@ -17,18 +17,16 @@ footer {
 }
 
 .qr-scanner-container video {
-    width: 50vw;
-    height: auto;
+    max-height: 400px;
 }
 
 .qr-container img {
-    width: 50vw;
-    height: auto;
+    max-height: 400px;
 }
 
 .company-card img,
 .staff-card img,
-.store-card img{
+.store-card img {
     max-height: 150px;
 }
 

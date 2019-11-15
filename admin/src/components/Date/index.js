@@ -42,9 +42,9 @@ class DateWrapper extends React.Component {
       closeOnSelect={true}
       showYearDropdown={true}
       viewMode="days"
+      autoComplete='off'
       placeholderText={i18n.t('placeholder.date')}
       className="form-control"
-      onFocus={(e) => e.target.readOnly = true}
       {...this.props}
       value={displayValue}
       onChange={this.onChange}/>
