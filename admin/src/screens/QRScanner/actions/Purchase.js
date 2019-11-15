@@ -1,6 +1,7 @@
 import request from 'axios'
 import parameters from '../../../parameters'
 import {SAVE_BEFORE, SAVE_FAILURE, SAVE_SUCCESS} from '../actions'
+import flatten from "../../../utils/flatten";
 
 export default (model) => (dispatch, getState) => {
 
@@ -32,7 +33,8 @@ export default (model) => (dispatch, getState) => {
   promise.then(({data}) => {
     dispatch({
       type: SAVE_SUCCESS,
-      payload: data
+      payload: data,
+      flatten: flatten(data)
     })
   })
     .catch(e => {

@@ -104,7 +104,7 @@ router.post('/login-check-staff', async (req, res) => {
       }
     }
 
-    const staff = await Staff.findById(decoded.user._id)
+    const staff = await Staff.findById(decoded.user._id).lean()
 
     if (!staff) {
       throw {
@@ -122,16 +122,12 @@ router.post('/login-check-staff', async (req, res) => {
 
     let company = null
     if (staff.companyId) {
-      company = await Company.findOne({
-        _id: staff.companyId
-      }).lean()
+      company = await Company.findById(staff.companyId).lean()
     }
 
     let store = null
     if (staff.storeId) {
-      store = await Store.findOne({
-        _id: staff.storeId
-      }).lean()
+      store = await Store.findById(staff.storeId).lean()
     }
 
     res.status(200).json({

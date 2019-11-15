@@ -1,6 +1,7 @@
 import request from 'axios'
 import parameters from '../../../parameters'
 import {SAVE_BEFORE, SAVE_FAILURE, SAVE_SUCCESS} from '../actions'
+import flatten from "../../../utils/flatten";
 
 const parseBeforeSubmit = model => {
   const data = {...model}
@@ -28,7 +29,8 @@ export default (model) => (dispatch) => {
     .then(({data}) => {
       dispatch({
         type: SAVE_SUCCESS,
-        payload: data
+        payload: data,
+        flatten: flatten(data)
       })
     })
     .catch(e => {

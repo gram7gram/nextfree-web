@@ -1,6 +1,7 @@
 import request from 'axios'
 import parameters from '../../../parameters'
 import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
+import flatten from "../../../utils/flatten";
 
 export default () => (dispatch, getState) => {
 
@@ -19,7 +20,8 @@ export default () => (dispatch, getState) => {
     .then(({data}) => {
       dispatch({
         type: FETCH_SUCCESS,
-        payload: data
+        payload: data,
+        flatten: flatten(data)
       })
     })
     .catch(e => {

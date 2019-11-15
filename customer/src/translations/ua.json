@@ -1,6 +1,7 @@
 {
   "navigation": {
     "logo": "NextFree",
+    "logo_footer": "Покупець",
     "register": "Реєстрація",
     "login": "Логін",
     "logout": "Вихід",

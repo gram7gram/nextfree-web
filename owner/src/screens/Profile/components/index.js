@@ -126,9 +126,9 @@ class Profile extends React.Component {
                     <label className="m-0 required">{i18n.t('profile.firstName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
-                           onChange={this.changeString('firstName')}
+                           onChange={this.changeString('user.firstName')}
                            value={model.user.firstName || ''}/>
-                    {this.getError('firstName')}
+                    {this.getError('user.firstName')}
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -136,9 +136,9 @@ class Profile extends React.Component {
                     <label className="m-0 required">{i18n.t('profile.lastName')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                            className="form-control"
-                           onChange={this.changeString('lastName')}
+                           onChange={this.changeString('user.lastName')}
                            value={model.user.lastName || ''}/>
-                    {this.getError('lastName')}
+                    {this.getError('user.lastName')}
                   </div>
                 </div>
               </div>
@@ -149,18 +149,18 @@ class Profile extends React.Component {
                     <label className="m-0">{i18n.t('profile.phone')}</label>
                     <input type="text" placeholder={i18n.t('placeholder.text')}
                       className="form-control"
-                      onChange={this.changePhone('phone')}
+                      onChange={this.changePhone('user.phone')}
                       value={model.user.phone || ''}/>
-                    {this.getError('phone')}
+                    {this.getError('user.phone')}
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label className="m-0">{i18n.t('profile.birthday')}</label>
                     <Date
-                      onChange={this.changeDate('birthday')}
+                      onChange={this.changeDate('user.birthday')}
                       value={model.user.birthday || ''}/>
-                    {this.getError('birthday')}
+                    {this.getError('user.birthday')}
                   </div>
                 </div>
 

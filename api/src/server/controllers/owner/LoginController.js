@@ -101,7 +101,7 @@ router.post('/login-check-owner', async (req, res) => {
       }
     }
 
-    const owner = await Owner.findById(decoded.user._id)
+    const owner = await Owner.findById(decoded.user._id).lean()
 
     if (!owner) {
       throw {

@@ -5,10 +5,8 @@ const id = (prev = null, action) => {
   switch (action.type) {
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
-      if (action.payload.user !== undefined) {
-        if (action.payload.user._id !== undefined) {
-          return action.payload.user._id
-        }
+      if (action.flatten['user._id'] !== undefined) {
+        return action.flatten['user._id']
       }
       return null
     default:
@@ -20,10 +18,8 @@ const isAdmin = (prev = null, action) => {
   switch (action.type) {
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
-      if (action.payload.user !== undefined) {
-        if (action.payload.user.isAdmin !== undefined) {
-          return action.payload.user.isAdmin
-        }
+      if (action.flatten['user.isAdmin'] !== undefined) {
+        return action.flatten['user.isAdmin']
       }
       return null
     default:
@@ -35,17 +31,10 @@ const email = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
-      if (action.payload.user !== undefined) {
-        if (action.payload.user.email !== undefined) {
-          return action.payload.user.email
-        }
+      if (action.flatten['user.email'] !== undefined) {
+        return action.flatten['user.email']
       }
       return null
-    case Action.MODEL_CHANGED:
-      if (action.payload.email !== undefined) {
-        return action.payload.email
-      }
-      return prev
     default:
       return prev
   }
@@ -55,15 +44,13 @@ const firstName = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
-      if (action.payload.user !== undefined) {
-        if (action.payload.user.firstName !== undefined) {
-          return action.payload.user.firstName
-        }
+      if (action.flatten['user.firstName'] !== undefined) {
+        return action.flatten['user.firstName']
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.firstName !== undefined) {
-        return action.payload.firstName
+      if (action.payload['user.firstName'] !== undefined) {
+        return action.payload['user.firstName']
       }
       return prev
     default:
@@ -75,15 +62,49 @@ const lastName = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
-      if (action.payload.user !== undefined) {
-        if (action.payload.user.lastName !== undefined) {
-          return action.payload.user.lastName
-        }
+      if (action.flatten['user.lastName'] !== undefined) {
+        return action.flatten['user.lastName']
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.lastName !== undefined) {
-        return action.payload.lastName
+      if (action.payload['user.lastName'] !== undefined) {
+        return action.payload['user.lastName']
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
+const birthday = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_SUCCESS:
+    case Action.FETCH_SUCCESS:
+      if (action.flatten['user.birthday'] !== undefined) {
+        return action.flatten['user.birthday']
+      }
+      return null
+    case Action.MODEL_CHANGED:
+      if (action.payload['user.birthday'] !== undefined) {
+        return action.payload['user.birthday']
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
+const phone = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_SUCCESS:
+    case Action.FETCH_SUCCESS:
+      if (action.flatten['user.phone'] !== undefined) {
+        return action.flatten['user.phone']
+      }
+      return null
+    case Action.MODEL_CHANGED:
+      if (action.payload['user.phone'] !== undefined) {
+        return action.payload['user.phone']
       }
       return prev
     default:
@@ -97,4 +118,6 @@ export default combineReducers({
   email,
   firstName,
   lastName,
+  phone,
+  birthday,
 })

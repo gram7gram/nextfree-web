@@ -82,7 +82,7 @@ router.post('/login-check-customer', async (req, res) => {
       });
     }
 
-    const customer = await Customer.findById(decoded.user._id)
+    const customer = await Customer.findById(decoded.user._id).lean()
 
     if (!customer) {
       throw {

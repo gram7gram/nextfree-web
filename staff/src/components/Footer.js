@@ -3,7 +3,7 @@ import i18n from '../i18n';
 
 const Footer = () => {
 
-  return <footer className="position-absolute w-100 border-top">
+  return <footer className="position-absolute w-100 border-top py-5">
 
     <div className="container">
 
@@ -22,10 +22,6 @@ const Footer = () => {
         </div>
       </div>
 
-    </div>
-
-    <div className="container text-center">
-      <p className="small text-muted">{i18n.t('footer.copyright')}</p>
     </div>
   </footer>
 }
