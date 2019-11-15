@@ -3,6 +3,7 @@ const isOwner = require('../../services/AuthService').isOwner;
 const ErrorHandler = require('../../services/ErrorHandler');
 const OwnerService = require('../../services/OwnerService');
 const Owner = require('../../../database/model/Owner').Owner;
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -13,7 +14,7 @@ router.post('/profile', isOwner, async (req, res) => {
     const entity = await Owner.findById(req.currentUser.user._id)
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -33,7 +34,7 @@ router.get('/profile', isOwner, async (req, res) => {
     const entity = await Owner.findById(req.currentUser.user._id).lean()
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

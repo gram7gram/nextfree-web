@@ -79,7 +79,7 @@ app.use('/api/v1/customer', CustomerProfileController);
 
 app.all('*', (req, res) => {
   res.status(404).json({
-    message: 'No route found'
+    message: i18n.t('request.no_route_found')
   })
 });
 

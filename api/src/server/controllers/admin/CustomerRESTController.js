@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Customer = require('../../../database/model/Customer').Customer;
 const CustomerRepository = require('../../../database/repository/CustomerRepository');
 const CustomerService = require('../../services/CustomerService');
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -55,7 +56,7 @@ router.get('/customers/:id', isAdmin, checkId, async (req, res) => {
     const entity = await CustomerRepository.findOneByFilter({_id: req.params.id})
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -99,7 +100,7 @@ router.put('/customers/:id', isAdmin, checkId, async (req, res) => {
     const entity = await Customer.findById(req.params.id)
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

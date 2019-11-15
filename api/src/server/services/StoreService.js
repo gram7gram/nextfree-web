@@ -1,5 +1,6 @@
 const Store = require('../../database/model/Store').Store
 const _merge = require('lodash/merge')
+const i18n = require('../../i18n')
 
 const StoreService = {
 
@@ -23,7 +24,7 @@ const StoreService = {
     if (validator) {
       throw {
         code: 400,
-        message: 'Please, re-check store information for errors',
+        message: i18n.t('store.validation_failed'),
         errors: validator.errors
       }
     }

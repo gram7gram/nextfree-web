@@ -3,6 +3,7 @@ const isStaff = require('../../services/AuthService').isStaff;
 const ErrorHandler = require('../../services/ErrorHandler');
 const StaffService = require('../../services/StaffService');
 const Staff = require('../../../database/model/Staff').Staff;
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -13,7 +14,7 @@ router.post('/profile', isStaff, async (req, res) => {
     const entity = await Staff.findById(req.currentUser.user._id)
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -33,7 +34,7 @@ router.get('/profile', isStaff, async (req, res) => {
     const entity = await Staff.findById(req.currentUser.user._id).lean()
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

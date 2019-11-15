@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Company = require('../../../database/model/Company').Company;
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const CompanyService = require('../../services/CompanyService');
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -56,7 +57,7 @@ router.get('/companies/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -76,7 +77,7 @@ router.delete('/companies/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -113,7 +114,7 @@ router.put('/companies/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

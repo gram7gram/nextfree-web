@@ -1,5 +1,6 @@
 const Staff = require('../../database/model/Staff').Staff
 const _merge = require('lodash/merge')
+const i18n = require('../../i18n')
 
 const StaffService = {
 
@@ -33,7 +34,7 @@ const StaffService = {
       if (match) {
         throw {
           code: 400,
-          message: `There is already staff with such email`,
+          message: i18n.t('staff.duplicate_email'),
         }
       }
 
@@ -43,7 +44,7 @@ const StaffService = {
     if (validator) {
       throw {
         code: 400,
-        message: 'Please, re-check staff information for errors',
+        message: i18n.t('staff.validation_failed'),
         errors: validator.errors
       }
     }

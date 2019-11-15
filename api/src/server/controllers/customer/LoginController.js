@@ -5,6 +5,7 @@ const Customer = require('../../../database/model/Customer').Customer;
 const AuthService = require('../../services/AuthService')
 const ErrorHandler = require('../../services/ErrorHandler')
 const CustomerService = require('../../services/CustomerService')
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -14,7 +15,7 @@ router.post('/login-customer', async (req, res) => {
 
   if (!(email && password)) {
     res.status(400).json({
-      message: 'Bad request'
+      message: i18n.t('request.bad_request')
     })
   }
 
@@ -24,30 +25,30 @@ router.post('/login-customer', async (req, res) => {
     if (!entity) {
       throw {
         code: 404,
-        message: 'No user found by email/password'
+        message: i18n.t('login.no_user_found')
       }
     }
 
     if (!entity.isEnabled) {
       throw {
         code: 401,
-        message: 'Your account is deactivated. Contact administrator for details'
+        message: i18n.t('login.customer_inactive')
       }
     }
 
     if (!entity.user.comparePassword(password)) {
       throw {
         code: 401,
-        message: 'Bad credentials'
+        message: i18n.t('login.bad_credentials')
       }
     }
 
-    const staff = entity.toObject()
+    const customer = entity.toObject()
 
     const content = {
       isCustomer: true,
-      isAdmin: staff.user.isAdmin === true,
-      user: CustomerService.serialize(staff),
+      isAdmin: customer.user.isAdmin === true,
+      user: CustomerService.serialize(customer),
     }
 
     const token = AuthService.generateAuthToken(content)
@@ -70,21 +71,37 @@ router.post('/login-check-customer', async (req, res) => {
     const token = AuthService.getToken(req)
     if (!token) {
       res.status(400).json({
-        message: 'Bad request'
+        message: i18n.t('request.bad_request')
       })
     }
 
     const decoded = AuthService.verifyToken(token)
     if (!decoded || !decoded.isCustomer) {
       res.status(403).json({
-        message: "Access denied"
+        message: i18n.t('auth.access_denied')
       });
+    }
+
+    const customer = await Customer.findById(decoded.user._id)
+
+    if (!customer) {
+      throw {
+        code: 404,
+        message: i18n.t('login.no_user_found')
+      }
+    }
+
+    if (!customer.isEnabled) {
+      throw {
+        code: 401,
+        message: i18n.t('login.customer_inactive')
+      }
     }
 
     res.status(200).json({
       isCustomer: true,
-      isAdmin: decoded.user.isAdmin === true,
-      user: CustomerService.serialize(decoded.user),
+      isAdmin: customer.user.isAdmin === true,
+      user: CustomerService.serialize(customer),
       token
     })
 

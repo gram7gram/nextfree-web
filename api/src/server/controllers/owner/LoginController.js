@@ -9,6 +9,7 @@ const ErrorHandler = require('../../services/ErrorHandler')
 const OwnerService = require('../../services/OwnerService')
 const CompanyService = require('../../services/CompanyService')
 const StoreService = require('../../services/StoreService')
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -18,7 +19,7 @@ router.post('/login-owner', async (req, res) => {
 
   if (!(email && password)) {
     res.status(400).json({
-      message: 'Bad request'
+      message: i18n.t('request.bad_request')
     })
   }
 
@@ -28,21 +29,21 @@ router.post('/login-owner', async (req, res) => {
     if (!entity) {
       throw {
         code: 404,
-        message: 'No user found by email/password'
+        message: i18n.t('login.no_user_found')
       }
     }
 
     if (!entity.isEnabled) {
       throw {
         code: 401,
-        message: 'Your account is deactivated. Contact administrator for details'
+        message: i18n.t('login.owner_inactive')
       }
     }
 
     if (!entity.user.comparePassword(password)) {
       throw {
         code: 401,
-        message: 'Bad credentials'
+        message: i18n.t('login.bad_credentials')
       }
     }
 
@@ -86,19 +87,35 @@ router.post('/login-check-owner', async (req, res) => {
 
     const token = AuthService.getToken(req)
     if (!token) {
-      res.status(400).json({
-        message: 'Bad request'
-      })
+      throw {
+        code: 400,
+        message: i18n.t('request.bad_request')
+      }
     }
 
     const decoded = AuthService.verifyToken(token)
     if (!decoded || !decoded.isOwner) {
-      res.status(403).json({
-        message: "Access denied"
-      });
+      throw {
+        code: 403,
+        message: i18n.t('auth.access_denied')
+      }
     }
 
-    const owner = decoded.user
+    const owner = await Owner.findById(decoded.user._id)
+
+    if (!owner) {
+      throw {
+        code: 404,
+        message: i18n.t('login.no_user_found')
+      }
+    }
+
+    if (!owner.isEnabled) {
+      throw {
+        code: 401,
+        message: i18n.t('login.owner_inactive')
+      }
+    }
 
     const company = await Company.findOne({
       ownerId: owner._id

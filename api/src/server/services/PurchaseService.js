@@ -1,5 +1,5 @@
 const Purchase = require('../../database/model/Purchase').Purchase
-
+const i18n = require('../../i18n')
 const Conditions = require('../../BonusCondition');
 
 const PurchaseService = {
@@ -18,7 +18,7 @@ const PurchaseService = {
     if (validator) {
       throw {
         code: 400,
-        message: 'Please, re-check purchase information for errors',
+        message: i18n.t('purchase.validation_failed'),
         errors: validator.errors
       }
     }
@@ -32,14 +32,30 @@ const PurchaseService = {
 
   checkBonusCondition: async purchase => {
 
-    const bonusCondition = purchase.store ? purchase.store.bonusCondition : purchase.company.bonusCondition
+    const bonusCondition = purchase.store
+      ? purchase.store.bonusCondition
+      : purchase.company.bonusCondition
 
     if (bonusCondition === Conditions.BC_4_PLUS_1) {
       await PurchaseService.check4Plus1Condition(purchase)
     } else {
-      throw {
-        code: 501,
-        message: `Unknown bonus condition "${bonusCondition}" in store "${purchase.store._id}"`
+
+      if (purchase.store) {
+        throw {
+          code: 501,
+          message: i18n.t('unknown_store_condition')
+            .replace('_CONDITION_', bonusCondition)
+            .replace('_STORE_', purchase.store.address)
+        }
+      }
+
+      if (purchase.company) {
+        throw {
+          code: 501,
+          message: i18n.t('unknown_company_condition')
+            .replace('_CONDITION_', bonusCondition)
+            .replace('_COMPANY_', purchase.company.name)
+        }
       }
     }
 

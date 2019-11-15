@@ -3,6 +3,7 @@ const isCustomer = require('../../services/AuthService').isCustomer;
 const ErrorHandler = require('../../services/ErrorHandler');
 const CustomerService = require('../../services/CustomerService');
 const Customer = require('../../../database/model/Customer').Customer;
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -13,7 +14,7 @@ router.post('/profile', isCustomer, async (req, res) => {
     const entity = await Customer.findById(req.currentUser.user._id)
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -33,7 +34,7 @@ router.get('/profile', isCustomer, async (req, res) => {
     const entity = await Customer.findById(req.currentUser.user._id).lean()
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

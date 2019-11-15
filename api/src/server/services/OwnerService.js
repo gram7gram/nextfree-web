@@ -1,5 +1,6 @@
 const Owner = require('../../database/model/Owner').Owner
 const _merge = require('lodash/merge')
+const i18n = require('../../i18n')
 
 const OwnerService = {
 
@@ -33,7 +34,7 @@ const OwnerService = {
       if (match) {
         throw {
           code: 400,
-          message: `There is already owner with such email`,
+          message: i18n.t('owner.duplicate_email'),
         }
       }
 
@@ -43,7 +44,7 @@ const OwnerService = {
     if (validator) {
       throw {
         code: 400,
-        message: 'Please, re-check owner information for errors',
+        message: i18n.t('owner.validation_failed'),
         errors: validator.errors
       }
     }

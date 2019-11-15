@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Store = require('../../../database/model/Store').Store;
 const StoreRepository = require('../../../database/repository/StoreRepository');
 const StoreService = require('../../services/StoreService');
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -57,7 +58,7 @@ router.get('/stores/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -92,7 +93,7 @@ router.put('/stores/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -116,7 +117,7 @@ router.delete('/stores/:id', isAdmin, checkId, async (req, res) => {
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

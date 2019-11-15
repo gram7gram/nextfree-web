@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const params = require('../../../parameters')
+const i18n = require('../../i18n')
 
 const getToken = req => req.headers['authorization'];
 
@@ -8,7 +9,7 @@ const isAdmin = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token"
+      message: i18n.t("auth.missing_token")
     });
     return
   }
@@ -18,7 +19,7 @@ const isAdmin = (req, res, next) => {
 
     if (!decoded || decoded.isAdmin !== true) {
       res.status(403).json({
-        message: "Access denied. Not admin"
+        message: i18n.t("auth.not_admin")
       });
       return
     }
@@ -31,7 +32,7 @@ const isAdmin = (req, res, next) => {
     console.error(e)
 
     res.status(401).json({
-      message: "Not authorized"
+      message: i18n.t("auth.not_authorized")
     })
   }
 }
@@ -41,7 +42,7 @@ const isOwner = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token"
+      message: i18n.t("auth.missing_token")
     });
     return
   }
@@ -51,7 +52,7 @@ const isOwner = (req, res, next) => {
 
     if (!decoded || decoded.isOwner !== true) {
       res.status(403).json({
-        message: "Access denied. Not owner"
+        message: i18n.t("auth.not_owner")
       });
       return
     }
@@ -64,7 +65,7 @@ const isOwner = (req, res, next) => {
     console.error(e)
 
     res.status(401).json({
-      message: "Not authorized"
+      message: i18n.t("auth.not_authorized")
     })
   }
 }
@@ -74,7 +75,7 @@ const isStaff = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token"
+      message: i18n.t("auth.missing_token")
     });
     return
   }
@@ -84,7 +85,7 @@ const isStaff = (req, res, next) => {
 
     if (!decoded || decoded.isStaff !== true) {
       res.status(403).json({
-        message: "Access denied. Not staff"
+        message: i18n.t("auth.not_staff")
       });
       return
     }
@@ -97,7 +98,7 @@ const isStaff = (req, res, next) => {
     console.error(e)
 
     res.status(401).json({
-      message: "Not authorized"
+      message: i18n.t("auth.not_authorized")
     })
   }
 }
@@ -107,7 +108,7 @@ const isCustomer = (req, res, next) => {
   const token = getToken(req);
   if (!token) {
     res.status(401).json({
-      message: "Missing token"
+      message: i18n.t("auth.missing_token")
     });
     return
   }
@@ -117,7 +118,7 @@ const isCustomer = (req, res, next) => {
 
     if (!decoded || decoded.isCustomer !== true) {
       res.status(403).json({
-        message: "Access denied. Not customer"
+        message: i18n.t("auth.not_customer")
       });
       return
     }
@@ -130,7 +131,7 @@ const isCustomer = (req, res, next) => {
     console.error(e)
 
     res.status(401).json({
-      message: "Not authorized"
+      message: i18n.t("auth.not_authorized")
     })
   }
 }
@@ -140,7 +141,7 @@ const isAuthenticated = (req, res, next) => {
   const token = getToken(req)
   if (!token) {
     res.status(401).json({
-      message: "Missing token"
+      message: i18n.t("auth.missing_token")
     });
     return
   }
@@ -150,8 +151,7 @@ const isAuthenticated = (req, res, next) => {
 
     if (!decoded || !(decoded.isOwner || decoded.isCustomer || decoded.isStaff)) {
       res.status(403).json({
-        ...decoded,
-        message: "Access denied"
+        message: i18n.t("auth.access_denied")
       });
       return
     }
@@ -164,7 +164,7 @@ const isAuthenticated = (req, res, next) => {
     console.error(e)
 
     res.status(401).json({
-      message: "Not authorized"
+      message: i18n.t("auth.not_authorized")
     })
   }
 }

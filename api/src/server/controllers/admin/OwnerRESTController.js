@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Owner = require('../../../database/model/Owner').Owner;
 const OwnerRepository = require('../../../database/repository/OwnerRepository');
 const OwnerService = require('../../services/OwnerService');
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -55,7 +56,7 @@ router.get('/owners/:id', isAdmin, checkId, async (req, res) => {
     const entity = await OwnerRepository.findOneByFilter({_id: req.params.id})
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -99,7 +100,7 @@ router.put('/owners/:id', isAdmin, checkId, async (req, res) => {
     const entity = await Owner.findById(req.params.id)
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 

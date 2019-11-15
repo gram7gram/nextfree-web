@@ -1,5 +1,6 @@
 const Customer = require('../../database/model/Customer').Customer
 const _merge = require('lodash/merge')
+const i18n = require('../../i18n')
 
 const CustomerService = {
 
@@ -32,7 +33,7 @@ const CustomerService = {
       if (match) {
         throw {
           code: 400,
-          message: `There is already customer with such email`,
+          message: i18n.t('customer.duplicate_email'),
         }
       }
     }
@@ -41,7 +42,7 @@ const CustomerService = {
     if (validator) {
       throw {
         code: 400,
-        message: 'Please, re-check customer information for errors',
+        message: i18n.t('customer.validation_failed'),
         errors: validator.errors
       }
     }

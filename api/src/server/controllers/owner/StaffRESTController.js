@@ -7,6 +7,7 @@ const Staff = require('../../../database/model/Staff').Staff;
 const StaffRepository = require('../../../database/repository/StaffRepository');
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const StaffService = require('../../services/StaffService');
+const i18n = require('../../../i18n');
 
 const router = new express.Router({mergeParams: true});
 
@@ -14,7 +15,7 @@ const checkCompanyId = (req, res, next) => {
 
   if (!/^[0-9a-fA-F]{24}$/.test(req.params.company)) {
     res.status(400).json({
-      message: 'Invalid `company` in request',
+      message: i18n.t('request.invalid_company_id'),
     })
     return
   }
@@ -32,7 +33,7 @@ router.get('/companies/:company/staff', isOwner, checkCompanyId, async (req, res
     })
     if (!company) {
       res.status(404).json({
-        message: 'No company found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -83,7 +84,7 @@ router.get('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, as
     })
     if (!company) {
       res.status(404).json({
-        message: 'No company found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -102,7 +103,7 @@ router.get('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, as
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -123,7 +124,7 @@ router.delete('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId,
     })
     if (!company) {
       res.status(404).json({
-        message: 'No company found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -142,7 +143,7 @@ router.delete('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId,
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -165,7 +166,7 @@ router.post('/companies/:company/staff', isOwner, checkCompanyId, async (req, re
     })
     if (!company) {
       res.status(404).json({
-        message: 'No company found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -191,7 +192,7 @@ router.put('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, as
     })
     if (!company) {
       res.status(404).json({
-        message: 'No company found'
+        message: i18n.t('request.not_found')
       })
     }
 
@@ -210,7 +211,7 @@ router.put('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, as
     })
     if (!entity) {
       res.status(404).json({
-        message: 'Not found'
+        message: i18n.t('request.not_found')
       })
     }
 
