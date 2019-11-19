@@ -194,7 +194,7 @@ class Invitation extends React.Component {
 
             {this.getError('hasAccepted')}
 
-            <ul className="m-0">
+            <ul className="m-0 pl-4">
               <li>
                 <a href="/terms" target="_blank">{i18n.t('invitation.terms_link')}</a>
               </li>

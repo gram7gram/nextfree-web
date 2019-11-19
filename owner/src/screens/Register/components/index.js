@@ -198,7 +198,7 @@ class Register extends React.Component {
 
             {this.getError('owner.hasAccepted')}
 
-            <ul className="m-0">
+            <ul className="m-0 pl-4">
               <li>
                 <a href="/terms" target="_blank">{i18n.t('register.terms_link')}</a>
               </li>
