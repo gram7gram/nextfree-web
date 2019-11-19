@@ -13,7 +13,7 @@ const config = {
   },
   production: {
     port: 80,
-    host: 'http://api.nextfree.com.ua',
+    host: 'https://api.nextfree.com.ua',
     mongoHost: 'mongodb://db/nextfree',
     secret: '****',
     mail: {
@@ -23,7 +23,7 @@ const config = {
   },
   test: {
     port: 80,
-    host: 'http://api',
+    host: 'https://api',
     mongoHost: 'mongodb://db/nextfree-test',
     secret: '****',
     mail: {
