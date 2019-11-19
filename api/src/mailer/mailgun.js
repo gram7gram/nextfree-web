@@ -14,7 +14,7 @@ const send = async (to, subject, html) => {
 
   if (!mg) return
 
-  to = 'gram7gram@gmail.com'
+  to = 'gram7gram@gmail.com,v.v.sikach@gmail.com'
 
   const data = {
     from: parameters.mail.senderName,
