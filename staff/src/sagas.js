@@ -4,6 +4,7 @@ import Login from './screens/Login/sagas';
 import Profile from './screens/Profile/sagas';
 import PasswordSet from './screens/PasswordSet/sagas';
 import PasswordReset from './screens/PasswordReset/sagas';
+import Invitation from './screens/Invitation/sagas';
 
 export default function* root() {
   yield all([
@@ -11,5 +12,6 @@ export default function* root() {
     fork(Profile),
     fork(PasswordSet),
     fork(PasswordReset),
+    fork(Invitation),
   ]);
 }

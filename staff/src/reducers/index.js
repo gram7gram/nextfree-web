@@ -7,6 +7,7 @@ import Profile from '../screens/Profile/reducers';
 import QRScanner from '../screens/QRScanner/reducers';
 import PasswordSet from '../screens/PasswordSet/reducers';
 import PasswordReset from '../screens/PasswordReset/reducers';
+import Invitation from '../screens/Invitation/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -16,6 +17,7 @@ const createRootReducer = (history) => combineReducers({
   QRScanner,
   PasswordReset,
   PasswordSet,
+  Invitation,
 });
 
 export default createRootReducer

@@ -15,8 +15,10 @@ import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
 import QRScanner from '../screens/QRScanner/components';
 import Profile from '../screens/Profile/components';
+
 import Staff from '../screens/Staff/components';
 import StaffEdit from '../screens/StaffEdit/components';
+import StaffInvite from '../screens/StaffInvite/components';
 
 import Company from '../screens/Company/components';
 import CompanyEdit from '../screens/CompanyEdit/components';
@@ -86,6 +88,7 @@ export function createRouter(store) {
           <PrivateRoute path={Pages.STORE_EDIT} component={StoreEdit}/>
 
           <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
+          <PrivateRoute exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
           <PrivateRoute exact path={Pages.STAFF_NEW} component={StaffEdit}/>
           <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
 

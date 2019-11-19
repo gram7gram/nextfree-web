@@ -26,6 +26,7 @@ const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
 const StaffLoginController = require('./controllers/staff/LoginController');
 const StaffPasswordController = require('./controllers/staff/PasswordController');
+const StaffInvitationController = require('./controllers/staff/InvitationController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 const CustomerLoginController = require('./controllers/customer/LoginController');
@@ -62,6 +63,7 @@ app.use('/api/v1', StaffLoginController);
 app.use('/api/v1', CustomerPasswordController);
 app.use('/api/v1', StaffPasswordController);
 app.use('/api/v1', OwnerPasswordController);
+app.use('/api/v1', StaffInvitationController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

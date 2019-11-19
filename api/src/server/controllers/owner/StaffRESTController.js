@@ -1,4 +1,5 @@
 const express = require('express');
+const uuid = require('uuid');
 const ErrorHandler = require('../../services/ErrorHandler');
 const isOwner = require('../../services/AuthService').isOwner;
 const checkId = require('../../services/RequestParamsValidator').checkId;
@@ -7,6 +8,7 @@ const Staff = require('../../../database/model/Staff').Staff;
 const StaffRepository = require('../../../database/repository/StaffRepository');
 const CompanyRepository = require('../../../database/repository/CompanyRepository');
 const StaffService = require('../../services/StaffService');
+const StaffEmailService = require('../../services/StaffEmailService');
 const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
@@ -150,6 +152,40 @@ router.delete('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId,
     await StaffService.remove(entity._id)
 
     res.status(204).send()
+
+  } catch (e) {
+    ErrorHandler.handle(res, e)
+  }
+})
+
+router.post('/companies/:company/staff/invite', isOwner, checkCompanyId, async (req, res) => {
+
+  try {
+
+    const owner = req.currentUser.user
+
+    const company = await CompanyRepository.findOneByFilter({
+      _id: req.params.company,
+      ownerId: owner._id
+    })
+    if (!company) {
+      res.status(404).json({
+        message: i18n.t('request.not_found')
+      })
+    }
+
+    const content = {
+      ...req.body,
+      companyId: company._id,
+    }
+
+    content.user.invitationToken = uuid()
+
+    const result = await StaffService.create(content)
+
+    await StaffEmailService.onInvitationCreated(result, owner, company)
+
+    res.status(201).json(StaffService.serialize(result))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

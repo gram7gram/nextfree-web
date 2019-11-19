@@ -8,7 +8,7 @@ const onPasswordReset = async entity => {
 
   const body = templating.render('customer-reset-password-ua.html.twig', {
     title,
-    link: parameters.customerHost + '/password-set/' + entity.user.accessToken
+    link: parameters.customerHost + '/password-set/' + entity.user.emailResetToken
   })
 
   await mailer(entity.user.email, title, body)

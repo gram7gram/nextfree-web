@@ -1,0 +1,26 @@
+<h1>{{ title }}</h1>
+
+<p>{{ owner.user.lastName }} {{ owner.user.firstName }} запрошує Вас до співпраці!</p>
+
+<table>
+    <tbody>
+    <tr>
+        <td>Компанія</td>
+        <td><code>{{ company.name }}</code></td>
+    </tr>
+    <tr>
+        <td>Точка продажу</td>
+        <td><code>{{ store.address }}</code></td>
+    </tr>
+    <tr>
+        <td>Посада</td>
+        <td><code>{{ staff.position }}</code></td>
+    </tr>
+    </tbody>
+</table>
+
+<p>Заповніть свій профіль за посиланням:</p>
+
+<p>
+    <a href="{{ link }}" rel="nofollow">Мій профіль</a>
+</p>

@@ -38,7 +38,7 @@ router.post('/owner-password-reset', async (req, res) => {
       }
     }
 
-    entity.user.accessToken = uuid()
+    entity.user.emailResetToken = uuid()
 
     entity = await entity.save()
 
@@ -65,7 +65,7 @@ router.post('/owner-password-set/:token', async (req, res) => {
     }
 
     let entity = await Owner.findOne({
-      'user.accessToken': req.params.token
+      'user.emailResetToken': req.params.token
     })
 
     if (!entity) {
@@ -82,7 +82,7 @@ router.post('/owner-password-set/:token', async (req, res) => {
       }
     }
 
-    entity.user.accessToken = null
+    entity.user.emailResetToken = null
     entity.user.password = req.body.password
 
     entity = await entity.save()

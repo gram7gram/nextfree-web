@@ -7,7 +7,11 @@ const schema = new mongoose.Schema({
     lowercase: true,
     required: true
   },
-  accessToken: {
+  emailResetToken: {
+    type: String,
+    required: false
+  },
+  invitationToken: {
     type: String,
     required: false
   },

@@ -5,6 +5,7 @@ import Profile from './screens/Profile/sagas';
 import Staff from './screens/Staff/sagas';
 import Register from './screens/Register/sagas';
 import StaffEdit from './screens/StaffEdit/sagas';
+import StaffInvite from './screens/StaffInvite/sagas';
 import Store from './screens/Store/sagas';
 import StoreEdit from './screens/StoreEdit/sagas';
 import Company from './screens/Company/sagas';
@@ -19,6 +20,7 @@ export default function* root() {
     fork(Register),
     fork(Staff),
     fork(StaffEdit),
+    fork(StaffInvite),
     fork(Store),
     fork(StoreEdit),
     fork(Company),
