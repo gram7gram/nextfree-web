@@ -5,7 +5,7 @@ const config = {
     apiHost: 'http://0.0.0.0:7601',
   },
   production: {
-    host: 'http://customer.nextfree.com.ua',
+    host: 'https://customer.nextfree.com.ua',
     apiHost: 'http://api.nextfree.com.ua',
   }
 }
