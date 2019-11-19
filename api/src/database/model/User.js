@@ -7,6 +7,10 @@ const schema = new mongoose.Schema({
     lowercase: true,
     required: true
   },
+  accessToken: {
+    type: String,
+    required: false
+  },
   isAdmin: {
     type: Boolean,
     required: false

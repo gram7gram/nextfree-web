@@ -20,14 +20,17 @@ const OwnerStaffRESTController = require('./controllers/owner/StaffRESTControlle
 const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTController');
 const OwnerRegisterController = require('./controllers/owner/RegisterController');
 const OwnerLoginController = require('./controllers/owner/LoginController');
+const OwnerPasswordController = require('./controllers/owner/PasswordController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
 const StaffLoginController = require('./controllers/staff/LoginController');
+const StaffPasswordController = require('./controllers/staff/PasswordController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 const CustomerLoginController = require('./controllers/customer/LoginController');
 const CustomerRegisterController = require('./controllers/customer/RegisterController');
+const CustomerPasswordController = require('./controllers/customer/PasswordController');
 
 const app = express();
 
@@ -56,6 +59,9 @@ app.use('/api/v1', CustomerLoginController);
 app.use('/api/v1', OwnerRegisterController);
 app.use('/api/v1', OwnerLoginController);
 app.use('/api/v1', StaffLoginController);
+app.use('/api/v1', CustomerPasswordController);
+app.use('/api/v1', StaffPasswordController);
+app.use('/api/v1', OwnerPasswordController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

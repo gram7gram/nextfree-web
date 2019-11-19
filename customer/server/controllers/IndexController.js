@@ -13,6 +13,9 @@ const routes = [
 
   '/profile',
   '/logout',
+
+  '/password-reset',
+  '/password-set/:id',
 ]
 
 const index = (req, res) => {

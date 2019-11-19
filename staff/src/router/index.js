@@ -15,6 +15,9 @@ import QR from '../screens/QR/components';
 import QRScanner from '../screens/QRScanner/components';
 import Profile from '../screens/Profile/components';
 
+import PasswordSet from '../screens/PasswordSet/components';
+import PasswordReset from '../screens/PasswordReset/components';
+
 import ErrorBoundary from "../components/ErrorBoundary";
 
 export function createRouter(store) {
@@ -55,6 +58,9 @@ export function createRouter(store) {
 
         <Switch>
           <PublicRoute exact path={Pages.LOGIN} component={Login}/>
+
+          <PublicRoute path={Pages.PASSWORD_SET} component={PasswordSet}/>
+          <PublicRoute exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 
           <PrivateRoute exact path={Pages.HOME} component={Home}/>
           <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>

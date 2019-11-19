@@ -46,12 +46,28 @@
     "remove_success": "Виделено!",
     "save_success": "Збережено!"
   },
+  "password_reset": {
+    "title": "Відновлення паролю",
+    "subtitle": "На вказану електронну адресу буде відправлений емейл з інструкціями по встановленню нового паролю",
+    "success": "Успішно!",
+    "placeholder": "Введіть емейл...",
+    "action": "Відновити"
+  },
+  "password_set": {
+    "title": "Новий пароль",
+    "subtitle": "Вкажіть Ваш новий пароль",
+    "success": "Збережено!",
+    "password1": "Новий пароль",
+    "password2": "Повторіть пароль",
+    "action": "Зберегти"
+  },
   "login": {
     "title": "NextFree",
     "login": "Емейл",
     "placeholder": "Введіть емейл",
     "password": "Пароль",
     "action": "Увійти",
+    "reset_password": "Забули пароль?",
     "subtitle": "Система отримання бонусів"
   },
   "register": {

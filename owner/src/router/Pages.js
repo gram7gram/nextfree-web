@@ -3,6 +3,9 @@ export const REGISTER = '/register';
 export const HOME = '/';
 export const PROFILE = '/profile';
 
+export const PASSWORD_SET = '/password-set/:id';
+export const PASSWORD_RESET = '/password-reset';
+
 export const QR_CODE = '/qr';
 export const QR_SCAN = '/scan';
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import * as Pages from '../../../router/Pages';
 import {LOGIN_CREDENTIALS_CHANGED} from '../actions';
 import LoginAction from '../actions/Login';
 import i18n from '../../../i18n';
@@ -89,6 +91,11 @@ class Login extends React.Component {
                          value={password || ''}/>
                 </div>
                 <div className="form-group text-right">
+
+                  <Link to={Pages.PASSWORD_RESET}
+                        className={"btn mr-1 " + (errors.length > 0 ? "btn-warning" : "btn-outline-warning")}>
+                    <i className="fa fa-key"/>&nbsp;{i18n.t('login.reset_password')}
+                  </Link>
 
                   <button className="btn btn-success"
                           onClick={this.submit}

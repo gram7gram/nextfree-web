@@ -9,6 +9,8 @@ import Store from './screens/Store/sagas';
 import StoreEdit from './screens/StoreEdit/sagas';
 import Company from './screens/Company/sagas';
 import CompanyEdit from './screens/CompanyEdit/sagas';
+import PasswordSet from './screens/PasswordSet/sagas';
+import PasswordReset from './screens/PasswordReset/sagas';
 
 export default function* root() {
   yield all([
@@ -21,5 +23,7 @@ export default function* root() {
     fork(StoreEdit),
     fork(Company),
     fork(CompanyEdit),
+    fork(PasswordSet),
+    fork(PasswordReset),
   ]);
 }
