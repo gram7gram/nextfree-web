@@ -229,7 +229,7 @@ class Register extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-8 col-lg-7 col-xl-6 mx-auto">
+        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
 
           {this.renderContent()}
 
