@@ -21,17 +21,20 @@ const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTCon
 const OwnerRegisterController = require('./controllers/owner/RegisterController');
 const OwnerLoginController = require('./controllers/owner/LoginController');
 const OwnerPasswordController = require('./controllers/owner/PasswordController');
+const OwnerActivationController = require('./controllers/owner/ActivationController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
 const StaffLoginController = require('./controllers/staff/LoginController');
 const StaffPasswordController = require('./controllers/staff/PasswordController');
 const StaffInvitationController = require('./controllers/staff/InvitationController');
+const StaffActivationController = require('./controllers/staff/ActivationController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 const CustomerLoginController = require('./controllers/customer/LoginController');
 const CustomerRegisterController = require('./controllers/customer/RegisterController');
 const CustomerPasswordController = require('./controllers/customer/PasswordController');
+const CustomerActivationController = require('./controllers/customer/ActivationController');
 
 const app = express();
 
@@ -55,6 +58,9 @@ app.use((req, res, next) => {
 })
 
 //Public API
+app.use('/api/v1', OwnerActivationController);
+app.use('/api/v1', StaffActivationController);
+app.use('/api/v1', CustomerActivationController);
 app.use('/api/v1', CustomerRegisterController);
 app.use('/api/v1', CustomerLoginController);
 app.use('/api/v1', OwnerRegisterController);

@@ -2,6 +2,7 @@ const express = require('express');
 const ErrorHandler = require('../../services/ErrorHandler')
 
 const CustomerService = require('../../services/CustomerService')
+const CustomerEmailService = require('../../services/CustomerEmailService')
 
 const router = new express.Router({mergeParams: true});
 
@@ -13,6 +14,8 @@ router.post('/customer-register', async (req, res) => {
       ...req.body,
       isEnabled: true
     })
+
+    await CustomerEmailService.onAccountActivation(entity)
 
     res.status(201).json(CustomerService.serialize(entity))
 

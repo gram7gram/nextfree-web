@@ -15,6 +15,7 @@ import CompanyEdit from '../screens/CompanyEdit/reducers';
 import QRScanner from '../screens/QRScanner/reducers';
 import PasswordSet from '../screens/PasswordSet/reducers';
 import PasswordReset from '../screens/PasswordReset/reducers';
+import Activation from '../screens/Activation/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -32,6 +33,7 @@ const createRootReducer = (history) => combineReducers({
   QRScanner,
   PasswordSet,
   PasswordReset,
+  Activation,
 });
 
 export default createRootReducer

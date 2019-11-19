@@ -28,6 +28,7 @@ import StoreEdit from '../screens/StoreEdit/components';
 
 import PasswordReset from '../screens/PasswordReset/components';
 import PasswordSet from '../screens/PasswordSet/components';
+import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 
@@ -71,6 +72,8 @@ export function createRouter(store) {
           <PublicRoute exact path={Pages.LOGIN} component={Login}/>
 
           <PublicRoute exact path={Pages.REGISTER} component={Register}/>
+
+          <PublicRoute path={Pages.ACTIVATION} component={Activation}/>
 
           <PublicRoute path={Pages.PASSWORD_SET} component={PasswordSet}/>
           <PublicRoute exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>

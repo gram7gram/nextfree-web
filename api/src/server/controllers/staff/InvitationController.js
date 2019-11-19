@@ -23,7 +23,11 @@ router.post('/invitation/:token/accept', async (req, res) => {
       ...req.body
     })
 
-    await Staff.updateOne({'_id': result._id}, {'user.invitationToken': null})
+    await Staff.updateOne({'_id': result._id}, {
+      'user.invitationToken': null,
+      'user.activationToken': null,
+      'user.isEmailVerified': true,
+    })
 
     res.status(200).json(StaffService.serialize(result))
 

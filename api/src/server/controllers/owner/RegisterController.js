@@ -5,6 +5,7 @@ const Condition = require('../../../BonusCondition')
 const CompanyService = require('../../services/CompanyService')
 const StoreService = require('../../services/StoreService')
 const OwnerService = require('../../services/OwnerService')
+const OwnerEmailService = require('../../services/OwnerEmailService')
 
 const router = new express.Router({mergeParams: true});
 
@@ -31,6 +32,8 @@ router.post('/owner-register', async (req, res) => {
       bonusCondition: companyEntity.bonusCondition,
       isEnabled: false,
     })
+
+    await OwnerEmailService.onAccountActivation(entity)
 
     res.status(201).json({
       owner: OwnerService.serialize(entity),

@@ -1,4 +1,5 @@
 const Owner = require('../../database/model/Owner').Owner
+const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
 
@@ -14,7 +15,11 @@ const OwnerService = {
   },
 
   create: async (content) => {
-    const entity = new Owner()
+    const entity = new Owner({
+      user: {
+        activationToken: uuid()
+      }
+    })
 
     return await OwnerService.update(entity, content)
   },

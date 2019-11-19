@@ -19,6 +19,7 @@ const routes = [
   '/password-set/:id',
 
   '/invitation/:id',
+  '/activation/:id',
 ]
 
 const index = (req, res) => {

@@ -7,6 +7,14 @@ const schema = new mongoose.Schema({
     lowercase: true,
     required: true
   },
+  isEmailVerified: {
+    type: Boolean,
+    required: false
+  },
+  activationToken: {
+    type: String,
+    required: false
+  },
   emailResetToken: {
     type: String,
     required: false

@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Owner = require('../../../database/model/Owner').Owner;
 const OwnerRepository = require('../../../database/repository/OwnerRepository');
 const OwnerService = require('../../services/OwnerService');
+const OwnerEmailService = require('../../services/OwnerEmailService');
 const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
@@ -85,6 +86,8 @@ router.post('/owners', isAdmin, async (req, res) => {
   try {
 
     const result = await OwnerService.create(req.body)
+
+    await OwnerEmailService.onAccountActivation(result)
 
     res.status(201).json(OwnerService.serialize(result))
 

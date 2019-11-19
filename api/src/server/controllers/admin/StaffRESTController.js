@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Staff = require('../../../database/model/Staff').Staff;
 const StaffRepository = require('../../../database/repository/StaffRepository');
 const StaffService = require('../../services/StaffService');
+const StaffEmailService = require('../../services/StaffEmailService');
 const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
@@ -85,6 +86,8 @@ router.post('/staff', isAdmin, async (req, res) => {
   try {
 
     const result = await StaffService.create(req.body)
+
+    await StaffEmailService.onAccountActivation(result)
 
     res.status(201).json(StaffService.serialize(result))
 

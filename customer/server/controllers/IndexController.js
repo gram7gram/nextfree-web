@@ -16,6 +16,8 @@ const routes = [
 
   '/password-reset',
   '/password-set/:id',
+
+  '/activation/:id',
 ]
 
 const index = (req, res) => {

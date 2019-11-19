@@ -6,6 +6,7 @@ const checkId = require('../../services/RequestParamsValidator').checkId;
 const Customer = require('../../../database/model/Customer').Customer;
 const CustomerRepository = require('../../../database/repository/CustomerRepository');
 const CustomerService = require('../../services/CustomerService');
+const CustomerEmailService = require('../../services/CustomerEmailService');
 const i18n = require('../../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
@@ -85,6 +86,8 @@ router.post('/customers', isAdmin, async (req, res) => {
   try {
 
     const result = await CustomerService.create(req.body)
+
+    await CustomerEmailService.onAccountActivation(result)
 
     res.status(201).json(CustomerService.serialize(result))
 

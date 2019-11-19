@@ -1,4 +1,5 @@
 const Staff = require('../../database/model/Staff').Staff
+const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
 
@@ -14,7 +15,11 @@ const StaffService = {
   },
 
   create: async (content) => {
-    const entity = new Staff()
+    const entity = new Staff({
+      user: {
+        activationToken: uuid()
+      }
+    })
 
     return await StaffService.update(entity, content)
   },

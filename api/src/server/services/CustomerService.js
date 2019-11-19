@@ -1,4 +1,5 @@
 const Customer = require('../../database/model/Customer').Customer
+const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
 
@@ -14,7 +15,11 @@ const CustomerService = {
   },
 
   create: async (content) => {
-    const entity = new Customer()
+    const entity = new Customer({
+      user: {
+        activationToken: uuid()
+      }
+    })
 
     return await CustomerService.update(entity, content)
   },

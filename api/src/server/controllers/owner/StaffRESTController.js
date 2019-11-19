@@ -211,6 +211,8 @@ router.post('/companies/:company/staff', isOwner, checkCompanyId, async (req, re
       companyId: company._id
     })
 
+    await StaffEmailService.onAccountActivation(result)
+
     res.status(201).json(StaffService.serialize(result))
 
   } catch (e) {

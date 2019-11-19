@@ -20,6 +20,15 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        <div className="col-12 col-md-6 col-lg-4">
+          <h4>{i18n.t('footer.hosts')}</h4>
+
+          <ul className="m-0">
+            <li><a href={'https://owner.nextfree.com.ua'}>{i18n.t('footer.ownerHost')}</a></li>
+            <li><a href={'https://staff.nextfree.com.ua'}>{i18n.t('footer.staffHost')}</a></li>
+            <li><a href={'https://customer.nextfree.com.ua'}>{i18n.t('footer.customerHost')}</a></li>
+          </ul>
+        </div>
       </div>
 
     </div>

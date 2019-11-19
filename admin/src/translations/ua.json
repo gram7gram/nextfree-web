@@ -167,6 +167,10 @@
     "resources": "Корисно знати",
     "privacy": "Політика приватності",
     "terms": "Правила користування",
+    "hosts": "Інші ресурси",
+    "ownerHost": "Я власник",
+    "staffHost": "Я співробітник",
+    "customerHost": "Я покупець",
     "copyright": "Copyright"
   },
   "notification": {
