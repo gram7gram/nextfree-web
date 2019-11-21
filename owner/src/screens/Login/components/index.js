@@ -75,7 +75,6 @@ class Login extends React.Component {
                   <input type="text"
                          className="form-control"
                          name="login"
-                         autoFocus={true}
                          placeholder={i18n.t('login.placeholder')}
                          onChange={this.onChangeIgnoreCase('email')}
                          onKeyDown={this.submitIfEnter}

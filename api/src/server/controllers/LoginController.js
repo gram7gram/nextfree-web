@@ -73,7 +73,7 @@ router.post('/login-check', async (req, res) => {
     }
 
     const decoded = AuthService.verifyToken(token)
-    if (!decoded) {
+    if (!decoded || !decoded.user) {
       throw {
         code: 403,
         message: i18n.t('auth.access_denied')

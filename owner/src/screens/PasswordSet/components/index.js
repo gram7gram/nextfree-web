@@ -78,7 +78,6 @@ class PasswordSet extends React.Component {
                   <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
                   <input type="password"
                          className="form-control"
-                         autoFocus={true}
                          placeholder={"******"}
                          onChange={this.onChange('password1')}
                          onKeyDown={this.submitIfEnter}

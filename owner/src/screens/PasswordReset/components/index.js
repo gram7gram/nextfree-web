@@ -72,7 +72,6 @@ class PasswordReset extends React.Component {
                 <div className="form-group">
                   <input type="text"
                          className="form-control"
-                         autoFocus={true}
                          placeholder={i18n.t('password_reset.placeholder')}
                          onChange={this.onChangeIgnoreCase('email')}
                          onKeyDown={this.submitIfEnter}
