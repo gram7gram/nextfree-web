@@ -4,11 +4,34 @@ import promise from 'redux-promise-middleware'
 import thunk from 'redux-thunk'
 import {routerMiddleware} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
+import Cookie from 'js-cookie'
 
 import {prepareTranslations} from './i18n'
 import sagas from './sagas'
 import reducers from './reducers'
 import LoginCheck from './screens/Login/actions/LoginCheck'
+
+import querystring from 'qs'
+
+const getAccessToken = () => {
+
+  const query = querystring.parse(window.location.search, {ignoreQueryPrefix: true})
+
+  let token = Cookie.get('token')
+
+  if (query.accessToken) {
+    try {
+      token = window.atob(query.accessToken)
+    } catch (ignore) {
+    }
+  }
+
+  if (!token) {
+    token = null
+  }
+
+  return token;
+}
 
 export const history = createBrowserHistory()
 
@@ -18,15 +41,12 @@ let middleware = [promise, thunk, sagaMiddleware, routerMiddleware(history)]
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-let locale = localStorage.getItem('locale')
+let locale = Cookie.get('locale')
 if (!locale) {
   locale = 'ua'
 }
 
-let token = localStorage.getItem('token')
-if (!token) {
-  token = null
-}
+const token = getAccessToken()
 
 const initial = {
   App: {

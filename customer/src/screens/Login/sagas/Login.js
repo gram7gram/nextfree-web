@@ -1,14 +1,17 @@
 import {all, takeLatest, put, select} from 'redux-saga/effects'
 import {replace} from 'connected-react-router'
+import Cookie from 'js-cookie'
 import * as Actions from '../actions'
 import * as Pages from '../../../router/Pages'
 
+window.Cookie = Cookie
+
 function* saveTokenAndRedirect({payload}) {
 
-  localStorage.setItem('customer-token', payload.token)
+  Cookie.set('token', payload.token)
 
   if (window.location.origin !== payload.domain) {
-    window.location = payload.domain
+    window.location = payload.domain + '?accessToken=' + window.btoa(payload.token)
   } else {
     yield put(replace(Pages.HOME))
   }
@@ -16,10 +19,10 @@ function* saveTokenAndRedirect({payload}) {
 
 function* saveTokenAndReload({payload}) {
 
-  localStorage.setItem('customer-token', payload.token)
+  Cookie.set('token', payload.token)
 
   if (window.location.origin !== payload.domain) {
-    window.location = payload.domain
+    window.location = payload.domain + '?accessToken=' + window.btoa(payload.token)
   } else {
     const pathname = yield select(store => store.router.location.pathname)
 
@@ -29,7 +32,7 @@ function* saveTokenAndReload({payload}) {
 
 function* removeToken() {
 
-  localStorage.removeItem('customer-token')
+  Cookie.remove('token')
 
   yield put(replace(Pages.LOGIN))
 }
