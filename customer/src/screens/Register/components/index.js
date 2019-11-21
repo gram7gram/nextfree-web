@@ -55,7 +55,7 @@ class Register extends React.Component {
 
         <div className="form-group">
           <label className="m-0 required">{i18n.t('register.email')}</label>
-          <input type="email"
+          <input type="email" placeholder={i18n.t('placeholder.text')}
                  className="form-control"
                  onChange={this.onStringChange('user.email')}
                  value={customer.user.email || ''}/>
@@ -99,6 +99,7 @@ class Register extends React.Component {
           <label className="m-0 required">{i18n.t('register.password1')}</label>
           <input type="password" autoComplete="off"
                  className="form-control"
+                 placeholder="*******"
                  onChange={this.onStringChange('password1')}
                  value={customer.password1 || ''}/>
           {this.getError('password1')}
@@ -108,6 +109,7 @@ class Register extends React.Component {
           <label className="m-0 required">{i18n.t('register.password2')}</label>
           <input type="password" autoComplete="off"
                  className="form-control"
+                 placeholder="*******"
                  onChange={this.onStringChange('password2')}
                  value={customer.password2 || ''}/>
           {this.getError('password2')}
@@ -132,22 +134,32 @@ class Register extends React.Component {
 
     return <React.Fragment>
 
-      <div className="row">
+      <div className="row mb-5 text-center text-md-left">
         <div className="col-12">
 
-          <div className="mb-4">
-            <h2 className="h3">{i18n.t('register.title')}</h2>
-            <p>{i18n.t('register.subtitle')}</p>
-          </div>
+          <h2 className="h3">{i18n.t('register.title')}</h2>
+          <p className="m-0">{i18n.t('register.subtitle')}</p>
 
         </div>
       </div>
 
+      <p className="mb-3">{i18n.t('register.already_have_account')}&nbsp;
+        <Link to={Pages.LOGIN} className="text-info">
+          {i18n.t('register.already_have_account_action')}
+        </Link>
+      </p>
+
       <Errors errors={serverErrors}/>
 
-      {this.renderProfile()}
+      <div className="row">
+        <div className="col-12 col-lg-6">
+          {this.renderProfile()}
+        </div>
 
-      {this.renderSecurity()}
+        <div className="col-12 col-lg-6">
+          {this.renderSecurity()}
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-12">
@@ -164,11 +176,15 @@ class Register extends React.Component {
 
             <ul className="m-0 pl-4">
               <li>
-                <a href="/terms" target="_blank">{i18n.t('register.terms_link')}</a>
+                <a href="https://nextfree.com.ua/terms"
+                   rel="noopener noreferrer"
+                   target="_blank">{i18n.t('register.terms_link')}</a>
               </li>
 
               <li>
-                <a href="/privacy" target="_blank">{i18n.t('register.privacy_link')}</a>
+                <a href="https://nextfree.com.ua/privacy"
+                   rel="noopener noreferrer"
+                   target="_blank">{i18n.t('register.privacy_link')}</a>
               </li>
             </ul>
           </div>
@@ -193,7 +209,7 @@ class Register extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div className="col-12">
 
           {this.renderContent()}
 

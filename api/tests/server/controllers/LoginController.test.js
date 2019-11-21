@@ -1,8 +1,5 @@
 const {boot, tearDown} = require('../../WebTestCase')
 
-const Customer = require('../../../src/database/model/Customer').Customer
-const Owner = require('../../../src/database/model/Owner').Owner
-const Staff = require('../../../src/database/model/Staff').Staff
 const {
   createCustomer, createOwner, createStaff,
   authorizeStaff, authorizeCustomer, authorizeOwner
@@ -45,8 +42,6 @@ describe('LoginController', () => {
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
 
-    await Customer.deleteOne({_id: entity._id})
-
     done()
   })
 
@@ -65,8 +60,6 @@ describe('LoginController', () => {
     expect(res.body.isOwner, 'Not an Owner').toBe(true)
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
-
-    await Owner.deleteOne({_id: entity._id})
 
     done()
   })
@@ -87,8 +80,6 @@ describe('LoginController', () => {
     expect(res.body.user, 'Missing user').not.toBe(undefined)
     expect(res.body.user.user.email).toBe(entity.user.email)
 
-    await Staff.deleteOne({_id: entity._id})
-
     done()
 
   })
@@ -104,8 +95,6 @@ describe('LoginController', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isStaff, 'Not a Staff').toBe(true)
-
-    await Staff.deleteOne({_id: entity._id})
 
     done()
 
@@ -123,8 +112,6 @@ describe('LoginController', () => {
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isCustomer, 'Not a Customer').toBe(true)
 
-    await Customer.deleteOne({_id: entity._id})
-
     done()
 
   })
@@ -140,8 +127,6 @@ describe('LoginController', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body.token, 'Missing token').not.toBe(undefined)
     expect(res.body.isOwner, 'Not a Owner').toBe(true)
-
-    await Owner.deleteOne({_id: entity._id})
 
     done()
 

@@ -3,31 +3,18 @@ import i18n from '../i18n';
 
 const Footer = () => {
 
-  return <footer className="position-absolute w-100 border-top py-5">
+  return <footer className="position-absolute w-100 border-top py-3">
 
     <div className="container">
 
-      <div className="row my-3">
+      <div className="row text-center">
         <div className="col-12 col-md-6 col-lg-4">
-          <h4>{i18n.t('footer.resources')}</h4>
-
-          <ul className="m-0 pl-4">
-            <li>
-              <a href="/privacy">{i18n.t('footer.privacy')}</a>
-            </li>
-            <li>
-              <a href="/terms">{i18n.t('footer.terms')}</a>
-            </li>
-          </ul>
+          <a href="https://nextfree.com.ua/privacy"
+             className="btn btn-link">{i18n.t('footer.privacy')}</a>
         </div>
         <div className="col-12 col-md-6 col-lg-4">
-          <h4>{i18n.t('footer.hosts')}</h4>
-
-          <ul className="m-0 pl-4">
-            <li><a href={'https://owner.nextfree.com.ua'}>{i18n.t('footer.ownerHost')}</a></li>
-            <li><a href={'https://staff.nextfree.com.ua'}>{i18n.t('footer.staffHost')}</a></li>
-            <li><a href={'https://customer.nextfree.com.ua'}>{i18n.t('footer.customerHost')}</a></li>
-          </ul>
+          <a href="https://nextfree.com.ua/terms"
+             className="btn btn-link">{i18n.t('footer.terms')}</a>
         </div>
       </div>
 

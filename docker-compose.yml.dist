@@ -24,6 +24,8 @@ services:
 #      - '/etc/letsencrypt/live/api.nextfree.com.ua/privkey.pem:/etc/nginx/certs/api.nextfree.com.ua.key'
 #      - '/etc/letsencrypt/live/admin.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/admin.nextfree.com.ua.crt'
 #      - '/etc/letsencrypt/live/admin.nextfree.com.ua/privkey.pem:/etc/nginx/certs/admin.nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/staff.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/staff.nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/staff.nextfree.com.ua/privkey.pem:/etc/nginx/certs/staff.nextfree.com.ua.key'
 
   www:
     build: ./www/env

@@ -166,6 +166,8 @@
     "success_subtitle": "Бажаємо Вам успіхів!",
     "success_action": "Почати",
     "companyName": "Назва",
+    "already_have_account": "Вже створили профіль?",
+    "already_have_account_action": "Логін",
     "owner_title": "Ваш профіль",
     "owner_subtitle": "Вкажіть персональні дані та способи зв'язку"
   },

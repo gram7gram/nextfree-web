@@ -8,7 +8,7 @@ export default (content) => dispatch => {
     type: LOGIN_CHECK_BEFORE
   })
 
-  request.post(parameters.apiHost + '/api/v1/login-check-customer', null, {
+  request.post(parameters.apiHost + '/api/v1/login-check', null, {
     headers: {
       Authorization: content.token
     }
@@ -22,13 +22,13 @@ export default (content) => dispatch => {
     .catch(e => {
       console.log(e);
 
-      if (!e.response) return
+
 
       dispatch({
         type: LOGIN_CHECK_FAILURE,
         payload: {
-          status: e.response.status,
-          data: e.response.data
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
         }
       })
     })

@@ -8,7 +8,7 @@ export default (email, password) => dispatch => {
     type: LOGIN_BEFORE
   })
 
-  request.post(parameters.apiHost + '/api/v1/login-staff', {email, password})
+  request.post(parameters.apiHost + '/api/v1/login', {email, password})
     .then(({data}) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -18,13 +18,13 @@ export default (email, password) => dispatch => {
     .catch(e => {
       console.log(e);
 
-      if (!e.response) return
+
 
       dispatch({
         type: LOGIN_FAILURE,
         payload: {
-          status: e.response.status,
-          data: e.response.data
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
         }
       })
     })

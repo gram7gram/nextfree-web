@@ -100,6 +100,8 @@
     "success_title": "Ви успішно приєдналися до NextFree як співробітник!",
     "success_subtitle": "Бажаємо Вам успіхів!",
     "success_action": "Почати",
+    "already_have_account": "Вже створили профіль?",
+    "already_have_account_action": "Логін",
     "staff_title": "Ваш профіль",
     "staff_subtitle": "Вкажіть персональні дані та способи зв'язку"
   },

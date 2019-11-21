@@ -6,8 +6,8 @@ const translations = {
 
 const prepareTranslations = (locale) => {
 
-  if (translations[locale] === undefined) {
-    throw new Error(`Locale '${locale}' is not supported`)
+  if (!translations[locale]) {
+    locale = Object.keys(translations)[0]
   }
 
   i18n.fallbacks = true;

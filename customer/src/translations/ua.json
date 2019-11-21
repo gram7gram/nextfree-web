@@ -97,6 +97,8 @@
     "success_title": "Ви успішно приєдналися до NextFree як покупець!",
     "success_subtitle": "Здійсніть перші покупки та отримайте бонуси",
     "success_action": "Почати",
+    "already_have_account": "Вже створили профіль?",
+    "already_have_account_action": "Логін",
     "customer_title": "Ваш профіль",
     "customer_subtitle": "Вкажіть персональні дані та способи зв'язку"
   },

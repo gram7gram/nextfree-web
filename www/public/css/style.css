@@ -1,0 +1,12 @@
+.index-main {
+    min-height: 400px;
+}
+
+.index-main-img {
+    background: url('/img/index-main.jpg') no-repeat center top;
+    background-size: cover;
+}
+
+.index-main-bg {
+    background-color: #4fa6d1;
+}

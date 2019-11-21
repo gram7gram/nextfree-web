@@ -22,13 +22,13 @@ export default (id) => (dispatch, getState) => {
       })
     })
     .catch(e => {
-      if (!e.response) return
+
 
       dispatch({
         type: REMOVE_FAILURE,
         payload: {
-          status: e.response.status,
-          data: e.response.data
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
         }
       })
     })

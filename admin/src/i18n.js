@@ -6,6 +6,10 @@ const translations = {
 
 export const prepareTranslations = (locale) => {
 
+  if (!translations[locale]) {
+    locale = Object.keys(translations)[0]
+  }
+
   i18n.fallbacks = true;
   i18n.translations = {
     [locale]: translations[locale](),

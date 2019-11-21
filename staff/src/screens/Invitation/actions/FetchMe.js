@@ -18,13 +18,13 @@ export default (id) => (dispatch) => {
       })
     })
     .catch(e => {
-      if (!e.response) return
+
 
       dispatch({
         type: FETCH_FAILURE,
         payload: {
-          status: e.response.status,
-          data: e.response.data
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
         }
       })
     })

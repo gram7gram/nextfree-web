@@ -177,9 +177,21 @@ class Invitation extends React.Component {
 
     return <React.Fragment>
 
-      {this.renderProfile()}
+      <p className="mb-3">{i18n.t('invitation.already_have_account')}&nbsp;
+        <Link to={Pages.LOGIN} className="text-info">
+          {i18n.t('invitation.already_have_account_action')}
+        </Link>
+      </p>
 
-      {this.renderSecurity()}
+      <div className="row">
+        <div className="col-12 col-lg-6">
+          {this.renderProfile()}
+        </div>
+
+        <div className="col-12 col-lg-6">
+          {this.renderSecurity()}
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-12">
@@ -196,11 +208,15 @@ class Invitation extends React.Component {
 
             <ul className="m-0 pl-4">
               <li>
-                <a href="/terms" target="_blank">{i18n.t('invitation.terms_link')}</a>
+                <a href="https://nextfree.com.ua/terms"
+                   rel="noopener noreferrer"
+                   target="_blank">{i18n.t('invitation.terms_link')}</a>
               </li>
 
               <li>
-                <a href="/privacy" target="_blank">{i18n.t('invitation.privacy_link')}</a>
+                <a href="https://nextfree.com.ua/privacy"
+                   rel="noopener noreferrer"
+                   target="_blank">{i18n.t('invitation.privacy_link')}</a>
               </li>
             </ul>
           </div>
@@ -227,15 +243,13 @@ class Invitation extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div className="col-12">
 
-          <div className="row">
+          <div className="row mb-5">
             <div className="col-12">
 
-              <div className="mb-4">
-                <h2 className="h3">{i18n.t('invitation.title')}</h2>
-                <p>{i18n.t('invitation.subtitle')}</p>
-              </div>
+              <h2 className="h3">{i18n.t('invitation.title')}</h2>
+              <p className="m-0">{i18n.t('invitation.subtitle')}</p>
 
             </div>
           </div>

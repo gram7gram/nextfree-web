@@ -7,6 +7,8 @@ const langParser = require('accept-language-parser')
 const i18n = require('../i18n').i18n
 const prepareTranslations = require('../i18n').prepareTranslations
 
+const LoginController = require('./controllers/LoginController');
+
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
 const AdminStaffRESTController = require('./controllers/admin/StaffRESTController');
@@ -19,19 +21,16 @@ const OwnerStoreRESTController = require('./controllers/owner/StoreRESTControlle
 const OwnerStaffRESTController = require('./controllers/owner/StaffRESTController');
 const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTController');
 const OwnerRegisterController = require('./controllers/owner/RegisterController');
-const OwnerLoginController = require('./controllers/owner/LoginController');
 const OwnerPasswordController = require('./controllers/owner/PasswordController');
 const OwnerActivationController = require('./controllers/owner/ActivationController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
-const StaffLoginController = require('./controllers/staff/LoginController');
 const StaffPasswordController = require('./controllers/staff/PasswordController');
 const StaffInvitationController = require('./controllers/staff/InvitationController');
 const StaffActivationController = require('./controllers/staff/ActivationController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
-const CustomerLoginController = require('./controllers/customer/LoginController');
 const CustomerRegisterController = require('./controllers/customer/RegisterController');
 const CustomerPasswordController = require('./controllers/customer/PasswordController');
 const CustomerActivationController = require('./controllers/customer/ActivationController');
@@ -58,14 +57,12 @@ app.use((req, res, next) => {
 })
 
 //Public API
+app.use('/api/v1', LoginController);
 app.use('/api/v1', OwnerActivationController);
 app.use('/api/v1', StaffActivationController);
 app.use('/api/v1', CustomerActivationController);
 app.use('/api/v1', CustomerRegisterController);
-app.use('/api/v1', CustomerLoginController);
 app.use('/api/v1', OwnerRegisterController);
-app.use('/api/v1', OwnerLoginController);
-app.use('/api/v1', StaffLoginController);
 app.use('/api/v1', CustomerPasswordController);
 app.use('/api/v1', StaffPasswordController);
 app.use('/api/v1', OwnerPasswordController);

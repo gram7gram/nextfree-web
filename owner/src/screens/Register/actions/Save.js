@@ -36,13 +36,13 @@ export default (model) => (dispatch) => {
     .catch(e => {
       console.log(e);
 
-      if (!e.response) return
+
 
       dispatch({
         type: SAVE_FAILURE,
         payload: {
-          status: e.response.status,
-          data: e.response.data
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
         }
       })
     })
