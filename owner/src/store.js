@@ -17,7 +17,7 @@ const getAccessToken = () => {
 
   const query = querystring.parse(window.location.search, {ignoreQueryPrefix: true})
 
-  let token = Cookie.get('token')
+  let token = null
 
   if (query.accessToken) {
     try {
@@ -27,7 +27,7 @@ const getAccessToken = () => {
   }
 
   if (!token) {
-    token = null
+    token = Cookie.get('token')
   }
 
   return token;

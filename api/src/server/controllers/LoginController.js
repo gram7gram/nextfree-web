@@ -85,7 +85,7 @@ router.post('/login-check', async (req, res) => {
     if (decoded.isStaff) {
       content = await AuthService.authorizeStaffById(decoded.user._id)
     } else if (decoded.isOwner) {
-      content = await AuthService.authorizeStaffById(decoded.user._id)
+      content = await AuthService.authorizeOwnerById(decoded.user._id)
     } else if (decoded.isCustomer) {
       content = await AuthService.authorizeCustomerById(decoded.user._id)
     }
