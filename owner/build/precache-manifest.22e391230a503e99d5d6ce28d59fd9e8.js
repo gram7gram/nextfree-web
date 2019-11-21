@@ -1,31 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8c8ec3cad1ab3a106d642a1fbfcde031",
+    "revision": "1c7657c0a599b0e856c87418ca763126",
     "url": "/index.html"
   },
   {
-    "revision": "864cba6bf65c516b3d42",
+    "revision": "c2701a3ede1c7ff77531",
     "url": "/static/css/2.3c8d98f3.chunk.css"
   },
   {
-    "revision": "723626dd2cdff7a54ab3",
+    "revision": "e5220644b507650ac402",
     "url": "/static/css/main.33e97e9c.chunk.css"
   },
   {
-    "revision": "864cba6bf65c516b3d42",
-    "url": "/static/js/2.56df8eb2.chunk.js"
+    "revision": "c2701a3ede1c7ff77531",
+    "url": "/static/js/2.5caca6e5.chunk.js"
   },
   {
-    "revision": "723626dd2cdff7a54ab3",
-    "url": "/static/js/main.512b6b68.chunk.js"
+    "revision": "e5220644b507650ac402",
+    "url": "/static/js/main.bbcd4752.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
     "url": "/static/js/runtime~main.a8a9905a.js"
-  },
-  {
-    "revision": "64f0feb7775b00eb45e75ec59c3001e1",
-    "url": "/static/media/avatar-unknown.64f0feb7.png"
   },
   {
     "revision": "b56e3346517fff06aad4e159e377ee63",
