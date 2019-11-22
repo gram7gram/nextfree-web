@@ -13,18 +13,12 @@ const Home = (props) => {
     <div className="row">
       <div className="col-12">
 
-        <div className="jumbotron">
-          <h1 className="display-3">
-            {i18n.t('home.welcome_title').replace('_NAME_', firstName || email)}
-          </h1>
-          <p className="lead">{i18n.t('home.welcome_text')}</p>
+        <h1 className="mb-4">
+          {i18n.t('home.welcome_title').replace('_NAME_', firstName || email)}
+        </h1>
 
-          <p className="lead">
-            <Link className="btn btn-primary btn-lg"
-                  to={Pages.PROFILE}>{i18n.t('home.profile')}</Link>
-          </p>
-
-        </div>
+        <Link className="btn btn-success btn-lg"
+              to={Pages.PROFILE}>{i18n.t('home.action')}</Link>
 
       </div>
     </div>

@@ -128,29 +128,32 @@ class OwnerEdit extends React.Component {
         <h4 className="card-title">{i18n.t('owner_edit.security_title')}</h4>
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('owner_edit.security_subtitle')}</h6>
 
-
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <div className="form-group">
-              <label className="m-0 required">{i18n.t('owner_edit.password1')}</label>
-              <input type="password" autoComplete="off"
-                     className="form-control"
-                     onChange={this.changeString('password1')}
-                     value={model.password1 || ''}/>
-              {this.getError('password1')}
+        <form noValidate autoComplete="off">
+          <div className="row">
+            <div className="col-12 col-md-6">
+              <div className="form-group">
+                <label className="m-0 required">{i18n.t('owner_edit.password1')}</label>
+                <input type="password"
+                       name="password1"
+                       className="form-control"
+                       onChange={this.changeString('password1')}
+                       value={model.password1 || ''}/>
+                {this.getError('password1')}
+              </div>
+            </div>
+            <div className="col-12 col-md-6">
+              <div className="form-group">
+                <label className="m-0 required">{i18n.t('owner_edit.password2')}</label>
+                <input type="password"
+                       name="password2"
+                       className="form-control"
+                       onChange={this.changeString('password2')}
+                       value={model.password2 || ''}/>
+                {this.getError('password2')}
+              </div>
             </div>
           </div>
-          <div className="col-12 col-md-6">
-            <div className="form-group">
-              <label className="m-0 required">{i18n.t('owner_edit.password2')}</label>
-              <input type="password" autoComplete="off"
-                     className="form-control"
-                     onChange={this.changeString('password2')}
-                     value={model.password2 || ''}/>
-              {this.getError('password2')}
-            </div>
-          </div>
-        </div>
+        </form>
 
 
       </div>
@@ -215,61 +218,73 @@ class OwnerEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              {!model.id ? <div className="form-group">
-                <label className="m-0 required">{i18n.t('owner_edit.email')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('user.email')}
-                       value={model.user.email || ''}/>
-                {this.getError('user.email')}
-              </div> : null}
+              <form noValidate autoComplete="off">
+                {!model.id ? <div className="form-group">
+                  <label className="m-0 required">{i18n.t('owner_edit.email')}</label>
+                  <input type="email"
+                         placeholder={i18n.t('placeholder.text')}
+                         name="user.email"
+                         className="form-control"
+                         onChange={this.changeString('user.email')}
+                         value={model.user.email || ''}/>
+                  {this.getError('user.email')}
+                </div> : null}
 
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('owner_edit.firstName')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changeString('user.firstName')}
-                           value={model.user.firstName || ''}/>
-                    {this.getError('user.firstName')}
+                <div className="row">
+                  <div className="col-12 col-md-6">
+                    <div className="form-group">
+                      <label className="m-0 required">{i18n.t('owner_edit.firstName')}</label>
+                      <input type="text"
+                             placeholder={i18n.t('placeholder.text')}
+                             name="user.firstName"
+                             className="form-control"
+                             onChange={this.changeString('user.firstName')}
+                             value={model.user.firstName || ''}/>
+                      {this.getError('user.firstName')}
+                    </div>
+                  </div>
+
+                  <div className="col-12 col-md-6">
+                    <div className="form-group">
+                      <label className="m-0 required">{i18n.t('owner_edit.lastName')}</label>
+                      <input type="text"
+                             placeholder={i18n.t('placeholder.text')}
+                             name="user.lastName"
+                             className="form-control"
+                             onChange={this.changeString('user.lastName')}
+                             value={model.user.lastName || ''}/>
+                      {this.getError('user.lastName')}
+                    </div>
                   </div>
                 </div>
 
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('owner_edit.lastName')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changeString('user.lastName')}
-                           value={model.user.lastName || ''}/>
-                    {this.getError('user.lastName')}
+                <div className="row">
+                  <div className="col-12 col-md-6">
+                    <div className="form-group">
+                      <label className="m-0">{i18n.t('owner_edit.phone')}</label>
+                      <input type="text"
+                             placeholder={i18n.t('placeholder.text')}
+                             name="user.phone"
+                             className="form-control"
+                             onChange={this.changePhone('user.phone')}
+                             value={model.user.phone || ''}/>
+                      {this.getError('user.phone')}
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('owner_edit.phone')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changePhone('user.phone')}
-                           value={model.user.phone || ''}/>
-                    {this.getError('user.phone')}
+                  <div className="col-12 col-md-6">
+                    <div className="form-group">
+                      <label className="m-0">{i18n.t('owner_edit.birthday')}</label>
+                      <Date
+                        onChange={this.changeDate('user.birthday')}
+                        value={model.user.birthday || ''}
+                        name="user.birthday"/>
+                      {this.getError('user.birthday')}
+                    </div>
                   </div>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('owner_edit.birthday')}</label>
-                    <Date
-                      onChange={this.changeDate('user.birthday')}
-                      value={model.user.birthday || ''}/>
-                    {this.getError('user.birthday')}
-                  </div>
-                </div>
 
-              </div>
+                </div>
+              </form>
 
             </div>
           </div>

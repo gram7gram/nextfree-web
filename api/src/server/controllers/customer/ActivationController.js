@@ -11,6 +11,7 @@ router.post('/customer-activation/:token', async (req, res) => {
     await Customer.updateOne({
       'user.activationToken': req.params.token
     }, {
+      'isEnabled': true,
       'user.activationToken': null,
       'user.isEmailVerified': true,
     })

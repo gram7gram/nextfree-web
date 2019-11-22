@@ -27,6 +27,11 @@
   },
   "qr_scanner": {
     "help": "Зчитайте QR-код покупця. При успішному розпізнаванні стане доступна кнопка Зарахувати покупку",
+    "no_camera": "Камеру не знайдено",
+    "has_camera": "Камера активна",
+    "checking_camera_permission": "Запит прав доступу до камери...",
+    "no_camera_permission": "Доступ до камери заборонений Вашим браузером",
+    "has_camera_permission": "Доступ до камери отриманий",
     "purchase_action": "Зарахувати покупку",
     "purchase_bonus_title": "Так! Це бонус",
     "purchase_bonus_subtitle": "Покупець заслуговує на безкоштовну покупку",
@@ -54,7 +59,7 @@
   "footer": {
     "resources": "Корисно знати",
     "privacy": "Політика приватності",
-    "terms": "Правила користування",
+    "terms": "Умови використання",
     "copyright": "Copyright"
   },
   "notification": {
@@ -87,7 +92,7 @@
     "not_found_action": "Логін",
     "save_action": "Зареєструватися!",
     "terms_and_conditions": "Я ознайомленний та погожуюсь з:",
-    "terms_link": "Правила користування",
+    "terms_link": "Умови використання",
     "privacy_link": "Політика приватності",
     "security_title": "Безпека",
     "security_subtitle": "Вкажіть пароль доступу в систему",
@@ -96,6 +101,8 @@
     "lastName": "Прізвище",
     "password1": "Пароль",
     "password2": "Повторіть пароль",
+    "phone": "Номер телефону",
+    "birthday": "Дата народження",
     "companyName": "Назва",
     "success_title": "Ви успішно приєдналися до NextFree як співробітник!",
     "success_subtitle": "Бажаємо Вам успіхів!",
@@ -107,8 +114,7 @@
   },
   "home": {
     "welcome_title": "Ласкаво просимо, _NAME_!",
-    "welcome_text": "",
-    "profile": "Мій профіль"
+    "action": "Відкрити сканер"
   },
   "password_reset": {
     "title": "Відновлення паролю",

@@ -16,12 +16,12 @@ footer {
     cursor: pointer;
 }
 
-.qr-scanner-container video {
-    max-height: 400px;
+.qr-scanner-container video.has-result {
+    border: 3px solid green;
 }
 
-.qr-container img {
-    max-height: 400px;
+.qr-scanner-container video.no-result {
+    border: 3px solid white;
 }
 
 .company-card img,

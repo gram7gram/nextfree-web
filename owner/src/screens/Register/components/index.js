@@ -64,32 +64,40 @@ class Register extends React.Component {
         <h4 className="card-title">{i18n.t('register.owner_title')}</h4>
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.owner_subtitle')}</h6>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.email')}</label>
-          <input type="email" placeholder={i18n.t('placeholder.text')}
-                 className="form-control"
-                 onChange={this.onOwnerChange('user.email')}
-                 value={owner.user.email || ''}/>
-          {this.getError('owner.user.email')}
-        </div>
+        <form noValidate autoComplete="off">
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.email')}</label>
+            <input type="email"
+                   placeholder={i18n.t('placeholder.text')}
+                   name="user.email"
+                   className="form-control"
+                   onChange={this.onOwnerChange('user.email')}
+                   value={owner.user.email || ''}/>
+            {this.getError('owner.user.email')}
+          </div>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.firstName')}</label>
-          <input type="text" placeholder={i18n.t('placeholder.text')}
-                 className="form-control"
-                 onChange={this.onOwnerChange('user.firstName')}
-                 value={owner.user.firstName || ''}/>
-          {this.getError('owner.user.firstName')}
-        </div>
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.firstName')}</label>
+            <input type="text"
+                   placeholder={i18n.t('placeholder.text')}
+                   name="user.firstName"
+                   className="form-control"
+                   onChange={this.onOwnerChange('user.firstName')}
+                   value={owner.user.firstName || ''}/>
+            {this.getError('owner.user.firstName')}
+          </div>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.lastName')}</label>
-          <input type="text" placeholder={i18n.t('placeholder.text')}
-                 className="form-control"
-                 onChange={this.onOwnerChange('user.lastName')}
-                 value={owner.user.lastName || ''}/>
-          {this.getError('owner.user.lastName')}
-        </div>
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.lastName')}</label>
+            <input type="text"
+                   placeholder={i18n.t('placeholder.text')}
+                   name="user.lastName"
+                   className="form-control"
+                   onChange={this.onOwnerChange('user.lastName')}
+                   value={owner.user.lastName || ''}/>
+            {this.getError('owner.user.lastName')}
+          </div>
+        </form>
 
       </div>
     </div>
@@ -106,14 +114,18 @@ class Register extends React.Component {
         <h4 className="card-title">{i18n.t('register.company_title')}</h4>
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.company_subtitle')}</h6>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.companyName')}</label>
-          <input type="text" placeholder={i18n.t('placeholder.text')}
-                 className="form-control"
-                 onChange={this.onCompanyChange('name')}
-                 value={company.name || ''}/>
-          {this.getError('company.name')}
-        </div>
+        <form noValidate autoComplete="off">
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.companyName')}</label>
+            <input type="text"
+                   placeholder={i18n.t('placeholder.text')}
+                   name="company.name"
+                   className="form-control"
+                   onChange={this.onCompanyChange('name')}
+                   value={company.name || ''}/>
+            {this.getError('company.name')}
+          </div>
+        </form>
 
       </div>
     </div>
@@ -129,25 +141,29 @@ class Register extends React.Component {
         <h4 className="card-title">{i18n.t('register.security_title')}</h4>
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.security_subtitle')}</h6>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.password1')}</label>
-          <input type="password" autoComplete="off"
-                 className="form-control"
-                 placeholder="********"
-                 onChange={this.onOwnerChange('password1')}
-                 value={owner.password1 || ''}/>
-          {this.getError('owner.password1')}
-        </div>
+        <form noValidate autoComplete="off">
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.password1')}</label>
+            <input type="password"
+                   name="password1"
+                   className="form-control"
+                   placeholder="********"
+                   onChange={this.onOwnerChange('password1')}
+                   value={owner.password1 || ''}/>
+            {this.getError('owner.password1')}
+          </div>
 
-        <div className="form-group">
-          <label className="m-0 required">{i18n.t('register.password2')}</label>
-          <input type="password" autoComplete="off"
-                 className="form-control"
-                 placeholder="********"
-                 onChange={this.onOwnerChange('password2')}
-                 value={owner.password2 || ''}/>
-          {this.getError('owner.password2')}
-        </div>
+          <div className="form-group">
+            <label className="m-0 required">{i18n.t('register.password2')}</label>
+            <input type="password"
+                   name="password2"
+                   className="form-control"
+                   placeholder="********"
+                   onChange={this.onOwnerChange('password2')}
+                   value={owner.password2 || ''}/>
+            {this.getError('owner.password2')}
+          </div>
+        </form>
 
       </div>
     </div>
@@ -158,11 +174,15 @@ class Register extends React.Component {
     const {owner, isValid, serverErrors, isLoading, isRegisterSuccess} = this.props.Register
 
     if (isRegisterSuccess) {
-      return <div className="alert alert-success text-center">
-        <h3>{i18n.t('register.success_title')}</h3>
-        <p>{i18n.t('register.success_subtitle')}</p>
+      return <div className="row">
+        <div className="col-12 col-md-10 col-lg-6 mx-auto">
+          <div className="alert alert-success text-center">
+            <h3>{i18n.t('register.success_title')}</h3>
+            <p>{i18n.t('register.success_subtitle')}</p>
 
-        <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('register.success_action')}</Link>
+            <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('register.success_action')}</Link>
+          </div>
+        </div>
       </div>
     }
 
@@ -204,7 +224,9 @@ class Register extends React.Component {
 
           <div className="alert alert-light">
             <label>
-              <input type="checkbox" checked={owner.hasAccepted}
+              <input type="checkbox"
+                     checked={owner.hasAccepted}
+                     name="hasAccepted"
                      onChange={this.onChangeCheckbox('owner.hasAccepted')}/>
 
               &nbsp;{i18n.t('register.terms_and_conditions')}

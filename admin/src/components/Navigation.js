@@ -37,10 +37,10 @@ class Navigation extends PureComponent {
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
-      <Link className="navbar-brand py-1" to={Pages.HOME}>
+      <a className="navbar-brand py-1" href="https://nextfree.com.ua">
         {i18n.t('navigation.logo')}
         <br/><small className="text-danger">{i18n.t('navigation.logo_footer')}</small>
-      </Link>
+      </a>
 
       <button className="navbar-toggler"
               type="button"

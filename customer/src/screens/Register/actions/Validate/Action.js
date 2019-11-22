@@ -58,6 +58,12 @@ export default (model, changes) => {
         validator.errors['password2'] = i18n.t('validation.password_mismatch')
       }
     }
+  } else {
+    ++validator.total
+
+    if (changes.password1) {
+      validator.errors.password1 = i18n.t('validation.required')
+    }
   }
 
   return validator

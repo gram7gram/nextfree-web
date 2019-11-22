@@ -24,6 +24,10 @@ const getAccessToken = () => {
       token = window.atob(query.accessToken)
     } catch (ignore) {
     }
+
+    delete query.accessToken
+
+    window.location.search = '?' + querystring.stringify(query)
   }
 
   if (!token) {

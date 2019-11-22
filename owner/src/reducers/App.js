@@ -37,7 +37,7 @@ const token = (prev = null, action) => {
         return action.payload.token
       }
 
-      return prev
+      return null
     case LoginActions.LOGOUT:
     case LoginActions.LOGIN_FAILURE:
     case LoginActions.LOGIN_CHECK_FAILURE:

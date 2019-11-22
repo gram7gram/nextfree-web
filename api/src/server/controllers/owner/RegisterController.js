@@ -17,7 +17,7 @@ router.post('/owner-register', async (req, res) => {
 
     const entity = await OwnerService.create({
       ...owner,
-      isEnabled: true
+      isEnabled: false
     })
 
     const companyEntity = await CompanyService.create({

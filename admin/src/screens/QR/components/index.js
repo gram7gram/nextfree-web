@@ -12,12 +12,14 @@ const QR = (props) => {
 
   return <div className="container py-5">
     <div className="row">
-      <div className="col-10 mx-auto mb-4">
+      <div className="col-11 col-md-8 col-lg-6 cpl-xl-5 mx-auto mb-4">
 
         <QrCode data={data}/>
 
       </div>
+    </div>
 
+    <div className="row">
       <div className="col-12 text-center">
 
         <p className="text-muted">{i18n.t('qr.help')}</p>

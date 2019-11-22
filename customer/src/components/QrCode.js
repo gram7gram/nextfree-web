@@ -27,7 +27,7 @@ class QrCode extends React.PureComponent {
     const {img} = this.state
 
     return <div className="qr-container text-center w-100">
-      {img ? <img src={img} className="img-fluid" alt=""/> : null}
+      {img ? <img src={img} className="img-fluid w-100" alt=""/> : null}
     </div>
   }
 }

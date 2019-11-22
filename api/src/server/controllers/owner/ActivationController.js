@@ -11,6 +11,7 @@ router.post('/owner-activation/:token', async (req, res) => {
     await Owner.updateOne({
       'user.activationToken': req.params.token
     }, {
+      'isEnabled': true,
       'user.activationToken': null,
       'user.isEmailVerified': true,
     })

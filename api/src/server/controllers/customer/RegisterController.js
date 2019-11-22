@@ -12,7 +12,7 @@ router.post('/customer-register', async (req, res) => {
 
     const entity = await CustomerService.create({
       ...req.body,
-      isEnabled: true
+      isEnabled: false
     })
 
     await CustomerEmailService.onAccountActivation(entity)
