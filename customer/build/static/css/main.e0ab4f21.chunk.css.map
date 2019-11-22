@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA,6DAEI,UACJ,CAHA,qBACI,YAAa,CACb,SACJ,CAEA,KACI,eACJ,CAEA,OACI,wBACJ","file":"main.e0ab4f21.chunk.css","sourcesContent":["label.required:after {\n    content: \" *\";\n    color: red\n}\n\nmain {\n    min-height: 75vh;\n}\n\nfooter {\n    background-color: #1c1e22;\n}"]}

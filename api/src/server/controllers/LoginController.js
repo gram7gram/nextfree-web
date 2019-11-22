@@ -20,17 +20,17 @@ router.post('/login', async (req, res) => {
 
     Promise.all([
       new Promise((resolve, reject) =>
-        AuthService.authorizeCustomerByEmailPassword(email, password)
-          .then(resolve)
-          .catch(reject)
-      ),
-      new Promise((resolve, reject) =>
         AuthService.authorizeOwnerByEmailPassword(email, password)
           .then(resolve)
           .catch(reject)
       ),
       new Promise((resolve, reject) =>
         AuthService.authorizeStaffByEmailPassword(email, password)
+          .then(resolve)
+          .catch(reject)
+      ),
+      new Promise((resolve, reject) =>
+        AuthService.authorizeCustomerByEmailPassword(email, password)
           .then(resolve)
           .catch(reject)
       ),
