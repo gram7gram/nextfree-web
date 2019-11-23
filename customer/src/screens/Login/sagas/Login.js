@@ -10,24 +10,16 @@ function* saveTokenAndRedirect({payload}) {
 
   Cookie.set('token', payload.token)
 
-  if (window.location.origin !== payload.domain) {
-    window.location = payload.domain + '?accessToken=' + window.btoa(payload.token)
-  } else {
-    yield put(replace(Pages.HOME))
-  }
+  yield put(replace(Pages.HOME))
 }
 
 function* saveTokenAndReload({payload}) {
 
   Cookie.set('token', payload.token)
 
-  if (window.location.origin !== payload.domain) {
-    window.location = payload.domain + '?accessToken=' + window.btoa(payload.token)
-  } else {
-    const pathname = yield select(store => store.router.location.pathname)
+  const pathname = yield select(store => store.router.location.pathname)
 
-    yield put(replace(pathname))
-  }
+  yield put(replace(pathname))
 }
 
 function* removeToken() {

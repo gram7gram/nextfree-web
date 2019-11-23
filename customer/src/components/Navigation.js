@@ -1,94 +1,92 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
 import {connect} from "react-redux";
 import * as Pages from "../router/Pages";
-import {LOGOUT} from "../screens/Login/actions";
+import {LOGOUT, TOGGLE_MENU} from "../screens/Login/actions";
 
-class Navigation extends PureComponent {
+const Navigation = (props) => {
 
-  state = {
-    isNavOpen: false
+  const hideMobileNavigation = () => {
+    props.dispatch({
+      type: TOGGLE_MENU,
+      payload: false
+    })
   }
 
-  hideMobileNavigation = () => {
-    this.setState(({
-      isNavOpen: false
-    }))
+  const toggleMobileNavigation = () => {
+    const {isMobileMenuVisible} = props.Nav
+
+    props.dispatch({
+      type: TOGGLE_MENU,
+      payload: !isMobileMenuVisible
+    })
   }
 
-  toggleMobileNavigation = () => {
-    this.setState(({
-      isNavOpen: !this.state.isNavOpen
-    }))
-  }
-
-  logout = () => {
-    this.props.dispatch({
+  const logout = () => {
+    props.dispatch({
       type: LOGOUT
     })
   }
 
-  render() {
+  const {isAuthenticated} = props
+  const {isMobileMenuVisible} = props.Nav
 
-    const {isAuthenticated} = this.props
+  return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
-    return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a className="navbar-brand py-0" href="https://nextfree.com.ua">
+      {i18n.t('navigation.logo')}
+      <br/><small className="text-info">{i18n.t('navigation.logo_footer')}</small>
+    </a>
 
-      <a className="navbar-brand py-1" href="https://nextfree.com.ua">
-        {i18n.t('navigation.logo')}
-        <br/><small className="text-info">{i18n.t('navigation.logo_footer')}</small>
-      </a>
+    <button className="navbar-toggler"
+            type="button"
+            onClick={toggleMobileNavigation}>
+      <i className="fa fa-bars"/>
+    </button>
 
-      <button className="navbar-toggler"
-              type="button"
-              onClick={this.toggleMobileNavigation}>
-        <i className="fa fa-bars"/>
-      </button>
+    <div className={"navbar-collapse collapse" + (isMobileMenuVisible ? " show" : "")}>
+      <ul className="navbar-nav mr-auto text-center">
 
-      <div className={"navbar-collapse collapse" + (this.state.isNavOpen ? " show" : "")}>
-        <ul className="navbar-nav mr-auto text-center">
+        {isAuthenticated && <li className="nav-item">
+          <Link to={Pages.QR_CODE}
+                className="nav-link text-white"
+                onClick={hideMobileNavigation}>
+            <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
+          </Link>
+        </li>}
 
-          {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.QR_CODE}
-                  className="nav-link text-white"
-                  onClick={this.hideMobileNavigation}>
-              <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
-            </Link>
-          </li>}
+        {isAuthenticated && <li className="nav-item">
+          <Link to={Pages.PROFILE}
+                className="nav-link text-white"
+                onClick={hideMobileNavigation}>{i18n.t('navigation.profile')}</Link>
+        </li>}
 
-          {isAuthenticated && <li className="nav-item">
-            <Link to={Pages.PROFILE}
-                  className="nav-link text-white"
-                  onClick={this.hideMobileNavigation}>{i18n.t('navigation.profile')}</Link>
-          </li>}
+      </ul>
+      <ul className="navbar-nav ml-auto text-center">
 
-        </ul>
-        <ul className="navbar-nav ml-auto text-center">
+        {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
+          <Link className="btn btn-outline-success"
+                onClick={hideMobileNavigation}
+                to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
+        </li>}
 
-          {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
-            <Link className="btn btn-outline-success"
-                  onClick={this.hideMobileNavigation}
-                  to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
-          </li>}
+        {!isAuthenticated && <li className="nav-ite mx-1 mb-1 mb-lg-0">
+          <Link className="btn btn-success"
+                onClick={hideMobileNavigation}
+                to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
+        </li>}
 
-          {!isAuthenticated && <li className="nav-ite mx-1 mb-1 mb-lg-0">
-            <Link className="btn btn-success"
-                  onClick={this.hideMobileNavigation}
-                  to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
-          </li>}
+        {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
+          <button className="btn btn-outline-success"
+                  onClick={logout}>{i18n.t('navigation.logout')}</button>
+        </li>}
 
-          {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
-            <button className="btn btn-outline-success"
-                    onClick={this.logout}>{i18n.t('navigation.logout')}</button>
-          </li>}
-
-        </ul>
-      </div>
-    </nav>
-  }
+      </ul>
+    </div>
+  </nav>
 }
 
 Navigation.propTypes = {
@@ -97,8 +95,7 @@ Navigation.propTypes = {
 
 const selectors = createStructuredSelector({
   isAuthenticated: store => store.App.isAuthenticated,
+  Nav: store => store.Nav,
 })
 
-export default withRouter(
-  connect(selectors)(Navigation)
-);
+export default connect(selectors)(Navigation)

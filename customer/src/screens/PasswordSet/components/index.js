@@ -5,6 +5,7 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
+import Password from "../../../components/PasswordInput";
 
 class PasswordSet extends React.Component {
 
@@ -19,16 +20,6 @@ class PasswordSet extends React.Component {
     this.props.dispatch(Save(id, {
       password: password1
     }))
-  }
-
-  submitIfEnter = e => {
-    if (e.keyCode === 13) {
-
-      const {isValid} = this.props.PasswordSet
-
-      if (isValid)
-        this.submit()
-    }
   }
 
   onChange = name => e => {
@@ -76,23 +67,19 @@ class PasswordSet extends React.Component {
 
                 <div className="form-group">
                   <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
-                  <input type="password"
-                         className="form-control"
-                         placeholder={"******"}
-                         onChange={this.onChange('password1')}
-                         onKeyDown={this.submitIfEnter}
-                         value={model.password1 || ''}/>
+                  <Password
+                    name="password1"
+                    onChange={this.change('password1')}
+                    value={model.password1 || ''}/>
                   {this.getError('password1')}
                 </div>
 
                 <div className="form-group">
                   <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
-                  <input type="password"
-                         className="form-control"
-                         placeholder={"******"}
-                         onChange={this.onChange('password2')}
-                         onKeyDown={this.submitIfEnter}
-                         value={model.password2 || ''}/>
+                  <Password
+                    name="password2"
+                    onChange={this.change('password2')}
+                    value={model.password2 || ''}/>
                   {this.getError('password2')}
                 </div>
 

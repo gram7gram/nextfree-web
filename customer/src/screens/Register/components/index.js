@@ -7,6 +7,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import * as Pages from "../../../router/Pages";
 import Errors from "../../../components/Errors";
+import Password from "../../../components/PasswordInput";
 
 class Register extends React.Component {
 
@@ -106,23 +107,19 @@ class Register extends React.Component {
         <form noValidate autoComplete="off">
           <div className="form-group">
             <label className="m-0 required">{i18n.t('register.password1')}</label>
-            <input type="password"
-                   name="password1"
-                   className="form-control"
-                   placeholder="*******"
-                   onChange={this.onStringChange('password1')}
-                   value={customer.password1 || ''}/>
+            <Password
+              name="password1"
+              onChange={this.onStringChange('password1')}
+              value={customer.password1 || ''}/>
             {this.getError('password1')}
           </div>
 
           <div className="form-group">
             <label className="m-0 required">{i18n.t('register.password2')}</label>
-            <input type="password"
-                   name="password2"
-                   className="form-control"
-                   placeholder="*******"
-                   onChange={this.onStringChange('password2')}
-                   value={customer.password2 || ''}/>
+            <Password
+              name="password2"
+              onChange={this.onStringChange('password2')}
+              value={customer.password2 || ''}/>
             {this.getError('password2')}
           </div>
         </form>

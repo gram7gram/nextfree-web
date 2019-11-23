@@ -9,6 +9,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Date from "../../../components/Date";
 import Errors from "../../../components/Errors";
+import Password from "../../../components/PasswordInput";
 
 class CustomerEdit extends React.Component {
 
@@ -135,11 +136,10 @@ class CustomerEdit extends React.Component {
             <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="m-0 required">{i18n.t('customer_edit.password1')}</label>
-                <input type="password"
-                       name="password1"
-                       className="form-control"
-                       onChange={this.changeString('password1')}
-                       value={model.password1 || ''}/>
+                <Password
+                  name="password1"
+                  onChange={this.changeString('password1')}
+                  value={model.password1 || ''}/>
                 {this.getError('password1')}
               </div>
             </div>
@@ -147,11 +147,10 @@ class CustomerEdit extends React.Component {
             <div className="col-12 col-md-6">
               <div className="form-group">
                 <label className="m-0 required">{i18n.t('customer_edit.password2')}</label>
-                <input type="password"
-                       name="password2"
-                       className="form-control"
-                       onChange={this.changeString('password2')}
-                       value={model.password2 || ''}/>
+                <Password
+                  name="password2"
+                  onChange={this.changeString('password2')}
+                  value={model.password2 || ''}/>
                 {this.getError('password2')}
               </div>
             </div>

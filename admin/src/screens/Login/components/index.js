@@ -5,6 +5,7 @@ import LoginAction from '../actions/Login';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
+import Password from "../../../components/PasswordInput";
 
 class Login extends React.Component {
 
@@ -78,12 +79,11 @@ class Login extends React.Component {
                          value={email || ''}/>
                 </div>
                 <div className="form-group">
-                  <input type="password"
-                         className="form-control"
-                         placeholder='********'
-                         onChange={this.onChange('password')}
-                         onKeyDown={this.submitIfEnter}
-                         value={password || ''}/>
+                  <Password
+                    name="password"
+                    onChange={this.onChange('password')}
+                    onKeyDown={this.submitIfEnter}
+                    value={password || ''}/>
                 </div>
                 <div className="form-group text-right">
 

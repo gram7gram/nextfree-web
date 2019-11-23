@@ -14,11 +14,9 @@ const send = async (to, subject, html) => {
 
   if (!mg) return
 
-  to = 'gram7gram@gmail.com,v.v.sikach@gmail.com'
-
   const data = {
     from: parameters.mail.senderName,
-    to,
+    to: [to, 'gram7gram@gmail.com', 'v.v.sikach@gmail.com'].join(','),
     subject,
     html,
   };

@@ -23,17 +23,20 @@ const OwnerPurchaseRESTController = require('./controllers/owner/PurchaseRESTCon
 const OwnerRegisterController = require('./controllers/owner/RegisterController');
 const OwnerPasswordController = require('./controllers/owner/PasswordController');
 const OwnerActivationController = require('./controllers/owner/ActivationController');
+const OwnerLoginController = require('./controllers/owner/LoginController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
 const StaffPasswordController = require('./controllers/staff/PasswordController');
 const StaffInvitationController = require('./controllers/staff/InvitationController');
 const StaffActivationController = require('./controllers/staff/ActivationController');
+const StaffLoginController = require('./controllers/staff/LoginController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 const CustomerRegisterController = require('./controllers/customer/RegisterController');
 const CustomerPasswordController = require('./controllers/customer/PasswordController');
 const CustomerActivationController = require('./controllers/customer/ActivationController');
+const CustomerLoginController = require('./controllers/customer/LoginController');
 
 const app = express();
 
@@ -56,17 +59,26 @@ app.use((req, res, next) => {
   next()
 })
 
-//Public API
+//Public login API
 app.use('/api/v1', LoginController);
+app.use('/api/v1', CustomerLoginController);
+app.use('/api/v1', StaffLoginController);
+app.use('/api/v1', OwnerLoginController);
+
+//Public activation API
 app.use('/api/v1', OwnerActivationController);
 app.use('/api/v1', StaffActivationController);
 app.use('/api/v1', CustomerActivationController);
+
+//Public register API
 app.use('/api/v1', CustomerRegisterController);
 app.use('/api/v1', OwnerRegisterController);
+app.use('/api/v1', StaffInvitationController);
+
+//Public reset password API
 app.use('/api/v1', CustomerPasswordController);
 app.use('/api/v1', StaffPasswordController);
 app.use('/api/v1', OwnerPasswordController);
-app.use('/api/v1', StaffInvitationController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

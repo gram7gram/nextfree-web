@@ -39,7 +39,6 @@ router.post('/login', async (req, res) => {
       const content = results.find(item => !!item)
       if (!content) {
         res.status(404).json({
-          results,
           message: i18n.t('login.no_user_found')
         })
       }

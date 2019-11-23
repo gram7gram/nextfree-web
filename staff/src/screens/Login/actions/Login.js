@@ -8,7 +8,7 @@ export default (email, password) => dispatch => {
     type: LOGIN_BEFORE
   })
 
-  request.post(parameters.apiHost + '/api/v1/login', {email, password})
+  request.post(parameters.apiHost + '/api/v1/login-staff', {email, password})
     .then(({data}) => {
       dispatch({
         type: LOGIN_SUCCESS,

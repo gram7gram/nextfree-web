@@ -10,6 +10,7 @@ import * as Pages from "../../../router/Pages";
 import Errors from "../../../components/Errors";
 import Date from "../../../components/Date";
 import Loading from "../../../components/Loading";
+import Password from "../../../components/PasswordInput";
 
 class Invitation extends React.Component {
 
@@ -90,7 +91,7 @@ class Invitation extends React.Component {
           </div>
 
           <div className="form-group">
-            <label className="m-0">{i18n.t('invitation.lastName')}</label>
+            <label className="m-0 required">{i18n.t('invitation.lastName')}</label>
             <input type="text"
                    placeholder={i18n.t('placeholder.text')}
                    name="user.lastName"
@@ -140,21 +141,19 @@ class Invitation extends React.Component {
         <form noValidate autoComplete="off">
           <div className="form-group">
             <label className="m-0 required">{i18n.t('invitation.password1')}</label>
-            <input type="password"
-                   name="password1"
-                   className="form-control"
-                   onChange={this.onStringChange('password1')}
-                   value={model.password1 || ''}/>
+            <Password
+              name="password1"
+              onChange={this.changeString('password1')}
+              value={model.password1 || ''}/>
             {this.getError('password1')}
           </div>
 
           <div className="form-group">
             <label className="m-0 required">{i18n.t('invitation.password2')}</label>
-            <input type="password"
-                   name="password2"
-                   className="form-control"
-                   onChange={this.onStringChange('password2')}
-                   value={model.password2 || ''}/>
+            <Password
+              name="password2"
+              onChange={this.changeString('password2')}
+              value={model.password2 || ''}/>
             {this.getError('password2')}
           </div>
         </form>

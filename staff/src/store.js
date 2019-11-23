@@ -11,30 +11,8 @@ import sagas from './sagas'
 import reducers from './reducers'
 import LoginCheck from './screens/Login/actions/LoginCheck'
 
-import querystring from 'qs'
-
 const getAccessToken = () => {
-
-  const query = querystring.parse(window.location.search, {ignoreQueryPrefix: true})
-
-  let token = null
-
-  if (query.accessToken) {
-    try {
-      token = window.atob(query.accessToken)
-    } catch (ignore) {
-    }
-
-    delete query.accessToken
-
-    window.location.search = '?' + querystring.stringify(query)
-  }
-
-  if (!token) {
-    token = Cookie.get('token')
-  }
-
-  return token;
+  return Cookie.get('token');
 }
 
 export const history = createBrowserHistory()

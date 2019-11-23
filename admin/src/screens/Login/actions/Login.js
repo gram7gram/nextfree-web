@@ -18,8 +18,6 @@ export default (email, password) => dispatch => {
     .catch(e => {
       console.log(e);
 
-
-
       dispatch({
         type: LOGIN_FAILURE,
         payload: {
