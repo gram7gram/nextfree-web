@@ -172,11 +172,7 @@
     "resources": "Корисно знати",
     "privacy": "Політика приватності",
     "terms": "Умови використання",
-    "hosts": "Інші ресурси",
-    "ownerHost": "Я власник",
-    "staffHost": "Я співробітник",
-    "customerHost": "Я покупець",
-    "copyright": "Copyright"
+    "contact": "Зворотній зв'язок"
   },
   "notification": {
     "remove_success": "Виделено!",

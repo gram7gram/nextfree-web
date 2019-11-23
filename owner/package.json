@@ -7,8 +7,7 @@
     "fs-extra": "^8.1.0"
   },
   "devDependencies": {
-    "supertest": "^4.0.2",
-    "qs": "^6.9.1",
+    "@sentry/browser": "^5.9.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
@@ -30,6 +29,7 @@
     "prop-types": "^15.7.2",
     "qr-scanner": "^1.1.1",
     "qrcode": "^1.4.4",
+    "qs": "^6.9.1",
     "random": "^2.1.1",
     "react": "^16.9.0",
     "react-datepicker": "^2.10.0",
@@ -46,6 +46,7 @@
     "redux-saga": "^1.1.1",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "supertest": "^4.0.2",
     "toastr": "^2.1.4"
   },
   "scripts": {

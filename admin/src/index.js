@@ -12,6 +12,13 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import './style/style.css';
 
+import * as Sentry from '@sentry/browser';
+
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({dsn: "https://b5dbf33ef1f244bb9e93b55b22b13991@sentry.io/1831992"});
+  Sentry.setExtra('domain', 'admin.nextfree.com.ua')
+}
+
 const rootElement = document.getElementById('root');
 
 try {
@@ -29,6 +36,8 @@ try {
 
 } catch (e) {
   console.error(e)
+
+  Sentry.captureException(e)
 
   window.location.reload()
 }

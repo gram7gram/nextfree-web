@@ -1,5 +1,6 @@
 import React from 'react'
 import i18n from '../i18n'
+import * as Sentry from '@sentry/browser';
 
 class ErrorBoundary extends React.PureComponent {
 
@@ -15,6 +16,8 @@ class ErrorBoundary extends React.PureComponent {
   componentDidCatch(error, errorInfo) {
     console.log(error);
     console.log(errorInfo);
+
+    Sentry.captureException(error)
   }
 
   render() {
