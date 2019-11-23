@@ -20,7 +20,7 @@ router.post('/login-customer', async (req, res) => {
     const content = await AuthService.authorizeCustomerByEmailPassword(email, password)
     if (!content) {
       res.status(404).json({
-        message: i18n.t('login.no_user_found')
+        message: i18n.t('login.no_customer_found')
       })
     }
 

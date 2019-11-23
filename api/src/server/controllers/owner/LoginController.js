@@ -20,7 +20,7 @@ router.post('/login-owner', async (req, res) => {
     const content = await AuthService.authorizeOwnerByEmailPassword(email, password)
     if (!content) {
       res.status(404).json({
-        message: i18n.t('login.no_user_found')
+        message: i18n.t('login.no_owner_found')
       })
     }
 

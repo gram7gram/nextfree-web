@@ -20,7 +20,7 @@ router.post('/login-staff', async (req, res) => {
     const content = await AuthService.authorizeStaffByEmailPassword(email, password)
     if (!content) {
       res.status(404).json({
-        message: i18n.t('login.no_user_found')
+        message: i18n.t('login.no_staff_found')
       })
     }
 
