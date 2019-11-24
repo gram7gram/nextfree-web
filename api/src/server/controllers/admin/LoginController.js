@@ -39,7 +39,7 @@ router.post('/login-admin', async (req, res) => {
       const content = results.find(item => !!item)
       if (!content) {
         res.status(404).json({
-          message: i18n.t('login.no_user_found')
+          message: i18n.t('login.no_admin_found')
         })
       }
 
