@@ -7,13 +7,12 @@ const langParser = require('accept-language-parser')
 const i18n = require('../i18n').i18n
 const prepareTranslations = require('../i18n').prepareTranslations
 
-const LoginController = require('./controllers/LoginController');
-
 const AdminCompanyRESTController = require('./controllers/admin/CompanyRESTController');
 const AdminCustomerRESTController = require('./controllers/admin/CustomerRESTController');
 const AdminStaffRESTController = require('./controllers/admin/StaffRESTController');
 const AdminStoreRESTController = require('./controllers/admin/StoreRESTController');
 const AdminOwnerRESTController = require('./controllers/admin/OwnerRESTController');
+const AdminLoginController = require('./controllers/admin/LoginController');
 
 const OwnerCompanyRESTController = require('./controllers/owner/CompanyRESTController');
 const OwnerProfileController = require('./controllers/owner/ProfileController');
@@ -60,7 +59,7 @@ app.use((req, res, next) => {
 })
 
 //Public login API
-app.use('/api/v1', LoginController);
+app.use('/api/v1', AdminLoginController);
 app.use('/api/v1', CustomerLoginController);
 app.use('/api/v1', StaffLoginController);
 app.use('/api/v1', OwnerLoginController);

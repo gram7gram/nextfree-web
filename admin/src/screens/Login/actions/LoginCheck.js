@@ -8,7 +8,7 @@ export default (content) => dispatch => {
     type: LOGIN_CHECK_BEFORE
   })
 
-  request.post(parameters.apiHost + '/api/v1/login-check', null, {
+  request.post(parameters.apiHost + '/api/v1/login-check-admin', null, {
     headers: {
       Authorization: content.token
     }

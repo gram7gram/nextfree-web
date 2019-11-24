@@ -6,7 +6,7 @@ const i18n = require('../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
 
-router.post('/login', async (req, res) => {
+router.post('/login-admin', async (req, res) => {
 
   const {password, email} = req.body
 
@@ -43,6 +43,13 @@ router.post('/login', async (req, res) => {
         })
       }
 
+      if (!content.isAdmin) {
+        throw {
+          code: 403,
+          message: i18n.t('auth.access_denied')
+        }
+      }
+
       const token = AuthService.generateAuthToken(content)
 
       res.status(200).json({
@@ -59,7 +66,7 @@ router.post('/login', async (req, res) => {
 
 })
 
-router.post('/login-check', async (req, res) => {
+router.post('/login-check-admin', async (req, res) => {
 
   try {
 
@@ -72,7 +79,7 @@ router.post('/login-check', async (req, res) => {
     }
 
     const decoded = AuthService.verifyToken(token)
-    if (!decoded || !decoded.user) {
+    if (!decoded || !decoded.isAdmin || !decoded.user) {
       throw {
         code: 403,
         message: i18n.t('auth.access_denied')
@@ -89,7 +96,7 @@ router.post('/login-check', async (req, res) => {
       content = await AuthService.authorizeCustomerById(decoded.user._id)
     }
 
-    if (!content) {
+    if (!content || !content.isAdmin) {
       throw {
         code: 403,
         message: i18n.t('auth.access_denied')
