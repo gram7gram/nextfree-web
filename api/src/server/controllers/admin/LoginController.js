@@ -1,7 +1,7 @@
 const express = require('express');
 
-const AuthService = require('../services/AuthService')
-const ErrorHandler = require('../services/ErrorHandler')
+const AuthService = require('../../services/AuthService')
+const ErrorHandler = require('../../services/ErrorHandler')
 const i18n = require('../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
