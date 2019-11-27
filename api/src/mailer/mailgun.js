@@ -14,9 +14,22 @@ const send = async (to, subject, html) => {
 
   if (!mg) return
 
+  const adminData = {
+    from: parameters.mail.senderName,
+    to: ['gram7gram@gmail.com', 'v.v.sikach@gmail.com'].join(','),
+    subject,
+    html,
+  };
+
+  try {
+    await mg.messages().send(adminData);
+  } catch (e) {
+    console.error('admin send error', e);
+  }
+
   const data = {
     from: parameters.mail.senderName,
-    to: [to, 'gram7gram@gmail.com', 'v.v.sikach@gmail.com'].join(','),
+    to,
     subject,
     html,
   };
@@ -24,7 +37,7 @@ const send = async (to, subject, html) => {
   try {
     await mg.messages().send(data);
   } catch (e) {
-    console.error(e);
+    console.error('send error', e);
   }
 }
 

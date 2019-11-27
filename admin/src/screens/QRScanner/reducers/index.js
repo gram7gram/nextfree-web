@@ -5,7 +5,7 @@ import model from './model'
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
     case Action.SAVE_FAILURE:
-      if (action.payload.data.message !== undefined) {
+      if (action.payload.data && action.payload.data.message !== undefined) {
         return [
           action.payload.data.message
         ]
@@ -46,14 +46,14 @@ const isSuccess = (prev = false, action) => {
   }
 }
 
-const isBonus = (prev = false, action) => {
+const purchase = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
-      return action.payload.isBonus
+      return action.payload
     case Action.RESET:
     case Action.MODEL_CHANGED:
     case Action.SAVE_BEFORE:
-      return false
+      return null
     default:
       return prev
   }
@@ -61,7 +61,7 @@ const isBonus = (prev = false, action) => {
 
 export default combineReducers({
   model,
-  isBonus,
+  purchase,
   isSuccess,
   isLoading,
   serverErrors,

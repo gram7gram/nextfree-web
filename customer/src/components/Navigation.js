@@ -34,7 +34,7 @@ const Navigation = (props) => {
   const {isAuthenticated} = props
   const {isMobileMenuVisible} = props.Nav
 
-  return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+  return <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
 
     <a className="navbar-brand py-0" href="https://nextfree.com.ua">
       {i18n.t('navigation.logo')}

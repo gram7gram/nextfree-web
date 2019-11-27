@@ -111,14 +111,17 @@ class QRScanner extends React.PureComponent {
 
   renderSuccess() {
 
-    const {isSuccess, isBonus} = this.props.QRScanner
+    const {isSuccess, purchase} = this.props.QRScanner
 
-    if (!isSuccess) return null
+    if (!isSuccess || !purchase) return null
 
-    if (isBonus) {
+    if (purchase.isBonus) {
+
+      const buyer = purchase.buyer.user.lastName + ' ' + purchase.buyer.user.firstName
+
       return <div className="alert alert-success">
         <h4>{i18n.t('qr_scanner.purchase_bonus_title')}</h4>
-        <p>{i18n.t('qr_scanner.purchase_bonus_subtitle')}</p>
+        <p>{i18n.t('qr_scanner.purchase_bonus_subtitle').replace('__NAME__', buyer)}</p>
       </div>
     }
 
@@ -184,7 +187,7 @@ class QRScanner extends React.PureComponent {
           <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
                   onClick={this.purchase}
                   disabled={!isValid || isLoading}>
-            <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-check")}/>
+            <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
             &nbsp;{i18n.t('qr_scanner.purchase_action')}
           </button>
 

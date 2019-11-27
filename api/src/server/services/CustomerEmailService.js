@@ -1,6 +1,23 @@
 const mailer = require('../../mailer/mailgun')
 const parameters = require('../../../parameters')
 const templating = require('../../templating')
+const i18n = require('../../i18n').i18n
+const moment = require('moment')
+
+const onBonusPurchase = async entity => {
+
+  const title = 'Вітаємо! Цей товар Ви отримуєте безкоштовно!'
+
+  const body = templating.render('customer-bonus-ua.html.twig', {
+    i18n,
+    moment,
+    entity,
+    title,
+  })
+
+  await mailer(entity.buyer.user.email, title, body)
+
+}
 
 const onAccountActivation = async entity => {
 
@@ -29,6 +46,7 @@ const onPasswordReset = async entity => {
 }
 
 module.exports = {
+  onBonusPurchase,
   onPasswordReset,
   onAccountActivation,
 }

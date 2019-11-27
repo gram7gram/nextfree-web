@@ -1,0 +1,33 @@
+<h1>{{ title }}</h1>
+
+<p>За виконання умови бонусної покупки,
+    продавець зобов`язаний видати Вам товар безкоштовно.</p>
+
+<h3>Бонусна умова "{{ i18n.t('bonus_conditions.' + entity.bonusCondition + ".title") }}"</h3>
+
+<p>{{ i18n.t('bonus_conditions.' + entity.bonusCondition + ".description") }}</p>
+
+<h3>Інформація про покупку</h3>
+
+<table>
+    <tbody>
+        <tr>
+            <th style="text-align: left">Ідентифікатор покупки:</th>
+            <td style="text-align: left">{{ entity._id }}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left">Дата:</th>
+            <td style="text-align: left">{{ moment(entity.createdAt).format('HH:mm DD.MM.YY') }}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left">Продавець:</th>
+            <td style="text-align: left">{{ entity.seller.user.lastName }} {{ entity.seller.user.firstName }}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left">Компанія:</th>
+            <td style="text-align: left">{{ entity.company.name }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Виникли запитання? Напишіть нам <a href="mailto:nextfree.adm@gmail.com">nextfree.adm@gmail.com</a></p>

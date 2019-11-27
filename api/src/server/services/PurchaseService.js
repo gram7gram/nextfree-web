@@ -1,6 +1,7 @@
 const Purchase = require('../../database/model/Purchase').Purchase
 const i18n = require('../../i18n').i18n
 const Conditions = require('../../BonusCondition');
+const CustomerEmailService = require('./CustomerEmailService');
 
 const PurchaseService = {
 
@@ -27,7 +28,13 @@ const PurchaseService = {
 
     await entity.save()
 
-    return entity.toObject()
+    const result = entity.toObject();
+
+    if (result.isBonus) {
+      await CustomerEmailService.onBonusPurchase(result)
+    }
+
+    return result
   },
 
   checkBonusCondition: async purchase => {

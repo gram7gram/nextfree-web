@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
 
-const userId = (prev = null, action) => {
+const userId = (prev = "5dc9d4c8119c4f03c7f078de", action) => {
   switch (action.type) {
     case Action.RESET:
     case Action.SAVE_SUCCESS:

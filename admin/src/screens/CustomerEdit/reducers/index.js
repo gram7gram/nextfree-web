@@ -7,7 +7,7 @@ const serverErrors = (prev = [], action) => {
     case Action.RESET:
       return []
     case Action.SAVE_FAILURE:
-      if (action.payload.data.message !== undefined) {
+      if (action.payload.data && action.payload.data.message !== undefined) {
         return [
           action.payload.data.message
         ]

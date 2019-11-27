@@ -37,7 +37,7 @@
     "has_camera_permission": "Доступ до камери отриманий",
     "purchase_action": "Зарахувати покупку",
     "purchase_bonus_title": "Так! Це бонус",
-    "purchase_bonus_subtitle": "Покупець заслуговує на безкоштовну покупку",
+    "purchase_bonus_subtitle": "Покупець __NAME__ отримує товар безкоштовно!",
     "purchase_success_title": "Не бонус, але на шаг ближче до нього!",
     "purchase_success_subtitle": "Чекаємо на наступні покупки"
   },

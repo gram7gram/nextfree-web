@@ -14,7 +14,7 @@ const isInvitationSuccess = (prev = false, action) => {
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
     case Action.SAVE_FAILURE:
-      if (action.payload.data.message !== undefined) {
+      if (action.payload.data && action.payload.data.message !== undefined) {
         return [
           action.payload.data.message
         ]
