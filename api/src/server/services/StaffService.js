@@ -16,6 +16,7 @@ const StaffService = {
 
   create: async (content) => {
     const entity = new Staff({
+      isEnabled: true,
       user: {
         activationToken: uuid()
       }

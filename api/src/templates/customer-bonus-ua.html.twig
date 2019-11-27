@@ -12,16 +12,8 @@
 <table>
     <tbody>
         <tr>
-            <th style="text-align: left">Ідентифікатор покупки:</th>
-            <td style="text-align: left">{{ entity._id }}</td>
-        </tr>
-        <tr>
             <th style="text-align: left">Дата:</th>
             <td style="text-align: left">{{ moment(entity.createdAt).format('HH:mm DD.MM.YY') }}</td>
-        </tr>
-        <tr>
-            <th style="text-align: left">Продавець:</th>
-            <td style="text-align: left">{{ entity.seller.user.lastName }} {{ entity.seller.user.firstName }}</td>
         </tr>
         <tr>
             <th style="text-align: left">Компанія:</th>

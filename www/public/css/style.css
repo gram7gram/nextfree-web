@@ -10,3 +10,7 @@
 .index-main-bg {
     background-color: #4fa6d1;
 }
+
+.navbar {
+    min-height: 58px
+}

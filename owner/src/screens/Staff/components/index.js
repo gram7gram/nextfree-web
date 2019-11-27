@@ -69,11 +69,6 @@ class Staff extends React.Component {
                     <i className="fa fa-user"/>&nbsp;{i18n.t('staff.invite_action')}
                   </Link>
 
-                  <Link className="btn btn-outline-success btn-sm"
-                        to={Pages.STAFF_NEW}>
-                    <i className="fa fa-plus"/>&nbsp;{i18n.t('staff.new_action')}
-                  </Link>
-
                 </div>
               </div>
             </div>

@@ -20,4 +20,3 @@ export const COMPANY_EDIT = '/companies/:id';
 export const STAFF = '/staff';
 export const STAFF_INVITE = '/staff/invite';
 export const STAFF_EDIT = '/staff/:id';
-export const STAFF_NEW = '/staff/new';

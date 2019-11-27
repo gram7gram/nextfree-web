@@ -92,7 +92,6 @@ export function createRouter(store) {
 
           <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
           <PrivateRoute exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
-          <PrivateRoute exact path={Pages.STAFF_NEW} component={StaffEdit}/>
           <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
           <Redirect path="*" to={Pages.HOME}/>

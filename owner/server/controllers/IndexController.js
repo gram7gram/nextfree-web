@@ -19,7 +19,7 @@ const routes = [
   '/stores/:id',
 
   '/staff',
-  '/staff/new',
+  '/staff/invite',
   '/staff/:id',
 
   '/profile',
