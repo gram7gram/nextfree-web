@@ -30,7 +30,7 @@ const onPasswordReset = async entity => {
 
 const onInvitationCreated = async (entity, owner, company) => {
 
-  const title = `Вас вітає сервіс NextFree!"`
+  const title = `Вас вітає сервіс NextFree!`
 
   const body = templating.render('staff-invite-ua.html.twig', {
     title,
