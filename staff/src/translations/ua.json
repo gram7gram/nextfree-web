@@ -6,7 +6,7 @@
     "login": "Логін",
     "logout": "Вихід",
     "qr": "QR код",
-    "qr_scan": "QR сканер",
+    "qr_scanner": "QR сканер",
     "profile": "Профіль"
   },
   "profile": {
