@@ -231,19 +231,9 @@ class Register extends React.Component {
 
             {this.getError('owner.hasAccepted')}
 
-            <ul className="m-0 pl-4">
-              <li>
-                <a href="https://nextfree.com.ua/terms"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('register.terms_link')}</a>
-              </li>
-
-              <li>
-                <a href="https://nextfree.com.ua/privacy"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('register.privacy_link')}</a>
-              </li>
-            </ul>
+            <a href="https://nextfree.com.ua/privacy"
+               rel="noopener noreferrer"
+               target="_blank">{i18n.t('register.privacy_link')}</a>
           </div>
 
         </div>

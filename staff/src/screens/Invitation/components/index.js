@@ -48,7 +48,7 @@ class Invitation extends React.Component {
     })
   }
 
-  onStringChange = name => e => {
+  changeString = name => e => {
     this.change(name, e.target.value)
   }
 
@@ -85,7 +85,7 @@ class Invitation extends React.Component {
                    placeholder={i18n.t('placeholder.text')}
                    name="user.firstName"
                    className="form-control"
-                   onChange={this.onStringChange('user.firstName')}
+                   onChange={this.changeString('user.firstName')}
                    value={model.user.firstName || ''}/>
             {this.getError('user.firstName')}
           </div>
@@ -96,7 +96,7 @@ class Invitation extends React.Component {
                    placeholder={i18n.t('placeholder.text')}
                    name="user.lastName"
                    className="form-control"
-                   onChange={this.onStringChange('user.lastName')}
+                   onChange={this.changeString('user.lastName')}
                    value={model.user.lastName || ''}/>
             {this.getError('user.lastName')}
           </div>
@@ -228,19 +228,9 @@ class Invitation extends React.Component {
 
             {this.getError('hasAccepted')}
 
-            <ul className="m-0 pl-4">
-              <li>
-                <a href="https://nextfree.com.ua/terms"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('invitation.terms_link')}</a>
-              </li>
-
-              <li>
-                <a href="https://nextfree.com.ua/privacy"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('invitation.privacy_link')}</a>
-              </li>
-            </ul>
+            <a href="https://nextfree.com.ua/privacy"
+               rel="noopener noreferrer"
+               target="_blank">{i18n.t('invitation.privacy_link')}</a>
           </div>
 
         </div>

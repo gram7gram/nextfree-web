@@ -155,6 +155,7 @@ router.post('/companies/:company/stores', isOwner, checkCompanyId, async (req, r
 
     const result = await StoreService.create({
       ...req.body,
+      isEnabled: true,
       companyId: company._id
     })
 

@@ -28,7 +28,8 @@ class DateWrapper extends React.Component {
       value = moment(date, 'DD.MM.YYYY').format('YYYY-MM-DD')
     }
 
-    this.props.onChange(value)
+    if (this.props.onChange)
+      this.props.onChange(value)
   }
 
   render() {
@@ -53,7 +54,7 @@ class DateWrapper extends React.Component {
 
 DateWrapper.propTypes = {
   value: PropType.any,
-  onChange: PropType.func.isRequired,
+  onChange: PropType.func,
 }
 
 export default DateWrapper

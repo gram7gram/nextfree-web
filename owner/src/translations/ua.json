@@ -77,6 +77,8 @@
     "title": "Мої співробітники",
     "invite_action": "Запросити",
     "new_action": "Додати",
+    "enabled_badge": "Активний",
+    "disabled_badge": "Неактивний",
     "not_found_title": "Нічого не знайдено"
   },
   "staff_invite": {
@@ -134,8 +136,7 @@
   },
   "footer": {
     "resources": "Корисно знати",
-    "privacy": "Політика приватності",
-    "terms": "Умови використання",
+    "privacy": "Угода користувача",
     "contact": "Зворотній зв'язок"
   },
   "notification": {
@@ -157,7 +158,7 @@
     "save_action": "Зареєструватися!",
     "terms_and_conditions": "Я ознайомленний та погожуюсь з:",
     "terms_link": "Умови використання",
-    "privacy_link": "Політика приватності",
+    "privacy_link": "Угода користувача",
     "security_title": "Безпека",
     "security_subtitle": "Вкажіть пароль доступу в систему",
     "company_title": "Ваша компанія",

@@ -99,6 +99,12 @@ const Navigation = (props) => {
                 to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
         </li>}
 
+        {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
+          <Link className="btn btn-success"
+                onClick={hideMobileNavigation}
+                to={Pages.REGISTER}>{i18n.t('navigation.register')}</Link>
+        </li>}
+
         {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
           <button className="btn btn-outline-success"
                   onClick={logout}>{i18n.t('navigation.logout')}</button>

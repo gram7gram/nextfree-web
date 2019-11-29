@@ -27,7 +27,7 @@ class Register extends React.Component {
     })
   }
 
-  onStringChange = name => e => {
+  changeString = name => e => {
     this.props.dispatch({
       type: MODEL_CHANGED,
       payload: {
@@ -61,7 +61,7 @@ class Register extends React.Component {
                    placeholder={i18n.t('placeholder.text')}
                    name="user.email"
                    className="form-control"
-                   onChange={this.onStringChange('user.email')}
+                   onChange={this.changeString('user.email')}
                    value={customer.user.email || ''}/>
             {this.getError('user.email')}
           </div>
@@ -72,7 +72,7 @@ class Register extends React.Component {
                    placeholder={i18n.t('placeholder.text')}
                    name="user.firstName"
                    className="form-control"
-                   onChange={this.onStringChange('user.firstName')}
+                   onChange={this.changeString('user.firstName')}
                    value={customer.user.firstName || ''}/>
             {this.getError('user.firstName')}
           </div>
@@ -83,7 +83,7 @@ class Register extends React.Component {
                    placeholder={i18n.t('placeholder.text')}
                    name="user.lastName"
                    className="form-control"
-                   onChange={this.onStringChange('user.lastName')}
+                   onChange={this.changeString('user.lastName')}
                    value={customer.user.lastName || ''}/>
             {this.getError('user.lastName')}
           </div>
@@ -109,7 +109,7 @@ class Register extends React.Component {
             <label className="m-0 required">{i18n.t('register.password1')}</label>
             <Password
               name="password1"
-              onChange={this.onStringChange('password1')}
+              onChange={this.changeString('password1')}
               value={customer.password1 || ''}/>
             {this.getError('password1')}
           </div>
@@ -118,7 +118,7 @@ class Register extends React.Component {
             <label className="m-0 required">{i18n.t('register.password2')}</label>
             <Password
               name="password2"
-              onChange={this.onStringChange('password2')}
+              onChange={this.changeString('password2')}
               value={customer.password2 || ''}/>
             {this.getError('password2')}
           </div>
@@ -189,19 +189,10 @@ class Register extends React.Component {
 
             {this.getError('hasAccepted')}
 
-            <ul className="m-0 pl-4">
-              <li>
-                <a href="https://nextfree.com.ua/terms"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('register.terms_link')}</a>
-              </li>
+            <a href="https://nextfree.com.ua/privacy"
+               rel="noopener noreferrer"
+               target="_blank">{i18n.t('register.privacy_link')}</a>
 
-              <li>
-                <a href="https://nextfree.com.ua/privacy"
-                   rel="noopener noreferrer"
-                   target="_blank">{i18n.t('register.privacy_link')}</a>
-              </li>
-            </ul>
           </div>
 
         </div>

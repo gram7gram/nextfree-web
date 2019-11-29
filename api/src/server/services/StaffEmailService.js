@@ -4,6 +4,8 @@ const templating = require('../../templating')
 
 const onAccountActivation = async entity => {
 
+  console.log('/activation/' + entity.user.activationToken);
+
   const title = 'Реєстрація на сайті nextfree.com.ua'
 
   const body = templating.render('staff-activation-ua.html.twig', {
@@ -17,6 +19,8 @@ const onAccountActivation = async entity => {
 
 const onPasswordReset = async entity => {
 
+  console.log('/password-set/' + entity.user.emailResetToken);
+
   const title = 'Відновлення паролю'
 
   const body = templating.render('staff-reset-password-ua.html.twig', {
@@ -29,6 +33,8 @@ const onPasswordReset = async entity => {
 }
 
 const onInvitationCreated = async (entity, owner, company) => {
+
+  console.log('/invitation/' + entity.user.invitationToken);
 
   const title = `Вас вітає сервіс NextFree!`
 

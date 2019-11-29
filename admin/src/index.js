@@ -15,7 +15,7 @@ import './style/style.css';
 import * as Sentry from '@sentry/browser';
 
 if (process.env.NODE_ENV === 'production') {
-  Sentry.init({dsn: "https://b5dbf33ef1f244bb9e93b55b22b13991@sentry.io/1831992"});
+  Sentry.init({dsn: "https://0322a85cb1c847e7981ac15d8979f612@sentry.io/1839632"});
   Sentry.setExtra('domain', 'admin.nextfree.com.ua')
 }
 

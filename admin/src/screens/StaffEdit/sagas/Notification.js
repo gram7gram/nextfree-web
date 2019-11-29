@@ -9,8 +9,15 @@ function alertSuccess() {
   });
 }
 
+function removeSuccess() {
+  toast.success(i18n.t('notification.remove_success'), {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+}
+
 export default function* sagas() {
   yield all([
     takeEvery(Actions.SAVE_SUCCESS, alertSuccess),
+    takeEvery(Actions.REMOVE_SUCCESS, removeSuccess),
   ])
 }

@@ -21,6 +21,8 @@ const onBonusPurchase = async entity => {
 
 const onAccountActivation = async entity => {
 
+  console.log('/activation/' + entity.user.activationToken);
+
   const title = 'Реєстрація на сайті nextfree.com.ua'
 
   const body = templating.render('customer-activation-ua.html.twig', {
@@ -33,6 +35,8 @@ const onAccountActivation = async entity => {
 }
 
 const onPasswordReset = async entity => {
+
+  console.log('/password-set/' + entity.user.emailResetToken);
 
   const title = 'Відновлення паролю'
 

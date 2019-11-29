@@ -22,7 +22,7 @@ class PasswordSet extends React.Component {
     }))
   }
 
-  onChange = name => e => {
+  changeString = name => e => {
     this.props.dispatch({
       type: MODEL_CHANGED,
       payload: {
@@ -69,7 +69,7 @@ class PasswordSet extends React.Component {
                   <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
                   <Password
                     name="password1"
-                    onChange={this.change('password1')}
+                    onChange={this.changeString('password1')}
                     value={model.password1 || ''}/>
                   {this.getError('password1')}
                 </div>
@@ -78,7 +78,7 @@ class PasswordSet extends React.Component {
                   <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
                   <Password
                     name="password2"
-                    onChange={this.change('password2')}
+                    onChange={this.changeString('password2')}
                     value={model.password2 || ''}/>
                   {this.getError('password2')}
                 </div>
