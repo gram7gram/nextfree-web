@@ -6,6 +6,8 @@ import {createStructuredSelector} from "reselect";
 import Card from "./Card";
 import Paginator from "../../../components/Paginator";
 import Loading from "../../../components/Loading";
+import {Link} from "react-router-dom";
+import * as Pages from "../../../router/Pages";
 
 class Store extends React.Component {
 
@@ -59,6 +61,14 @@ class Store extends React.Component {
               <div className="row">
                 <div className="col">
                   <h3 className="m-0">{i18n.t('store.title')}</h3>
+                </div>
+                <div className="col-12 col-md-auto text-right">
+
+                  <Link className="btn btn-success btn-sm mr-1"
+                        to={Pages.STORE_NEW}>
+                    <i className="fa fa-plus"/>&nbsp;{i18n.t('store.new_action')}
+                  </Link>
+
                 </div>
               </div>
             </div>

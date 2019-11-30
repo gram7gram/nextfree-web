@@ -16,6 +16,10 @@ footer {
     cursor: pointer;
 }
 
+.condition-card:hover {
+    background-color: #8e989f !important;
+}
+
 .qr-scanner-container video.has-result {
     border: 3px solid green;
 }

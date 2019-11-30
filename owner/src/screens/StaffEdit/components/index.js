@@ -6,32 +6,34 @@ import Fetch from '../actions/Fetch';
 import Remove from '../actions/Remove';
 import Save from '../actions/Save';
 import FetchStores from '../../Store/actions/Fetch';
-import FetchCompanies from '../../Company/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
 import Date from "../../../components/Date";
-import Password from "../../../components/PasswordInput";
 
 class StaffEdit extends React.Component {
 
   componentDidMount() {
 
-    const {match} = this.props
+    const {match, defaultCompany, defaultStore} = this.props
 
     const {id} = match.params
 
     if (id) {
       this.props.dispatch(Fetch(id))
-    } else {
+    } else if (defaultCompany && defaultStore) {
       this.props.dispatch({
         type: FETCH_SUCCESS,
-        payload: {},
-        flatten: {}
+        payload: {
+          companyId: defaultCompany._id,
+          storeId: defaultStore._id,
+        },
+        flatten: {
+          companyId: defaultCompany._id,
+          storeId: defaultStore._id,
+        }
       })
     }
-
-    this.props.dispatch(FetchCompanies())
 
     this.props.dispatch(FetchStores())
   }
@@ -121,7 +123,7 @@ class StaffEdit extends React.Component {
 
   renderPosition() {
 
-    const {companies, stores} = this.props
+    const {defaultCompany, stores} = this.props
     const {model} = this.props.StaffEdit
 
     return <div className="card mb-4">
@@ -137,11 +139,10 @@ class StaffEdit extends React.Component {
                 <label className="m-0 required">{i18n.t('staff_edit.company')}</label>
                 <select
                   name="companyId"
-                  value={model.companyId || ''}
-                  onChange={this.changeString('companyId')}
+                  value={defaultCompany._id || ''}
+                  disabled={true}
                   className="form-control">
-                  <option value="">{i18n.t('placeholder.select')}</option>
-                  {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+                  <option value={defaultCompany._id}>{defaultCompany.name}</option>
                 </select>
                 {this.getError('companyId')}
               </div>
@@ -319,7 +320,8 @@ class StaffEdit extends React.Component {
 
 const selectors = createStructuredSelector({
   StaffEdit: store => store.StaffEdit,
-  companies: store => store.Company.items,
+  defaultCompany: store => store.App.defaultCompany,
+  defaultStore: store => store.App.defaultStore,
   stores: store => store.Store.items,
 })
 

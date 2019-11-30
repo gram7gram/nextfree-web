@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Save from '../actions/Save';
 import FetchStores from '../../Store/actions/Fetch';
-import FetchCompanies from '../../Company/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
@@ -12,9 +11,19 @@ import {RESET, MODEL_CHANGED} from "../actions";
 class StaffInvite extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(FetchCompanies())
+    const {defaultCompany, defaultStore} = this.props
 
     this.props.dispatch(FetchStores())
+
+    if (defaultStore && defaultCompany) {
+      this.props.dispatch({
+        type: MODEL_CHANGED,
+        payload: {
+          companyId: defaultCompany._id,
+          storeId: defaultStore._id,
+        }
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -51,7 +60,7 @@ class StaffInvite extends React.Component {
 
   renderPosition() {
 
-    const {companies, stores} = this.props
+    const {defaultCompany, stores} = this.props
     const {model} = this.props.StaffInvite
 
     return <div className="card mb-4">
@@ -61,19 +70,20 @@ class StaffInvite extends React.Component {
         <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_invite.position_subtitle')}</h6>
 
         <div className="row">
+
           <div className="col-12 col-md-6">
-            <div className="form-group">
+            {defaultCompany ? <div className="form-group">
               <label className="m-0 required">{i18n.t('staff_invite.company')}</label>
               <select
-                value={model.companyId || ''}
-                onChange={this.changeString('companyId')}
+                value={defaultCompany._id}
+                disabled={true}
                 className="form-control">
-                <option value="">{i18n.t('placeholder.select')}</option>
-                {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+                <option value={defaultCompany._id}>{defaultCompany.name}</option>
               </select>
               {this.getError('companyId')}
-            </div>
+            </div> : null}
           </div>
+
           <div className="col-12 col-md-6">
 
             <div className="form-group">
@@ -83,9 +93,8 @@ class StaffInvite extends React.Component {
                 disabled={!model.companyId}
                 onChange={this.changeString('storeId')}
                 className="form-control">
-                <option value="">{i18n.t('placeholder.select')}</option>
+                <option value="" disabled={true}>{i18n.t('placeholder.select')}</option>
                 {stores
-                  .filter(item => item.companyId === model.companyId)
                   .map(item => <option key={item._id} value={item._id}>{item.address || item._id}</option>)}
               </select>
               {this.getError('storeId')}
@@ -163,7 +172,8 @@ class StaffInvite extends React.Component {
 
 const selectors = createStructuredSelector({
   StaffInvite: store => store.StaffInvite,
-  companies: store => store.Company.items,
+  defaultCompany: store => store.App.defaultCompany,
+  defaultStore: store => store.App.defaultStore,
   stores: store => store.Store.items,
 })
 

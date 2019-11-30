@@ -21,7 +21,6 @@ import Staff from '../screens/Staff/components';
 import StaffEdit from '../screens/StaffEdit/components';
 import StaffInvite from '../screens/StaffInvite/components';
 
-import Company from '../screens/Company/components';
 import CompanyEdit from '../screens/CompanyEdit/components';
 
 import Store from '../screens/Store/components';
@@ -86,10 +85,10 @@ export function createRouter(store) {
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
           <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
-          <PrivateRoute exact path={Pages.COMPANIES} component={Company}/>
-          <PrivateRoute path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
+          <PrivateRoute exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
 
           <PrivateRoute exact path={Pages.STORES} component={Store}/>
+          <PrivateRoute excat path={Pages.STORE_NEW} component={StoreEdit}/>
           <PrivateRoute path={Pages.STORE_EDIT} component={StoreEdit}/>
 
           <PrivateRoute exact path={Pages.STAFF} component={Staff}/>

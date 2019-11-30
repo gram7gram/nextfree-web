@@ -115,6 +115,40 @@ const isStaff = (prev = false, action) => {
   }
 }
 
+const defaultCompany = (prev = null, action) => {
+  switch (action.type) {
+    case LoginActions.LOGIN_SUCCESS:
+    case LoginActions.LOGIN_CHECK_SUCCESS:
+      if (action.payload.company !== undefined) {
+        return action.payload.company
+      }
+      return null
+    case LoginActions.LOGOUT:
+    case LoginActions.LOGIN_FAILURE:
+    case LoginActions.LOGIN_CHECK_FAILURE:
+      return null
+    default:
+      return prev
+  }
+}
+
+const defaultStore = (prev = null, action) => {
+  switch (action.type) {
+    case LoginActions.LOGIN_SUCCESS:
+    case LoginActions.LOGIN_CHECK_SUCCESS:
+      if (action.payload.store !== undefined) {
+        return action.payload.store
+      }
+      return null
+    case LoginActions.LOGOUT:
+    case LoginActions.LOGIN_FAILURE:
+    case LoginActions.LOGIN_CHECK_FAILURE:
+      return null
+    default:
+      return prev
+  }
+}
+
 const locale = (prev = null) => prev
 
 export default combineReducers({
@@ -125,5 +159,7 @@ export default combineReducers({
   isCustomer,
   isStaff,
   admin,
+  defaultStore,
+  defaultCompany,
   locale,
 });

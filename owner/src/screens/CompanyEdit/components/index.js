@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
 import {MODEL_CHANGED} from '../actions';
 import Fetch from '../actions/Fetch';
 import Save from '../actions/Save';
@@ -13,12 +12,10 @@ class CompanyEdit extends React.Component {
 
   componentDidMount() {
 
-    const {match} = this.props
+    const {defaultCompany} = this.props
 
-    const {id} = match.params
-
-    if (id) {
-      this.props.dispatch(Fetch(id))
+    if (defaultCompany) {
+      this.props.dispatch(Fetch(defaultCompany._id))
     }
   }
 
@@ -85,7 +82,18 @@ class CompanyEdit extends React.Component {
             <div className="card-header">
               <div className="row">
                 <div className="col">
-                  <h3 className="m-0">{i18n.t('company_edit.title')}</h3>
+                  <h3 className="m-0 text-white">{model.name}</h3>
+
+                  {model.id && model.isEnabled
+                    ? <span className="badge badge-success">
+                        <i className="fa fa-check"/>&nbsp;{i18n.t('staff.enabled_badge')}
+                    </span> : null}
+
+                  {model.id && !model.isEnabled
+                    ? <span className="badge badge-danger">
+                      <i className="fa fa-times"/>&nbsp;{i18n.t('staff.disabled_badge')}
+                    </span> : null}
+
                 </div>
                 <div className="col-12 col-md-auto text-right">
 
@@ -164,9 +172,8 @@ class CompanyEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
+  defaultCompany: store => store.App.defaultCompany,
   CompanyEdit: store => store.CompanyEdit,
 })
 
-export default withRouter(
-  connect(selectors)(CompanyEdit)
-)
+export default connect(selectors)(CompanyEdit)

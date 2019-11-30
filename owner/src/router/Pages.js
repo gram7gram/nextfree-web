@@ -13,10 +13,10 @@ export const QR_CODE = '/qr';
 export const QR_SCAN = '/scan';
 
 export const STORES = '/stores';
+export const STORE_NEW = '/stores/new';
 export const STORE_EDIT = '/stores/:id';
 
-export const COMPANIES = '/companies';
-export const COMPANY_EDIT = '/companies/:id';
+export const MY_COMPANY = '/company';
 
 export const STAFF = '/staff';
 export const STAFF_INVITE = '/staff/invite';

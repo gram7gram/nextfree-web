@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
+import * as StoreAction from '../../Store/actions'
 import user from './user'
 
 const id = (prev = null, action) => {
@@ -74,6 +75,13 @@ const password2 = (prev = null, action) => {
 const storeId = (prev = null, action) => {
   switch (action.type) {
     case Action.RESET:
+      return null
+    case StoreAction.FETCH_SUCCESS:
+      if (action.payload.items) {
+        if (action.payload.items.length === 0) {
+          return action.payload.items[0]._id
+        }
+      }
       return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {MODEL_CHANGED, FETCH_SUCCESS, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
-import FetchCompanies from '../../Company/actions/Fetch';
+import Remove from '../actions/Remove';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
@@ -14,21 +14,23 @@ class StoreEdit extends React.Component {
 
   componentDidMount() {
 
-    const {match} = this.props
+    const {match, defaultCompany} = this.props
 
     const {id} = match.params
 
     if (id) {
       this.props.dispatch(Fetch(id))
-    } else {
+    } else if (defaultCompany) {
       this.props.dispatch({
         type: FETCH_SUCCESS,
-        payload: {},
-        flatten: {},
+        payload: {
+          companyId: defaultCompany._id,
+        },
+        flatten: {
+          companyId: defaultCompany._id,
+        },
       })
     }
-
-    this.props.dispatch(FetchCompanies())
   }
 
   componentWillUnmount() {
@@ -53,6 +55,15 @@ class StoreEdit extends React.Component {
       ...model,
       isEnabled: true
     }))
+  }
+
+  remove = () => {
+
+    if (!window.confirm(i18n.t('store_edit.remove_confirm_title'))) return
+
+    const {model} = this.props.StoreEdit
+
+    this.props.dispatch(Remove(model))
   }
 
   submit = () => {
@@ -80,9 +91,36 @@ class StoreEdit extends React.Component {
     return <small className="feedback invalid-feedback d-block">{errors[key]}</small>
   }
 
+  renderDelete() {
+
+    const {model, isLoading} = this.props.StoreEdit
+
+    if (!model.id) return null
+
+    return <div className="card mb-4">
+      <div className="card-body">
+
+        <div className="row">
+          <div className="col-12 text-center">
+
+            <p className="text-danger">{i18n.t('store_edit.remove_content')}</p>
+
+            <button className="btn btn-outline-danger btn-sm"
+                    onClick={this.remove}
+                    disabled={isLoading}>
+              <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-trash"}/>
+              &nbsp;{i18n.t('store_edit.remove_action')}
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
   render() {
 
-    const {companies} = this.props
+    const {defaultCompany} = this.props
 
     const {
       model,
@@ -143,17 +181,15 @@ class StoreEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              <div className="form-group">
+              {defaultCompany ? <div className="form-group">
                 <label className="m-0 required">{i18n.t('store_edit.company')}</label>
                 <select
-                  value={model.companyId || ''}
-                  onChange={this.changeString('companyId')}
+                  value={defaultCompany._id}
+                  disabled={true}
                   className="form-control">
-                  <option value="">{i18n.t('placeholder.select')}</option>
-                  {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+                  <option value={defaultCompany._id}>{defaultCompany.name}</option>
                 </select>
-                {this.getError('companyId')}
-              </div>
+              </div> : null}
 
               <div className="row">
                 <div className="col-12 col-md-6">
@@ -223,6 +259,8 @@ class StoreEdit extends React.Component {
             </div>
           </div>
 
+          {this.renderDelete()}
+
         </div>
       </div>
     </div>
@@ -230,7 +268,7 @@ class StoreEdit extends React.Component {
 }
 
 const selectors = createStructuredSelector({
-  companies: store => store.Company.items,
+  defaultCompany: store => store.App.defaultCompany,
   StoreEdit: store => store.StoreEdit,
 })
 
