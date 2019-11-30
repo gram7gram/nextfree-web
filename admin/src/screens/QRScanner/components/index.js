@@ -15,6 +15,8 @@ class QRScanner extends React.PureComponent {
   htmlVideo = null
   scanner = null
 
+  isMounted = false
+
   state = {
     hasCamera: true,
     hasCameraPermission: null
@@ -27,6 +29,8 @@ class QRScanner extends React.PureComponent {
 
   componentDidMount() {
 
+    this.isMounted = true
+
     try {
       Scanner.hasCamera().then(result => {
 
@@ -38,7 +42,8 @@ class QRScanner extends React.PureComponent {
           this.scanner = new Scanner(this.htmlVideo.current, this.onResult)
 
           try {
-            this.scanner.start();
+            if (this.isMounted)
+              this.scanner.start();
 
             this.setState({
               hasCameraPermission: true
@@ -62,6 +67,24 @@ class QRScanner extends React.PureComponent {
     }
 
     this.setDefaults()
+  }
+
+  componentWillUnmount() {
+
+    this.isMounted = false
+
+    this.stopScanner()
+
+    try {
+      if (this.htmlVideo.current)
+        this.htmlVideo.current.stop()
+    } catch (e) {
+      console.log(e);
+    }
+
+    this.props.dispatch({
+      type: RESET,
+    })
   }
 
   setDefaults = () => {
@@ -127,15 +150,6 @@ class QRScanner extends React.PureComponent {
         console.log(e);
       }
     }
-  }
-
-  componentWillUnmount() {
-
-    this.stopScanner()
-
-    this.props.dispatch({
-      type: RESET,
-    })
   }
 
   isValid = () => {
