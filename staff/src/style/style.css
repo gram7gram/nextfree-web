@@ -10,11 +10,3 @@ main {
 footer {
     background-color: #1c1e22;
 }
-
-.qr-scanner-container video.has-result {
-    border: 3px solid green;
-}
-
-.qr-scanner-container video.no-result {
-    border: 3px solid white;
-}

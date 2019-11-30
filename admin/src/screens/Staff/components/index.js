@@ -8,10 +8,14 @@ import {createStructuredSelector} from "reselect";
 import Card from "./Card";
 import Paginator from "../../../components/Paginator";
 import Loading from "../../../components/Loading";
+import FetchCompanies from "../../Company/actions/Fetch";
 
 class Staff extends React.Component {
 
   componentDidMount() {
+
+    this.props.dispatch(FetchCompanies())
+
     this.changePage(1)
   }
 

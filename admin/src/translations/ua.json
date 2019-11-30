@@ -40,6 +40,8 @@
     "no_camera_permission": "Доступ до камери заборонений Вашим браузером",
     "has_camera_permission": "Доступ до камери отриманий",
     "purchase_action": "Зарахувати покупку",
+    "discard": "Відмінити",
+    "again_action": "Сканувати",
     "purchase_bonus_title": "Так! Це бонус",
     "purchase_bonus_subtitle": "Покупець __NAME__ отримує товар безкоштовно!",
     "purchase_success_title": "Не бонус, але на шаг ближче до нього!",
@@ -61,6 +63,8 @@
   "staff": {
     "title": "Співробітники",
     "new_action": "Додати",
+    "enabled_badge": "Активний",
+    "disabled_badge": "Неактивний",
     "not_found_title": "Нічого не знайдено"
   },
   "staff_edit": {
@@ -88,6 +92,8 @@
   "store": {
     "title": "Торгові точки",
     "new_action": "Додати",
+    "enabled_badge": "Активний",
+    "disabled_badge": "Неактивний",
     "not_found_title": "Нічого не знайдено"
   },
   "store_edit": {
@@ -108,6 +114,8 @@
   "customer": {
     "title": "Покупці",
     "new_action": "Додати",
+    "enabled_badge": "Активний",
+    "disabled_badge": "Неактивний",
     "not_found_title": "Нічого не знайдено"
   },
   "customer_edit": {
@@ -130,6 +138,8 @@
   "owner": {
     "title": "Власники",
     "new_action": "Додати",
+    "enabled_badge": "Активний",
+    "disabled_badge": "Неактивний",
     "not_found_title": "Нічого не знайдено"
   },
   "owner_edit": {

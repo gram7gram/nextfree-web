@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import * as Pages from '../../../router/Pages';
 import avatar from '../../../assets/img/avatar-unknown.png';
+import i18n from "../../../i18n";
 
 const Card = ({model}) => {
 
@@ -18,6 +19,14 @@ const Card = ({model}) => {
       </div>
       <div className="card-footer p-1">
         <h5 className="m-0 text-truncate">{name}</h5>
+
+        {model.isEnabled
+          ? <div className="badge badge-success">
+            <i className="fa fa-check"/>&nbsp;{i18n.t('owner.enabled_badge')}
+          </div>
+          : <div className="badge badge-danger">
+            <i className="fa fa-times"/>&nbsp;{i18n.t('owner.disabled_badge')}
+          </div>}
       </div>
     </Link>
   </div>

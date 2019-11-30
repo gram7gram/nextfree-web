@@ -20,14 +20,6 @@ footer {
     background-color: #8e989f !important;
 }
 
-.qr-scanner-container video.has-result {
-    border: 3px solid green;
-}
-
-.qr-scanner-container video.no-result {
-    border: 3px solid white;
-}
-
 .company-card img,
 .staff-card img,
 .store-card img {

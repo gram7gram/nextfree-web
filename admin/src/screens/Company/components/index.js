@@ -8,10 +8,14 @@ import Paginator from "../../../components/Paginator";
 import Loading from "../../../components/Loading";
 import {Link} from "react-router-dom";
 import * as Pages from "../../../router/Pages";
+import FetchOwners from "../../Owner/actions/Fetch";
 
 class Company extends React.Component {
 
   componentDidMount() {
+
+    this.props.dispatch(FetchOwners())
+
     this.changePage(1)
   }
 

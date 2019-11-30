@@ -11,12 +11,13 @@ import {createRouter} from './router';
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import './style/style.css';
+import './style/qr-scan.css';
 
 import * as Sentry from '@sentry/browser';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({dsn: "https://0322a85cb1c847e7981ac15d8979f612@sentry.io/1839632"});
-  Sentry.setExtra('domain', 'staff.nextfree.com.ua')
+  Sentry.setTag('domain', 'staff.nextfree.com.ua')
 }
 
 const rootElement = document.getElementById('root');

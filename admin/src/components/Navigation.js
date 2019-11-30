@@ -38,7 +38,7 @@ const Navigation = (props) => {
 
     <a className="navbar-brand py-0" href="https://nextfree.com.ua">
       {i18n.t('navigation.logo')}
-      <br/><small className="text-info">{i18n.t('navigation.logo_footer')}</small>
+      <br/><small className="text-danger">{i18n.t('navigation.logo_footer')}</small>
     </a>
 
     <button className="navbar-toggler"

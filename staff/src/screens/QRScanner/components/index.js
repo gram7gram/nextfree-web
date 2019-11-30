@@ -122,7 +122,6 @@ class QRScanner extends React.PureComponent {
     if (this.scanner) {
       try {
         this.scanner.destroy()
-        this.scanner = null
       } catch (e) {
         console.log(e);
       }
@@ -141,7 +140,7 @@ class QRScanner extends React.PureComponent {
   isValid = () => {
     const {model} = this.props.QRScanner
 
-    return model.userId && model.storeId
+    return model.userId && model.storeId && model.companyId
   }
 
   renderSuccess() {

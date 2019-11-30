@@ -7,11 +7,15 @@ import Card from "./Card";
 import Paginator from "../../../components/Paginator";
 import Loading from "../../../components/Loading";
 import {Link} from "react-router-dom";
+import FetchCompanies from "../../Company/actions/Fetch";
 import * as Pages from "../../../router/Pages";
 
 class Store extends React.Component {
 
   componentDidMount() {
+
+    this.props.dispatch(FetchCompanies())
+
     this.changePage(1)
   }
 
