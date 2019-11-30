@@ -5,6 +5,7 @@ import App from './App';
 import Nav from './Nav';
 import Login from '../screens/Login/reducers';
 import Profile from '../screens/Profile/reducers';
+import ProfileSecurity from '../screens/ProfileSecurity/reducers';
 import Staff from '../screens/Staff/reducers';
 import StaffEdit from '../screens/StaffEdit/reducers';
 import StaffInvite from '../screens/StaffInvite/reducers';
@@ -24,6 +25,7 @@ const createRootReducer = (history) => combineReducers({
   Nav,
   Login,
   Profile,
+  ProfileSecurity,
   Staff,
   StaffEdit,
   Register,

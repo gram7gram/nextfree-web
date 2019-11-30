@@ -8,6 +8,7 @@ import {createStructuredSelector} from "reselect";
 import * as Pages from "../../../router/Pages";
 import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
+import password from "../../../utils/password";
 
 class Register extends React.Component {
 
@@ -112,6 +113,12 @@ class Register extends React.Component {
               onChange={this.changeString('password1')}
               value={customer.password1 || ''}/>
             {this.getError('password1')}
+
+            {customer.password1 && password.validate(customer.password1)
+              ? <small className="feedback valid-feedback d-block">
+                {i18n.t('validation.strong_password')}
+              </small>
+              : null}
           </div>
 
           <div className="form-group">

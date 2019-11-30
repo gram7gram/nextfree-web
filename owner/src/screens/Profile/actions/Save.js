@@ -8,13 +8,6 @@ const parseBeforeSubmit = model => {
 
   delete data.id
 
-  if (data.password1) {
-    data.password = data.password1
-  }
-
-  delete data.password1
-  delete data.password2
-
   return data
 }
 

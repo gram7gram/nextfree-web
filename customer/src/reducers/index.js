@@ -5,6 +5,7 @@ import App from './App';
 import Nav from './Nav';
 import Login from '../screens/Login/reducers';
 import Profile from '../screens/Profile/reducers';
+import ProfileSecurity from '../screens/ProfileSecurity/reducers';
 import Register from '../screens/Register/reducers';
 import PasswordReset from '../screens/PasswordReset/reducers';
 import PasswordSet from '../screens/PasswordSet/reducers';
@@ -16,6 +17,7 @@ const createRootReducer = (history) => combineReducers({
   Nav,
   Login,
   Profile,
+  ProfileSecurity,
   Register,
   PasswordReset,
   PasswordSet,

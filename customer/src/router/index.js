@@ -11,9 +11,9 @@ import Footer from '../components/Footer';
 import Login from '../screens/Login/components';
 import Register from '../screens/Register/components';
 
-import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
 import Profile from '../screens/Profile/components';
+import ProfileSecurity from '../screens/ProfileSecurity/components';
 
 import PasswordReset from '../screens/PasswordReset/components';
 import PasswordSet from '../screens/PasswordSet/components';
@@ -67,10 +67,10 @@ export function createRouter(store) {
           <PublicRoute exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
           <PublicRoute path={Pages.PASSWORD_SET} component={PasswordSet}/>
 
-          <PrivateRoute exact path={Pages.HOME} component={Home}/>
           <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
           <Redirect path="*" to={Pages.HOME}/>
 

@@ -33,6 +33,7 @@ const routes = [
   '/staff/:id',
 
   '/profile',
+  '/profile/security',
   '/logout',
 ]
 

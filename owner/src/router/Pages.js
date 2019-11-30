@@ -2,6 +2,7 @@ export const LOGIN = '/login';
 export const REGISTER = '/register';
 export const HOME = '/';
 export const PROFILE = '/profile';
+export const PROFILE_SECURITY = '/profile/security';
 
 export const PASSWORD_SET = '/password-set/:id';
 export const PASSWORD_RESET = '/password-reset';

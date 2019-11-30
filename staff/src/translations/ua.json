@@ -7,7 +7,8 @@
     "logout": "Вихід",
     "qr": "QR код",
     "qr_scanner": "QR сканер",
-    "profile": "Профіль"
+    "profile": "Профіль",
+    "profile_security": "Безпека"
   },
   "profile": {
     "title": "Мій профіль",
@@ -19,6 +20,7 @@
     "lastName": "Прізвище",
     "email": "Емейл",
     "security_title": "Безпека",
+    "currentPassword": "Поточний пароль",
     "password1": "Новий пароль",
     "password2": "Повторіть пароль"
   },
@@ -48,6 +50,7 @@
     "invalid": "Значення не правильне",
     "invalid_email": "Емейл не повноцінний",
     "password_mismatch": "Паролі не співпадають",
+    "strong_password": "Чудово! Пароль сильний",
     "weak_password1": "Пароль недостатньо сильний"
   },
   "bonus_conditions": {

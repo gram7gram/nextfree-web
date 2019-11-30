@@ -6,6 +6,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
+import password from "../../../utils/password";
 
 class PasswordSet extends React.Component {
 
@@ -66,12 +67,18 @@ class PasswordSet extends React.Component {
               <form noValidate>
 
                 <div className="form-group">
-                  <label className="mb-1 required">{i18n.t('password_set.password2')}</label>
+                  <label className="mb-1 required">{i18n.t('password_set.password1')}</label>
                   <Password
                     name="password1"
                     onChange={this.changeString('password1')}
                     value={model.password1 || ''}/>
                   {this.getError('password1')}
+
+                  {model.password1 && password.validate(model.password1)
+                    ? <small className="feedback valid-feedback d-block">
+                      {i18n.t('validation.strong_password')}
+                    </small>
+                    : null}
                 </div>
 
                 <div className="form-group">

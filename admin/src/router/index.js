@@ -14,6 +14,7 @@ import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
 import QRScanner from '../screens/QRScanner/components';
 import Profile from '../screens/Profile/components';
+import ProfileSecurity from '../screens/ProfileSecurity/components';
 import Staff from '../screens/Staff/components';
 import StaffEdit from '../screens/StaffEdit/components';
 
@@ -75,6 +76,7 @@ export function createRouter(store) {
           <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
           <PrivateRoute exact path={Pages.COMPANIES} component={Company}/>
           <PrivateRoute exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>

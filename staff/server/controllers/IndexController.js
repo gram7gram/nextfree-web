@@ -13,6 +13,7 @@ const routes = [
   '/scan',
 
   '/profile',
+  '/profile/security',
   '/logout',
 
   '/password-reset',

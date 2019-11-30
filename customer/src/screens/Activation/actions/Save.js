@@ -8,7 +8,7 @@ export default (id) => (dispatch) => {
     type: SAVE_BEFORE
   })
 
-  request.post(parameters.apiHost + `/api/v1/owner-activation/${id}`)
+  request.post(parameters.apiHost + `/api/v1/customer-activation/${id}`)
     .then(({data}) => {
       dispatch({
         type: SAVE_SUCCESS,

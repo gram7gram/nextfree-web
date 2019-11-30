@@ -7,7 +7,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Date from "../../../components/Date";
 import Errors from "../../../components/Errors";
-import Password from "../../../components/PasswordInput";
+import ProfileSidebar from "../../../components/ProfileSidebar";
 
 class Profile extends React.Component {
 
@@ -44,52 +44,6 @@ class Profile extends React.Component {
     return <small className="feedback invalid-feedback d-block">{errors[key]}</small>
   }
 
-  renderSecurity() {
-
-    const {
-      model,
-    } = this.props.Profile
-
-    return <div className="card shadow-sm mb-3">
-      <div className="card-header">
-        <div className="row">
-          <div className="col">
-            <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
-          </div>
-        </div>
-      </div>
-      <div className="card-body">
-
-        <form noValidate autoComplete="off">
-          <div className="row">
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                <label className="m-0">{i18n.t('profile.password1')}</label>
-                <Password
-                  name="password1"
-                  onChange={this.changeString('password1')}
-                  value={model.password1 || ''}/>
-                {this.getError('password1')}
-              </div>
-            </div>
-            <div className="col-12 col-md-6">
-              <div className="form-group">
-                <label className="m-0">{i18n.t('profile.password2')}</label>
-                <Password
-                  name="password2"
-                  onChange={this.changeString('password2')}
-                  value={model.password2 || ''}/>
-                {this.getError('password2')}
-              </div>
-
-            </div>
-          </div>
-        </form>
-
-      </div>
-    </div>
-  }
-
   render() {
 
     const {
@@ -99,10 +53,15 @@ class Profile extends React.Component {
       serverErrors,
     } = this.props.Profile
 
-    return <div className="container my-3">
+    return <div className="container-fluid my-3">
+
       <div className="row">
 
-        <div className="col-12">
+        <div className="col-12 col-md-4 col-lg-3">
+          <ProfileSidebar/>
+        </div>
+
+        <div className="col-12 col-md-8 col-lg-9">
 
           <Errors errors={serverErrors}/>
 
@@ -185,12 +144,6 @@ class Profile extends React.Component {
           </div>
         </div>
 
-      </div>
-
-      <div className="row">
-        <div className="col-12">
-          {this.renderSecurity()}
-        </div>
       </div>
 
     </div>

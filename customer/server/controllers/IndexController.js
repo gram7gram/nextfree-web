@@ -12,6 +12,7 @@ const routes = [
   '/qr',
 
   '/profile',
+  '/profile/security',
   '/logout',
 
   '/password-reset',

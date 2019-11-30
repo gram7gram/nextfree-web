@@ -11,6 +11,7 @@ import Errors from "../../../components/Errors";
 import Date from "../../../components/Date";
 import Loading from "../../../components/Loading";
 import Password from "../../../components/PasswordInput";
+import password from "../../../utils/password";
 
 class Invitation extends React.Component {
 
@@ -146,6 +147,12 @@ class Invitation extends React.Component {
               onChange={this.changeString('password1')}
               value={model.password1 || ''}/>
             {this.getError('password1')}
+
+            {model.password1 && password.validate(model.password1)
+              ? <small className="feedback valid-feedback d-block">
+                {i18n.t('validation.strong_password')}
+              </small>
+              : null}
           </div>
 
           <div className="form-group">

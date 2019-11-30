@@ -1,3 +1,5 @@
+const Sentry = require('@sentry/node')
+
 const ErrorHandler = {
 
   detectMessage: e => {
@@ -26,6 +28,10 @@ const ErrorHandler = {
 
     const code = ErrorHandler.detectStatusCode(e)
     const message = ErrorHandler.detectMessage(e)
+
+    if (code >= 500) {
+      Sentry.captureException(e)
+    }
 
     res.status(code).json({
       message,

@@ -23,6 +23,7 @@ const OwnerRegisterController = require('./controllers/owner/RegisterController'
 const OwnerPasswordController = require('./controllers/owner/PasswordController');
 const OwnerActivationController = require('./controllers/owner/ActivationController');
 const OwnerLoginController = require('./controllers/owner/LoginController');
+const OwnerSecurityController = require('./controllers/owner/SecurityController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
@@ -30,12 +31,14 @@ const StaffPasswordController = require('./controllers/staff/PasswordController'
 const StaffInvitationController = require('./controllers/staff/InvitationController');
 const StaffActivationController = require('./controllers/staff/ActivationController');
 const StaffLoginController = require('./controllers/staff/LoginController');
+const StaffSecurityController = require('./controllers/staff/SecurityController');
 
 const CustomerProfileController = require('./controllers/customer/ProfileController');
 const CustomerRegisterController = require('./controllers/customer/RegisterController');
 const CustomerPasswordController = require('./controllers/customer/PasswordController');
 const CustomerActivationController = require('./controllers/customer/ActivationController');
 const CustomerLoginController = require('./controllers/customer/LoginController');
+const CustomerSecurityController = require('./controllers/customer/SecurityController');
 
 const app = express();
 
@@ -92,13 +95,16 @@ app.use('/api/v1/owner', OwnerStoreRESTController);
 app.use('/api/v1/owner', OwnerStaffRESTController);
 app.use('/api/v1/owner', OwnerProfileController);
 app.use('/api/v1/owner', OwnerPurchaseRESTController);
+app.use('/api/v1/owner', OwnerSecurityController);
 
 //Staff API
 app.use('/api/v1/staff', StaffProfileController);
 app.use('/api/v1/staff', StaffPurchaseRESTController);
+app.use('/api/v1/staff', StaffSecurityController);
 
 //Customer API
 app.use('/api/v1/customer', CustomerProfileController);
+app.use('/api/v1/customer', CustomerSecurityController);
 
 app.all('*', (req, res) => {
   res.status(404).json({
