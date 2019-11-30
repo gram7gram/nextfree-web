@@ -8,6 +8,15 @@ const parseBeforeSubmit = model => {
 
   delete data.id
 
+  if (data.password1) {
+    data.user.password = data.password1
+  }
+
+  delete data.password1
+  delete data.password2
+
+  delete data.hasAccepted
+
   return data
 }
 
