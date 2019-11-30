@@ -59,7 +59,7 @@ schema.pre("save", function (next) {
 })
 
 schema.methods.comparePassword = function (plaintext) {
-  return bcrypt.compareSync(plaintext, this.password)
+  return this.password && bcrypt.compareSync(plaintext, this.password)
 }
 
 module.exports = {
