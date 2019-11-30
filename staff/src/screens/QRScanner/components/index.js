@@ -65,18 +65,16 @@ class QRScanner extends React.PureComponent {
 
   setDefaults = () => {
 
-    const {defaultCompany, defaultStore} = this.props
+    const {store, company} = this.props
 
-    if (defaultCompany && defaultStore) {
-      this.props.dispatch({
-        type: MODEL_CHANGED,
-        payload: {
-          companyId: defaultCompany._id,
-          storeId: defaultStore._id,
-          userId: null,
-        }
-      })
-    }
+    this.props.dispatch({
+      type: MODEL_CHANGED,
+      payload: {
+        companyId: company ? company._id : null,
+        storeId: store ? store._id : null,
+        userId: null,
+      }
+    })
   }
 
   change = (key, value = null) => this.props.dispatch({
@@ -295,10 +293,9 @@ class QRScanner extends React.PureComponent {
 }
 
 const selectors = createStructuredSelector({
-  defaultCompany: store => store.App.defaultCompany,
-  defaultStore: store => store.App.defaultStore,
+  company: store => store.App.company,
+  store: store => store.App.store,
   QRScanner: store => store.QRScanner,
-  stores: store => store.Store.items,
 })
 
 export default connect(selectors)(QRScanner)

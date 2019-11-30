@@ -70,16 +70,14 @@ class QRScanner extends React.PureComponent {
 
     const {defaultCompany, defaultStore} = this.props
 
-    if (defaultCompany && defaultStore) {
-      this.props.dispatch({
-        type: MODEL_CHANGED,
-        payload: {
-          companyId: defaultCompany._id,
-          storeId: defaultStore._id,
-          userId: null,
-        }
-      })
-    }
+    this.props.dispatch({
+      type: MODEL_CHANGED,
+      payload: {
+        companyId: defaultCompany ? defaultCompany._id : null,
+        storeId: defaultStore ? defaultStore._id : null,
+        userId: null,
+      }
+    })
   }
 
   change = (key, value = null) => this.props.dispatch({
