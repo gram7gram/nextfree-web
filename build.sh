@@ -18,6 +18,10 @@ echo '[+] Build admin...'
 cd $CURRENT/admin && npm run build:prod
 test $? -gt 0 && exit 1
 
+cd $CURRENT
+
+sleep 1
+
 git add owner/build customer/build staff/build admin/build
 test $? -gt 0 && exit 1
 
