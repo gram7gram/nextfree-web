@@ -76,7 +76,7 @@ class QRScanner extends React.PureComponent {
 
     try {
       if (this.htmlVideo.current)
-        this.htmlVideo.current.stop()
+        this.htmlVideo.current.pause()
     } catch (e) {
       console.log(e);
     }
