@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import * as LoginActions from "../screens/Login/actions";
+import * as LoginActions from "../../Login/actions";
 
 const isLoadingVisible = (prev = true, action) => {
   switch (action.type) {
@@ -47,7 +47,7 @@ const token = (prev = null, action) => {
   }
 }
 
-const admin = (prev = null, action) => {
+const owner = (prev = null, action) => {
   switch (action.type) {
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
@@ -59,57 +59,6 @@ const admin = (prev = null, action) => {
     case LoginActions.LOGIN_FAILURE:
     case LoginActions.LOGIN_CHECK_FAILURE:
       return null
-    default:
-      return prev
-  }
-}
-
-const isOwner = (prev = false, action) => {
-  switch (action.type) {
-    case LoginActions.LOGIN_SUCCESS:
-    case LoginActions.LOGIN_CHECK_SUCCESS:
-      if (action.payload.isOwner !== undefined) {
-        return action.payload.isOwner
-      }
-      return false
-    case LoginActions.LOGOUT:
-    case LoginActions.LOGIN_FAILURE:
-    case LoginActions.LOGIN_CHECK_FAILURE:
-      return false
-    default:
-      return prev
-  }
-}
-
-const isCustomer = (prev = false, action) => {
-  switch (action.type) {
-    case LoginActions.LOGIN_SUCCESS:
-    case LoginActions.LOGIN_CHECK_SUCCESS:
-      if (action.payload.isCustomer !== undefined) {
-        return action.payload.isCustomer
-      }
-      return false
-    case LoginActions.LOGOUT:
-    case LoginActions.LOGIN_FAILURE:
-    case LoginActions.LOGIN_CHECK_FAILURE:
-      return false
-    default:
-      return prev
-  }
-}
-
-const isStaff = (prev = false, action) => {
-  switch (action.type) {
-    case LoginActions.LOGIN_SUCCESS:
-    case LoginActions.LOGIN_CHECK_SUCCESS:
-      if (action.payload.isStaff !== undefined) {
-        return action.payload.isStaff
-      }
-      return false
-    case LoginActions.LOGOUT:
-    case LoginActions.LOGIN_FAILURE:
-    case LoginActions.LOGIN_CHECK_FAILURE:
-      return false
     default:
       return prev
   }
@@ -155,11 +104,8 @@ export default combineReducers({
   isLoadingVisible,
   isAuthenticated,
   token,
-  isOwner,
-  isCustomer,
-  isStaff,
-  admin,
-  defaultStore,
+  owner,
   defaultCompany,
+  defaultStore,
   locale,
 });

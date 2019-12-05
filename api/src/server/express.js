@@ -40,6 +40,8 @@ const CustomerActivationController = require('./controllers/customer/ActivationC
 const CustomerLoginController = require('./controllers/customer/LoginController');
 const CustomerSecurityController = require('./controllers/customer/SecurityController');
 
+const BonusConditionController = require('./controllers/BonusConditionController');
+
 const app = express();
 
 app.use(cors());
@@ -105,6 +107,9 @@ app.use('/api/v1/staff', StaffSecurityController);
 //Customer API
 app.use('/api/v1/customer', CustomerProfileController);
 app.use('/api/v1/customer', CustomerSecurityController);
+
+//Private API
+app.use('/api/v1', BonusConditionController);
 
 app.all('*', (req, res) => {
   res.status(404).json({

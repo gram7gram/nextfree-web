@@ -6,7 +6,7 @@ const {
   createCompany, createOwner
 } = require('../../../utils')
 
-let app, staff, token, customer, company
+let app, staff, token, customer, company, company2
 
 beforeAll(async (done) => {
 
@@ -16,6 +16,10 @@ beforeAll(async (done) => {
 
   company = await createCompany(owner._id, {
     bonusCondition: Conditions.BC_4_PLUS_1,
+  })
+
+  company2 = await createCompany(owner._id, {
+    bonusCondition: Conditions.BC_5_PLUS_1,
   })
 
   customer = await createCustomer()
@@ -41,7 +45,7 @@ describe('PurchaseRESTController for Owner', () => {
 
   it('POST /api/v1/owner/customers/:id/purchases as Owner is successful', async (done) => {
 
-    const res = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+    const res = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
       .set('Authorization', `${token}`)
 
     expect(res.statusCode).toBe(201)
@@ -61,7 +65,7 @@ describe('PurchaseRESTController for Owner', () => {
     expect(company.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
 
     for (let i = 0; i < 4; i++) {
-      const resNotBonus = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
         .set('Authorization', `${token}`)
 
       expect(resNotBonus.statusCode).toBe(201)
@@ -69,7 +73,7 @@ describe('PurchaseRESTController for Owner', () => {
       expect(resNotBonus.body.isBonus).toBe(false)
     }
 
-    const resBonus = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+    const resBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
       .set('Authorization', `${token}`)
 
     expect(resBonus.statusCode).toBe(201)
@@ -86,7 +90,7 @@ describe('PurchaseRESTController for Owner', () => {
     expect(company.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
 
     for (let i = 0; i < 4; i++) {
-      const resNotBonus = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
         .set('Authorization', `${token}`)
 
       expect(resNotBonus.statusCode).toBe(201)
@@ -94,7 +98,7 @@ describe('PurchaseRESTController for Owner', () => {
       expect(resNotBonus.body.isBonus).toBe(false)
     }
 
-    const resBonus1 = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+    const resBonus1 = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
       .set('Authorization', `${token}`)
 
     expect(resBonus1.statusCode).toBe(201)
@@ -102,7 +106,7 @@ describe('PurchaseRESTController for Owner', () => {
     expect(resBonus1.body.isBonus).toBe(true)
 
     for (let i = 0; i < 4; i++) {
-      const resNotBonus = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
         .set('Authorization', `${token}`)
 
       expect(resNotBonus.statusCode).toBe(201)
@@ -110,11 +114,77 @@ describe('PurchaseRESTController for Owner', () => {
       expect(resNotBonus.body.isBonus).toBe(false)
     }
 
-    const resBonus2 = await app.post(`/api/v1/owner/customers/${customer._id}/purchases`)
+    const resBonus2 = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
       .set('Authorization', `${token}`)
 
     expect(resBonus2.statusCode).toBe(201)
     expect(resBonus2.body.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
+    expect(resBonus2.body.isBonus).toBe(true)
+
+    done()
+  })
+
+  it(`Bonus condition ${Conditions.BC_5_PLUS_1}: 5 purchases should yield 1 bonus`, async (done) => {
+
+    const customer = await createCustomer()
+
+    expect(company2.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+
+    for (let i = 0; i < 5; i++) {
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+        .set('Authorization', `${token}`)
+
+      expect(resNotBonus.statusCode).toBe(201)
+      expect(resNotBonus.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+      expect(resNotBonus.body.isBonus).toBe(false)
+    }
+
+    const resBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+      .set('Authorization', `${token}`)
+
+    expect(resBonus.statusCode).toBe(201)
+    expect(resBonus.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+    expect(resBonus.body.isBonus).toBe(true)
+
+    done()
+  })
+
+  it(`Bonus condition ${Conditions.BC_5_PLUS_1}: 11 purchases in a row should yield only 2 bonuses`, async (done) => {
+
+    const customer = await createCustomer()
+
+    expect(company2.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+
+    for (let i = 0; i < 5; i++) {
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+        .set('Authorization', `${token}`)
+
+      expect(resNotBonus.statusCode).toBe(201)
+      expect(resNotBonus.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+      expect(resNotBonus.body.isBonus).toBe(false)
+    }
+
+    const resBonus1 = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+      .set('Authorization', `${token}`)
+
+    expect(resBonus1.statusCode).toBe(201)
+    expect(resBonus1.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+    expect(resBonus1.body.isBonus).toBe(true)
+
+    for (let i = 0; i < 5; i++) {
+      const resNotBonus = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+        .set('Authorization', `${token}`)
+
+      expect(resNotBonus.statusCode).toBe(201)
+      expect(resNotBonus.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+      expect(resNotBonus.body.isBonus).toBe(false)
+    }
+
+    const resBonus2 = await app.post(`/api/v1/owner/users/${customer.user._id}/purchases`)
+      .set('Authorization', `${token}`)
+
+    expect(resBonus2.statusCode).toBe(201)
+    expect(resBonus2.body.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
     expect(resBonus2.body.isBonus).toBe(true)
 
     done()

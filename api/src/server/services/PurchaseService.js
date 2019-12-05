@@ -45,6 +45,8 @@ const PurchaseService = {
 
     if (bonusCondition === Conditions.BC_4_PLUS_1) {
       await PurchaseService.check4Plus1Condition(purchase)
+    } else if (bonusCondition === Conditions.BC_5_PLUS_1) {
+      await PurchaseService.check5Plus1Condition(purchase)
     } else {
 
       if (purchase.store) {
@@ -69,9 +71,20 @@ const PurchaseService = {
   },
 
   check4Plus1Condition: async (purchase) => {
+    const count = await PurchaseService.countPurchasesByCondition(purchase, Conditions.BC_4_PLUS_1)
+    if (count >= 4) {
+      purchase.isBonus = true
+    }
+  },
 
-    const bonusCondition = Conditions.BC_4_PLUS_1
+  check5Plus1Condition: async (purchase) => {
+    const count = await PurchaseService.countPurchasesByCondition(purchase, Conditions.BC_5_PLUS_1)
+    if (count >= 5) {
+      purchase.isBonus = true
+    }
+  },
 
+  countPurchasesByCondition: async (purchase, bonusCondition) => {
     const previousBonus = await Purchase.findOne({
       'buyer._id': purchase.buyer._id,
       'company._id': purchase.company._id,
@@ -92,11 +105,7 @@ const PurchaseService = {
       }
     }
 
-    const purchasesAfterBonus = await Purchase.countDocuments(bonusQuery)
-
-    if (purchasesAfterBonus >= 4) {
-      purchase.isBonus = true
-    }
+    return Purchase.countDocuments(bonusQuery);
   }
 }
 

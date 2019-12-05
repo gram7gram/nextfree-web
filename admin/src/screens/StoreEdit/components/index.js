@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {MODEL_CHANGED, FETCH_SUCCESS, RESET} from '../actions';
+import {FETCH_SUCCESS, MODEL_CHANGED, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
 import FetchCompanies from '../../Company/actions/Fetch';
 import Save from '../actions/Save';
@@ -9,6 +9,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
+import FetchConditions from "../../App/actions/FetchConditions";
 
 class StoreEdit extends React.Component {
 
@@ -29,6 +30,7 @@ class StoreEdit extends React.Component {
     }
 
     this.props.dispatch(FetchCompanies())
+    this.props.dispatch(FetchConditions())
   }
 
   componentWillUnmount() {
@@ -82,7 +84,7 @@ class StoreEdit extends React.Component {
 
   render() {
 
-    const {companies} = this.props
+    const {companies, conditions} = this.props
 
     const {
       model,
@@ -212,13 +214,14 @@ class StoreEdit extends React.Component {
               <h6 className="card-subtitle mb-2 text-muted">{i18n.t('store_edit.conditions_subtitle')}</h6>
 
               <div className="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                  <BonusCondition
-                    onClick={this.setCondition('4+1')}
-                    title={i18n.t('bonus_conditions.4+1.title')}
-                    content={i18n.t('bonus_conditions.4+1.description')}
-                    selected={model.bonusCondition === '4+1'}/>
-                </div>
+                {conditions.map(condition =>
+                  <div key={condition.code} className="col-12 col-md-6 col-lg-4">
+                    <BonusCondition
+                      onClick={this.setCondition(condition.code)}
+                      title={condition.title}
+                      content={condition.description}
+                      selected={model.bonusCondition === condition.code}/>
+                  </div>)}
               </div>
             </div>
           </div>
@@ -231,6 +234,7 @@ class StoreEdit extends React.Component {
 
 const selectors = createStructuredSelector({
   companies: store => store.Company.items,
+  conditions: store => store.Conditions.items,
   StoreEdit: store => store.StoreEdit,
 })
 

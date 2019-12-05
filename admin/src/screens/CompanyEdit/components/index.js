@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {MODEL_CHANGED, RESET, FETCH_SUCCESS} from '../actions';
 import Fetch from '../actions/Fetch';
+import FetchConditions from '../../App/actions/FetchConditions';
 import FetchOwners from '../../Owner/actions/Fetch';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
@@ -29,6 +30,7 @@ class CompanyEdit extends React.Component {
     }
 
     this.props.dispatch(FetchOwners())
+    this.props.dispatch(FetchConditions())
   }
 
   componentWillUnmount() {
@@ -82,7 +84,7 @@ class CompanyEdit extends React.Component {
 
   render() {
 
-    const {owners} = this.props
+    const {owners, conditions} = this.props
 
     const {
       model,
@@ -188,17 +190,17 @@ class CompanyEdit extends React.Component {
               <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
 
               <div className="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                  <BonusCondition
-                    onClick={this.setCondition('4+1')}
-                    title={i18n.t('bonus_conditions.4+1.title')}
-                    content={i18n.t('bonus_conditions.4+1.description')}
-                    selected={model.bonusCondition === '4+1'}/>
-                </div>
+                {conditions.map(condition =>
+                  <div key={condition.code} className="col-12 col-md-6 col-lg-4">
+                    <BonusCondition
+                      onClick={this.setCondition(condition.code)}
+                      title={condition.title}
+                      content={condition.description}
+                      selected={model.bonusCondition === condition.code}/>
+                  </div>)}
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
@@ -208,6 +210,7 @@ class CompanyEdit extends React.Component {
 
 const selectors = createStructuredSelector({
   owners: store => store.Owner.items,
+  conditions: store => store.Conditions.items,
   CompanyEdit: store => store.CompanyEdit,
 })
 

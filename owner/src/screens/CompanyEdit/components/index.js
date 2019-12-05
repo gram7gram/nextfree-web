@@ -7,12 +7,15 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
+import FetchConditions from "../../App/actions/FetchConditions";
 
 class CompanyEdit extends React.Component {
 
   componentDidMount() {
 
     const {defaultCompany} = this.props
+
+    this.props.dispatch(FetchConditions())
 
     if (defaultCompany) {
       this.props.dispatch(Fetch(defaultCompany._id))
@@ -63,6 +66,8 @@ class CompanyEdit extends React.Component {
   }
 
   render() {
+
+    const {conditions} = this.props
 
     const {
       model,
@@ -153,13 +158,14 @@ class CompanyEdit extends React.Component {
               <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
 
               <div className="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                  <BonusCondition
-                    onClick={this.setCondition('4+1')}
-                    title={i18n.t('bonus_conditions.4+1.title')}
-                    content={i18n.t('bonus_conditions.4+1.description')}
-                    selected={model.bonusCondition === '4+1'}/>
-                </div>
+                {conditions.map(condition =>
+                  <div key={condition.code} className="col-12 col-md-6 col-lg-4">
+                    <BonusCondition
+                      onClick={this.setCondition(condition.code)}
+                      title={condition.title}
+                      content={condition.description}
+                      selected={model.bonusCondition === condition.code}/>
+                  </div>)}
               </div>
             </div>
           </div>
@@ -173,6 +179,7 @@ class CompanyEdit extends React.Component {
 
 const selectors = createStructuredSelector({
   defaultCompany: store => store.App.defaultCompany,
+  conditions: store => store.Conditions.items,
   CompanyEdit: store => store.CompanyEdit,
 })
 

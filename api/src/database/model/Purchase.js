@@ -41,6 +41,12 @@ schema.pre("save", function (next) {
     this.createdAt = new Date()
   }
 
+  if (this.seller)
+    delete this.seller.user.password
+
+  if (this.buyer)
+    delete this.buyer.user.password
+
   next();
 })
 
