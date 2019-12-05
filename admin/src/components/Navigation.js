@@ -105,12 +105,6 @@ const Navigation = (props) => {
       </ul>
       <ul className="navbar-nav ml-auto text-center">
 
-        {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
-          <Link className="btn btn-outline-success"
-                onClick={hideMobileNavigation}
-                to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
-        </li>}
-
         {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
           <button className="btn btn-outline-success"
                   onClick={logout}>{i18n.t('navigation.logout')}</button>

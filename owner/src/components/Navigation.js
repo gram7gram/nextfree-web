@@ -96,7 +96,7 @@ const Navigation = (props) => {
         {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
           <Link className="btn btn-outline-success"
                 onClick={hideMobileNavigation}
-                to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
+                to={Pages.HOME}>{i18n.t('navigation.login')}</Link>
         </li>}
 
         {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">

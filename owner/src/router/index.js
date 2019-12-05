@@ -7,7 +7,6 @@ import * as Pages from './Pages';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-import Login from '../screens/Login/components';
 import Register from '../screens/Register/components';
 
 import Home from '../screens/Home/components';
@@ -44,8 +43,6 @@ export function createRouter() {
 
         <Switch>
 
-          <Route exact path={Pages.LOGIN} component={Login}/>
-
           <Route exact path={Pages.REGISTER} component={Register}/>
 
           <Route path={Pages.ACTIVATION} component={Activation}/>
@@ -53,10 +50,7 @@ export function createRouter() {
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 
-        </Switch>
-
-        <Authentication>
-          <Switch>
+          <Authentication>
             <Route exact path={Pages.HOME} component={Home}/>
             <Route exact path={Pages.QR_CODE} component={QR}/>
             <Route exact path={Pages.QR_SCAN} component={QRScanner}/>
@@ -75,8 +69,8 @@ export function createRouter() {
             <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
             <Redirect path="*" to={Pages.HOME}/>
-          </Switch>
-        </Authentication>
+          </Authentication>
+        </Switch>
 
       </ErrorBoundary>
 

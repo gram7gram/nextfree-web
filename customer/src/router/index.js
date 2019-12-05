@@ -7,7 +7,6 @@ import * as Pages from './Pages';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-import Login from '../screens/Login/components';
 import Register from '../screens/Register/components';
 
 import QR from '../screens/QR/components';
@@ -32,27 +31,23 @@ export function createRouter() {
       <ErrorBoundary>
 
         <Switch>
-          <Route exact path={Pages.LOGIN} component={Login}/>
-
           <Route exact path={Pages.REGISTER} component={Register}/>
 
           <Route path={Pages.ACTIVATION} component={Activation}/>
 
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
+
+          <Authentication>
+              <Route exact path={Pages.QR_CODE} component={QR}/>
+
+              <Route exact path={Pages.PROFILE} component={Profile}/>
+              <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+
+              <Redirect path="*" to={Pages.HOME}/>
+
+          </Authentication>
         </Switch>
-
-        <Authentication>
-          <Switch>
-            <Route exact path={Pages.QR_CODE} component={QR}/>
-
-            <Route exact path={Pages.PROFILE} component={Profile}/>
-            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
-
-            <Redirect path="*" to={Pages.HOME}/>
-
-          </Switch>
-        </Authentication>
       </ErrorBoundary>
 
     </main>

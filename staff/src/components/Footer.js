@@ -3,7 +3,7 @@ import i18n from '../i18n';
 
 const Footer = () => {
 
-  return <footer className="position-absolute w-100 border-top py-3">
+  return <footer className="position-absolute w-100 border-top py-5 mt-5">
 
     <div className="container">
 

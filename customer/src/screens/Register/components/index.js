@@ -146,7 +146,7 @@ class Register extends React.Component {
             <h3>{i18n.t('register.success_title')}</h3>
             <p>{i18n.t('register.success_subtitle')}</p>
 
-            <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('register.success_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('register.success_action')}</Link>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ class Register extends React.Component {
       </div>
 
       <p className="mb-3">{i18n.t('register.already_have_account')}&nbsp;
-        <Link to={Pages.LOGIN} className="text-info">
+        <Link to={Pages.HOME} className="text-info">
           {i18n.t('register.already_have_account_action')}
         </Link>
       </p>

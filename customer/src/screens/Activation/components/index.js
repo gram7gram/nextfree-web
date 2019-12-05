@@ -29,14 +29,14 @@ class Activation extends React.Component {
         <h3>{i18n.t('activation.success_title')}</h3>
         <p>{i18n.t('activation.success_subtitle')}</p>
 
-        <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('activation.success_action')}</Link>
+        <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('activation.success_action')}</Link>
       </div>
     } else {
       return <div className="alert alert-danger text-center">
         <h3>{i18n.t('activation.not_found_title')}</h3>
         <p>{i18n.t('activation.not_found_subtitle')}</p>
 
-        <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('activation.not_found_action')}</Link>
+        <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('activation.not_found_action')}</Link>
       </div>
     }
   }

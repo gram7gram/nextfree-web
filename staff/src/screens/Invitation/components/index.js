@@ -184,7 +184,7 @@ class Invitation extends React.Component {
             <h3>{i18n.t('invitation.not_found_title')}</h3>
             <p>{i18n.t('invitation.not_found_subtitle')}</p>
 
-            <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('invitation.not_found_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('invitation.not_found_action')}</Link>
           </div>
         </div>
       </div>
@@ -197,7 +197,7 @@ class Invitation extends React.Component {
             <h3>{i18n.t('invitation.success_title')}</h3>
             <p>{i18n.t('invitation.success_subtitle')}</p>
 
-            <Link to={Pages.LOGIN} className="btn btn-warning">{i18n.t('invitation.success_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('invitation.success_action')}</Link>
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ class Invitation extends React.Component {
     return <React.Fragment>
 
       <p className="mb-3">{i18n.t('invitation.already_have_account')}&nbsp;
-        <Link to={Pages.LOGIN} className="text-info">
+        <Link to={Pages.HOME} className="text-info">
           {i18n.t('invitation.already_have_account_action')}
         </Link>
       </p>

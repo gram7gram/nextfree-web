@@ -4,7 +4,7 @@ import * as Actions from '../actions'
 import * as Pages from '../../../router/Pages'
 
 function* redirect() {
-  yield put(replace(Pages.LOGIN))
+  yield put(replace(Pages.HOME))
 }
 
 export default function* sagas() {

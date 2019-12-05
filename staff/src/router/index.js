@@ -7,8 +7,6 @@ import * as Pages from './Pages';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-import Login from '../screens/Login/components';
-
 import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
 import QRScanner from '../screens/QRScanner/components';
@@ -34,8 +32,6 @@ export function createRouter() {
       <ErrorBoundary>
 
         <Switch>
-          <Route exact path={Pages.LOGIN} component={Login}/>
-
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 

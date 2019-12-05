@@ -6,9 +6,6 @@ const router = new express.Router({mergeParams: true});
 const routes = [
   '/',
 
-  '/login',
-  '/register',
-
   '/qr',
   '/scan',
 
@@ -29,7 +26,7 @@ const routes = [
   '/stores/:id',
 
   '/staff',
-  '/staff/new',
+  '/staff/invite',
   '/staff/:id',
 
   '/profile',

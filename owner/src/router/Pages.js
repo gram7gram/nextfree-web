@@ -1,4 +1,3 @@
-export const LOGIN = '/login';
 export const REGISTER = '/register';
 export const HOME = '/';
 export const PROFILE = '/profile';
@@ -14,10 +13,10 @@ export const QR_SCAN = '/scan';
 
 export const STORES = '/stores';
 export const STORE_NEW = '/stores/new';
-export const STORE_EDIT = '/stores/:id';
+export const STORE_EDIT = '/stores/:id/edit';
 
 export const MY_COMPANY = '/company';
 
 export const STAFF = '/staff';
 export const STAFF_INVITE = '/staff/invite';
-export const STAFF_EDIT = '/staff/:id';
+export const STAFF_EDIT = '/staff/:id/edit';

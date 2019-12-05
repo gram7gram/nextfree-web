@@ -1,4 +1,3 @@
-export const LOGIN = '/login';
 export const HOME = '/';
 export const PROFILE = '/profile';
 export const PROFILE_SECURITY = '/profile/security';
