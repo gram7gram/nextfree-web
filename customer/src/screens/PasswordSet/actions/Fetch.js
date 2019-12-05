@@ -1,17 +1,25 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import {SAVE_BEFORE, SAVE_FAILURE, SAVE_SUCCESS} from '../actions'
+import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
 
-export default (id, data) => (dispatch) => {
+export default (id) => (dispatch) => {
+
+  if (!id) {
+    dispatch({
+      type: FETCH_FAILURE,
+      payload: {}
+    })
+    return;
+  }
 
   dispatch({
-    type: SAVE_BEFORE
+    type: FETCH_BEFORE
   })
 
-  request.post(parameters.apiHost + `/api/v1/staff-password-set/${id}`, data)
+  request.get(parameters.apiHost + `/api/v1/owner-password-set/${id}`)
     .then(({data}) => {
       dispatch({
-        type: SAVE_SUCCESS,
+        type: FETCH_SUCCESS,
         payload: data,
       })
     })
@@ -19,7 +27,7 @@ export default (id, data) => (dispatch) => {
       console.log(e);
 
       dispatch({
-        type: SAVE_FAILURE,
+        type: FETCH_FAILURE,
         payload: {
           status: e.response ? e.response.status : 0,
           data: e.response ? e.response.data : null

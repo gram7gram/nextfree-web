@@ -27,6 +27,8 @@ class QRScanner extends React.PureComponent {
 
   componentDidMount() {
 
+    this.setDefaults()
+
     try {
       Scanner.hasCamera().then(result => {
 
@@ -35,9 +37,10 @@ class QRScanner extends React.PureComponent {
         })
 
         if (result) {
-          this.scanner = new Scanner(this.htmlVideo.current, this.onResult)
 
           try {
+
+            this.scanner = new Scanner(this.htmlVideo.current, this.onResult)
             this.scanner.start();
 
             this.setState({
@@ -53,15 +56,15 @@ class QRScanner extends React.PureComponent {
         }
 
       })
+
     } catch (e) {
       console.log(e);
 
       this.setState({
+        hasCamera: false,
         hasCameraPermission: false
       })
     }
-
-    this.setDefaults()
   }
 
   componentWillUnmount() {
@@ -120,8 +123,6 @@ class QRScanner extends React.PureComponent {
       if (!data || !data.user || data.user === userId) return
 
       this.change('userId', data.user)
-
-      this.stopScanner()
 
     } catch (e) {
       console.log(e);
@@ -223,7 +224,7 @@ class QRScanner extends React.PureComponent {
 
   renderCardContent() {
 
-    const {isLoading, serverErrors, isSuccess} = this.props.QRScanner
+    const {isLoading, serverErrors, isSuccess, model} = this.props.QRScanner
 
     const isValid = this.isValid()
 
@@ -232,7 +233,7 @@ class QRScanner extends React.PureComponent {
     }
 
     return <>
-      <p className="text-muted text-center">{i18n.t('qr_scanner.help')}</p>
+      <h4 className="text-muted text-center">{i18n.t('qr_scanner.help')}</h4>
 
       <div className="mb-4">
         {!this.state.hasCamera
@@ -246,24 +247,27 @@ class QRScanner extends React.PureComponent {
         {this.renderCameraPermission()}
       </div>
 
-      <Errors errors={serverErrors}/>
+      {model.userId
+        ? <>
+          <Errors errors={serverErrors}/>
 
-      {this.renderStore()}
+          {this.renderStore()}
 
-      <div className="text-center">
+          <div className="text-center">
 
-        <button className="btn btn-outline-warning mr-1"
-                onClick={this.setDefaults}>
-          <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
-        </button>
+            <button className="btn btn-outline-warning mr-1 mb-1"
+                    onClick={this.setDefaults}>
+              <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
+            </button>
 
-        <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
-                onClick={this.purchase}
-                disabled={!isValid || isLoading}>
-          <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
-          &nbsp;{i18n.t('qr_scanner.purchase_action')}
-        </button>
-      </div>
+            <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
+                    onClick={this.purchase}
+                    disabled={!isValid || isLoading}>
+              <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
+              &nbsp;{i18n.t('qr_scanner.purchase_action')}
+            </button>
+          </div>
+        </> : null}
     </>
   }
 

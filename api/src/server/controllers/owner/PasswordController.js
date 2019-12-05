@@ -53,6 +53,37 @@ router.post('/owner-password-reset', async (req, res) => {
   }
 })
 
+router.get('/owner-password-set/:token', async (req, res) => {
+
+  try {
+
+    if (!req.params.token) {
+      throw {
+        code: 400,
+        message: i18n.t('request.bad_request')
+      }
+    }
+
+    const count = await Owner.countDocuments({
+      'user.emailResetToken': req.params.token
+    })
+
+    if (count === 0) {
+      throw {
+        code: 404,
+        message: i18n.t('reset_password.not_found')
+      }
+    }
+
+    res.status(200).json({
+      valid: true
+    })
+
+  } catch (e) {
+    ErrorHandler.handle(res, e)
+  }
+})
+
 router.post('/owner-password-set/:token', async (req, res) => {
 
   try {

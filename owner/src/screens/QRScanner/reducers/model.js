@@ -28,7 +28,7 @@ const storeId = (prev = null, action) => {
           return action.payload.items[0]._id
         }
       }
-      return null
+      return prev
     case Action.MODEL_CHANGED:
       if (action.payload.storeId !== undefined) {
         return action.payload.storeId

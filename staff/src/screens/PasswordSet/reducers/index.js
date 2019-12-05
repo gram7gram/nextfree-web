@@ -19,6 +19,17 @@ const serverErrors = (prev = [], action) => {
   }
 }
 
+const isTokenValid = (prev = true, action) => {
+  switch (action.type) {
+    case Action.FETCH_FAILURE:
+      return false
+    case Action.FETCH_SUCCESS:
+      return true
+    default:
+      return prev
+  }
+}
+
 const isValid = (prev = false, action) => {
   switch (action.type) {
     case Action.VALIDATE_SUCCESS:
@@ -79,6 +90,7 @@ const changes = (prev = {}, action) => {
 }
 
 export default combineReducers({
+  isTokenValid,
   isValid,
   isLoading,
   validator,

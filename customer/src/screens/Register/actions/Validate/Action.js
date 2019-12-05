@@ -42,11 +42,25 @@ export default (model, changes) => {
       validator.errors['hasAccepted'] = i18n.t('validation.required')
   }
 
-  if (model.password1 && !password.validate(model.password1)) {
+  if (!model.password1) {
+    ++validator.total
+
+    if (changes.password1) {
+      validator.errors.password1 = i18n.t('validation.required')
+    }
+  } else if (!password.validate(model.password1)) {
     ++validator.total
 
     if (changes['password1']) {
       validator.errors['password1'] = i18n.t('validation.weak_password1')
+    }
+  }
+
+  if (!model.password2) {
+    ++validator.total
+
+    if (changes.password2) {
+      validator.errors.password2 = i18n.t('validation.required')
     }
   }
 
@@ -57,12 +71,6 @@ export default (model, changes) => {
       if (changes['password2']) {
         validator.errors['password2'] = i18n.t('validation.password_mismatch')
       }
-    }
-  } else {
-    ++validator.total
-
-    if (changes.password1) {
-      validator.errors.password1 = i18n.t('validation.required')
     }
   }
 

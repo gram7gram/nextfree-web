@@ -4,7 +4,6 @@ import {ToastContainer} from 'react-toastify';
 
 import * as Pages from './Pages';
 
-import Loading from '../components/Loading';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
@@ -31,36 +30,11 @@ import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
+import Authentication from "../hoc/Authentication";
 
-export function createRouter(store) {
+export function createRouter() {
 
-  const PrivateRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === true) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.LOGIN}/>
-  }
-
-  const PublicRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === false) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.HOME}/>
-  }
-
-  return <div>
+  return <>
 
     <Navigation/>
 
@@ -69,35 +43,41 @@ export function createRouter(store) {
       <ErrorBoundary>
 
         <Switch>
-          <PublicRoute exact path={Pages.LOGIN} component={Login}/>
 
-          <PublicRoute exact path={Pages.REGISTER} component={Register}/>
+          <Route exact path={Pages.LOGIN} component={Login}/>
 
-          <PublicRoute path={Pages.ACTIVATION} component={Activation}/>
+          <Route exact path={Pages.REGISTER} component={Register}/>
 
-          <PublicRoute path={Pages.PASSWORD_SET} component={PasswordSet}/>
-          <PublicRoute exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
+          <Route path={Pages.ACTIVATION} component={Activation}/>
 
-          <PrivateRoute exact path={Pages.HOME} component={Home}/>
-          <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
-          <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>
-
-          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
-          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
-
-          <PrivateRoute exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
-
-          <PrivateRoute exact path={Pages.STORES} component={Store}/>
-          <PrivateRoute excat path={Pages.STORE_NEW} component={StoreEdit}/>
-          <PrivateRoute path={Pages.STORE_EDIT} component={StoreEdit}/>
-
-          <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
-          <PrivateRoute exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
-          <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
-
-          <Redirect path="*" to={Pages.HOME}/>
+          <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
+          <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 
         </Switch>
+
+        <Authentication>
+          <Switch>
+            <Route exact path={Pages.HOME} component={Home}/>
+            <Route exact path={Pages.QR_CODE} component={QR}/>
+            <Route exact path={Pages.QR_SCAN} component={QRScanner}/>
+
+            <Route exact path={Pages.PROFILE} component={Profile}/>
+            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+
+            <Route exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
+
+            <Route exact path={Pages.STORES} component={Store}/>
+            <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
+            <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
+
+            <Route exact path={Pages.STAFF} component={Staff}/>
+            <Route exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
+            <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
+
+            <Redirect path="*" to={Pages.HOME}/>
+          </Switch>
+        </Authentication>
+
       </ErrorBoundary>
 
     </main>
@@ -108,5 +88,5 @@ export function createRouter(store) {
       <ToastContainer/>
     </div>
 
-  </div>
+  </>
 }

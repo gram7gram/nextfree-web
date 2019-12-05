@@ -67,7 +67,6 @@
 
 .qr-toolbar.no-result {
     opacity: 0.5;
-    bottom: -15%;
     transition: opacity .3s, bottom .3s;
 }
 

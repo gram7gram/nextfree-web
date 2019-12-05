@@ -4,7 +4,6 @@ import {ToastContainer} from 'react-toastify';
 
 import * as Pages from './Pages';
 
-import Loading from '../components/Loading';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
@@ -20,36 +19,11 @@ import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
+import Authentication from "../hoc/Authentication";
 
-export function createRouter(store) {
+export function createRouter() {
 
-  const PrivateRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === true) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.LOGIN}/>
-  }
-
-  const PublicRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === false) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.HOME}/>
-  }
-
-  return <div>
+  return <>
 
     <Navigation/>
 
@@ -58,23 +32,27 @@ export function createRouter(store) {
       <ErrorBoundary>
 
         <Switch>
-          <PublicRoute exact path={Pages.LOGIN} component={Login}/>
+          <Route exact path={Pages.LOGIN} component={Login}/>
 
-          <PublicRoute exact path={Pages.REGISTER} component={Register}/>
+          <Route exact path={Pages.REGISTER} component={Register}/>
 
-          <PublicRoute path={Pages.ACTIVATION} component={Activation}/>
+          <Route path={Pages.ACTIVATION} component={Activation}/>
 
-          <PublicRoute exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
-          <PublicRoute path={Pages.PASSWORD_SET} component={PasswordSet}/>
-
-          <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
-
-          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
-          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
-
-          <Redirect path="*" to={Pages.HOME}/>
-
+          <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
+          <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
         </Switch>
+
+        <Authentication>
+          <Switch>
+            <Route exact path={Pages.QR_CODE} component={QR}/>
+
+            <Route exact path={Pages.PROFILE} component={Profile}/>
+            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+
+            <Redirect path="*" to={Pages.HOME}/>
+
+          </Switch>
+        </Authentication>
       </ErrorBoundary>
 
     </main>
@@ -85,5 +63,5 @@ export function createRouter(store) {
       <ToastContainer/>
     </div>
 
-  </div>
+  </>
 }

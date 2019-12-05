@@ -229,11 +229,11 @@ class Register extends React.Component {
               &nbsp;{i18n.t('register.terms_and_conditions')}
             </label>
 
-            {this.getError('owner.hasAccepted')}
-
-            <a href="https://nextfree.com.ua/privacy"
+            &nbsp;<a href="https://nextfree.com.ua/privacy"
                rel="noopener noreferrer"
                target="_blank">{i18n.t('register.privacy_link')}</a>
+
+            {this.getError('owner.hasAccepted')}
           </div>
 
         </div>

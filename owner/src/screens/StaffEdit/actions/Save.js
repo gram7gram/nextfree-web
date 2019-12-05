@@ -4,7 +4,7 @@ import parameters from '../../../parameters'
 import {SAVE_BEFORE, SAVE_FAILURE, SAVE_SUCCESS} from '../actions'
 
 const parseBeforeSubmit = model => {
-  const data = {...model}
+  const data = JSON.parse(JSON.stringify(model))
 
   delete data.id
 
@@ -56,8 +56,6 @@ export default (model) => (dispatch, getState) => {
     })
   }).catch(e => {
     console.log(e);
-
-
 
     dispatch({
       type: SAVE_FAILURE,

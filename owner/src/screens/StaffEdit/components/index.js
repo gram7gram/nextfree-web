@@ -310,7 +310,7 @@ class StaffEdit extends React.Component {
 
           {this.renderPosition()}
 
-          {this.renderDelete()}
+          {/*{this.renderDelete()}*/}
 
         </div>
       </div>

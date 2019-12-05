@@ -4,7 +4,6 @@ import {ToastContainer} from 'react-toastify';
 
 import * as Pages from './Pages';
 
-import Loading from '../components/Loading';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
@@ -31,36 +30,11 @@ import Owner from '../screens/Owner/components';
 import OwnerEdit from '../screens/OwnerEdit/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
+import Authentication from "../hoc/Authentication";
 
-export function createRouter(store) {
+export function createRouter() {
 
-  const PrivateRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === true) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.LOGIN}/>
-  }
-
-  const PublicRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) return <Loading/>
-
-    if (appState.isAuthenticated === false) {
-      return <Route {...rest} render={(props) => <Component {...props}/>}/>
-    }
-
-    return <Redirect to={Pages.HOME}/>
-  }
-
-  return <div>
+  return <>
 
     <Navigation/>
 
@@ -69,38 +43,44 @@ export function createRouter(store) {
       <ErrorBoundary>
 
         <Switch>
-          <PublicRoute exact path={Pages.LOGIN} component={Login}/>
-
-          <PrivateRoute exact path={Pages.HOME} component={Home}/>
-          <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
-          <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>
-
-          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
-          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
-
-          <PrivateRoute exact path={Pages.COMPANIES} component={Company}/>
-          <PrivateRoute exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>
-          <PrivateRoute path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
-
-          <PrivateRoute exact path={Pages.STORES} component={Store}/>
-          <PrivateRoute exact path={Pages.STORE_NEW} component={StoreEdit}/>
-          <PrivateRoute path={Pages.STORE_EDIT} component={StoreEdit}/>
-
-          <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
-          <PrivateRoute exact path={Pages.STAFF_NEW} component={StaffEdit}/>
-          <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
-
-          <PrivateRoute exact path={Pages.OWNERS} component={Owner}/>
-          <PrivateRoute exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
-          <PrivateRoute path={Pages.OWNER_EDIT} component={OwnerEdit}/>
-
-          <PrivateRoute exact path={Pages.CUSTOMERS} component={Customer}/>
-          <PrivateRoute exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
-          <PrivateRoute path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
-
-          <Redirect path="*" to={Pages.HOME}/>
+          <Route exact path={Pages.LOGIN} component={Login}/>
 
         </Switch>
+
+        <Authentication>
+          <Switch>
+            <Route exact path={Pages.HOME} component={Home}/>
+            <Route exact path={Pages.QR_CODE} component={QR}/>
+            <Route exact path={Pages.QR_SCAN} component={QRScanner}/>
+
+            <Route exact path={Pages.PROFILE} component={Profile}/>
+            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+
+            <Route exact path={Pages.COMPANIES} component={Company}/>
+            <Route exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>
+            <Route path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
+
+            <Route exact path={Pages.STORES} component={Store}/>
+            <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
+            <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
+
+            <Route exact path={Pages.STAFF} component={Staff}/>
+            <Route exact path={Pages.STAFF_NEW} component={StaffEdit}/>
+            <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
+
+            <Route exact path={Pages.OWNERS} component={Owner}/>
+            <Route exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
+            <Route path={Pages.OWNER_EDIT} component={OwnerEdit}/>
+
+            <Route exact path={Pages.CUSTOMERS} component={Customer}/>
+            <Route exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
+            <Route path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
+
+            <Redirect path="*" to={Pages.HOME}/>
+
+          </Switch>
+        </Authentication>
+
       </ErrorBoundary>
 
     </main>
@@ -111,5 +91,5 @@ export function createRouter(store) {
       <ToastContainer/>
     </div>
 
-  </div>
+  </>
 }

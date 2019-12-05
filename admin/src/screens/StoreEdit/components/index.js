@@ -70,6 +70,13 @@ class StoreEdit extends React.Component {
     }
   })
 
+  changeFloat = name => e => {
+    let value = parseFloat(e.target.value)
+    if (isNaN(value)) value = null
+
+    this.change(name, value)
+  }
+
   changeString = name => e => this.change(name, e.target.value)
 
   setCondition = value => () => this.change('bonusCondition', value)
@@ -190,14 +197,13 @@ class StoreEdit extends React.Component {
                     <div className="input-group">
                       <input type="text" placeholder={i18n.t('store_edit.lat')}
                              className="form-control"
-                             onChange={this.changeString('lat')}
+                             onChange={this.changeFloat('lat')}
                              value={model.lat || ''}/>
                       <input type="text" placeholder={i18n.t('store_edit.lng')}
                              className="form-control"
-                             onChange={this.changeString('lng')}
+                             onChange={this.changeFloat('lng')}
                              value={model.lng || ''}/>
                     </div>
-
                     {this.getError('coordinates')}
 
                   </div>

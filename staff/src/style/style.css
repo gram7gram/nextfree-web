@@ -10,3 +10,9 @@ main {
 footer {
     background-color: #1c1e22;
 }
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: 15px;
+    height: 15px;
+}

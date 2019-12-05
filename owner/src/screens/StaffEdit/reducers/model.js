@@ -82,7 +82,7 @@ const storeId = (prev = null, action) => {
           return action.payload.items[0]._id
         }
       }
-      return null
+      return prev
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['storeId'] !== undefined) {

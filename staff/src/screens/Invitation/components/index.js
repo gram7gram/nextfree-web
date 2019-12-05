@@ -233,11 +233,11 @@ class Invitation extends React.Component {
               &nbsp;{i18n.t('invitation.terms_and_conditions')}
             </label>
 
-            {this.getError('hasAccepted')}
-
-            <a href="https://nextfree.com.ua/privacy"
+            &nbsp;<a href="https://nextfree.com.ua/privacy"
                rel="noopener noreferrer"
                target="_blank">{i18n.t('invitation.privacy_link')}</a>
+
+            {this.getError('owner.hasAccepted')}
           </div>
 
         </div>

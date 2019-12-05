@@ -1,4 +1,4 @@
-const mailer = require('../../mailer/mailgun')
+const mailer = require('../../mailer/gmail')
 const parameters = require('../../../parameters')
 const templating = require('../../templating')
 
