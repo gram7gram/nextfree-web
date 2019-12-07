@@ -21,13 +21,11 @@ footer {
 }
 
 .company-card img,
-.staff-card img,
 .store-card img {
     max-height: 150px;
 }
 
 .company-card .card-image,
-.staff-card .card-image,
 .store-card .card-image {
     text-align: center;
 }

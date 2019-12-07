@@ -219,7 +219,7 @@ class CompanyEdit extends React.Component {
 
               <div className="row">
                 {conditions.map(condition =>
-                  <div key={condition.code} className="col-12 col-md-6 col-lg-4">
+                  <div key={condition.code} className="col-12 col-md-6">
                     <BonusCondition
                       onClick={this.setCondition(condition.code)}
                       title={condition.title}

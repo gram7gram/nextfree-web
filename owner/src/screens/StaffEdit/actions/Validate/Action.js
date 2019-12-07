@@ -42,20 +42,6 @@ export default (model, changes) => {
       validator.errors['position'] = i18n.t('validation.required')
   }
 
-  if (!model.user.firstName) {
-    ++validator.total
-
-    if (changes['user.firstName'])
-      validator.errors['user.firstName'] = i18n.t('validation.required')
-  }
-
-  if (!model.user.lastName) {
-    ++validator.total
-
-    if (changes['user.lastName'])
-      validator.errors['user.lastName'] = i18n.t('validation.required')
-  }
-
   if (!model.id && !model.password1) {
     ++validator.total
 

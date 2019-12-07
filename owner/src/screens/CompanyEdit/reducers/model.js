@@ -14,17 +14,17 @@ const id = (prev = null, action) => {
   }
 }
 
-const companyId = (prev = null, action) => {
+const logo = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
-      if (action.flatten['companyId'] !== undefined) {
-        return action.flatten['companyId']
+      if (action.flatten['logo'] !== undefined) {
+        return action.flatten['logo']
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload['companyId'] !== undefined) {
-        return action.payload['companyId']
+      if (action.payload['logo'] !== undefined) {
+        return action.payload['logo']
       }
       return prev
     default:
@@ -89,7 +89,7 @@ const isEnabled = (prev = false, action) => {
 export default combineReducers({
   id,
   isEnabled,
-  companyId,
+  logo,
   name,
   bonusCondition,
 })

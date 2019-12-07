@@ -10,6 +10,8 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
 import Date from "../../../components/Date";
+import Upload from "../actions/Upload";
+import Avatar from "../../../components/Avatar";
 
 class StaffEdit extends React.Component {
 
@@ -60,6 +62,15 @@ class StaffEdit extends React.Component {
       ...model,
       isEnabled: true
     }))
+  }
+
+  setAvatar = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    this.props.dispatch(Upload(file))
+
+    e.target.value = null
   }
 
   remove = () => {
@@ -194,7 +205,24 @@ class StaffEdit extends React.Component {
     return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12">
+        <div className="col-12 col-md-4 col-lg-3 text-center">
+
+          <div className="card">
+            <div className="card-body">
+              <Avatar src={model.user.avatar}/>
+            </div>
+            <div className="card-footer p-1">
+              <label className="btn btn-secondary btn-sm m-0">
+                <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
+                <input type="file" className="d-none"
+                       onChange={this.setAvatar}
+                       disabled={isLoading}/>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12 col-md-8 col-lg-9">
 
           <Errors errors={serverErrors}/>
 
