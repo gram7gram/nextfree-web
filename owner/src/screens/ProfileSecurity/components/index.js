@@ -6,7 +6,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
-import ProfileSidebar from "../../../components/ProfileSidebar";
+import ProfileSidebar from "../../Profile/components/ProfileSidebar";
 import password from "../../../utils/password";
 
 class ProfileSecurity extends React.Component {

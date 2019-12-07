@@ -7,7 +7,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Date from "../../../components/Date";
 import Errors from "../../../components/Errors";
-import ProfileSidebar from "../../../components/ProfileSidebar";
+import ProfileSidebar from "./ProfileSidebar";
 
 class Profile extends React.Component {
 
