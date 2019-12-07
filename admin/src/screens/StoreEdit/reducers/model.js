@@ -76,26 +76,6 @@ const address = (prev = null, action) => {
   }
 }
 
-const bonusCondition = (prev = null, action) => {
-  switch (action.type) {
-    case Action.RESET:
-      return null
-    case Action.SAVE_SUCCESS:
-    case Action.FETCH_SUCCESS:
-      if (action.flatten['bonusCondition'] !== undefined) {
-        return action.flatten['bonusCondition']
-      }
-      return null
-    case Action.MODEL_CHANGED:
-      if (action.payload['bonusCondition'] !== undefined) {
-        return action.payload['bonusCondition']
-      }
-      return prev
-    default:
-      return prev
-  }
-}
-
 const lng = (prev = null, action) => {
   switch (action.type) {
     case Action.RESET:
@@ -164,5 +144,4 @@ export default combineReducers({
   lat,
   city,
   address,
-  bonusCondition,
 })

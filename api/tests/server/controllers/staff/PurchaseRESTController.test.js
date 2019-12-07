@@ -1,3 +1,5 @@
+import company from "../../../../../owner/src/screens/Register/reducers/company";
+
 const {boot, tearDown} = require('../../../WebTestCase')
 const Conditions = require('../../../../src/BonusCondition')
 
@@ -6,7 +8,7 @@ const {
   createCompany, createOwner, createStore
 } = require('../../../utils')
 
-let app, staff, staff2, token, token2, customer, store, store2
+let app, staff, staff2, token, token2, customer, store, store2, company, company2
 
 beforeAll(async (done) => {
 
@@ -14,20 +16,17 @@ beforeAll(async (done) => {
 
   const owner = await createOwner()
 
-  const company = await createCompany(owner._id, {
+  company = await createCompany(owner._id, {
     bonusCondition: Conditions.BC_4_PLUS_1,
   })
-  const company2 = await createCompany(owner._id, {
+
+  company2 = await createCompany(owner._id, {
     bonusCondition: Conditions.BC_5_PLUS_1,
   })
 
-  store = await createStore(company._id, {
-    bonusCondition: company.bonusCondition,
-  })
+  store = await createStore(company._id)
 
-  store2 = await createStore(company2._id, {
-    bonusCondition: company2.bonusCondition,
-  })
+  store2 = await createStore(company2._id)
 
   customer = await createCustomer()
 
@@ -80,7 +79,7 @@ describe('PurchaseRESTController for Staff', () => {
 
     const customer = await createCustomer()
 
-    expect(store.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
+    expect(company.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
 
     for (let i = 0; i < 4; i++) {
       const resNotBonus = await app.post(`/api/v1/staff/users/${customer.user._id}/purchases`)
@@ -105,7 +104,7 @@ describe('PurchaseRESTController for Staff', () => {
 
     const customer = await createCustomer()
 
-    expect(store.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
+    expect(company.bonusCondition).toBe(Conditions.BC_4_PLUS_1)
 
     for (let i = 0; i < 4; i++) {
       const resNotBonus = await app.post(`/api/v1/staff/users/${customer.user._id}/purchases`)
@@ -146,7 +145,7 @@ describe('PurchaseRESTController for Staff', () => {
 
     const customer = await createCustomer()
 
-    expect(store2.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+    expect(company2.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
 
     for (let i = 0; i < 5; i++) {
       const resNotBonus = await app.post(`/api/v1/staff/users/${customer.user._id}/purchases`)
@@ -171,7 +170,7 @@ describe('PurchaseRESTController for Staff', () => {
 
     const customer = await createCustomer()
 
-    expect(store.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
+    expect(company2.bonusCondition).toBe(Conditions.BC_5_PLUS_1)
 
     for (let i = 0; i < 5; i++) {
       const resNotBonus = await app.post(`/api/v1/staff/users/${customer.user._id}/purchases`)

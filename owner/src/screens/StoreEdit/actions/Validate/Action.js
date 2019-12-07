@@ -28,12 +28,6 @@ export default (model, changes) => {
       validator.errors['address'] = i18n.t('validation.required')
   }
 
-  if (!model.bonusCondition) {
-    ++validator.total
-
-    if (changes['bonusCondition'])
-      validator.errors['bonusCondition'] = i18n.t('validation.required')
-  }
 
   return validator
 }

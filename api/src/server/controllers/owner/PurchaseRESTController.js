@@ -162,7 +162,7 @@ router.post('/users/:id/purchases', isOwner, checkId, async (req, res) => {
         store,
         seller: owner,
         buyer,
-        bonusCondition: store.bonusCondition,
+        bonusCondition: company.bonusCondition,
       })
 
       res.status(201).json(PurchaseService.serialize(item))

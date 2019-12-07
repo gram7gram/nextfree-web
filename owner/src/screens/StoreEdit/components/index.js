@@ -7,9 +7,7 @@ import Remove from '../actions/Remove';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
-import FetchConditions from "../../App/actions/FetchConditions";
 
 class StoreEdit extends React.Component {
 
@@ -18,8 +16,6 @@ class StoreEdit extends React.Component {
     const {match, defaultCompany} = this.props
 
     const {id} = match.params
-
-    this.props.dispatch(FetchConditions())
 
     if (id) {
       this.props.dispatch(Fetch(id))
@@ -90,8 +86,6 @@ class StoreEdit extends React.Component {
   }
 
   changeString = name => e => this.change(name, e.target.value)
-
-  setCondition = value => () => this.change('bonusCondition', value)
 
   getError = key => {
     const {errors} = this.props.StoreEdit.validator
@@ -250,25 +244,6 @@ class StoreEdit extends React.Component {
             </div>
           </div>
 
-          <div className="card mb-4">
-            <div className="card-body">
-
-              <h4 className="card-title">{i18n.t('store_edit.conditions_title')}</h4>
-              <h6 className="card-subtitle mb-2 text-muted">{i18n.t('store_edit.conditions_subtitle')}</h6>
-
-              <div className="row">
-                {conditions.map(condition =>
-                  <div key={condition.code} className="col-12 col-md-6 col-lg-4">
-                    <BonusCondition
-                      onClick={this.setCondition(condition.code)}
-                      title={condition.title}
-                      content={condition.description}
-                      selected={model.bonusCondition === condition.code}/>
-                  </div>)}
-              </div>
-            </div>
-          </div>
-
           {/*{this.renderDelete()}*/}
 
         </div>
@@ -279,7 +254,6 @@ class StoreEdit extends React.Component {
 
 const selectors = createStructuredSelector({
   defaultCompany: store => store.App.defaultCompany,
-  conditions: store => store.Conditions.items,
   StoreEdit: store => store.StoreEdit,
 })
 

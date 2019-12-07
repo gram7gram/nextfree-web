@@ -41,7 +41,6 @@ describe('StoreRESTController for Owner', () => {
 
     const entity = {
       isEnabled: true,
-      bonusCondition: cid(),
       city: cid(),
       address: cid(),
       lng: 0,

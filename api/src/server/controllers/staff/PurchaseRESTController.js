@@ -151,7 +151,7 @@ router.post('/users/:id/purchases', isStaff, checkId, async (req, res) => {
         store,
         seller: staff,
         buyer,
-        bonusCondition: store.bonusCondition,
+        bonusCondition: company.bonusCondition,
       })
 
       res.status(201).json(PurchaseService.serialize(item))

@@ -99,19 +99,77 @@ class StaffEdit extends React.Component {
     return <small className="feedback invalid-feedback d-block">{errors[key]}</small>
   }
 
+  grantAdmin = () => {
+
+    const {model} = this.props.StaffEdit
+
+    if (!window.confirm(i18n.t('staff_edit.grant_admin_confirm'))) return
+
+    this.props.dispatch(Save({
+      id: model.id,
+      user: {
+        isAdmin: true
+      }
+    }))
+  }
+
+  ungrantAdmin = () => {
+
+    const {model} = this.props.StaffEdit
+
+    if (!window.confirm(i18n.t('staff_edit.ungrant_admin_confirm'))) return
+
+    this.props.dispatch(Save({
+      id: model.id,
+      user: {
+        isAdmin: false
+      }
+    }))
+  }
+
+  renderAdmin = () => {
+
+    const {model, isLoading} = this.props.StaffEdit
+
+    return <div className="card mb-4 border-warning text-warning">
+      <div className="card-body">
+        <div className="row">
+          <div className="col-12 text-center">
+
+            <p>{i18n.t('staff_edit.is_admin_title')}</p>
+
+            {!model.user.isAdmin
+              ? <button className="btn btn-outline-warning btn-sm"
+                        onClick={this.grantAdmin}
+                        disabled={isLoading}>
+                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-plus"}/>
+                &nbsp;{i18n.t('staff_edit.grant_admin_action')}
+              </button>
+              : <button className="btn btn-outline-warning btn-sm"
+                        onClick={this.ungrantAdmin}
+                        disabled={isLoading}>
+                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
+                &nbsp;{i18n.t('staff_edit.ungrant_admin_action')}
+              </button>}
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
   renderDelete() {
 
     const {model, isLoading} = this.props.StaffEdit
 
     if (!model.id) return null
 
-    return <div className="card mb-4">
+    return <div className="card mb-4 text-danger border-danger">
       <div className="card-body">
 
         <div className="row">
           <div className="col-12 text-center">
 
-            <p className="text-danger">{i18n.t('staff_edit.remove_content')}</p>
+            <p>{i18n.t('staff_edit.remove_content')}</p>
 
             <button className="btn btn-outline-danger btn-sm"
                     onClick={this.remove}
@@ -364,7 +422,14 @@ class StaffEdit extends React.Component {
 
           {this.renderSecurity()}
 
-          {this.renderDelete()}
+          <div className="row">
+            <div className="col-12 col-md-6">
+              {this.renderAdmin()}
+            </div>
+            <div className="col-12 col-md-6">
+              {this.renderDelete()}
+            </div>
+          </div>
 
         </div>
       </div>

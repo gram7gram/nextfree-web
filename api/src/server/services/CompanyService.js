@@ -1,5 +1,4 @@
 const Company = require('../../database/model/Company').Company
-const Store = require('../../database/model/Store').Store
 const i18n = require('../../i18n').i18n
 const _merge = require('lodash/merge')
 
@@ -44,15 +43,6 @@ const CompanyService = {
         message: i18n.t('company.validation_failed'),
         errors: validator.errors
       }
-    }
-
-    if (entity._id && entity.isModified('bonusCondition')) {
-
-      await Store.updateMany(
-        {companyId: entity._id},
-        {bonusCondition: entity.bonusCondition}
-      )
-
     }
 
     await entity.save()

@@ -11,23 +11,23 @@ const routes = [
 
   '/customers',
   '/customers/new',
-  '/customers/:id',
+  '/customers/:id/edit',
 
   '/owners',
   '/owners/new',
-  '/owners/:id',
+  '/owners/:id/edit',
 
   '/companies',
   '/companies/new',
-  '/companies/:id',
+  '/companies/:id/edit',
 
   '/stores',
   '/stores/new',
-  '/stores/:id',
+  '/stores/:id/edit',
 
   '/staff',
   '/staff/invite',
-  '/staff/:id',
+  '/staff/:id/edit',
 
   '/profile',
   '/profile/security',

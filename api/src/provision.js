@@ -68,7 +68,6 @@ const createStore = async (companyId) => {
   const entity = new Store({
     city: 'Київ',
     address: 'пр. Перемоги 12',
-    bonusCondition: Condition.BC_4_PLUS_1,
     isEnabled: true,
     companyId
   })

@@ -27,11 +27,7 @@ const schema = new mongoose.Schema({
   lat: {
     type: Number,
     required: false
-  },
-  bonusCondition: {
-    type: String,
-    required: false
-  },
+  }
 })
 
 schema.pre("save", function (next) {

@@ -27,7 +27,6 @@ const createStore = async (companyId, store = {}) => {
   let entity = new Store({
     companyId,
     isEnabled: true,
-    bonusCondition: cid(),
     city: cid(),
     address: cid(),
     lng: 0,

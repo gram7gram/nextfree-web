@@ -39,9 +39,7 @@ const PurchaseService = {
 
   checkBonusCondition: async purchase => {
 
-    const bonusCondition = purchase.store
-      ? purchase.store.bonusCondition
-      : purchase.company.bonusCondition
+    const bonusCondition = purchase.bonusCondition
 
     if (bonusCondition === Conditions.BC_4_PLUS_1) {
       await PurchaseService.check4Plus1Condition(purchase)
@@ -71,41 +69,25 @@ const PurchaseService = {
   },
 
   check4Plus1Condition: async (purchase) => {
-    const count = await PurchaseService.countPurchasesByCondition(purchase, Conditions.BC_4_PLUS_1)
-    if (count >= 4) {
+    const count = await PurchaseService.countPreviousPurchases(purchase)
+    if (count > 0 && count % 4 === 0) {
       purchase.isBonus = true
     }
   },
 
   check5Plus1Condition: async (purchase) => {
-    const count = await PurchaseService.countPurchasesByCondition(purchase, Conditions.BC_5_PLUS_1)
-    if (count >= 5) {
+    const count = await PurchaseService.countPreviousPurchases(purchase)
+    if (count > 0 && count % 5 === 0) {
       purchase.isBonus = true
     }
   },
 
-  countPurchasesByCondition: async (purchase, bonusCondition) => {
-    const previousBonus = await Purchase.findOne({
+  countPreviousPurchases: async (purchase) => {
+    return Purchase.countDocuments({
       'buyer._id': purchase.buyer._id,
       'company._id': purchase.company._id,
-      'bonusCondition': bonusCondition,
-      'isBonus': true
-    }).sort({createdAt: 'desc'}).select('_id createdAt').lean()
-
-    const bonusQuery = {
-      'buyer._id': purchase.buyer._id,
-      'company._id': purchase.company._id,
-      'bonusCondition': bonusCondition,
       'isBonus': false,
-    }
-
-    if (previousBonus) {
-      bonusQuery.createdAt = {
-        $gt: previousBonus.createdAt
-      }
-    }
-
-    return Purchase.countDocuments(bonusQuery);
+    });
   }
 }
 

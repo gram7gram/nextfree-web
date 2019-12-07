@@ -42,7 +42,6 @@ describe('StoreRESTController for Admin', () => {
     const entity = {
       companyId: company._id,
       isEnabled: true,
-      bonusCondition: cid(),
       city: cid(),
       address: cid(),
       lng: 0,
