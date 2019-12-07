@@ -41,29 +41,41 @@ const PurchaseService = {
 
     const bonusCondition = purchase.bonusCondition
 
-    if (bonusCondition === Conditions.BC_4_PLUS_1) {
-      await PurchaseService.check4Plus1Condition(purchase)
-    } else if (bonusCondition === Conditions.BC_5_PLUS_1) {
-      await PurchaseService.check5Plus1Condition(purchase)
-    } else {
+    switch (bonusCondition) {
+      case Conditions.BC_4_PLUS_1:
+        await PurchaseService.check4Plus1Condition(purchase)
+        break;
+      case Conditions.BC_5_PLUS_1:
+        await PurchaseService.check5Plus1Condition(purchase)
+        break;
+      case Conditions.BC_6_PLUS_1:
+        await PurchaseService.check6Plus1Condition(purchase)
+        break;
+      case Conditions.BC_7_PLUS_1:
+        await PurchaseService.check7Plus1Condition(purchase)
+        break;
+      case Conditions.BC_9_PLUS_1:
+        await PurchaseService.check9Plus1Condition(purchase)
+        break;
+      default:
 
-      if (purchase.store) {
-        throw {
-          code: 501,
-          message: i18n.t('unknown_store_condition')
-            .replace('_CONDITION_', bonusCondition)
-            .replace('_STORE_', purchase.store.address)
+        if (purchase.store) {
+          throw {
+            code: 501,
+            message: i18n.t('unknown_store_condition')
+              .replace('_CONDITION_', bonusCondition)
+              .replace('_STORE_', purchase.store.address)
+          }
         }
-      }
 
-      if (purchase.company) {
-        throw {
-          code: 501,
-          message: i18n.t('unknown_company_condition')
-            .replace('_CONDITION_', bonusCondition)
-            .replace('_COMPANY_', purchase.company.name)
+        if (purchase.company) {
+          throw {
+            code: 501,
+            message: i18n.t('unknown_company_condition')
+              .replace('_CONDITION_', bonusCondition)
+              .replace('_COMPANY_', purchase.company.name)
+          }
         }
-      }
     }
 
   },
@@ -78,6 +90,27 @@ const PurchaseService = {
   check5Plus1Condition: async (purchase) => {
     const count = await PurchaseService.countPreviousPurchases(purchase)
     if (count > 0 && count % 5 === 0) {
+      purchase.isBonus = true
+    }
+  },
+
+  check6Plus1Condition: async (purchase) => {
+    const count = await PurchaseService.countPreviousPurchases(purchase)
+    if (count > 0 && count % 6 === 0) {
+      purchase.isBonus = true
+    }
+  },
+
+  check7Plus1Condition: async (purchase) => {
+    const count = await PurchaseService.countPreviousPurchases(purchase)
+    if (count > 0 && count % 7 === 0) {
+      purchase.isBonus = true
+    }
+  },
+
+  check9Plus1Condition: async (purchase) => {
+    const count = await PurchaseService.countPreviousPurchases(purchase)
+    if (count > 0 && count % 9 === 0) {
       purchase.isBonus = true
     }
   },
