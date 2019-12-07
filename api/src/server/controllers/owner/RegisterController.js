@@ -3,7 +3,6 @@ const ErrorHandler = require('../../services/ErrorHandler')
 const Condition = require('../../../BonusCondition')
 
 const CompanyService = require('../../services/CompanyService')
-const StoreService = require('../../services/StoreService')
 const OwnerService = require('../../services/OwnerService')
 const OwnerEmailService = require('../../services/OwnerEmailService')
 
@@ -27,18 +26,11 @@ router.post('/owner-register', async (req, res) => {
       bonusCondition: Condition.BC_4_PLUS_1
     })
 
-    const storeEntity = await StoreService.create({
-      companyId: companyEntity._id,
-      bonusCondition: companyEntity.bonusCondition,
-      isEnabled: false,
-    })
-
     await OwnerEmailService.onAccountActivation(entity)
 
     res.status(201).json({
       owner: OwnerService.serialize(entity),
       company: CompanyService.serialize(companyEntity),
-      store: StoreService.serialize(storeEntity),
     })
 
   } catch (e) {

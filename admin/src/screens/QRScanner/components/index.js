@@ -7,6 +7,7 @@ import Scanner from 'qr-scanner'
 import {MODEL_CHANGED, RESET} from "../actions";
 import Errors from "../../../components/Errors";
 import FetchStores from '../../Store/actions/Fetch';
+import {stopVideoStreams} from '../../../utils/camera';
 
 Scanner.WORKER_PATH = '/qr-scanner-worker.min.js';
 
@@ -67,13 +68,17 @@ class QRScanner extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
 
     this.stopScanner()
 
+    await stopVideoStreams()
+
     try {
-      if (this.htmlVideo.current)
+      if (this.htmlVideo.current) {
         this.htmlVideo.current.pause()
+        this.htmlVideo.current.srcObject = null
+      }
     } catch (e) {
       console.log(e);
     }

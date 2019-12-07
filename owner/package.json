@@ -34,6 +34,7 @@
     "react": "^16.9.0",
     "react-datepicker": "^2.10.0",
     "react-dom": "^16.9.0",
+    "react-gtm-module": "^2.0.8",
     "react-intl-tel-input": "^7.1.0",
     "react-paginate": "^6.3.0",
     "react-redux": "^7.1.1",

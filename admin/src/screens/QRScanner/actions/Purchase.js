@@ -11,13 +11,13 @@ export default (model) => (dispatch, getState) => {
   let promise
 
   if (state.App.isStaff) {
-    promise = request.post(parameters.apiHost + `/api/v1/staff/users/${model.userId}/purchases`, null, {
+    promise = request.post(parameters.apiHost + `/api/v1/staff/users/${model.userId}/purchases`, model, {
       headers: {
         Authorization: token
       }
     })
   } else if (state.App.isOwner) {
-    promise = request.post(parameters.apiHost + `/api/v1/owner/users/${model.userId}/purchases`, null, {
+    promise = request.post(parameters.apiHost + `/api/v1/owner/users/${model.userId}/purchases`, model, {
       headers: {
         Authorization: token
       }

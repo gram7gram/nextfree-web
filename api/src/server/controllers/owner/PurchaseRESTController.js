@@ -20,9 +20,18 @@ router.post('/users/:id/purchases', isOwner, checkId, async (req, res) => {
 
     const owner = {...req.currentUser.user}
 
-    const company = await CompanyRepository.findOneByFilter({
-      ownerId: owner._id,
-    })
+    let company
+    if (req.body.companyId) {
+      company = await CompanyRepository.findOneByFilter({
+        _id: req.body.companyId,
+        ownerId: owner._id,
+      })
+    } else {
+      company = await CompanyRepository.findOneByFilter({
+        ownerId: owner._id,
+      })
+    }
+
     if (!company) {
       throw {
         code: 404,
@@ -37,9 +46,17 @@ router.post('/users/:id/purchases', isOwner, checkId, async (req, res) => {
       }
     }
 
-    const store = await StoreRepository.findOneByFilter({
-      companyId: company._id,
-    })
+    let store
+    if (req.body.storeId) {
+      store = await StoreRepository.findOneByFilter({
+        _id: req.body.storeId,
+        companyId: company._id,
+      })
+    } else {
+      store = await StoreRepository.findOneByFilter({
+        companyId: company._id,
+      })
+    }
 
     if (!store) {
       throw {

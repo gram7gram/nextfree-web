@@ -12,7 +12,7 @@ export default (model) => (dispatch, getState) => {
     type: SAVE_BEFORE
   })
 
-  request.post(parameters.apiHost + `/api/v1/staff/users/${model.userId}/purchases`, null, {
+  request.post(parameters.apiHost + `/api/v1/staff/users/${model.userId}/purchases`, model, {
     headers: {
       Authorization: token
     }
