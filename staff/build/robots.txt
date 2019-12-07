@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: https://staff.nextfree.com.ua/sitemap.xml
+Allow: /
