@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import './style/style.css';
 import './style/qr-scan.css';
+import './style/avatar.css';
 
 import * as Sentry from '@sentry/browser';
 import TagManager from "react-gtm-module";

@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
-import * as StoreAction from '../../Store/actions'
 
 const userId = (prev = null, action) => {
   switch (action.type) {
@@ -33,13 +32,6 @@ const storeId = (prev = null, action) => {
   switch (action.type) {
     case Action.RESET:
       return null
-    case StoreAction.FETCH_SUCCESS:
-      if (!prev && action.payload.items) {
-        if (action.payload.items.length > 0) {
-          return action.payload.items[0]._id
-        }
-      }
-      return prev
     case Action.MODEL_CHANGED:
       if (action.payload.storeId !== undefined) {
         return action.payload.storeId

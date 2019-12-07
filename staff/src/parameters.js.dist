@@ -1,16 +1,10 @@
 const env = process.env.NODE_ENV || 'production'
 
 const config = {
-  development: {
-    host: 'https://staff.nextfree.com.ua',
-    apiHost: 'http://0.0.0.0:7601',
-    gtm: {
-      enabled: false,
-      id: 'UA-154091628-3'
-    }
-  },
+  development: {},
   production: {
     host: 'https://staff.nextfree.com.ua',
+    storageHost: 'https://storage.nextfree.com.ua',
     apiHost: 'https://api.nextfree.com.ua',
     gtm: {
       enabled: true,

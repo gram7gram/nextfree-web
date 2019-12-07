@@ -28,7 +28,7 @@ const ProfileSidebar = (props) => {
       </div>
       <div className="card-footer p-1">
         <label className="btn btn-secondary btn-sm m-0">
-          <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
+          <i className="fa fa-upload"/>&nbsp;{i18n.t('profile.upload_action')}
           <input type="file" className="d-none"
                  onChange={setAvatar}
                  disabled={isLoading}/>
