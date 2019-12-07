@@ -4,8 +4,6 @@ import {FILTER_CHANGED} from '../actions';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Card from "./Card";
-import Paginator from "../../../components/Paginator";
-import Loading from "../../../components/Loading";
 import {Link} from "react-router-dom";
 import FetchCompanies from "../../Company/actions/Fetch";
 import * as Pages from "../../../router/Pages";
@@ -28,23 +26,11 @@ class Store extends React.Component {
     })
   }
 
-  renderPagination = () => {
-    const {isLoading, page, limit, total} = this.props.Store
-
-    if (isLoading) return <Loading/>
-
-    return <Paginator
-      onChange={this.changePage}
-      total={total}
-      limit={limit}
-      page={page}/>
-
-  }
-
   renderContent = () => {
-    const {items} = this.props.Store
+    const {items, isLoading} = this.props.Store
 
     if (items.length === 0) {
+      if (!isLoading)
       return <div className="text-center pt-4">
         <h4>{i18n.t('store.not_found_title')}</h4>
       </div>
@@ -78,11 +64,6 @@ class Store extends React.Component {
               <div className="row">
                 <div className="col-12">
                   {this.renderContent()}
-                </div>
-              </div>
-              <div className="row my-2">
-                <div className="col-auto mx-auto">
-                  {this.renderPagination()}
                 </div>
               </div>
             </div>

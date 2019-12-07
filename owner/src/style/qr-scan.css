@@ -64,15 +64,3 @@
 .qr-scanner-overlay {
     z-index: 100;
 }
-
-.qr-toolbar.no-result {
-    opacity: 0.5;
-    transition: opacity .3s, bottom .3s;
-}
-
-.qr-toolbar:hover,
-.qr-toolbar.has-result {
-    opacity: 1;
-    bottom: 0;
-    transition: opacity .3s, bottom .3s;
-}

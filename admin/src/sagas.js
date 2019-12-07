@@ -13,6 +13,7 @@ import Customer from './screens/Customer/sagas';
 import CustomerEdit from './screens/CustomerEdit/sagas';
 import Owner from './screens/Owner/sagas';
 import OwnerEdit from './screens/OwnerEdit/sagas';
+import QRScanner from './screens/QRScanner/sagas';
 
 export default function* root() {
   yield all([
@@ -29,5 +30,6 @@ export default function* root() {
     fork(CustomerEdit),
     fork(Owner),
     fork(OwnerEdit),
+    fork(QRScanner),
   ]);
 }

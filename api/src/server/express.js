@@ -41,6 +41,7 @@ const CustomerLoginController = require('./controllers/customer/LoginController'
 const CustomerSecurityController = require('./controllers/customer/SecurityController');
 
 const BonusConditionController = require('./controllers/BonusConditionController');
+const UserRESTController = require('./controllers/UserRESTController');
 
 const app = express();
 
@@ -84,6 +85,10 @@ app.use('/api/v1', CustomerPasswordController);
 app.use('/api/v1', StaffPasswordController);
 app.use('/api/v1', OwnerPasswordController);
 
+//Private API
+app.use('/api/v1', BonusConditionController);
+app.use('/api/v1', UserRESTController);
+
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);
 app.use('/api/v1/admin', AdminOwnerRESTController);
@@ -107,9 +112,6 @@ app.use('/api/v1/staff', StaffSecurityController);
 //Customer API
 app.use('/api/v1/customer', CustomerProfileController);
 app.use('/api/v1/customer', CustomerSecurityController);
-
-//Private API
-app.use('/api/v1', BonusConditionController);
 
 app.all('*', (req, res) => {
   res.status(404).json({

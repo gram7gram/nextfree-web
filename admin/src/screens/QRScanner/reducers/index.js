@@ -4,6 +4,7 @@ import model from './model'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
+    case Action.FETCH_USER_FAILURE:
     case Action.SAVE_FAILURE:
       if (action.payload.data && action.payload.data.message !== undefined) {
         return [
@@ -46,6 +47,19 @@ const isSuccess = (prev = false, action) => {
   }
 }
 
+const isLoadingUser = (prev = false, action) => {
+  switch (action.type) {
+    case Action.FETCH_USER_BEFORE:
+      return true
+    case Action.RESET:
+    case Action.FETCH_USER_SUCCESS:
+    case Action.FETCH_USER_FAILURE:
+      return false
+    default:
+      return prev
+  }
+}
+
 const purchase = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
@@ -63,6 +77,7 @@ export default combineReducers({
   model,
   purchase,
   isSuccess,
+  isLoadingUser,
   isLoading,
   serverErrors,
 })

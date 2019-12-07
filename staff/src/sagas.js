@@ -6,6 +6,7 @@ import ProfileSecurity from './screens/ProfileSecurity/sagas';
 import PasswordSet from './screens/PasswordSet/sagas';
 import PasswordReset from './screens/PasswordReset/sagas';
 import Invitation from './screens/Invitation/sagas';
+import QRScanner from './screens/QRScanner/sagas';
 
 export default function* root() {
   yield all([
@@ -15,5 +16,6 @@ export default function* root() {
     fork(PasswordSet),
     fork(PasswordReset),
     fork(Invitation),
+    fork(QRScanner),
   ]);
 }
