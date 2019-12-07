@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.1613c4d3.chunk.css",
-    "main.js": "/static/js/main.6648f11f.chunk.js",
-    "main.js.map": "/static/js/main.6648f11f.chunk.js.map",
+    "main.css": "/static/css/main.6721cd0d.chunk.css",
+    "main.js": "/static/js/main.e133d6b1.chunk.js",
+    "main.js.map": "/static/js/main.e133d6b1.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/css/2.3c8d98f3.chunk.css": "/static/css/2.3c8d98f3.chunk.css",
-    "static/js/2.13418c54.chunk.js": "/static/js/2.13418c54.chunk.js",
-    "static/js/2.13418c54.chunk.js.map": "/static/js/2.13418c54.chunk.js.map",
+    "static/css/2.ae19aa34.chunk.css": "/static/css/2.ae19aa34.chunk.css",
+    "static/js/2.83778fce.chunk.js": "/static/js/2.83778fce.chunk.js",
+    "static/js/2.83778fce.chunk.js.map": "/static/js/2.83778fce.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7c3950dbfdf94d0837e3e5958bda9c71.js": "/precache-manifest.7c3950dbfdf94d0837e3e5958bda9c71.js",
+    "precache-manifest.881ee716aa311ff93b916b47c4c3cbef.js": "/precache-manifest.881ee716aa311ff93b916b47c4c3cbef.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.3c8d98f3.chunk.css.map": "/static/css/2.3c8d98f3.chunk.css.map",
-    "static/css/main.1613c4d3.chunk.css.map": "/static/css/main.1613c4d3.chunk.css.map",
+    "static/css/2.ae19aa34.chunk.css.map": "/static/css/2.ae19aa34.chunk.css.map",
+    "static/css/main.6721cd0d.chunk.css.map": "/static/css/main.6721cd0d.chunk.css.map",
     "static/media/avatar-unknown.png": "/static/media/avatar-unknown.64f0feb7.png",
     "static/media/company-placeholder.png": "/static/media/company-placeholder.b56e3346.png",
     "static/media/loading.gif": "/static/media/loading.de50e2e9.gif",
     "static/media/scanner.jpg": "/static/media/scanner.a308c60e.jpg",
-    "static/media/staff-placeholder.png": "/static/media/staff-placeholder.dc4ad0a3.png",
     "static/media/store-placeholder.png": "/static/media/store-placeholder.0995afa5.png"
   }
 }

@@ -26,6 +26,8 @@ services:
 #      - '/etc/letsencrypt/live/admin.nextfree.com.ua/privkey.pem:/etc/nginx/certs/admin.nextfree.com.ua.key'
 #      - '/etc/letsencrypt/live/staff.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/staff.nextfree.com.ua.crt'
 #      - '/etc/letsencrypt/live/staff.nextfree.com.ua/privkey.pem:/etc/nginx/certs/staff.nextfree.com.ua.key'
+#      - '/etc/letsencrypt/live/storage.nextfree.com.ua/fullchain.pem:/etc/nginx/certs/storage.nextfree.com.ua.crt'
+#      - '/etc/letsencrypt/live/storage.nextfree.com.ua/privkey.pem:/etc/nginx/certs/storage.nextfree.com.ua.key'
 
   www:
     build: ./www/env
@@ -37,6 +39,17 @@ services:
       - backend
     volumes:
       - './www:/var/www'
+
+  storage:
+    build: ./storage/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=storage.nextfree.com.ua
+    networks:
+      - backend
+    volumes:
+      - './storage:/var/www'
 
   api:
     build: ./api/env
