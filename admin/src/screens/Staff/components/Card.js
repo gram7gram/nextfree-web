@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import * as Pages from '../../../router/Pages';
-import avatar from '../../../assets/img/staff-placeholder.png';
 import {createStructuredSelector} from "reselect";
 import {connect} from "react-redux";
 import i18n from "../../../i18n";
+import Avatar from "../../../components/Avatar";
 
 const Card = ({model, companies}) => {
 
@@ -24,7 +24,7 @@ const Card = ({model, companies}) => {
       </div>
 
       <div className="card-image">
-        <img src={avatar} alt="" className="img-fluid"/>
+        <Avatar src={model.user.avatar}/>
       </div>
       <div className="card-footer p-1">
         <h5 className="m-0 text-truncate">{name}</h5>

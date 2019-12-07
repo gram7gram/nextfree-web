@@ -16,6 +16,26 @@ const id = (prev = null, action) => {
   }
 }
 
+const avatar = (prev = null, action) => {
+  switch (action.type) {
+    case Action.RESET:
+      return null
+    case Action.FETCH_SUCCESS:
+    case Action.SAVE_SUCCESS:
+      if (action.flatten['user.avatar'] !== undefined) {
+        return action.flatten['user.avatar']
+      }
+      return null
+    case Action.MODEL_CHANGED:
+      if (action.payload['user.avatar'] !== undefined) {
+        return action.payload['user.avatar']
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
 const isAdmin = (prev = null, action) => {
   switch (action.type) {
     case Action.RESET:
@@ -133,6 +153,7 @@ const phone = (prev = null, action) => {
 
 export default combineReducers({
   id,
+  avatar,
   isAdmin,
   email,
   firstName,

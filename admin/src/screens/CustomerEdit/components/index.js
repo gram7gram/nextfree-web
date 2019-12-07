@@ -11,6 +11,8 @@ import Date from "../../../components/Date";
 import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
 import password from "../../../utils/password";
+import Upload from "../actions/Upload";
+import Avatar from "../../../components/Avatar";
 
 class CustomerEdit extends React.Component {
 
@@ -83,6 +85,15 @@ class CustomerEdit extends React.Component {
 
   changePhone = name => e => {
     this.change(name, e.target.value.replace(/[^\d+]/g, ''))
+  }
+
+  setAvatar = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    this.props.dispatch(Upload(file))
+
+    e.target.value = null
   }
 
   getError = key => {
@@ -239,7 +250,24 @@ class CustomerEdit extends React.Component {
     return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12">
+        <div className="col-12 col-md-4 col-lg-3 text-center">
+
+          <div className="card">
+            <div className="card-body">
+              <Avatar src={model.user.avatar}/>
+            </div>
+            <div className="card-footer p-1">
+              <label className="btn btn-secondary btn-sm m-0">
+                <i className="fa fa-upload"/>&nbsp;{i18n.t('customer_edit.upload_action')}
+                <input type="file" className="d-none"
+                       onChange={this.setAvatar}
+                       disabled={isLoading}/>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12 col-md-8 col-lg-9">
 
           <Errors errors={serverErrors}/>
 

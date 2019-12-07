@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import * as Pages from '../../../router/Pages';
-import avatar from '../../../assets/img/company-placeholder.png';
 import i18n from "../../../i18n";
 import {createStructuredSelector} from "reselect";
 import {connect} from "react-redux";
+import Logotype from "../../../components/Logotype";
 
 const Card = ({model, owners}) => {
 
@@ -27,7 +27,7 @@ const Card = ({model, owners}) => {
       </div>
 
       <div className="card-image">
-        <img src={avatar} alt="" className="img-fluid "/>
+        <Logotype src={model.logo}/>
       </div>
       <div className="card-footer p-1">
         <p className="m-0 text-truncate">{model.name}</p>

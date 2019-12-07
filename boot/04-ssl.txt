@@ -2,6 +2,7 @@ apt install certbot
 
 certbot delete -d nextfree.com.ua \
     -d api.nextfree.com.ua \
+    -d storage.nextfree.com.ua \
     -d admin.nextfree.com.ua \
     -d customer.nextfree.com.ua \
     -d staff.nextfree.com.ua \
@@ -11,6 +12,11 @@ certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/www/public \
     -m gram7gram@gmail.com \
     -d nextfree.com.ua
+
+certbot certonly \
+    --webroot --webroot-path /var/www/nextfree-web/storage/public \
+    -m gram7gram@gmail.com \
+    -d storage.nextfree.com.ua
 
 certbot certonly \
     --webroot --webroot-path /var/www/nextfree-web/api/public \

@@ -23,6 +23,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  avatar: {
+    type: String,
+    required: false
+  },
   isAdmin: {
     type: Boolean,
     required: false

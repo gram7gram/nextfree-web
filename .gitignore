@@ -3,18 +3,23 @@ api/node_modules
 owner/node_modules
 staff/node_modules
 admin/node_modules
+storage/node_modules
 
 admin/package-lock.json
 staff/package-lock.json
 customer/package-lock.json
 api/package-lock.json
 owner/package-lock.json
+storage/package-lock.json
 
 admin/src/parameters.js
 staff/src/parameters.js
 customer/src/parameters.js
 owner/src/parameters.js
 api/parameters.js
+storage/parameters.js
+
+storage/public/u/*
 
 docker-compose.yml
 
@@ -24,6 +29,7 @@ api/env/Dockerfile
 customer/env/Dockerfile
 www/env/Dockerfile
 owner/env/Dockerfile
+storage/env/Dockerfile
 
 .persistency
 *.zip

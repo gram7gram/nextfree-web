@@ -10,6 +10,8 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
+import Logotype from "../../../components/Logotype";
+import Upload from "../actions/Upload";
 
 class CompanyEdit extends React.Component {
 
@@ -74,6 +76,15 @@ class CompanyEdit extends React.Component {
 
   setCondition = value => () => this.change('bonusCondition', value)
 
+  setLogotype = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    this.props.dispatch(Upload(file))
+
+    e.target.value = null
+  }
+
   getError = key => {
     const {errors} = this.props.CompanyEdit.validator
 
@@ -103,7 +114,24 @@ class CompanyEdit extends React.Component {
     return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12">
+        <div className="col-12 col-md-4 col-lg-3 text-center">
+
+          <div className="card">
+            <div className="card-body">
+              <Logotype src={model.logo}/>
+            </div>
+            <div className="card-footer p-1">
+              <label className="btn btn-secondary btn-sm m-0">
+                <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
+                <input type="file" className="d-none"
+                       onChange={this.setLogotype}
+                       disabled={isLoading}/>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12 col-md-8 col-lg-9">
 
           <Errors errors={serverErrors}/>
 
