@@ -17,4 +17,6 @@ cp docker-compose.yml.dist docker-compose.yml \
  && cp customer/env/Dockerfile.dist customer/env/Dockerfile \
  && cp admin/src/parameters.js.dist admin/src/parameters.js \
  && cp admin/env/Dockerfile.dist admin/env/Dockerfile \
+ && cp storage/parameters.js.dist storage/parameters.js \
+ && cp storage/env/Dockerfile.dist storage/env/Dockerfile \
  && cp www/env/Dockerfile.dist www/env/Dockerfile
