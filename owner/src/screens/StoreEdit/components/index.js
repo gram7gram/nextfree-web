@@ -124,7 +124,7 @@ class StoreEdit extends React.Component {
 
   render() {
 
-    const {defaultCompany, conditions} = this.props
+    const {defaultCompany} = this.props
 
     const {
       model,

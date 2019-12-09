@@ -340,7 +340,7 @@ class QRScanner extends React.PureComponent {
               </div>
               : null}
 
-            {!this.state.hasCameraPermission
+            {this.state.hasCameraPermission === false
               ? <div className="text-danger mb-2">
                 <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.no_camera_permission')}
               </div>
@@ -365,7 +365,7 @@ class QRScanner extends React.PureComponent {
 
       <div className="qr-stack">
         <div className="qr-scanner-container text-center w-100">
-          <video ref={this.htmlVideo}
+          <video ref={this.htmlVideo} playsinline muted
                  className="img-fluid bg-secondary"/>
         </div>
 
