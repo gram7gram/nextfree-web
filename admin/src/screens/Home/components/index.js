@@ -5,6 +5,7 @@ import i18n from '../../../i18n';
 import * as Pages from '../../../router/Pages';
 import {createStructuredSelector} from "reselect";
 import img from "../../../assets/img/scanner.jpg";
+import {isIPhone, isSafari} from "../../../utils/ios";
 
 const Home = (props) => {
 
@@ -16,7 +17,11 @@ const Home = (props) => {
         <h1 className="mb-4">{i18n.t('home.welcome_title').replace('_NAME_', firstName || email)}</h1>
       </div>
       <div className="col-11 col-md-8 col-lg-6 mx-auto">
-        <img src={img} alt="" className="img-fluid shadow mb-4"/>
+        <img src={img} alt="" className="img-fluid shadow mb-3"/>
+
+        {isIPhone() && isSafari() ? <div className="alert alert-warning mb-3">
+          <i className="fa fa-warning"/>&nbsp;{i18n.t('home.ios_warning')}
+        </div> : null}
 
         <Link className="btn btn-success btn-lg"
               to={Pages.QR_SCAN}>{i18n.t('home.action')}</Link>

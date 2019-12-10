@@ -163,8 +163,8 @@ class QRScanner extends React.PureComponent {
       const buyer = purchase.buyer.user.lastName + ' ' + purchase.buyer.user.firstName
 
       return <div className="container-fluid fixed-bottom qr-toolbar">
-        <div className="row mb-4">
-          <div className="col-11 col-md-8 col-lg-6 mx-auto">
+        <div className="row mb-4 no-gutters">
+          <div className="col-12 col-md-8 col-lg-6 mx-auto">
             <div className="alert alert-success text-center">
               <h4>{i18n.t('qr_scanner.purchase_bonus_title')}</h4>
               <p>{i18n.t('qr_scanner.purchase_bonus_subtitle').replace('__NAME__', buyer)}</p>
@@ -179,8 +179,8 @@ class QRScanner extends React.PureComponent {
     }
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4">
-        <div className="col-11 col-md-8 col-lg-6 mx-auto">
+      <div className="row mb-4 no-gutters">
+        <div className="col-12 col-md-8 col-lg-6 mx-auto">
           <div className="alert alert-light text-center">
             <h4>{i18n.t('qr_scanner.purchase_success_title')}</h4>
             <p>{i18n.t('qr_scanner.purchase_success_subtitle')}</p>
@@ -226,16 +226,16 @@ class QRScanner extends React.PureComponent {
 
       {isOwner ? this.renderStore() : null}
 
-      <div className="row text-center">
+      <div className="row text-cente no-gutters">
 
-        <div className="col-12 col-md-6 text-center text-md-left">
+        <div className="col-5 col-md-6 text-center text-md-left">
           <button className="btn btn-outline-warning mr-1 mb-1"
                   onClick={this.setDefaults}>
             <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
           </button>
         </div>
 
-        <div className="col-12 col-md-6 text-center text-md-right">
+        <div className="col-7 col-md-6 text-center text-md-right">
           <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
                   onClick={this.purchase}
                   disabled={!isValid || isLoading}>
@@ -252,11 +252,11 @@ class QRScanner extends React.PureComponent {
     const {user} = this.props.QRScanner.model
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4">
-        <div className="col-11 col-md-8 col-lg-6 mx-auto">
+      <div className="row mb-4 no-gutters">
+        <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
           <div className="card">
-            <div className="card-body">
+            <div className="card-body px-2">
 
               <h4 className="text-center">
                 {i18n.t('qr_scanner.purchase_title_1')}
@@ -285,8 +285,8 @@ class QRScanner extends React.PureComponent {
 
       if (isLoadingUser) {
         return <div className="container-fluid fixed-bottom qr-toolbar">
-          <div className="row mb-4">
-            <div className="col-11 col-md-8 col-lg-6 mx-auto">
+          <div className="row mb-4 no-gutters">
+            <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
               <div className="alert alert-secondary">
                 <h4 className="m-0">{i18n.t('qr_scanner.searching')}</h4>
@@ -297,8 +297,8 @@ class QRScanner extends React.PureComponent {
       }
 
       return <div className="container-fluid fixed-bottom qr-toolbar">
-        <div className="row mb-4">
-          <div className="col-11 col-md-8 col-lg-6 mx-auto text-center">
+        <div className="row mb-4 no-gutters">
+          <div className="col-12 col-md-8 col-lg-6 mx-auto text-center">
 
             <div className="alert alert-danger">
               <h4 className="m-0">{serverErrors[0]}</h4>
@@ -319,8 +319,8 @@ class QRScanner extends React.PureComponent {
   renderStep1 = () => {
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4">
-        <div className="col-11 col-md-8 col-lg-6 mx-auto">
+      <div className="row mb-4 no-gutters">
+        <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
           <div className="alert alert-warning">
 
@@ -365,7 +365,7 @@ class QRScanner extends React.PureComponent {
 
       <div className="qr-stack">
         <div className="qr-scanner-container text-center w-100">
-          <video ref={this.htmlVideo} playsinline muted
+          <video ref={this.htmlVideo}  muted
                  className="img-fluid bg-secondary"/>
         </div>
 
