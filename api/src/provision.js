@@ -1,9 +1,12 @@
+const bcrypt = require('bcryptjs')
 const Owner = require('./database/model/Owner').Owner
 const Customer = require('./database/model/Customer').Customer
 const Staff = require('./database/model/Staff').Staff
 const Company = require('./database/model/Company').Company
 const Store = require('./database/model/Store').Store
 const Condition = require('./BonusCondition')
+
+const superpass = bcrypt.hashSync('nextfree', 10)
 
 const createAdminOwner = async () => {
   const admin = new Owner({
@@ -12,7 +15,7 @@ const createAdminOwner = async () => {
       email: 'admin@nextfree.com.ua',
       firstName: 'Admin',
       lastName: 'Owner',
-      password: 'nextfree',
+      password: superpass,
     },
     isEnabled: true
   })
@@ -31,7 +34,7 @@ const createOwner = async () => {
       email: 'owner@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Owner',
-      password: 'nextfree',
+      password: superpass,
     },
     isEnabled: true
   })
@@ -86,7 +89,7 @@ const createCustomer = async () => {
       email: 'customer@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Customer',
-      password: 'nextfree',
+      password: superpass,
     },
     isEnabled: true
   })
@@ -105,7 +108,7 @@ const createStaff = async () => {
       email: 'staff@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Staff',
-      password: 'nextfree',
+      password: superpass,
     },
     isEnabled: true
   })

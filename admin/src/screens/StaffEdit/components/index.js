@@ -15,6 +15,7 @@ import Password from "../../../components/PasswordInput";
 import password from "../../../utils/password";
 import Upload from "../actions/Upload";
 import Avatar from "../../../components/Avatar";
+import SaveSecurity from "../actions/SaveSecurity";
 
 class StaffEdit extends React.Component {
 
@@ -76,6 +77,12 @@ class StaffEdit extends React.Component {
     const {model} = this.props.StaffEdit
 
     this.props.dispatch(Save(model))
+  }
+
+  submitSecurity = () => {
+    const {model} = this.props.StaffEdit
+
+    this.props.dispatch(SaveSecurity(model))
   }
 
   change = (key, value = null) => this.props.dispatch({
@@ -196,14 +203,28 @@ class StaffEdit extends React.Component {
   }
 
   renderSecurity() {
-
-    const {model} = this.props.StaffEdit
+    const {model, isLoading, isValid} = this.props.StaffEdit
 
     return <div className="card mb-4">
       <div className="card-body">
 
-        <h4 className="card-title">{i18n.t('staff_edit.security_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_edit.security_subtitle')}</h6>
+        <div className="row">
+          <div className="col">
+
+            <h4 className="card-title">{i18n.t('staff_edit.security_title')}</h4>
+            <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_edit.security_subtitle')}</h6>
+
+          </div>
+          <div className="col-auto">
+
+            <button className="btn btn-success btn-sm"
+                    onClick={this.submitSecurity}
+                    disabled={isLoading || !isValid}>
+              <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
+              &nbsp;{i18n.t('staff_edit.save_action')}
+            </button>
+          </div>
+        </div>
 
         <form noValidate autoComplete="off">
           <div className="row">

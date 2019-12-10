@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const ErrorHandler = require('../../services/ErrorHandler')
 
 const i18n = require('../../../i18n').i18n
@@ -17,6 +18,15 @@ router.put('/customers/:id/security', checkId, isAdmin, async (req, res) => {
 
   try {
 
+    const {newPassword} = req.body
+
+    if (!newPassword) {
+      throw {
+        code: 400,
+        message: i18n.t('request.bad_request')
+      }
+    }
+
     const entity = await Customer.findById(req.params.id)
     if (!entity) {
       throw {
@@ -25,27 +35,11 @@ router.put('/customers/:id/security', checkId, isAdmin, async (req, res) => {
       }
     }
 
-    const {currentPassword, newPassword} = req.body
-
-    if (!(currentPassword && newPassword)) {
-      throw {
-        code: 400,
-        message: i18n.t('request.bad_request')
-      }
-    }
-
-    if (!entity.user.comparePassword(currentPassword)) {
-      throw {
-        code: 403,
-        message: i18n.t('reset_password.mismatch')
-      }
-    }
-
-    entity.user.password = newPassword;
+    entity.user.password = bcrypt.hashSync(newPassword, 10);
 
     await entity.save()
 
-    res.status(201).json(CustomerService.serialize(entity))
+    res.status(201).json(CustomerService.serialize(entity.toObject()))
 
   } catch (e) {
     ErrorHandler.handle(res, e)
@@ -56,6 +50,15 @@ router.put('/staff/:id/security', checkId, isAdmin, async (req, res) => {
 
   try {
 
+    const {newPassword} = req.body
+
+    if (!newPassword) {
+      throw {
+        code: 400,
+        message: i18n.t('request.bad_request')
+      }
+    }
+
     const entity = await Staff.findById(req.params.id)
     if (!entity) {
       throw {
@@ -64,27 +67,11 @@ router.put('/staff/:id/security', checkId, isAdmin, async (req, res) => {
       }
     }
 
-    const {currentPassword, newPassword} = req.body
-
-    if (!(currentPassword && newPassword)) {
-      throw {
-        code: 400,
-        message: i18n.t('request.bad_request')
-      }
-    }
-
-    if (!entity.user.comparePassword(currentPassword)) {
-      throw {
-        code: 403,
-        message: i18n.t('reset_password.mismatch')
-      }
-    }
-
-    entity.user.password = newPassword;
+    entity.user.password = bcrypt.hashSync(newPassword, 10);
 
     await entity.save()
 
-    res.status(201).json(StaffService.serialize(entity))
+    res.status(201).json(StaffService.serialize(entity.toObject()))
 
   } catch (e) {
     ErrorHandler.handle(res, e)
@@ -95,6 +82,15 @@ router.put('/owners/:id/security', checkId, isAdmin, async (req, res) => {
 
   try {
 
+    const {newPassword} = req.body
+
+    if (!newPassword) {
+      throw {
+        code: 400,
+        message: i18n.t('request.bad_request')
+      }
+    }
+
     const entity = await Owner.findById(req.params.id)
     if (!entity) {
       throw {
@@ -103,27 +99,11 @@ router.put('/owners/:id/security', checkId, isAdmin, async (req, res) => {
       }
     }
 
-    const {currentPassword, newPassword} = req.body
-
-    if (!(currentPassword && newPassword)) {
-      throw {
-        code: 400,
-        message: i18n.t('request.bad_request')
-      }
-    }
-
-    if (!entity.user.comparePassword(currentPassword)) {
-      throw {
-        code: 403,
-        message: i18n.t('reset_password.mismatch')
-      }
-    }
-
-    entity.user.password = newPassword;
+    entity.user.password = bcrypt.hashSync(newPassword, 10);
 
     await entity.save()
 
-    res.status(201).json(OwnerService.serialize(entity))
+    res.status(201).json(OwnerService.serialize(entity.toObject()))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

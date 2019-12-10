@@ -1,4 +1,5 @@
 import React from 'react';
+import {captureException} from '@sentry/browser';
 import {connect} from 'react-redux';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
@@ -49,6 +50,7 @@ class QRScanner extends React.PureComponent {
             })
           } catch (e) {
             console.log(e);
+            captureException(e)
 
             this.setState({
               hasCameraPermission: false

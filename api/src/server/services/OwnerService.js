@@ -5,7 +5,7 @@ const i18n = require('../../i18n').i18n
 
 const OwnerService = {
 
-  serialize: entity => {
+  serialize: function (entity) {
     const result = {...entity}
 
     if (result.user)
@@ -14,17 +14,21 @@ const OwnerService = {
     return result
   },
 
-  create: async (content) => {
+  create: async function (content) {
     const entity = new Owner({
       user: {
         activationToken: uuid()
       }
     })
 
-    return await OwnerService.update(entity, content)
+    return await this.update(entity, content)
   },
 
-  update: async (entity, content) => {
+  update: async function (entity, content) {
+
+    delete entity.user.password;
+    if (content.user)
+      delete content.user.password;
 
     entity.set(
       _merge(entity.toObject(), content)
@@ -59,7 +63,7 @@ const OwnerService = {
     return result.toObject()
   },
 
-  remove: async id => {
+  remove: async function (id) {
     await Owner.deleteOne({_id: id})
   },
 

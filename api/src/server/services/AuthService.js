@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const params = require('../../../parameters')
 const i18n = require('../../i18n').i18n
 
@@ -208,7 +209,7 @@ const authorizeStaffByEmailPassword = async (email, password) => {
     }
   }
 
-  if (!entity.user.comparePassword(password)) {
+  if (!bcrypt.compareSync(password, entity.user.password)) {
     throw {
       code: 401,
       message: i18n.t('login.bad_credentials')
@@ -274,7 +275,7 @@ const authorizeOwnerByEmailPassword = async (email, password) => {
     }
   }
 
-  if (!entity.user.comparePassword(password)) {
+  if (!bcrypt.compareSync(password, entity.user.password)) {
     throw {
       code: 401,
       message: i18n.t('login.bad_credentials')
@@ -341,7 +342,7 @@ const authorizeCustomerByEmailPassword = async (email, password) => {
     }
   }
 
-  if (!entity.user.comparePassword(password)) {
+  if (!bcrypt.compareSync(password, entity.user.password)) {
     throw {
       code: 401,
       message: i18n.t('login.bad_credentials')

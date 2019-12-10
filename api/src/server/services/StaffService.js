@@ -27,6 +27,10 @@ const StaffService = {
 
   update: async (entity, content) => {
 
+    delete entity.user.password;
+    if (content.user)
+      delete content.user.password;
+
     entity.set(
       _merge(entity.toObject(), content)
     )
@@ -55,9 +59,9 @@ const StaffService = {
       }
     }
 
-    await entity.save()
+    const result = await entity.save()
 
-    return entity.toObject()
+    return result.toObject()
   },
 
   remove: async id => {

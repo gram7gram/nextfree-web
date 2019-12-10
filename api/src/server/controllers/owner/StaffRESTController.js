@@ -246,7 +246,7 @@ router.put('/companies/:company/staff/:id', isOwner, checkCompanyId, checkId, as
           ]
         }
       ]
-    })
+    }).select('-user.password')
     if (!entity) {
       res.status(404).json({
         message: i18n.t('request.not_found')

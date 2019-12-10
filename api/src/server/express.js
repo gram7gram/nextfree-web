@@ -13,6 +13,7 @@ const AdminStaffRESTController = require('./controllers/admin/StaffRESTControlle
 const AdminStoreRESTController = require('./controllers/admin/StoreRESTController');
 const AdminOwnerRESTController = require('./controllers/admin/OwnerRESTController');
 const AdminLoginController = require('./controllers/admin/LoginController');
+const AdminSecurityController = require('./controllers/admin/SecurityController');
 
 const OwnerCompanyRESTController = require('./controllers/owner/CompanyRESTController');
 const OwnerProfileController = require('./controllers/owner/ProfileController');
@@ -95,6 +96,7 @@ app.use('/api/v1/admin', AdminOwnerRESTController);
 app.use('/api/v1/admin', AdminStoreRESTController);
 app.use('/api/v1/admin', AdminStaffRESTController);
 app.use('/api/v1/admin', AdminCustomerRESTController);
+app.use('/api/v1/admin', AdminSecurityController);
 
 //Owner API
 app.use('/api/v1/owner', OwnerCompanyRESTController);

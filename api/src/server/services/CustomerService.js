@@ -26,6 +26,10 @@ const CustomerService = {
 
   update: async (entity, content) => {
 
+    delete entity.user.password;
+    if (content.user)
+      delete content.user.password;
+
     entity.set(
       _merge(entity.toObject(), content)
     )
