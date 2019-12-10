@@ -116,11 +116,26 @@ const PurchaseService = {
   },
 
   countPreviousPurchases: async (purchase) => {
-    return Purchase.countDocuments({
+
+    const previousBonus = await Purchase.findOne({
+      'buyer._id': purchase.buyer._id,
+      'company._id': purchase.company._id,
+      'isBonus': true
+    }).sort({createdAt: 'desc'}).select('_id createdAt').lean()
+
+    const bonusQuery = {
       'buyer._id': purchase.buyer._id,
       'company._id': purchase.company._id,
       'isBonus': false,
-    });
+    }
+
+    if (previousBonus) {
+      bonusQuery.createdAt = {
+        $gt: previousBonus.createdAt
+      }
+    }
+
+    return await Purchase.countDocuments(bonusQuery)
   }
 }
 
