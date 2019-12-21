@@ -24,7 +24,7 @@ process.on('unhandledRejection', (reason, p) => {
 const db = require('./database/mongo');
 
 db.connect()
-  // .then(provision)
+  .then(provision)
   .catch(e => {
     console.error(e)
   })

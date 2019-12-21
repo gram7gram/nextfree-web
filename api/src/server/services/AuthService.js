@@ -198,7 +198,7 @@ const verifyToken = token => {
 
 
 const authorizeStaffByEmailPassword = async (email, password) => {
-  const entity = await Staff.findOne({"user.email": email})
+  const entity = await Staff.findOne({"user.email": email}).lean()
 
   if (!entity) return null
 
@@ -216,7 +216,7 @@ const authorizeStaffByEmailPassword = async (email, password) => {
     }
   }
 
-  return await authorizeStaff(entity.toObject())
+  return await authorizeStaff(entity)
 }
 
 const authorizeStaffById = async (id) => {
@@ -264,7 +264,7 @@ const authorizeStaff = async (staff) => {
 
 
 const authorizeOwnerByEmailPassword = async (email, password) => {
-  const entity = await Owner.findOne({"user.email": email})
+  const entity = await Owner.findOne({"user.email": email}).lean()
 
   if (!entity) return null
 
@@ -282,7 +282,7 @@ const authorizeOwnerByEmailPassword = async (email, password) => {
     }
   }
 
-  return await authorizeOwner(entity.toObject())
+  return await authorizeOwner(entity)
 }
 
 const authorizeOwnerById = async (id) => {
@@ -331,7 +331,7 @@ const authorizeOwner = async (owner) => {
 
 
 const authorizeCustomerByEmailPassword = async (email, password) => {
-  const entity = await Customer.findOne({"user.email": email})
+  const entity = await Customer.findOne({"user.email": email}).lean()
 
   if (!entity) return null
 
@@ -349,7 +349,7 @@ const authorizeCustomerByEmailPassword = async (email, password) => {
     }
   }
 
-  return authorizeCustomer(entity.toObject())
+  return authorizeCustomer(entity)
 }
 
 const authorizeCustomerById = async (id) => {
