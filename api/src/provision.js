@@ -136,6 +136,8 @@ const start = async () => {
   await createStaff()
 
   await createCustomer()
+
+  console.log('Completed provision!')
 }
 
 module.exports = start

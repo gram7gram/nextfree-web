@@ -1,6 +1,5 @@
 const Sentry = require('@sentry/node')
 const parameters = require('../parameters')
-const provision = require('./provision')
 
 const env = process.env.NODE_ENV || 'production'
 
@@ -24,7 +23,8 @@ process.on('unhandledRejection', (reason, p) => {
 const db = require('./database/mongo');
 
 db.connect()
-  // .then(provision)
+  // .then(require('./provision'))
+  .then(require('./migration'))
   .catch(e => {
     console.error(e)
   })
