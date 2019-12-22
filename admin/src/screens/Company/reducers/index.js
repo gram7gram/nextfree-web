@@ -10,6 +10,18 @@ const items = (prev = [], action) => {
   }
 }
 
+const search = (prev = '', action) => {
+  switch (action.type) {
+    case Action.FILTER_CHANGED:
+      if (action.payload.search !== undefined) {
+        return action.payload.search
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
 const page = (prev = 1, action) => {
   switch (action.type) {
     case Action.FETCH_SUCCESS:
@@ -51,6 +63,7 @@ const isLoading = (prev = false, action) => {
 
 export default combineReducers({
   items,
+  search,
   isLoading,
   page,
   limit,

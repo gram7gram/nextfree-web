@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import * as Pages from "../router/Pages";
 import {LOGOUT, TOGGLE_MENU} from "../screens/Login/actions";
 
 const Navigation = (props) => {
 
+  const dispatch = useDispatch()
+
   const hideMobileNavigation = () => {
-    props.dispatch({
+    dispatch({
       type: TOGGLE_MENU,
       payload: false
     })
@@ -19,14 +21,14 @@ const Navigation = (props) => {
   const toggleMobileNavigation = () => {
     const {isMobileMenuVisible} = props.Nav
 
-    props.dispatch({
+    dispatch({
       type: TOGGLE_MENU,
       payload: !isMobileMenuVisible
     })
   }
 
   const logout = () => {
-    props.dispatch({
+    dispatch({
       type: LOGOUT
     })
   }

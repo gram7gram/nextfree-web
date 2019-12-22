@@ -29,6 +29,17 @@ router.get('/customers', isAdmin, async (req, res) => {
 
     const filter = {}
 
+    if (req.query.filter) {
+      if (req.query.filter.search) {
+        filter.$or = [
+          {'user.lastName': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.firstName': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.phone': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.email': {$regex: req.query.filter.search, $options: 'im'}},
+        ]
+      }
+    }
+
     let items = []
     const total = await CustomerRepository.countByFilter(filter)
     if (total > 0) {

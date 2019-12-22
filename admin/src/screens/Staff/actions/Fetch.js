@@ -2,7 +2,7 @@ import request from 'axios'
 import parameters from '../../../parameters'
 import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
 
-export default (page, limit) => (dispatch, getState) => {
+export default (filter = {}, page, limit) => (dispatch, getState) => {
 
   const state = getState()
   const token = state.App.token
@@ -11,6 +11,10 @@ export default (page, limit) => (dispatch, getState) => {
     'page=' + page,
     'limit=' + limit,
   ]
+
+  if (filter.search) {
+    query.push(`filter[search]=${filter.search.trim().toLowerCase()}`)
+  }
 
   dispatch({
     type: FETCH_BEFORE

@@ -21,12 +21,8 @@ import Activation from '../screens/Activation/components';
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
 
-let QRScanner
-if (isIPhone()) {
-  QRScanner = require('../screens/QRScanner/components/index.iphone').default
-} else {
-  QRScanner = require('../screens/QRScanner/components/index').default
-}
+import QRScanner from '../screens/QRScanner/components';
+import QRScannerById from '../screens/QRScanner/components/ById';
 
 export function createRouter() {
 
@@ -50,7 +46,9 @@ export function createRouter() {
           <Switch>
             <Route exact path={Pages.HOME} component={Home}/>
             <Route exact path={Pages.QR_CODE} component={QR}/>
-            <Route exact path={Pages.QR_SCAN} component={QRScanner}/>
+
+            {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
+            <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
             <Route exact path={Pages.PROFILE} component={Profile}/>
             <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>

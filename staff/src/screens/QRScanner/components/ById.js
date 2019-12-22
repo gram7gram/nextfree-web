@@ -10,7 +10,6 @@ import FetchUser from '../actions/FetchUser';
 import PurchaseBonus from "./PurchaseBonus";
 import PurchaseSuccess from "./PurchaseSuccess";
 import Customer from "./Customer";
-import Store from "./Store";
 
 class QRScanner extends React.PureComponent {
 
@@ -91,8 +90,6 @@ class QRScanner extends React.PureComponent {
     return <>
       <Errors errors={serverErrors}/>
 
-      <Store/>
-
       <div className="row">
         <div className="col-12">
           <div className="form-group">
@@ -138,35 +135,25 @@ class QRScanner extends React.PureComponent {
 
     return <div className="container my-3">
       <div className="row">
-        <div className="col-10 mx-auto">
+        <div className="col-8 mx-auto">
 
           <div className="row text-center steps my-4">
-            <div className="col-4">
-              <div className="step">
-                <h4 className="circle mx-auto p-2">
-                  {model.storeId
-                    ? <i className="fa fa-check text-success"/>
-                    : '1'}
-                </h4>
-                <h5>{i18n.t('qr_scanner.step1')}</h5>
-              </div>
-            </div>
-            <div className="col-4">
+            <div className="col-6">
               <div className="step">
                 <h4 className="circle mx-auto p-2">
                   {model.userId && model.match && model.match.isEnabled
                     ? <i className="fa fa-check text-success"/>
-                    : '2'}
+                    : '1'}
                 </h4>
                 <h5>{i18n.t('qr_scanner.step2')}</h5>
               </div>
             </div>
-            <div className="col-4">
+            <div className="col-6">
               <div className="step">
                 <h4 className="circle mx-auto p-2">
                   {purchase && purchase._id
                     ? <i className="fa fa-check text-success"/>
-                    : '3'}
+                    : '2'}
                 </h4>
                 <h5>{i18n.t('qr_scanner.step3')}</h5>
               </div>

@@ -8,6 +8,7 @@ const routes = [
 
   '/qr',
   '/scan',
+  '/scan-by-id',
 
   '/customers',
   '/customers/new',

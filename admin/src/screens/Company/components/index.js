@@ -7,6 +7,7 @@ import Card from "./Card";
 import {Link} from "react-router-dom";
 import * as Pages from "../../../router/Pages";
 import FetchOwners from "../../Owner/actions/Fetch";
+import Filter from "./Filter";
 
 class Company extends React.Component {
 
@@ -31,9 +32,9 @@ class Company extends React.Component {
 
     if (items.length === 0) {
       if (!isLoading)
-      return <div className="text-center pt-4">
-        <h4>{i18n.t('company.not_found_title')}</h4>
-      </div>
+        return <div className="text-center pt-4">
+          <h4>{i18n.t('company.not_found_title')}</h4>
+        </div>
     }
 
     return <div className="row no-gutters">{items.map(model =>
@@ -52,11 +53,8 @@ class Company extends React.Component {
                 <div className="col">
                   <h3 className="m-0">{i18n.t('company.title')}</h3>
                 </div>
-                <div className="col-12 col-md-auto text-right">
-                  <Link className="btn btn-success btn-sm"
-                        to={Pages.COMPANY_NEW}>
-                    <i className="fa fa-plus"/>&nbsp;{i18n.t('company.new_action')}
-                  </Link>
+                <div className="col-12 col-md-6 col-lg-4 text-right">
+                  <Filter/>
                 </div>
               </div>
             </div>

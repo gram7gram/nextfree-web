@@ -11,6 +11,7 @@ const routes = [
 
   '/qr',
   '/scan',
+  '/scan-by-id',
 
   '/company',
 

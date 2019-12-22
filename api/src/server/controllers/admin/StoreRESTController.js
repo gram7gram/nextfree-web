@@ -28,6 +28,15 @@ router.get('/stores', isAdmin, async (req, res) => {
 
     let filter = {}
 
+    if (req.query.filter) {
+      if (req.query.filter.search) {
+        filter.$or = [
+          {'address': {$regex: req.query.filter.search, $options: 'im'}},
+          {'city': {$regex: req.query.filter.search, $options: 'im'}},
+        ]
+      }
+    }
+
     let items = []
     const total = await StoreRepository.countByFilter(filter)
     if (total > 0) {

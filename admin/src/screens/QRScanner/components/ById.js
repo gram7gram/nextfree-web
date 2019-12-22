@@ -17,7 +17,7 @@ class QRScanner extends React.PureComponent {
 
   componentDidMount() {
 
-    const {defaultCompany} = this.props
+    const {company} = this.props
 
     if (defaultCompany)
       this.props.dispatch(FetchStores(defaultCompany._id))

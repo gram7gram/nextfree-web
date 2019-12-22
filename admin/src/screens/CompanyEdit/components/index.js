@@ -124,6 +124,7 @@ class CompanyEdit extends React.Component {
               <label className="btn btn-secondary btn-sm m-0">
                 <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
                 <input type="file" className="d-none"
+                       accept="image/*" max={1} min={1}
                        onChange={this.setLogotype}
                        disabled={isLoading}/>
               </label>

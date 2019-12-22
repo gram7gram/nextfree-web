@@ -12,7 +12,6 @@ import {stopVideoStreams} from "../../../utils/camera";
 import PurchaseSuccess from "./PurchaseSuccess";
 import PurchaseBonus from "./PurchaseBonus";
 import Customer from "./Customer";
-import Store from "./Store";
 
 Scanner.WORKER_PATH = '/qr-scanner-worker.min.js';
 
@@ -192,8 +191,6 @@ class QRScanner extends React.PureComponent {
 
     return <>
       <Errors errors={serverErrors}/>
-
-      <Store/>
 
       <Customer/>
 

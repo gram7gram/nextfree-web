@@ -54,6 +54,15 @@ router.get('/companies/:company/stores', isOwner, checkCompanyId, async (req, re
       'companyId': company._id
     }
 
+    if (req.query.filter) {
+      if (req.query.filter.search) {
+        filter.$or = [
+          {'address': {$regex: req.query.filter.search, $options: 'im'}},
+          {'city': {$regex: req.query.filter.search, $options: 'im'}},
+        ]
+      }
+    }
+
     let items = []
     const total = await StoreRepository.countByFilter(filter)
     if (total > 0) {

@@ -55,6 +55,18 @@ router.get('/companies/:company/staff', isOwner, checkCompanyId, async (req, res
       companyId: company._id
     }
 
+    if (req.query.filter) {
+      if (req.query.filter.search) {
+        filter.$or = [
+          {'user.lastName': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.firstName': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.phone': {$regex: req.query.filter.search, $options: 'im'}},
+          {'user.email': {$regex: req.query.filter.search, $options: 'im'}},
+          {'position': {$regex: req.query.filter.search, $options: 'im'}},
+        ]
+      }
+    }
+
     let items = []
     const total = await StaffRepository.countByFilter(filter)
     if (total > 0) {

@@ -24,6 +24,8 @@ router.post('/media', fileUpload(uploadOptions), (req, res) => {
 
   file.mv(publicDir + uri)
 
+  console.log(`[/api/v1/media] upload ${uri}`);
+
   res.status(201).json({
     url: parameters.host + uri
   })

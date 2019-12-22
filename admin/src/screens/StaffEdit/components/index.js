@@ -346,6 +346,7 @@ class StaffEdit extends React.Component {
               <label className="btn btn-secondary btn-sm m-0">
                 <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
                 <input type="file" className="d-none"
+                       accept="image/*" max={1} min={1}
                        onChange={this.setAvatar}
                        disabled={isLoading}/>
               </label>

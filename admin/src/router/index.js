@@ -10,6 +10,10 @@ import Footer from '../components/Footer';
 
 import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
+
+import QRScanner from '../screens/QRScanner/components';
+import QRScannerById from '../screens/QRScanner/components/ById';
+
 import Profile from '../screens/Profile/components';
 import ProfileSecurity from '../screens/ProfileSecurity/components';
 import Staff from '../screens/Staff/components';
@@ -30,13 +34,6 @@ import OwnerEdit from '../screens/OwnerEdit/components';
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
 
-let QRScanner
-if (isIPhone()) {
-  QRScanner = require('../screens/QRScanner/components/index.iphone').default
-} else {
-  QRScanner = require('../screens/QRScanner/components/index').default
-}
-
 export function createRouter() {
 
   return <>
@@ -51,7 +48,9 @@ export function createRouter() {
           <Authentication>
             <Route exact path={Pages.HOME} component={Home}/>
             <Route exact path={Pages.QR_CODE} component={QR}/>
-            <Route exact path={Pages.QR_SCAN} component={QRScanner}/>
+
+            {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
+            <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
             <Route exact path={Pages.PROFILE} component={Profile}/>
             <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>

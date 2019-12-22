@@ -4,10 +4,12 @@ import i18n from "../../../i18n";
 import * as Pages from "../../../router/Pages";
 import Avatar from "../../../components/Avatar";
 import {createStructuredSelector} from "reselect";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Upload from "../actions/Upload";
 
 const ProfileSidebar = (props) => {
+
+  const dispatch = useDispatch()
   
   const {isLoading, model} = props.Profile
   
@@ -15,7 +17,7 @@ const ProfileSidebar = (props) => {
     const file = e.target.files[0]
     if (!file) return
 
-    props.dispatch(Upload(file))
+    dispatch(Upload(file))
 
     e.target.value = null
   }
@@ -30,6 +32,7 @@ const ProfileSidebar = (props) => {
         <label className="btn btn-secondary btn-sm m-0">
           <i className="fa fa-upload"/>&nbsp;{i18n.t('profile.upload_action')}
           <input type="file" className="d-none"
+                 accept="image/*" max={1} min={1}
                  onChange={setAvatar}
                  disabled={isLoading}/>
         </label>

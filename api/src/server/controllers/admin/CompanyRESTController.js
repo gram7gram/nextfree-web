@@ -27,6 +27,14 @@ router.get('/companies', isAdmin, async (req, res) => {
 
     let filter = {}
 
+    if (req.query.filter) {
+      if (req.query.filter.search) {
+        filter.$or = [
+          {'name': {$regex: req.query.filter.search, $options: 'im'}},
+        ]
+      }
+    }
+
     let items = []
     const total = await CompanyRepository.countByFilter(filter)
     if (total > 0) {

@@ -4,6 +4,7 @@ export const PROFILE_SECURITY = '/profile/security';
 
 export const QR_CODE = '/qr';
 export const QR_SCAN = '/scan';
+export const QR_SCAN_BY_ID = '/scan-by-id';
 
 export const STORES = '/stores';
 export const STORE_NEW = '/stores/new';

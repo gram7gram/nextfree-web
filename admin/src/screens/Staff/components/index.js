@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {FILTER_CHANGED} from '../actions';
-import * as Pages from '../../../router/Pages';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Card from "./Card";
 import FetchCompanies from "../../Company/actions/Fetch";
+import Filter from "./Filter";
 
 class Staff extends React.Component {
 
@@ -53,10 +52,7 @@ class Staff extends React.Component {
                   <h3 className="m-0">{i18n.t('staff.title')}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
-                  <Link className="btn btn-success btn-sm"
-                        to={Pages.STAFF_NEW}>
-                    <i className="fa fa-plus"/>&nbsp;{i18n.t('staff.new_action')}
-                  </Link>
+                  <Filter/>
                 </div>
               </div>
             </div>

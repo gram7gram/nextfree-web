@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import * as Pages from "../router/Pages";
 import {LOGOUT, TOGGLE_MENU} from "../screens/Login/actions";
+import {isIPhone} from "../utils/ios";
 
 const Navigation = (props) => {
 
+  const dispatch = useDispatch()
+
   const hideMobileNavigation = () => {
-    props.dispatch({
+    dispatch({
       type: TOGGLE_MENU,
       payload: false
     })
@@ -19,14 +22,14 @@ const Navigation = (props) => {
   const toggleMobileNavigation = () => {
     const {isMobileMenuVisible} = props.Nav
 
-    props.dispatch({
+    dispatch({
       type: TOGGLE_MENU,
       payload: !isMobileMenuVisible
     })
   }
 
   const logout = () => {
-    props.dispatch({
+    dispatch({
       type: LOGOUT
     })
   }
@@ -50,13 +53,21 @@ const Navigation = (props) => {
     <div className={"navbar-collapse collapse" + (isMobileMenuVisible ? " show" : "")}>
       <ul className="navbar-nav mr-auto text-center">
 
-        {isAuthenticated && <li className="nav-item">
+        {isAuthenticated && !isIPhone() ? <li className="nav-item">
           <Link to={Pages.QR_SCAN}
                 className="nav-link text-white"
                 onClick={hideMobileNavigation}>
             <i className="fa fa-camera"/>&nbsp;{i18n.t('navigation.qr_scanner')}
           </Link>
-        </li>}
+        </li> : null}
+
+        {isAuthenticated ? <li className="nav-item">
+          <Link to={Pages.QR_SCAN_BY_ID}
+                className="nav-link text-white"
+                onClick={hideMobileNavigation}>
+            <i className="fa fa-search"/>&nbsp;{i18n.t('navigation.qr_scanner_by_id')}
+          </Link>
+        </li> : null}
 
         {isAuthenticated && <li className="nav-item">
           <Link to={Pages.QR_CODE}
