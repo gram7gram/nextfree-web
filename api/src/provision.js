@@ -11,6 +11,7 @@ const superpass = bcrypt.hashSync('nextfree', 10)
 const createAdminOwner = async () => {
   const admin = new Owner({
     user: {
+      displayId: '00001',
       isAdmin: true,
       email: 'admin@nextfree.com.ua',
       firstName: 'Admin',
@@ -31,6 +32,7 @@ const createAdminOwner = async () => {
 const createOwner = async () => {
   let owner = new Owner({
     user: {
+      displayId: '00002',
       email: 'owner@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Owner',
@@ -86,6 +88,7 @@ const createStore = async (companyId) => {
 const createCustomer = async () => {
   const customer = new Customer({
     user: {
+      displayId: '00003',
       email: 'customer@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Customer',
@@ -105,6 +108,7 @@ const createCustomer = async () => {
 const createStaff = async () => {
   const staff = new Staff({
     user: {
+      displayId: '00004',
       email: 'staff@nextfree.com.ua',
       firstName: 'Simple',
       lastName: 'Staff',

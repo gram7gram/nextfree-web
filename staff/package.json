@@ -51,7 +51,7 @@
     "toastr": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3000 ./node_modules/react-scripts/bin/react-scripts.js start",
+    "start": "PORT=3002 ./node_modules/react-scripts/bin/react-scripts.js start",
     "build:prod": "./node_modules/react-scripts/bin/react-scripts.js build",
     "test:react": "./node_modules/react-script/bin/react-scripts.js test",
     "test:server": "mocha --colors --recursive --exit tests/server"

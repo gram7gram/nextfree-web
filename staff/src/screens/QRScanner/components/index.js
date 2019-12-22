@@ -9,6 +9,10 @@ import {MODEL_CHANGED, RESET, SET_DEFAULTS} from "../actions";
 import Errors from "../../../components/Errors";
 import FetchUser from '../actions/FetchUser';
 import {stopVideoStreams} from "../../../utils/camera";
+import PurchaseSuccess from "./PurchaseSuccess";
+import PurchaseBonus from "./PurchaseBonus";
+import Customer from "./Customer";
+import Store from "./Store";
 
 Scanner.WORKER_PATH = '/qr-scanner-worker.min.js';
 
@@ -107,7 +111,7 @@ class QRScanner extends React.PureComponent {
 
   onResult = json => {
 
-    const {userId} = this.props.QRScanner.model
+    const {displayId} = this.props.QRScanner.model
 
     console.log('decoded qr code:', json)
 
@@ -117,9 +121,9 @@ class QRScanner extends React.PureComponent {
 
       const data = JSON.parse(json)
 
-      if (!data || !data.user || data.user === userId) return
+      if (!data || !data.user || data.user === displayId) return
 
-      this.change('userId', data.user)
+      this.change('displayId', data.user)
 
       this.props.dispatch(FetchUser(data.user))
 
@@ -132,7 +136,11 @@ class QRScanner extends React.PureComponent {
   purchase = () => {
     const {model} = this.props.QRScanner
 
-    this.props.dispatch(Purchase(model))
+    this.props.dispatch(Purchase({
+      userId: model.userId,
+      storeId: model.storeId,
+      companyId: model.companyId,
+    }))
   }
 
   stopScanner() {
@@ -148,7 +156,7 @@ class QRScanner extends React.PureComponent {
   isValid = () => {
     const {model} = this.props.QRScanner
 
-    return model.userId && model.storeId && model.companyId
+    return model.userId && model.storeId && model.match && model.match.isEnabled
   }
 
   renderSuccess() {
@@ -158,36 +166,19 @@ class QRScanner extends React.PureComponent {
     if (!purchase) return null
 
     if (purchase.isBonus) {
-
-      const buyer = purchase.buyer.user.lastName + ' ' + purchase.buyer.user.firstName
-
       return <div className="container-fluid fixed-bottom qr-toolbar">
-        <div className="row mb-4 no-gutters">
+        <div className="row no-gutters">
           <div className="col-12 col-md-8 col-lg-6 mx-auto">
-            <div className="alert alert-success text-center">
-              <h4>{i18n.t('qr_scanner.purchase_bonus_title')}</h4>
-              <p>{i18n.t('qr_scanner.purchase_bonus_subtitle').replace('__NAME__', buyer)}</p>
-
-              <button className="btn btn-success" onClick={this.setDefaults}>
-                {i18n.t('qr_scanner.again_action')}
-              </button>
-            </div>
+            <PurchaseBonus/>
           </div>
         </div>
       </div>
     }
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4 no-gutters">
+      <div className="row no-gutters">
         <div className="col-12 col-md-8 col-lg-6 mx-auto">
-          <div className="alert alert-light text-center">
-            <h4>{i18n.t('qr_scanner.purchase_success_title')}</h4>
-            <p>{i18n.t('qr_scanner.purchase_success_subtitle')}</p>
-
-            <button className="btn btn-success" onClick={this.setDefaults}>
-              {i18n.t('qr_scanner.again_action')}
-            </button>
-          </div>
+          <PurchaseSuccess/>
         </div>
       </div>
     </div>
@@ -202,43 +193,38 @@ class QRScanner extends React.PureComponent {
     return <>
       <Errors errors={serverErrors}/>
 
-      <div className="row text-center no-gutters">
+      <Store/>
 
-        <div className="col-5 col-md-6 text-center text-md-left">
-          <button className="btn btn-outline-warning mr-1 mb-1"
-                  onClick={this.setDefaults}>
-            <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
-          </button>
-        </div>
+      <Customer/>
 
-        <div className="col-7 col-md-6 text-center text-md-right">
-          <button className={"btn " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
-                  onClick={this.purchase}
-                  disabled={!isValid || isLoading}>
-            <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
-            &nbsp;{i18n.t('qr_scanner.purchase_action')}
-          </button>
-        </div>
+      <div className="text-center text-md-right">
+        <button className="btn btn-sm btn-outline-warning mr-1"
+                onClick={this.setDefaults}>
+          <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
+        </button>
+        <button className={"btn btn-sm " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
+                onClick={this.purchase}
+                disabled={!isValid || isLoading}>
+          <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
+          &nbsp;{i18n.t('qr_scanner.purchase_action')}
+        </button>
       </div>
     </>
   }
 
-  renderStep3 = () => {
-
-    const {user} = this.props.QRScanner.model
+  renderStep2 = () => {
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4 no-gutters">
+      <div className="row no-gutters">
         <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
           <div className="card">
             <div className="card-body px-2">
 
-              <h4 className="text-center">
+              <h5 className="text-center">
                 {i18n.t('qr_scanner.purchase_title_1')}
-                &nbsp;<span className="text-success">{user.lastName + ' ' + user.firstName}</span>
                 &nbsp;{i18n.t('qr_scanner.purchase_title_2')}
-              </h4>
+              </h5>
 
               {this.renderPurchaseForm()}
 
@@ -252,55 +238,15 @@ class QRScanner extends React.PureComponent {
 
   }
 
-  renderStep2 = () => {
-
-    const {isLoadingUser, serverErrors} = this.props.QRScanner
-    const {user} = this.props.QRScanner.model
-
-    if (!user) {
-
-      if (isLoadingUser) {
-        return <div className="container-fluid fixed-bottom qr-toolbar">
-          <div className="row mb-4 no-gutters">
-            <div className="col-12 col-md-8 col-lg-6 mx-auto">
-
-              <div className="alert alert-secondary">
-                <h4 className="m-0">{i18n.t('qr_scanner.searching')}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-
-      return <div className="container-fluid fixed-bottom qr-toolbar">
-        <div className="row mb-4 no-gutters">
-          <div className="col-12 col-md-8 col-lg-6 mx-auto text-center">
-
-            <div className="alert alert-danger">
-              <h4 className="m-0">{serverErrors[0]}</h4>
-            </div>
-
-            <button className="btn btn-warning mr-1 mb-1"
-                    onClick={this.setDefaults}>
-              <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
-            </button>
-          </div>
-        </div>
-      </div>
-    }
-
-    return this.renderStep3()
-  }
-
   renderStep1 = () => {
 
     return <div className="container-fluid fixed-bottom qr-toolbar">
-      <div className="row mb-4 no-gutters">
+      <div className="row no-gutters">
         <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
           <div className="alert alert-warning">
 
-            <h4 className="text-center">{i18n.t('qr_scanner.help')}</h4>
+            <h5 className="text-center">{i18n.t('qr_scanner.help')}</h5>
 
             <p className="m-0 text-center">{i18n.t('qr_scanner.help_subtitle')}</p>
 
@@ -332,16 +278,17 @@ class QRScanner extends React.PureComponent {
 
   render() {
 
-    const {isSuccess} = this.props.QRScanner
+    const {purchase} = this.props.QRScanner
     const {userId} = this.props.QRScanner.model
 
+    const isSuccess = purchase && purchase._id
     const hasUser = !!userId
 
     return <div className="w-100">
 
       <div className="qr-stack">
         <div className="qr-scanner-container text-center w-100">
-          <video ref={this.htmlVideo}  muted
+          <video ref={this.htmlVideo} muted
                  className="img-fluid bg-secondary"/>
         </div>
 
@@ -387,6 +334,7 @@ class QRScanner extends React.PureComponent {
 }
 
 const selectors = createStructuredSelector({
+  defaultCompany: store => store.App.defaultCompany,
   QRScanner: store => store.QRScanner,
 })
 

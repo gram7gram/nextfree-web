@@ -1,6 +1,7 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
+import {isIPhone} from "../utils/ios";
 
 import * as Pages from './Pages';
 
@@ -9,7 +10,6 @@ import Footer from '../components/Footer';
 
 import Home from '../screens/Home/components';
 import QR from '../screens/QR/components';
-import QRScanner from '../screens/QRScanner/components';
 import Profile from '../screens/Profile/components';
 import ProfileSecurity from '../screens/ProfileSecurity/components';
 
@@ -20,6 +20,13 @@ import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
+
+let QRScanner
+if (isIPhone()) {
+  QRScanner = require('../screens/QRScanner/components/index.iphone').default
+} else {
+  QRScanner = require('../screens/QRScanner/components/index').default
+}
 
 export function createRouter() {
 

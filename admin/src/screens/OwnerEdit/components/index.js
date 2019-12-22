@@ -212,12 +212,12 @@ class OwnerEdit extends React.Component {
           </div>
           <div className="col-auto">
 
-            <button className="btn btn-success btn-sm"
-                    onClick={this.submitSecurity}
-                    disabled={isLoading || !isValid}>
+            {model.id ? <button className="btn btn-success btn-sm"
+                                onClick={this.submitSecurity}
+                                disabled={isLoading || !isValid}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
               &nbsp;{i18n.t('owner_edit.save_action')}
-            </button>
+            </button> : null}
           </div>
         </div>
 

@@ -22,7 +22,7 @@ const ProfileSidebar = (props) => {
 
   return <>
 
-    <div className="card text-center mb-2">
+    <div className="card text-center mb-4">
       <div className="card-body">
         <Avatar src={model.user.avatar}/>
       </div>

@@ -34,19 +34,6 @@ const isLoading = (prev = false, action) => {
   }
 }
 
-const isSuccess = (prev = false, action) => {
-  switch (action.type) {
-    case Action.SAVE_SUCCESS:
-      return true
-    case Action.RESET:
-    case Action.MODEL_CHANGED:
-    case Action.SAVE_BEFORE:
-      return false
-    default:
-      return prev
-  }
-}
-
 const isLoadingUser = (prev = false, action) => {
   switch (action.type) {
     case Action.FETCH_USER_BEFORE:
@@ -76,7 +63,6 @@ const purchase = (prev = null, action) => {
 export default combineReducers({
   model,
   purchase,
-  isSuccess,
   isLoadingUser,
   isLoading,
   serverErrors,

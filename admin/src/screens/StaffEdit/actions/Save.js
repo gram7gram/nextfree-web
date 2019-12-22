@@ -14,6 +14,8 @@ const parseBeforeSubmit = model => {
 
   delete data.password1
   delete data.password2
+  delete data.user.id
+  delete data.user.displayId
 
   return data
 }

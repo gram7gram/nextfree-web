@@ -1,4 +1,5 @@
 const Customer = require('../../database/model/Customer').Customer
+const {getNextSequence} = require('../../database/mongo')
 const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
@@ -17,6 +18,7 @@ const CustomerService = {
   create: async (content) => {
     const entity = new Customer({
       user: {
+        displayId: await getNextSequence('user_seq'),
         activationToken: uuid()
       }
     })

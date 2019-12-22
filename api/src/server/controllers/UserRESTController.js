@@ -3,7 +3,6 @@ const i18n = require('../../i18n').i18n;
 
 const ErrorHandler = require('../services/ErrorHandler');
 const isAuthenticated = require('../services/AuthService').isAuthenticated;
-const checkId = require('../services/RequestParamsValidator').checkId;
 const CustomerService = require('../services/CustomerService');
 const OwnerService = require('../services/OwnerService');
 const StaffService = require('../services/StaffService');
@@ -15,7 +14,7 @@ const StaffRepository = require('../../database/repository/StaffRepository');
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
+router.get('/users/:id', isAuthenticated, async (req, res) => {
 
   try {
 
@@ -24,7 +23,7 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
     const isCustomer = new Promise((resolve, reject) => {
       (async () => {
         const match = await CustomerRepository.findOneByFilter({
-          'user._id': id,
+          'user.displayId': id,
         })
 
         if (!match) {
@@ -32,13 +31,13 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
           return
         }
 
-        if (!match.isEnabled) {
-          reject({
-            code: 404,
-            message: i18n.t('purchase.customer_is_disabled')
-          })
-          return
-        }
+        // if (!match.isEnabled) {
+        //   reject({
+        //     code: 404,
+        //     message: i18n.t('purchase.customer_is_disabled')
+        //   })
+        //   return
+        // }
 
         resolve(CustomerService.serialize(match))
 
@@ -48,7 +47,7 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
     const isStaff = new Promise((resolve, reject) => {
       (async () => {
         const match = await StaffRepository.findOneByFilter({
-          'user._id': id,
+          'user.displayId': id,
         })
 
         if (!match) {
@@ -56,13 +55,13 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
           return
         }
 
-        if (!match.isEnabled) {
-          reject({
-            code: 404,
-            message: i18n.t('purchase.staff_is_disabled')
-          })
-          return
-        }
+        // if (!match.isEnabled) {
+        //   reject({
+        //     code: 404,
+        //     message: i18n.t('purchase.staff_is_disabled')
+        //   })
+        //   return
+        // }
 
         resolve(StaffService.serialize(match))
 
@@ -72,7 +71,7 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
     const isOwner = new Promise((resolve, reject) => {
       (async () => {
         const match = await OwnerRepository.findOneByFilter({
-          'user._id': id,
+          'user.displayId': id,
         })
 
         if (!match) {
@@ -80,13 +79,13 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
           return
         }
 
-        if (!match.isEnabled) {
-          reject({
-            code: 404,
-            message: i18n.t('purchase.owner_is_disabled')
-          })
-          return
-        }
+        // if (!match.isEnabled) {
+        //   reject({
+        //     code: 404,
+        //     message: i18n.t('purchase.owner_is_disabled')
+        //   })
+        //   return
+        // }
 
         resolve(OwnerService.serialize(match))
 
@@ -106,7 +105,7 @@ router.get('/users/:id', checkId, isAuthenticated, async (req, res) => {
         })
       }
 
-      res.status(200).json(match.user)
+      res.status(200).json(match)
 
     }).catch(e => {
       ErrorHandler.handle(res, e)

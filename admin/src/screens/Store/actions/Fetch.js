@@ -30,8 +30,6 @@ export default (page = 0, limit = 0) => (dispatch, getState) => {
     .catch(e => {
       console.log(e);
 
-
-
       dispatch({
         type: FETCH_FAILURE,
         payload: {

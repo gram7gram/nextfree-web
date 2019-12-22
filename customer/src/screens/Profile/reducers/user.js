@@ -14,6 +14,19 @@ const id = (prev = null, action) => {
   }
 }
 
+const displayId = (prev = null, action) => {
+  switch (action.type) {
+    case Action.FETCH_SUCCESS:
+    case Action.SAVE_SUCCESS:
+      if (action.flatten['user.displayId'] !== undefined) {
+        return action.flatten['user.displayId']
+      }
+      return null
+    default:
+      return prev
+  }
+}
+
 const avatar = (prev = null, action) => {
   switch (action.type) {
     case Action.FETCH_SUCCESS:
@@ -132,6 +145,7 @@ const phone = (prev = null, action) => {
 
 export default combineReducers({
   id,
+  displayId,
   avatar,
   isAdmin,
   email,

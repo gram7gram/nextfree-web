@@ -5,6 +5,10 @@ import flatten from "../../../utils/flatten";
 
 export default (id) => (dispatch, getState) => {
 
+  const isIdValid = (id || '').length > 4
+
+  if (!isIdValid) return
+
   const state = getState();
   const token = state.App.token
 

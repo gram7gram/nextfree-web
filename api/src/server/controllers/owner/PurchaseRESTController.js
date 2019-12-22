@@ -14,7 +14,7 @@ const CompanyRepository = require('../../../database/repository/CompanyRepositor
 
 const router = new express.Router({mergeParams: true});
 
-router.post('/users/:id/purchases', isOwner, checkId, async (req, res) => {
+router.post('/users/:id/purchases', checkId, isOwner, async (req, res) => {
 
   try {
 

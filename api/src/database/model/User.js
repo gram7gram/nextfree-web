@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  displayId: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     lowercase: true,

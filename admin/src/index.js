@@ -13,6 +13,7 @@ import 'bootswatch/dist/slate/bootstrap.min.css';
 import './style/style.css';
 import './style/qr-scan.css';
 import './style/avatar.css';
+import './style/steps.css';
 
 import * as Sentry from '@sentry/browser';
 

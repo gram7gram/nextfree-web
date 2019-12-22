@@ -1,4 +1,5 @@
 const Staff = require('../../database/model/Staff').Staff
+const {getNextSequence} = require('../../database/mongo')
 const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
@@ -18,9 +19,12 @@ const StaffService = {
     const entity = new Staff({
       isEnabled: true,
       user: {
+        displayId: await getNextSequence('user_seq'),
         activationToken: uuid()
       }
     })
+
+    console.log('create', JSON.stringify(entity.toObject()));
 
     return await StaffService.update(entity, content)
   },

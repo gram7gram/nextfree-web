@@ -1,6 +1,8 @@
 const parameters = require('../../parameters')
 
 const mongoose = require('mongoose');
+const sequences = require('./sequences').sequences;
+
 mongoose.Promise = Promise;
 
 const host = parameters.mongoHost
@@ -47,7 +49,22 @@ mongoose.connection.on('disconnected', () => {
 
 });
 
+const getNextSequence = async function (name) {
+  const res = await sequences.findOneAndUpdate({
+    name
+  }, {
+    $inc: {seq: 1}
+  }, {
+    upsert: true
+  })
+
+  const seq = res ? 1313 + res.seq : 1313
+
+  return String(seq + "").padStart(5, '0')
+}
+
 module.exports = {
+  getNextSequence,
   connect: () => connect(host, params),
   disconnect: () => mongoose.disconnect(),
   dropdb: () => {

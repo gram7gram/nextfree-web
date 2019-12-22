@@ -1,4 +1,5 @@
 const Owner = require('../../database/model/Owner').Owner
+const {getNextSequence} = require('../../database/mongo')
 const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
@@ -17,6 +18,7 @@ const OwnerService = {
   create: async function (content) {
     const entity = new Owner({
       user: {
+        displayId: await getNextSequence('user_seq'),
         activationToken: uuid()
       }
     })

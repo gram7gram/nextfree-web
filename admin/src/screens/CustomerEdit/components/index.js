@@ -212,12 +212,12 @@ class CustomerEdit extends React.Component {
           </div>
           <div className="col-auto">
 
-            <button className="btn btn-success btn-sm"
+            {model.id ? <button className="btn btn-success btn-sm"
                     onClick={this.submitSecurity}
                     disabled={isLoading || !isValid}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
               &nbsp;{i18n.t('customer_edit.save_action')}
-            </button>
+            </button> : null}
           </div>
         </div>
 
@@ -274,7 +274,7 @@ class CustomerEdit extends React.Component {
 
         <div className="col-12 col-md-4 col-lg-3 text-center">
 
-          <div className="card">
+          <div className="card mb-4">
             <div className="card-body">
               <Avatar src={model.user.avatar}/>
             </div>

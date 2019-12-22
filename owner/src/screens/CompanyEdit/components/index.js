@@ -92,7 +92,7 @@ class CompanyEdit extends React.Component {
 
         <div className="col-12 col-md-4 col-lg-3 text-center">
 
-          <div className="card">
+          <div className="card mb-4">
             <div className="card-body">
               <Logotype src={model.logo}/>
             </div>
@@ -119,12 +119,12 @@ class CompanyEdit extends React.Component {
 
                   {model.id && model.isEnabled
                     ? <span className="badge badge-success">
-                        <i className="fa fa-check"/>&nbsp;{i18n.t('staff.enabled_badge')}
+                        <i className="fa fa-check"/>&nbsp;{i18n.t('company.enabled_badge')}
                     </span> : null}
 
                   {model.id && !model.isEnabled
                     ? <span className="badge badge-danger">
-                      <i className="fa fa-times"/>&nbsp;{i18n.t('staff.disabled_badge')}
+                      <i className="fa fa-times"/>&nbsp;{i18n.t('company.disabled_badge')}
                     </span> : null}
 
                 </div>

@@ -13,6 +13,7 @@ function* setDefaults() {
     payload: {
       companyId: defaultCompany ? defaultCompany._id : null,
       storeId: defaultStore ? defaultStore._id : null,
+      displayId: null,
       userId: null,
       user: null,
     }

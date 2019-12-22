@@ -217,12 +217,12 @@ class StaffEdit extends React.Component {
           </div>
           <div className="col-auto">
 
-            <button className="btn btn-success btn-sm"
+            {model.id ? <button className="btn btn-success btn-sm"
                     onClick={this.submitSecurity}
                     disabled={isLoading || !isValid}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
               &nbsp;{i18n.t('staff_edit.save_action')}
-            </button>
+            </button> : null}
           </div>
         </div>
 

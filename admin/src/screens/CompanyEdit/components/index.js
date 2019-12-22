@@ -116,7 +116,7 @@ class CompanyEdit extends React.Component {
 
         <div className="col-12 col-md-4 col-lg-3 text-center">
 
-          <div className="card">
+          <div className="card mb-3">
             <div className="card-body">
               <Logotype src={model.logo}/>
             </div>
