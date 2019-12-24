@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || 'production'
 const config = {
   development: {
     port: 80,
-    host: 'http://192.168.1.105:8080',
+    host: 'http://0.0.0.0:8080',
     mongoHost: 'mongodb://db/nextfree',
     secret: '****',
     gmail: {

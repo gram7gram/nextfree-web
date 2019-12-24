@@ -40,10 +40,8 @@ export function createRouter() {
 
           <Route path={Pages.INVITATION} component={Invitation}/>
           <Route path={Pages.ACTIVATION} component={Activation}/>
-        </Switch>
 
-        <Authentication>
-          <Switch>
+          <Authentication>
             <Route exact path={Pages.HOME} component={Home}/>
             <Route exact path={Pages.QR_CODE} component={QR}/>
 
@@ -55,8 +53,8 @@ export function createRouter() {
 
             <Redirect path="*" to={Pages.HOME}/>
 
-          </Switch>
-        </Authentication>
+          </Authentication>
+        </Switch>
       </ErrorBoundary>
 
     </main>

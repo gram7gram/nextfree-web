@@ -1,5 +1,6 @@
 const Owner = require('../../database/model/Owner').Owner
 const {getNextSequence} = require('../../database/mongo')
+const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
@@ -24,6 +25,24 @@ const OwnerService = {
     })
 
     return await this.update(entity, content)
+  },
+
+  changePassword: async (entity, newPassword, currentPassword) => {
+
+    if (currentPassword) {
+      if (!bcrypt.compareSync(currentPassword, entity.user.password || '')) {
+        throw {
+          code: 403,
+          message: i18n.t('reset_password.mismatch')
+        }
+      }
+    }
+
+    await Owner.updateOne({_id: entity._id}, {
+      $set: {
+        'user.password': bcrypt.hashSync(newPassword, 10)
+      }
+    })
   },
 
   update: async function (entity, content) {

@@ -1,5 +1,6 @@
 const Staff = require('../../database/model/Staff').Staff
 const {getNextSequence} = require('../../database/mongo')
+const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
 const _merge = require('lodash/merge')
 const i18n = require('../../i18n').i18n
@@ -27,6 +28,24 @@ const StaffService = {
     console.log('create', JSON.stringify(entity.toObject()));
 
     return await StaffService.update(entity, content)
+  },
+
+  changePassword: async (entity, newPassword, currentPassword = null) => {
+
+    if (currentPassword) {
+      if (!bcrypt.compareSync(currentPassword, entity.user.password || '')) {
+        throw {
+          code: 403,
+          message: i18n.t('reset_password.mismatch')
+        }
+      }
+    }
+
+    await Staff.updateOne({_id: entity._id}, {
+      $set: {
+        'user.password': bcrypt.hashSync(newPassword, 10)
+      }
+    })
   },
 
   update: async (entity, content) => {

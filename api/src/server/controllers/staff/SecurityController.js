@@ -1,5 +1,4 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const ErrorHandler = require('../../services/ErrorHandler')
 
 const i18n = require('../../../i18n').i18n
@@ -32,16 +31,7 @@ router.post('/security', isStaff, async (req, res) => {
       }
     }
 
-    if (!bcrypt.compareSync(currentPassword, entity.user.password)) {
-      throw {
-        code: 403,
-        message: i18n.t('reset_password.mismatch')
-      }
-    }
-
-    entity.user.password = bcrypt.hashSync(newPassword, 10);
-
-    await entity.save()
+    await StaffService.changePassword(entity, newPassword, currentPassword)
 
     res.status(201).json(StaffService.serialize(entity))
 

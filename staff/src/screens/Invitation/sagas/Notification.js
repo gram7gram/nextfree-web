@@ -4,7 +4,7 @@ import {toast} from 'react-toastify';
 import i18n from '../../../i18n'
 
 function alertSuccess() {
-  toast.success(i18n.t('invitation.save_success'), {
+  toast.success(i18n.t('notification.save_success'), {
     position: toast.POSITION.TOP_RIGHT,
   });
 }

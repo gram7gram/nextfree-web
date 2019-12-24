@@ -10,10 +10,14 @@ router.post('/customer-register', async (req, res) => {
 
   try {
 
+    const {password} = req.body.user
+
     const entity = await CustomerService.create({
       ...req.body,
       isEnabled: false
     })
+
+    await CustomerService.changePassword(entity, password)
 
     await CustomerEmailService.onAccountActivation(entity)
 

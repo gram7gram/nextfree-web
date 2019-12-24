@@ -19,9 +19,13 @@ router.post('/invitation/:token/accept', async (req, res) => {
       })
     }
 
+    const {password} = req.body.user
+
     const result = await StaffService.update(entity, {
       ...req.body
     })
+
+    await StaffService.changePassword(entity, password)
 
     await Staff.updateOne({'_id': result._id}, {
       'user.invitationToken': null,

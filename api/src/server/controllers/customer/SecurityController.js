@@ -32,16 +32,7 @@ router.post('/security', isCustomer, async (req, res) => {
       }
     }
 
-    if (!bcrypt.compareSync(currentPassword, entity.user.password)) {
-      throw {
-        code: 403,
-        message: i18n.t('reset_password.mismatch')
-      }
-    }
-
-    entity.user.password = bcrypt.hashSync(newPassword, 10);
-
-    await entity.save()
+    await CustomerService.changePassword(entity, newPassword, currentPassword)
 
     res.status(201).json(CustomerService.serialize(entity))
 

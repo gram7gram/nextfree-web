@@ -114,13 +114,10 @@ router.post('/staff-password-set/:token', async (req, res) => {
     }
 
     entity.user.emailResetToken = null
-    entity.user.password = req.body.password
 
-    entity = await entity.save()
+    await StaffService.changePassword(entity, req.body.password)
 
-    entity = entity.toObject()
-
-    res.status(201).json(StaffService.serialize(entity))
+    res.status(201).json(StaffService.serialize(entity.toObject()))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

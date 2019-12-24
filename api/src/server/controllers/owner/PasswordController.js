@@ -114,13 +114,10 @@ router.post('/owner-password-set/:token', async (req, res) => {
     }
 
     entity.user.emailResetToken = null
-    entity.user.password = req.body.password
 
-    entity = await entity.save()
+    await OwnerService.changePassword(entity, req.body.password)
 
-    entity = entity.toObject()
-
-    res.status(201).json(OwnerService.serialize(entity))
+    res.status(201).json(OwnerService.serialize(entity.toObject()))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

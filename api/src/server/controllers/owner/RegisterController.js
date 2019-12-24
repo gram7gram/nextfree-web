@@ -14,10 +14,14 @@ router.post('/owner-register', async (req, res) => {
 
     const {owner, company} = req.body
 
+    const {password} = owner.user
+
     const entity = await OwnerService.create({
       ...owner,
       isEnabled: false
     })
+
+    await OwnerService.changePassword(entity, password)
 
     const companyEntity = await CompanyService.create({
       ownerId: entity._id,
