@@ -113,9 +113,15 @@ router.post('/customer-password-set/:token', async (req, res) => {
       }
     }
 
-    entity.user.emailResetToken = null
-
     await CustomerService.changePassword(entity, req.body.password)
+
+    await Customer.updateOne({
+      'user.emailResetToken': req.params.token
+    }, {
+      $set: {
+        'user.emailResetToken': null
+      }
+    })
 
     res.status(201).json(CustomerService.serialize(entity.toObject()))
 

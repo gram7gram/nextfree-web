@@ -113,9 +113,15 @@ router.post('/owner-password-set/:token', async (req, res) => {
       }
     }
 
-    entity.user.emailResetToken = null
-
     await OwnerService.changePassword(entity, req.body.password)
+
+    await Owner.updateOne({
+      'user.emailResetToken': req.params.token
+    }, {
+      $set: {
+        'user.emailResetToken': null
+      }
+    })
 
     res.status(201).json(OwnerService.serialize(entity.toObject()))
 

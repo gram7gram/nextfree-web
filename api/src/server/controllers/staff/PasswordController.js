@@ -113,9 +113,15 @@ router.post('/staff-password-set/:token', async (req, res) => {
       }
     }
 
-    entity.user.emailResetToken = null
-
     await StaffService.changePassword(entity, req.body.password)
+
+    await Staff.updateOne({
+      'user.emailResetToken': req.params.token
+    }, {
+      $set: {
+        'user.emailResetToken': null
+      }
+    })
 
     res.status(201).json(StaffService.serialize(entity.toObject()))
 
