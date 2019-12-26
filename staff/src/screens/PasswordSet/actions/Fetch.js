@@ -16,7 +16,7 @@ export default (id) => (dispatch) => {
     type: FETCH_BEFORE
   })
 
-  request.get(parameters.apiHost + `/api/v1/owner-password-set/${id}`)
+  request.get(parameters.apiHost + `/api/v1/staff-password-set/${id}`)
     .then(({data}) => {
       dispatch({
         type: FETCH_SUCCESS,
