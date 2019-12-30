@@ -7,6 +7,8 @@ import {createStructuredSelector} from "reselect";
 import img from "../../../assets/img/scanner.jpg";
 import {isIPhone} from "../../../utils/ios";
 
+const iphone = isIPhone()
+
 const Home = (props) => {
 
   const {firstName, email} = props.admin.user
@@ -19,8 +21,11 @@ const Home = (props) => {
       <div className="col-11 col-md-8 col-lg-6 mx-auto">
         <img src={img} alt="" className="img-fluid shadow mb-3"/>
 
-        <Link className="btn btn-success btn-lg"
-              to={isIPhone() ? Pages.QR_SCAN_BY_ID : Pages.QR_SCAN}>{i18n.t('home.action')}</Link>
+        {iphone
+          ? <Link className="btn btn-success btn-lg"
+                  to={Pages.QR_SCAN_BY_ID}>{i18n.t('home.id_action')}</Link>
+          : <Link className="btn btn-success btn-lg"
+                  to={Pages.QR_SCAN}>{i18n.t('home.action')}</Link>}
       </div>
     </div>
   </div>
