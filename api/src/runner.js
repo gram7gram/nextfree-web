@@ -24,7 +24,7 @@ const db = require('./database/mongo');
 
 db.connect()
   // .then(require('./provision'))
-  .then(require('./migration'))
+  // .then(require('./migration'))
   .catch(e => {
     console.error(e)
   })
