@@ -11,8 +11,8 @@ const Card = ({model, companies}) => {
   const company = companies.find(company => company._id === model.companyId)
 
   let name = model.user.email
-  if (model.user.lastName  || model.user.firstName) {
-    name = (model.user.lastName  + ' ' + model.user.firstName).trim()
+  if (model.user.lastName || model.user.firstName) {
+    name = `${model.user.lastName || ''} ${model.user.firstName || ''}`.trim()
   }
 
   return <div className="col-6 col-md-3 col-lg-2">

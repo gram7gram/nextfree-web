@@ -14,7 +14,7 @@ const Card = ({model, owners}) => {
   if (owner) {
     name = owner.user.email
     if (owner.user.lastName || owner.user.firstName) {
-      name = (owner.user.lastName + ' ' + owner.user.firstName).trim()
+      name = `${owner.user.lastName || ''} ${owner.user.firstName || ''}`.trim()
     }
   }
 

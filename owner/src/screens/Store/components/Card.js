@@ -12,8 +12,8 @@ const Card = ({model}) => {
         <img src={avatar} alt="" className="img-fluid p-4"/>
       </div>
       <div className="card-footer p-1">
-        <h6 className="m-0 text-truncate">{model.city}</h6>
-        <p className="m-0 text-truncate">{model.address}</p>
+        <h6 className="m-0 text-truncate">{model.city || '-'}</h6>
+        <p className="m-0 text-truncate">{model.address || '-'}</p>
       </div>
     </Link>
   </div>

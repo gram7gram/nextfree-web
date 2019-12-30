@@ -7,8 +7,8 @@ import Avatar from "../../../components/Avatar";
 const Card = ({model}) => {
 
   let name = model.user.email
-  if (model.user.lastName  || model.user.firstName) {
-    name = (model.user.lastName  + ' ' + model.user.firstName).trim()
+  if (model.user.lastName || model.user.firstName) {
+    name = `${model.user.lastName || ''} ${model.user.firstName || ''}`.trim()
   }
 
   return <div className="col-6 col-md-3 col-lg-2">
