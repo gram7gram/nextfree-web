@@ -12,7 +12,7 @@ const Customer = () => {
   if (isLoadingUser) {
     return <div className="row">
       <div className="col-12">
-        <div className="card">
+        <div className="card mb-4">
           <div className="card-body p-4 text-center">
             <i className="fa fa-2x fa-spin fa-circle-notch"/>
           </div>
@@ -21,7 +21,20 @@ const Customer = () => {
     </div>
   }
 
-  if (!match) return null
+  if (!match) {
+    if (!model.displayId) return null
+
+    return <div className="row">
+      <div className="col-12">
+        <div className="card mb-4">
+          <div className="card-body p-4 text-center">
+            <p>{i18n.t('qr_scanner.no_user_found')}</p>
+            <i className="fa fa-2x fa-times"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 
   return <div className="row">
     <div className="col-12">

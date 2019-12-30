@@ -4,12 +4,11 @@ import fallback from '../assets/img/company-placeholder.png'
 
 const Logotype = ({src}) => {
 
-  const [img, setImg] = React.useState(fallback)
+  const [img, setImg] = React.useState(src)
 
   React.useEffect(() => {
 
-    if (src)
-      setImg(src)
+    setImg(src || fallback)
 
   }, [src])
 

@@ -5,13 +5,13 @@ import {createStructuredSelector} from "reselect";
 import Purchase from '../actions/Purchase'
 import {MODEL_CHANGED, RESET, SET_DEFAULTS} from "../actions";
 import Errors from "../../../components/Errors";
-import FetchUser from '../actions/FetchUser';
 
 import PurchaseBonus from "./PurchaseBonus";
 import PurchaseSuccess from "./PurchaseSuccess";
 import Customer from "./Customer";
+import IdInput from "./IdInput";
 
-class QRScanner extends React.PureComponent {
+class QRScannerById extends React.PureComponent {
 
   componentDidMount() {
     this.setDefaults()
@@ -38,20 +38,10 @@ class QRScanner extends React.PureComponent {
 
   changeString = name => e => this.change(name, e.target.value)
 
-  fetchUserIfEnter = e => {
-    if (e.keyCode === 13) {
-      this.fetchUser()
-    }
-  }
-
-  fetchUser = () => {
-    const {displayId} = this.props.QRScanner.model
-
-    this.props.dispatch(FetchUser(displayId))
-  }
-
   purchase = () => {
     const {model} = this.props.QRScanner
+
+    if (!this.isValid()) return
 
     this.props.dispatch(Purchase({
       userId: model.userId,
@@ -81,11 +71,9 @@ class QRScanner extends React.PureComponent {
 
   renderPurchaseForm() {
 
-    const {isLoading, serverErrors, isLoadingUser, model} = this.props.QRScanner
+    const {isLoading, serverErrors} = this.props.QRScanner
 
     const isValid = this.isValid()
-
-    const isIdValid = (model.displayId || '').length > 4
 
     return <>
       <Errors errors={serverErrors}/>
@@ -93,21 +81,9 @@ class QRScanner extends React.PureComponent {
       <div className="row">
         <div className="col-12">
           <div className="form-group">
-            <div className="input-group">
-              <input type="text"
-                     className="form-control"
-                     onKeyDown={this.fetchUserIfEnter}
-                     onChange={this.changeString('displayId')}
-                     value={model.displayId || ''}
-                     placeholder={i18n.t('qr_scanner.find_user_placeholder')}/>
-              <div className="input-group-append">
-                <button className="btn btn-success"
-                        onClick={this.fetchUser}
-                        disabled={isLoadingUser || !isIdValid}>
-                  <i className="fa fa-search"/>&nbsp;{i18n.t('qr_scanner.find_user_action')}
-                </button>
-              </div>
-            </div>
+            <label className="required">{i18n.t('qr_scanner.find_user_placeholder')}</label>
+            <IdInput
+              onSubmit={this.purchase}/>
           </div>
         </div>
       </div>
@@ -177,4 +153,4 @@ const selectors = createStructuredSelector({
   QRScanner: store => store.QRScanner,
 })
 
-export default connect(selectors)(QRScanner)
+export default connect(selectors)(QRScannerById)

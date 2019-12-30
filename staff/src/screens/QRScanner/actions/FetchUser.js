@@ -13,7 +13,10 @@ export default (id) => (dispatch, getState) => {
   const token = state.App.token
 
   dispatch({
-    type: FETCH_USER_BEFORE
+    type: FETCH_USER_BEFORE,
+    payload: {
+      id
+    }
   })
 
   request.get(parameters.apiHost + `/api/v1/users/${id}`, {

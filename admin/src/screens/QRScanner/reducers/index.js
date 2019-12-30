@@ -4,7 +4,6 @@ import model from './model'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
-    case Action.FETCH_USER_FAILURE:
     case Action.SAVE_FAILURE:
       if (action.payload.data && action.payload.data.message !== undefined) {
         return [

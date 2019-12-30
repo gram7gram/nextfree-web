@@ -14,6 +14,7 @@ import './style/style.css';
 import './style/qr-scan.css';
 import './style/avatar.css';
 import './style/steps.css';
+import './style/id-input.css';
 
 import * as Sentry from '@sentry/browser';
 import TagManager from "react-gtm-module";
