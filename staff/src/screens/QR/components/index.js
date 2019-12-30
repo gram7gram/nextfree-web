@@ -14,16 +14,15 @@ const QR = (props) => {
     <div className="row">
       <div className="col-11 col-md-8 col-lg-6 cpl-xl-5 mx-auto text-center">
 
+        <div className="alert alert-secondary">
+          <h4 className="m-0">{i18n.t('qr.your_id')}: {user.displayId || '-'}</h4>
+        </div>
+
         <div className="mb-4">
           <QrCode data={data}/>
         </div>
 
         <p className="text-muted">{i18n.t('qr.help')}</p>
-        <p className="text-muted">{i18n.t('qr.help_alt')}</p>
-
-        <div className="alert alert-secondary">
-          <h2 className="m-0">ID: {user.displayId || '-'}</h2>
-        </div>
 
       </div>
     </div>
