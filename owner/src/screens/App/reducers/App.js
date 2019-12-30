@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import * as LoginActions from "../../Login/actions";
+import * as FirstLogin from "../../FirstLogin/actions";
 
 const isLoadingVisible = (prev = true, action) => {
   switch (action.type) {
@@ -98,6 +99,28 @@ const defaultStore = (prev = null, action) => {
   }
 }
 
+const isFirstLoginGreetingViewed = (prev = null, action) => {
+  switch (action.type) {
+    case LoginActions.LOGIN_SUCCESS:
+    case LoginActions.LOGIN_CHECK_SUCCESS:
+      if (action.payload.user.isFirstLoginGreetingViewed !== undefined) {
+        return action.payload.user.isFirstLoginGreetingViewed
+      }
+      return false
+    case FirstLogin.SAVE_SUCCESS:
+      if (action.payload.isFirstLoginGreetingViewed !== undefined) {
+        return action.payload.isFirstLoginGreetingViewed
+      }
+      return null
+    case LoginActions.LOGOUT:
+    case LoginActions.LOGIN_FAILURE:
+    case LoginActions.LOGIN_CHECK_FAILURE:
+      return null
+    default:
+      return prev
+  }
+}
+
 const locale = (prev = null) => prev
 
 export default combineReducers({
@@ -108,4 +131,5 @@ export default combineReducers({
   defaultCompany,
   defaultStore,
   locale,
+  isFirstLoginGreetingViewed,
 });

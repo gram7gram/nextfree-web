@@ -10,6 +10,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
+  isFirstLoginGreetingViewed: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
   },

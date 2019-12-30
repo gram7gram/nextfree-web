@@ -30,6 +30,8 @@ import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
+import FirstLogin from "../hoc/FirstLogin";
+import Loading from "../hoc/Loading";
 
 import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
@@ -45,36 +47,40 @@ export function createRouter() {
       <ErrorBoundary>
 
         <Switch>
+          <Loading>
 
-          <Route exact path={Pages.REGISTER} component={Register}/>
+            <Route exact path={Pages.REGISTER} component={Register}/>
 
-          <Route path={Pages.ACTIVATION} component={Activation}/>
+            <Route path={Pages.ACTIVATION} component={Activation}/>
 
-          <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
-          <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
+            <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
+            <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 
-          <Authentication>
-            <Route exact path={Pages.HOME} component={Home}/>
-            <Route exact path={Pages.QR_CODE} component={QR}/>
+            <Authentication>
+              <FirstLogin>
+                <Route exact path={Pages.HOME} component={Home}/>
+                <Route exact path={Pages.QR_CODE} component={QR}/>
 
-            {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
-            <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
+                {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
+                <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
-            <Route exact path={Pages.PROFILE} component={Profile}/>
-            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+                <Route exact path={Pages.PROFILE} component={Profile}/>
+                <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
-            <Route exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
+                <Route exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
 
-            <Route exact path={Pages.STORES} component={Store}/>
-            <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
-            <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
+                <Route exact path={Pages.STORES} component={Store}/>
+                <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
+                <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
 
-            <Route exact path={Pages.STAFF} component={Staff}/>
-            <Route exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
-            <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
+                <Route exact path={Pages.STAFF} component={Staff}/>
+                <Route exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
+                <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
-            <Redirect path="*" to={Pages.HOME}/>
-          </Authentication>
+                <Redirect path="*" to={Pages.HOME}/>
+              </FirstLogin>
+            </Authentication>
+          </Loading>
         </Switch>
 
       </ErrorBoundary>

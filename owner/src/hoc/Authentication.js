@@ -2,11 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import Login from "../screens/Login/components";
-import Loading from "../components/Loading";
 
-const Authentication = ({children, isAuthenticated, isLoadingVisible}) => {
-
-  if (isLoadingVisible) return <Loading/>
+const Authentication = ({children, isAuthenticated}) => {
 
   if (!isAuthenticated) return <Login/>
 
