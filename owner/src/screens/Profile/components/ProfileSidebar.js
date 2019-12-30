@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import i18n from "../../../i18n";
 import * as Pages from "../../../router/Pages";
 import {AvatarBody} from "../../../components/Avatar";
@@ -10,6 +10,8 @@ import Upload from "../actions/Upload";
 const ProfileSidebar = (props) => {
 
   const dispatch = useDispatch()
+
+  const isProfile = props.match.path === Pages.PROFILE
 
   const {isLoading, model} = props.Profile
 
@@ -33,7 +35,7 @@ const ProfileSidebar = (props) => {
       <div className="card-body">
         <AvatarBody src={model.user.avatar}/>
       </div>
-      <div className="card-footer p-1">
+      {isProfile && <div className="card-footer p-1">
         <div className="form-group text-center">
           <label className="btn btn-secondary btn-sm m-0">
             <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
@@ -50,7 +52,7 @@ const ProfileSidebar = (props) => {
         <div className="text-muted">
           <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
         </div>
-      </div>
+      </div>}
     </div>
 
     <nav className="bg-primary mb-4">
@@ -73,4 +75,6 @@ const selectors = createStructuredSelector({
   Profile: store => store.Profile,
 })
 
-export default connect(selectors)(ProfileSidebar)
+export default withRouter(
+  connect(selectors)(ProfileSidebar)
+)
