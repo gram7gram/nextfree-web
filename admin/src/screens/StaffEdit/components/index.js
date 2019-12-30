@@ -112,6 +112,11 @@ class StaffEdit extends React.Component {
     const file = e.target.files[0]
     if (!file) return
 
+    if (file.size / 1024 > 1000) {
+      e.target.value = null
+      return;
+    }
+
     this.props.dispatch(Upload(file))
 
     e.target.value = null
@@ -218,8 +223,8 @@ class StaffEdit extends React.Component {
           <div className="col-auto">
 
             {model.id ? <button className="btn btn-success btn-sm"
-                    onClick={this.submitSecurity}
-                    disabled={isLoading || !isValid}>
+                                onClick={this.submitSecurity}
+                                disabled={isLoading || !isValid}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
               &nbsp;{i18n.t('staff_edit.save_action')}
             </button> : null}
@@ -336,20 +341,29 @@ class StaffEdit extends React.Component {
     return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12 col-md-4 col-lg-3 text-center">
+        <div className="col-12 col-md-4 col-lg-3">
 
           <div className="card">
             <div className="card-body">
               <AvatarBody src={model.user.avatar}/>
             </div>
             <div className="card-footer p-1">
-              <label className="btn btn-secondary btn-sm m-0">
-                <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
-                <input type="file" className="d-none"
-                       accept="image/*" max={1} min={1}
-                       onChange={this.setAvatar}
-                       disabled={isLoading}/>
-              </label>
+              <div className="form-group text-center">
+                <label className="btn btn-secondary btn-sm m-0">
+                  <i className="fa fa-upload"/>&nbsp;{i18n.t('staff_edit.upload_action')}
+                  <input type="file" className="d-none"
+                         accept="image/*" max={1} min={1}
+                         onChange={this.setAvatar}
+                         disabled={isLoading}/>
+                </label>
+              </div>
+
+              <div className="text-muted">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
+              </div>
+              <div className="text-muted">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
+              </div>
             </div>
           </div>
         </div>

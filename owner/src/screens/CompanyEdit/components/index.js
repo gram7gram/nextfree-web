@@ -46,6 +46,11 @@ class CompanyEdit extends React.Component {
     const file = e.target.files[0]
     if (!file) return
 
+    if (file.size / 1024 > 1000) {
+      e.target.value = null
+      return;
+    }
+
     this.props.dispatch(Upload(file))
 
     e.target.value = null
