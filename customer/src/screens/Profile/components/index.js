@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {MODEL_CHANGED} from '../actions';
+import {MODEL_CHANGED, RESET} from '../actions';
 import FetchMe from '../actions/FetchMe';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
@@ -13,6 +13,12 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(FetchMe())
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: RESET
+    })
   }
 
   submit = () => {

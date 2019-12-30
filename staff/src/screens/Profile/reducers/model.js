@@ -4,6 +4,8 @@ import user from './user'
 
 const id = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
       if (action.payload._id !== undefined) {

@@ -3,6 +3,8 @@ import * as Action from '../actions'
 
 const id = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
       if (action.flatten['user._id'] !== undefined) {
@@ -16,6 +18,8 @@ const id = (prev = null, action) => {
 
 const isAdmin = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
       if (action.flatten['user.isAdmin'] !== undefined) {
@@ -29,6 +33,8 @@ const isAdmin = (prev = null, action) => {
 
 const displayId = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
       if (action.flatten['user.displayId'] !== undefined) {
@@ -42,6 +48,8 @@ const displayId = (prev = null, action) => {
 
 const avatar = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.FETCH_SUCCESS:
     case Action.SAVE_SUCCESS:
       if (action.flatten['user.avatar'] !== undefined) {
@@ -60,6 +68,8 @@ const avatar = (prev = null, action) => {
 
 const email = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['user.email'] !== undefined) {
@@ -73,6 +83,8 @@ const email = (prev = null, action) => {
 
 const firstName = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['user.firstName'] !== undefined) {
@@ -91,6 +103,8 @@ const firstName = (prev = null, action) => {
 
 const lastName = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['user.lastName'] !== undefined) {
@@ -109,6 +123,8 @@ const lastName = (prev = null, action) => {
 
 const birthday = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['user.birthday'] !== undefined) {
@@ -127,6 +143,8 @@ const birthday = (prev = null, action) => {
 
 const phone = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['user.phone'] !== undefined) {
