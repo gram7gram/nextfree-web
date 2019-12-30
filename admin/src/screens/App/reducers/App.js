@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux';
 import * as LoginActions from "../../Login/actions";
+import * as StoreEdit from "../../StoreEdit/actions";
+import * as CompanyEdit from "../../CompanyEdit/actions";
 
 const isLoadingVisible = (prev = true, action) => {
   switch (action.type) {
@@ -117,6 +119,12 @@ const isStaff = (prev = false, action) => {
 
 const defaultCompany = (prev = null, action) => {
   switch (action.type) {
+    case CompanyEdit.SAVE_SUCCESS:
+      if (!prev) {
+        return action.payload
+      }
+
+      return prev
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
       if (action.payload.company !== undefined) {
@@ -134,6 +142,12 @@ const defaultCompany = (prev = null, action) => {
 
 const defaultStore = (prev = null, action) => {
   switch (action.type) {
+    case StoreEdit.SAVE_SUCCESS:
+      if (!prev) {
+        return action.payload
+      }
+
+      return prev
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
       if (action.payload.store !== undefined) {

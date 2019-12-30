@@ -13,7 +13,7 @@ import Password from "../../../components/PasswordInput";
 import password from "../../../utils/password";
 import Upload from "../actions/Upload";
 import SaveSecurity from "../actions/SaveSecurity";
-import Avatar from "../../../components/Avatar";
+import {AvatarBody} from "../../../components/Avatar";
 
 class CustomerEdit extends React.Component {
 
@@ -276,7 +276,7 @@ class CustomerEdit extends React.Component {
 
           <div className="card mb-4">
             <div className="card-body">
-              <Avatar src={model.user.avatar}/>
+              <AvatarBody src={model.user.avatar}/>
             </div>
             <div className="card-footer p-1">
               <label className="btn btn-secondary btn-sm m-0">

@@ -1,6 +1,6 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import {MODEL_CHANGED} from '../actions'
+import {MODEL_CHANGED, SAVE_FAILURE} from '../actions'
 
 export default (file) => (dispatch) => {
 
@@ -18,5 +18,13 @@ export default (file) => (dispatch) => {
     })
     .catch(e => {
       console.log(e);
+
+      dispatch({
+        type: SAVE_FAILURE,
+        payload: {
+          status: e.response ? e.response.status : 0,
+          data: e.response ? e.response.data : null
+        },
+      })
     })
 }

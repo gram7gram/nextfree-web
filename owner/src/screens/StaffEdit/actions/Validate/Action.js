@@ -35,13 +35,6 @@ export default (model, changes) => {
       validator.errors['storeId'] = i18n.t('validation.required')
   }
 
-  if (!model.position) {
-    ++validator.total
-
-    if (changes['position'])
-      validator.errors['position'] = i18n.t('validation.required')
-  }
-
   if (!model.id && !model.password1) {
     ++validator.total
 

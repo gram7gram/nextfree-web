@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import i18n from "../../../i18n";
 import * as Pages from "../../../router/Pages";
-import Avatar from "../../../components/Avatar";
+import {AvatarBody} from "../../../components/Avatar";
 import {createStructuredSelector} from "reselect";
 import {connect, useDispatch} from "react-redux";
 import Upload from "../actions/Upload";
@@ -27,7 +27,7 @@ const ProfileSidebar = (props) => {
 
     <div className="card text-center mb-4">
       <div className="card-body">
-        <Avatar src={model.user.avatar}/>
+        <AvatarBody src={model.user.avatar}/>
       </div>
       <div className="card-footer p-1">
         <label className="btn btn-secondary btn-sm m-0">

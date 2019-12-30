@@ -14,7 +14,7 @@ import Date from "../../../components/Date";
 import Password from "../../../components/PasswordInput";
 import password from "../../../utils/password";
 import Upload from "../actions/Upload";
-import Avatar from "../../../components/Avatar";
+import {AvatarBody} from "../../../components/Avatar";
 import SaveSecurity from "../actions/SaveSecurity";
 
 class StaffEdit extends React.Component {
@@ -340,7 +340,7 @@ class StaffEdit extends React.Component {
 
           <div className="card">
             <div className="card-body">
-              <Avatar src={model.user.avatar}/>
+              <AvatarBody src={model.user.avatar}/>
             </div>
             <div className="card-footer p-1">
               <label className="btn btn-secondary btn-sm m-0">

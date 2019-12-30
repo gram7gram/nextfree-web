@@ -19,7 +19,7 @@ const Card = ({model}) => {
       </div>
       <div className="card-footer p-1">
         <h5 className="m-0 text-truncate">{name}</h5>
-        <p className="m-0 text-truncate">{model.position}</p>
+        <p className="m-0 text-truncate">{model.position || '-'}</p>
 
         {model.isEnabled
           ? <span className="badge badge-success">

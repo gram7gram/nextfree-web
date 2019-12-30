@@ -11,7 +11,7 @@ import Date from "../../../components/Date";
 import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
 import password from "../../../utils/password";
-import Avatar from "../../../components/Avatar";
+import {AvatarBody} from "../../../components/Avatar";
 import Upload from "../actions/Upload";
 import SaveSecurity from "../actions/SaveSecurity";
 
@@ -273,7 +273,7 @@ class OwnerEdit extends React.Component {
 
           <div className="card">
             <div className="card-body">
-              <Avatar src={model.user.avatar}/>
+              <AvatarBody src={model.user.avatar}/>
             </div>
             <div className="card-footer p-1">
               <label className="btn btn-secondary btn-sm m-0">

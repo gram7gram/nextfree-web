@@ -9,9 +9,8 @@ import FetchStores from '../../Store/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
-import Date from "../../../components/Date";
 import Upload from "../actions/Upload";
-import Avatar from "../../../components/Avatar";
+import {AvatarBody} from "../../../components/Avatar";
 
 class StaffEdit extends React.Component {
 
@@ -209,7 +208,7 @@ class StaffEdit extends React.Component {
 
           <div className="card">
             <div className="card-body">
-              <Avatar src={model.user.avatar}/>
+              <AvatarBody src={model.user.avatar}/>
             </div>
             <div className="card-footer p-1">
               <label className="btn btn-secondary btn-sm m-0">
@@ -230,15 +229,7 @@ class StaffEdit extends React.Component {
           <div className="card mb-4">
             <div className="card-header">
               <div className="row">
-                <div className="col">
-                  <h3 className="m-0">{model.user.email}</h3>
-
-                  {model.user.isAdmin ? <div className="badge badge-danger">
-                    <i className="fa fa-user"/>&nbsp;{i18n.t('staff_edit.admin_badge')}
-                  </div> : null}
-
-                </div>
-                <div className="col-12 col-md-auto text-right">
+                <div className="col-12 text-right">
 
                   {model.id && model.isEnabled
                     ? <button className="btn btn-outline-danger btn-sm mx-1"
@@ -270,69 +261,30 @@ class StaffEdit extends React.Component {
             </div>
             <div className="card-body">
 
-              <form noValidate autoComplete="off">
-
-                {!model.id ? <div className="form-group">
-                  <label className="m-0 required">{i18n.t('staff_edit.email')}</label>
-                  <input type="email" placeholder={i18n.t('placeholder.text')}
-                         name="user.email"
-                         className="form-control"
-                         onChange={this.changeString('user.email')}
-                         value={model.user.email || ''}/>
-                  {this.getError('user.email')}
-                </div> : null}
-
-                <div className="row">
-                  <div className="col-12 col-md-6">
-                    <div className="form-group">
-                      <label className="m-0 required">{i18n.t('staff_edit.firstName')}</label>
-                      <input type="text" placeholder={i18n.t('placeholder.text')}
-                             name="user.firstName"
-                             className="form-control"
-                             disabled={true}
-                             value={model.user.firstName || ''}/>
-                      {this.getError('user.firstName')}
-                    </div>
-                  </div>
-
-                  <div className="col-12 col-md-6">
-                    <div className="form-group">
-                      <label className="m-0 required">{i18n.t('staff_edit.lastName')}</label>
-                      <input type="text" placeholder={i18n.t('placeholder.text')}
-                             name="user.lastName"
-                             className="form-control"
-                             disabled={true}
-                             value={model.user.lastName || ''}/>
-                      {this.getError('user.lastName')}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-12 col-md-6">
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('staff_edit.phone')}</label>
-                      <input type="text" placeholder={i18n.t('placeholder.text')}
-                             name="user.phone"
-                             className="form-control"
-                             disabled={true}
-                             value={model.user.phone || ''}/>
-                      {this.getError('user.phone')}
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-6">
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('staff_edit.birthday')}</label>
-                      <Date
-                        disabled={true}
-                        value={model.user.birthday || ''}
-                        name="user.birthday"/>
-                      {this.getError('user.birthday')}
-                    </div>
-                  </div>
-
-                </div>
-              </form>
+              <table className="table table-sm">
+                <tbody>
+                <tr>
+                  <th>{i18n.t('staff_edit.email')}</th>
+                  <td>{model.user.email}</td>
+                </tr>
+                <tr>
+                  <th>{i18n.t('staff_edit.lastName')}</th>
+                  <td>{model.user.lastName}</td>
+                </tr>
+                <tr>
+                  <th>{i18n.t('staff_edit.firstName')}</th>
+                  <td>{model.user.firstName}</td>
+                </tr>
+                <tr>
+                  <th>{i18n.t('staff_edit.phone')}</th>
+                  <td>{model.user.phone}</td>
+                </tr>
+                <tr>
+                  <th>{i18n.t('staff_edit.birthday')}</th>
+                  <td>{model.user.birthday}</td>
+                </tr>
+                </tbody>
+              </table>
 
             </div>
           </div>

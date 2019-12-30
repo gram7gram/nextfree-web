@@ -10,7 +10,7 @@ const publicDir = path.resolve(__dirname, '../../public')
 const uploadOptions = {
   uploadTimeout: 30 * 1000, //30 sec
   abortOnLimit: true,
-  limits: {fileSize: 5 * 1024 * 1024}, // 5MB
+  limits: {fileSize: 1 * 1024 * 1024}, // 1MB
 }
 
 router.post('/media', fileUpload(uploadOptions), (req, res) => {
@@ -27,6 +27,7 @@ router.post('/media', fileUpload(uploadOptions), (req, res) => {
   console.log(`[/api/v1/media] upload ${uri}`);
 
   res.status(201).json({
+    uri,
     url: parameters.host + uri
   })
 

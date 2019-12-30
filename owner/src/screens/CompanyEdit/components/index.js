@@ -8,7 +8,7 @@ import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
 import FetchConditions from "../../App/actions/FetchConditions";
-import Logotype from "../../../components/Logotype";
+import {LogotypeBody} from "../../../components/Logotype";
 import Upload from "../actions/Upload";
 
 class CompanyEdit extends React.Component {
@@ -90,20 +90,29 @@ class CompanyEdit extends React.Component {
     return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12 col-md-4 col-lg-3 text-center">
+        <div className="col-12 col-md-4 col-lg-3">
 
           <div className="card mb-4">
             <div className="card-body">
-              <Logotype src={model.logo}/>
+              <LogotypeBody src={model.logo}/>
             </div>
             <div className="card-footer p-1">
-              <label className="btn btn-secondary btn-sm m-0">
-                <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
-                <input type="file" className="d-none"
-                       accept="image/*" max={1} min={1}
-                       onChange={this.setLogotype}
-                       disabled={isLoading}/>
-              </label>
+              <div className="form-group text-center">
+                <label className="btn btn-secondary btn-sm m-0">
+                  <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
+                  <input type="file" className="d-none"
+                         accept="image/*" max={1} min={1}
+                         onChange={this.setLogotype}
+                         disabled={isLoading}/>
+                </label>
+              </div>
+
+              <div className="text-muted">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
+              </div>
+              <div className="text-muted">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
+              </div>
             </div>
           </div>
         </div>

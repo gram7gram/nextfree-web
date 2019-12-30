@@ -10,7 +10,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
 import Errors from "../../../components/Errors";
-import Logotype from "../../../components/Logotype";
+import {LogotypeBody} from "../../../components/Logotype";
 import Upload from "../actions/Upload";
 
 class CompanyEdit extends React.Component {
@@ -118,7 +118,7 @@ class CompanyEdit extends React.Component {
 
           <div className="card mb-3">
             <div className="card-body">
-              <Logotype src={model.logo}/>
+              <LogotypeBody src={model.logo}/>
             </div>
             <div className="card-footer p-1">
               <label className="btn btn-secondary btn-sm m-0">

@@ -42,8 +42,6 @@ export default (model) => (dispatch, getState) => {
   }).catch(e => {
     console.log(e);
 
-
-
     dispatch({
       type: SAVE_FAILURE,
       payload: {
