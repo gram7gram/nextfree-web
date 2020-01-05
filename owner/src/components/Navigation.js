@@ -86,7 +86,7 @@ const Navigation = (props) => {
         {isAuthenticated && <li className="nav-item">
           <Link to={Pages.MY_COMPANY}
                 className="nav-link text-white"
-                onClick={hideMobileNavigation}>{i18n.t('navigation.companies')}</Link>
+                onClick={hideMobileNavigation}>{i18n.t('navigation.my_company')}</Link>
         </li>}
 
         {isAuthenticated && <li className="nav-item">

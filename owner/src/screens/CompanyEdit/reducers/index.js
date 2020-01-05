@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
 import model from './model'
+import page from './page'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
@@ -14,6 +15,26 @@ const serverErrors = (prev = [], action) => {
     case Action.SAVE_SUCCESS:
     case Action.SAVE_BEFORE:
       return []
+    default:
+      return prev
+  }
+}
+
+const raw = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_SUCCESS:
+    case Action.FETCH_SUCCESS:
+      return action.flatten
+    default:
+      return prev
+  }
+}
+
+const rawPage = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.FETCH_WEBSITE_SUCCESS:
+      return action.flatten
     default:
       return prev
   }
@@ -88,6 +109,9 @@ export default combineReducers({
   isLoading,
   validator,
   model,
+  page,
+  raw,
+  rawPage,
   changes,
   serverErrors,
 })

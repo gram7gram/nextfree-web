@@ -25,6 +25,7 @@ const OwnerPasswordController = require('./controllers/owner/PasswordController'
 const OwnerActivationController = require('./controllers/owner/ActivationController');
 const OwnerLoginController = require('./controllers/owner/LoginController');
 const OwnerSecurityController = require('./controllers/owner/SecurityController');
+const OwnerCompanyPageRESTController = require('./controllers/owner/CompanyPageRESTController');
 
 const StaffProfileController = require('./controllers/staff/ProfileController');
 const StaffPurchaseRESTController = require('./controllers/staff/PurchaseRESTController');
@@ -43,6 +44,7 @@ const CustomerSecurityController = require('./controllers/customer/SecurityContr
 
 const BonusConditionController = require('./controllers/BonusConditionController');
 const UserRESTController = require('./controllers/UserRESTController');
+const CompanyPageRESTController = require('./controllers/CompanyPageRESTController');
 
 const app = express();
 
@@ -86,6 +88,9 @@ app.use('/api/v1', CustomerPasswordController);
 app.use('/api/v1', StaffPasswordController);
 app.use('/api/v1', OwnerPasswordController);
 
+//Public partner website API
+app.use('/api/v1', CompanyPageRESTController);
+
 //Private API
 app.use('/api/v1', BonusConditionController);
 app.use('/api/v1', UserRESTController);
@@ -105,6 +110,7 @@ app.use('/api/v1/owner', OwnerStaffRESTController);
 app.use('/api/v1/owner', OwnerProfileController);
 app.use('/api/v1/owner', OwnerPurchaseRESTController);
 app.use('/api/v1/owner', OwnerSecurityController);
+app.use('/api/v1/owner', OwnerCompanyPageRESTController);
 
 //Staff API
 app.use('/api/v1/staff', StaffProfileController);

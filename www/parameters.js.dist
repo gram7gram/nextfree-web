@@ -1,0 +1,16 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {},
+  production: {
+    pageprefix: ' - nextfree.com.ua',
+    host: 'https://nextfree.com.ua',
+    apiHost: 'https://api.nextfree.com.ua',
+  }
+}
+
+if (config[env] === undefined) {
+  throw `Missing parameters for ${env} environment`
+}
+
+module.exports = config[env]

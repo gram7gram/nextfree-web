@@ -10,6 +10,7 @@ import Errors from "../../../components/Errors";
 import FetchConditions from "../../App/actions/FetchConditions";
 import {LogotypeBody} from "../../../components/Logotype";
 import Upload from "../actions/Upload";
+import Sidebar from "./Sidebar";
 
 class CompanyEdit extends React.Component {
 
@@ -42,20 +43,6 @@ class CompanyEdit extends React.Component {
     }))
   }
 
-  setLogotype = (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-
-    if (file.size / 1024 > 1000) {
-      e.target.value = null
-      return;
-    }
-
-    this.props.dispatch(Upload(file))
-
-    e.target.value = null
-  }
-
   submit = () => {
     const {model} = this.props.CompanyEdit
 
@@ -72,6 +59,24 @@ class CompanyEdit extends React.Component {
   changeString = name => e => this.change(name, e.target.value)
 
   setCondition = value => () => this.change('bonusCondition', value)
+
+  setLogotype = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const {
+      model,
+    } = this.props.CompanyEdit
+
+    if (file.size / 1024 > 1000) {
+      e.target.value = null
+      return;
+    }
+
+    this.props.dispatch(Upload(model.id, file))
+
+    e.target.value = null
+  }
 
   getError = key => {
     const {errors} = this.props.CompanyEdit.validator
@@ -92,58 +97,49 @@ class CompanyEdit extends React.Component {
       serverErrors,
     } = this.props.CompanyEdit
 
-    return <div className="container my-3">
+    return <div className="container-fluid my-3">
       <div className="row">
 
         <div className="col-12 col-md-4 col-lg-3">
-
-          <div className="card mb-4">
-            <div className="card-body">
-              <LogotypeBody src={model.logo}/>
-            </div>
-            <div className="card-footer p-1">
-              <div className="form-group text-center">
-                <label className="btn btn-secondary btn-sm m-0">
-                  <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
-                  <input type="file" className="d-none"
-                         accept="image/*" max={1} min={1}
-                         onChange={this.setLogotype}
-                         disabled={isLoading}/>
-                </label>
-              </div>
-
-              <div className="text-muted">
-                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
-              </div>
-              <div className="text-muted">
-                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
-              </div>
-            </div>
-          </div>
+          <Sidebar/>
         </div>
 
         <div className="col-12 col-md-8 col-lg-9">
 
           <Errors errors={serverErrors}/>
 
-          <div className="card mb-4">
-            <div className="card-header">
-              <div className="row">
-                <div className="col">
-                  <h3 className="m-0 text-white">{model.name}</h3>
+          <div className="d-block d-md-none mb-4">
 
-                  {model.id && model.isEnabled
-                    ? <span className="badge badge-success">
-                        <i className="fa fa-check"/>&nbsp;{i18n.t('company.enabled_badge')}
-                    </span> : null}
+            <button className="btn btn-success btn-block mb-1"
+                    onClick={this.submit}
+                    disabled={isLoading || !isValid}>
+              <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
+              &nbsp;{i18n.t('company_edit.save_action')}
+            </button>
 
-                  {model.id && !model.isEnabled
-                    ? <span className="badge badge-danger">
-                      <i className="fa fa-times"/>&nbsp;{i18n.t('company.disabled_badge')}
-                    </span> : null}
+            {model.id && model.isEnabled
+              ? <button className="btn btn-outline-danger btn-block mb-1"
+                        onClick={this.deactivate}
+                        disabled={isLoading || !isValid}>
+                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
+                &nbsp;{i18n.t('company_edit.deactivate_action')}
+              </button>
+              : null}
 
-                </div>
-                <div className="col-12 col-md-auto text-right">
+            {model.id && !model.isEnabled
+              ? <button className="btn btn-outline-success btn-block mb-1"
+                        onClick={this.activate}
+                        disabled={isLoading || !isValid}>
+                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
+                &nbsp;{i18n.t('company_edit.activate_action')}
+              </button>
+              : null}
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="card mb-4">
+                <div className="card-header text-right d-none d-md-block">
 
                   {model.id && model.isEnabled
                     ? <button className="btn btn-outline-danger btn-sm mx-1"
@@ -171,27 +167,55 @@ class CompanyEdit extends React.Component {
                   </button>
 
                 </div>
-              </div>
-            </div>
-            <div className="card-body">
+                <div className="card-body">
 
-              <div className="row">
-                <div className="col-12">
+                  <div className="row">
+                    <div className="col-12">
 
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('company_edit.name')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changeString('name')}
-                           value={model.name || ''}/>
-                    {this.getError('name')}
+                      <div className="form-group">
+                        <label className="m-0 required">{i18n.t('company_edit.name')}</label>
+                        <input type="text" placeholder={i18n.t('placeholder.text')}
+                               className="form-control"
+                               onChange={this.changeString('name')}
+                               value={model.name || ''}/>
+                        {this.getError('name')}
+                      </div>
+
+                    </div>
                   </div>
 
                 </div>
               </div>
+            </div>
+            <div className="col-12 col-md-6">
+              <div className="card mb-4">
+                <div className="card-body">
+                  <LogotypeBody src={model.logo}/>
+                </div>
+                <div className="card-footer p-1">
+                  <div className="form-group text-center">
+                    <label className="btn btn-secondary btn-sm m-0">
+                      <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
+                      <input type="file" className="d-none"
+                             accept="image/*" max={1} min={1}
+                             onChange={this.setLogotype}
+                             disabled={isLoading}/>
+                    </label>
+                  </div>
 
+                  <div className="text-muted">
+                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
+                  </div>
+                  <div className="text-muted">
+                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+
+
 
 
           <div className="card mb-4">

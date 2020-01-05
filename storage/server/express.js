@@ -13,7 +13,7 @@ app.use('/api/v1', MediaController)
 app.use(express.static(path.resolve(__dirname, '../public')))
 
 app.use('*', (req, res) => {
-  res.status(404).send({
+  res.status(404).json({
     message: 'Not found'
   })
 })

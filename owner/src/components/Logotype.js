@@ -21,7 +21,7 @@ export const LogotypeBody = ({src}) => {
     src={img}
     onError={() => setImg(fallback)}
     alt=""
-    className="img-fluid"/>
+    className="img-fluid d-block mx-auto"/>
 
 }
 

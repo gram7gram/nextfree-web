@@ -17,6 +17,7 @@ export const STORE_NEW = '/stores/new';
 export const STORE_EDIT = '/stores/:id/edit';
 
 export const MY_COMPANY = '/company';
+export const MY_COMPANY_PAGE = '/company/page';
 
 export const STAFF = '/staff';
 export const STAFF_INVITE = '/staff/invite';
