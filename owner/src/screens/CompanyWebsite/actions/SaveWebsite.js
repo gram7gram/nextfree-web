@@ -6,7 +6,7 @@ import {SAVE_WEBSITE_BEFORE, SAVE_WEBSITE_FAILURE, SAVE_WEBSITE_SUCCESS} from '.
 const parseBeforeSubmit = model => {
   const data = JSON.parse(JSON.stringify(model))
 
-  delete data.id
+  data.content = data.content.split('<p><br></p>').join('')
 
   return data
 }

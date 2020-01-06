@@ -7,33 +7,39 @@ import SaveWebsite from '../actions/SaveWebsite';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../CompanyEdit/components/Sidebar";
 
-class PageTab extends React.Component {
+class CompanyWebsite extends React.Component {
 
   componentDidMount() {
 
     const {defaultCompany} = this.props
 
-    if (defaultCompany) {
-      this.props.dispatch(FetchWebsite(defaultCompany._id))
-    }
+    if (!defaultCompany) return
+
+    this.props.dispatch(FetchWebsite(defaultCompany._id))
   }
 
   draft = () => {
-    const {model, page} = this.props.CompanyEdit
+    const {model} = this.props.CompanyWebsite
+    const {defaultCompany} = this.props
 
-    this.props.dispatch(SaveWebsite(model.id, {
-      ...page,
+    if (!defaultCompany) return
+
+    this.props.dispatch(SaveWebsite(defaultCompany._id, {
+      ...model,
       status: 'DRAFT'
     }))
   }
 
   publish = () => {
-    const {model, page} = this.props.CompanyEdit
+    const {model} = this.props.CompanyWebsite
+    const {defaultCompany} = this.props
 
-    this.props.dispatch(SaveWebsite(model.id, {
-      ...page,
+    if (!defaultCompany) return
+
+    this.props.dispatch(SaveWebsite(defaultCompany._id, {
+      ...model,
       status: 'IN_REVIEW'
     }))
   }
@@ -48,10 +54,12 @@ class PageTab extends React.Component {
 
   changeString = name => e => this.change(name, e.target.value)
 
+  changeHtml = name => value => this.change(name, value)
+
   enablePage = () => this.change('isEnabled', true)
 
   getError = key => {
-    const {errors} = this.props.CompanyEdit.validator
+    const {errors} = this.props.CompanyWebsite.validator
 
     if (errors[key] === undefined) return null
 
@@ -60,11 +68,11 @@ class PageTab extends React.Component {
 
   renderContent() {
 
-    const {page, isValid, isLoading} = this.props.CompanyEdit
+    const {model, isValid, isLoading} = this.props.CompanyWebsite
 
-    const {meta, social} = page
+    const {meta, social} = model
 
-    if (!page.isEnabled) {
+    if (!model.isEnabled) {
       return <div className="text-center py-5">
 
         <h4>{i18n.t('company_edit.page_create_title')}</h4>
@@ -136,7 +144,7 @@ class PageTab extends React.Component {
             <input type="text" placeholder={i18n.t('placeholder.text')}
                    className="form-control"
                    onChange={this.changeString('title')}
-                   value={page.title || ''}/>
+                   value={model.title || ''}/>
             {this.getError('title')}
           </div>
 
@@ -144,9 +152,9 @@ class PageTab extends React.Component {
             <label className="m-0">{i18n.t('company_edit.page.content')}</label>
             <Editor
               theme="snow"
-              className="bg-light"
-              onChange={this.changeString('content')}
-              value={page.content || ''}/>
+              className="bg-light text-dark"
+              onChange={this.changeHtml('content')}
+              value={model.content || ''}/>
             {this.getError('content')}
           </div>
         </div>
@@ -254,7 +262,7 @@ class PageTab extends React.Component {
 
     const {
       serverErrors,
-    } = this.props.CompanyEdit
+    } = this.props.CompanyWebsite
 
     return <div className="container-fluid my-3">
       <div className="row">
@@ -277,7 +285,7 @@ class PageTab extends React.Component {
 
 const selectors = createStructuredSelector({
   defaultCompany: store => store.App.defaultCompany,
-  CompanyEdit: store => store.CompanyEdit,
+  CompanyWebsite: store => store.CompanyWebsite,
 })
 
-export default connect(selectors)(PageTab)
+export default connect(selectors)(CompanyWebsite)

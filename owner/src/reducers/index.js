@@ -14,6 +14,7 @@ import Register from '../screens/Register/reducers';
 import Store from '../screens/Store/reducers';
 import StoreEdit from '../screens/StoreEdit/reducers';
 import CompanyEdit from '../screens/CompanyEdit/reducers';
+import CompanyWebsite from '../screens/CompanyWebsite/reducers';
 import QRScanner from '../screens/QRScanner/reducers';
 import PasswordSet from '../screens/PasswordSet/reducers';
 import PasswordReset from '../screens/PasswordReset/reducers';
@@ -31,6 +32,7 @@ const createRootReducer = (history) => combineReducers({
   StaffEdit,
   Register,
   CompanyEdit,
+  CompanyWebsite,
   Store,
   StoreEdit,
   StaffInvite,

@@ -20,7 +20,7 @@ import StaffEdit from '../screens/StaffEdit/components';
 import StaffInvite from '../screens/StaffInvite/components';
 
 import CompanyEdit from '../screens/CompanyEdit/components';
-import CompanyPageTab from '../screens/CompanyEdit/components/PageTab';
+import CompanyWebsite from '../screens/CompanyWebsite/components';
 
 import Store from '../screens/Store/components';
 import StoreEdit from '../screens/StoreEdit/components';
@@ -69,7 +69,7 @@ export function createRouter() {
                 <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
                 <Route exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
-                <Route exact path={Pages.MY_COMPANY_PAGE} component={CompanyPageTab}/>
+                <Route exact path={Pages.MY_COMPANY_PAGE} component={CompanyWebsite}/>
 
                 <Route exact path={Pages.STORES} component={Store}/>
                 <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
