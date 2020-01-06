@@ -3,6 +3,16 @@ import * as Action from '../actions'
 import social from './social'
 import meta from './meta'
 
+const id = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.FETCH_WEBSITE_SUCCESS:
+      return action.flatten['_id']
+    default:
+      return prev
+  }
+}
+
 const status = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_WEBSITE_SUCCESS:
@@ -76,6 +86,7 @@ const content = (prev = null, action) => {
 }
 
 export default combineReducers({
+  id,
   isEnabled,
   status,
   title,

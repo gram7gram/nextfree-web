@@ -50,11 +50,50 @@ router.post('/companies/:id/website', checkId, isOwner, async (req, res) => {
       }
     }
 
-    const page = await CompanyPageService.create(company, {
+    let page = await CompanyPage.findOne({
+      ownerId: owner._id,
+      companyId: company._id,
+    })
+    if (!page) {
+      page = await CompanyPageService.create(company, {
+        ...req.body
+      })
+    } else {
+      page = await CompanyPageService.update(page, {
+        ...req.body
+      })
+    }
+
+    res.status(200).json(CompanyPageService.serialize(page))
+
+  } catch (e) {
+    ErrorHandler.handle(res, e)
+  }
+})
+
+router.put('/companies/:id/website/:website', checkId, isOwner, async (req, res) => {
+
+  try {
+
+    const owner = req.currentUser.user
+
+    let page = await CompanyPage.findOne({
+      _id: req.params.website,
+      companyId: req.params.id,
+      ownerId: owner._id,
+    })
+    if (!page) {
+      throw {
+        code: 404,
+        message: i18n.t('request.not_found')
+      }
+    }
+
+    page = await CompanyPageService.update(page, {
       ...req.body
     })
 
-    res.status(201).json(CompanyPageService.serialize(page))
+    res.status(200).json(CompanyPageService.serialize(page))
 
   } catch (e) {
     ErrorHandler.handle(res, e)

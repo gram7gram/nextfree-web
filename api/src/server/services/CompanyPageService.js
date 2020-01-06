@@ -33,6 +33,11 @@ const CompanyPageService = {
       }
     }
 
+    //Admin should moderate pages
+    if (entity.status === 'IN_REVIEW') {
+      entity.status = 'PUBLISHED'
+    }
+
     await entity.save()
 
     return entity.toObject()

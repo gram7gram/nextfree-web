@@ -39,7 +39,7 @@ router.get('/partner-websites', async (req, res) => {
     let items = []
     const total = await CompanyPage.countDocuments(filter)
     if (total > 0) {
-      items = await CompanyPage.find(filter, {limit, offset: limit * (page - 1)})
+      items = await CompanyPage.find(filter, null, {limit, skip: limit * (page - 1)}).lean()
 
       items = items.map(item => CompanyPageService.serialize(item))
     }

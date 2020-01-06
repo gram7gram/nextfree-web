@@ -1,6 +1,7 @@
 const path = require('path');
 const axios = require('axios');
 const express = require('express');
+const moment = require('moment');
 const template = require('nunjucks');
 const parameters = require('../../parameters');
 const ErrorHandler = require('../ErrorHandler');
@@ -13,12 +14,27 @@ router.get('/sitemap.xml', async (req, res) => {
 
   try {
 
-    let routes = ['/', '/login', '/privacy']
+    let routes = [
+      {
+        url: '/',
+        updatedAt: '2020-01-07'
+      },
+      {
+        url: '/login',
+        updatedAt: '2020-01-07'
+      },
+      {
+        url: '/privacy',
+        updatedAt: '2020-01-07'
+      }
+    ]
 
     const response = await axios.get(`${parameters.apiHost}/api/v1/partner-websites?limit=0`)
     if (response.status === 200) {
-      routes = routes.concat(response.data.items.map(website =>
-        `/partners/${website._id}`
+      routes = routes.concat(response.data.items.map(website => ({
+          url: `/partners/${website._id}`,
+          updatedAt: moment(website.updatedAt).format('YYYY-MM-DD'),
+        })
       ))
     }
 

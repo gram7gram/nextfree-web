@@ -6,6 +6,8 @@ import {SAVE_WEBSITE_BEFORE, SAVE_WEBSITE_FAILURE, SAVE_WEBSITE_SUCCESS} from '.
 const parseBeforeSubmit = model => {
   const data = JSON.parse(JSON.stringify(model))
 
+  delete data.id
+
   data.content = data.content.split('<p><br></p>').join('')
 
   return data
@@ -22,17 +24,30 @@ export default (companyId, model) => (dispatch, getState) => {
     type: SAVE_WEBSITE_BEFORE
   })
 
-  request.post(parameters.apiHost + `/api/v1/owner/companies/${companyId}/website`, data, {
-    headers: {
-      Authorization: token
-    }
-  }).then(({data}) => {
-    dispatch({
-      type: SAVE_WEBSITE_SUCCESS,
-      payload: data,
-      flatten: flatten(data),
+  let promise
+
+  if (model.id) {
+    promise = request.put(parameters.apiHost + `/api/v1/owner/companies/${companyId}/website/${model.id}`, data, {
+      headers: {
+        Authorization: token
+      }
     })
-  }).catch(e => {
+  } else {
+    promise = request.post(parameters.apiHost + `/api/v1/owner/companies/${companyId}/website`, data, {
+      headers: {
+        Authorization: token
+      }
+    })
+  }
+
+  promise
+    .then(({data}) => {
+      dispatch({
+        type: SAVE_WEBSITE_SUCCESS,
+        payload: data,
+        flatten: flatten(data),
+      })
+    }).catch(e => {
     console.log(e);
 
     dispatch({
