@@ -1,0 +1,24 @@
+.bg-light {
+    background-color: #f5f8fa !important;
+}
+
+
+
+#website-content {
+    min-height: 300px;
+}
+
+@media (max-width: 768px) {
+    #nav-container,
+    #logo-container {
+        margin: 0 auto
+    }
+}
+
+@media (min-width: 769px) {
+    #nav-logo {
+        position: relative;
+        top: 50px;
+        border-width: 5px !important;
+    }
+}

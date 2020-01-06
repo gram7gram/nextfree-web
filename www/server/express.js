@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan')
+const langParser = require('accept-language-parser')
+const prepareTranslations = require('./i18n').prepareTranslations
 
 const publicDir = path.resolve(__dirname, '../public')
 
@@ -13,6 +15,21 @@ const app = express();
 
 app.use(cors())
 app.use(morgan('tiny'))
+
+app.use((req, res, next) => {
+
+  const supported = ['ua']
+
+  let locale = langParser.pick(supported, req.headers['accept-language'] || '')
+  if (!locale) {
+    locale = supported[0]
+  }
+
+  prepareTranslations(locale)
+
+  next()
+})
+
 app.use(IndexController)
 app.use(SitemapController)
 app.use(PartnerController)

@@ -5,7 +5,11 @@ const checkId = require('../services/RequestParamsValidator').checkId;
 const CompanyPage = require('../../database/model/CompanyPage').CompanyPage;
 const Owner = require('../../database/model/Owner').Owner;
 const Company = require('../../database/model/Company').Company;
+const Purchase = require('../../database/model/Purchase').Purchase;
+const Store = require('../../database/model/Store').Store;
+
 const CompanyService = require('../services/CompanyService');
+const OwnerService = require('../services/OwnerService');
 const CompanyPageService = require('../services/CompanyPageService');
 // const i18n = require('../../i18n').i18n;
 
@@ -103,9 +107,21 @@ router.get('/partner-websites/:id', checkId, async (req, res) => {
       }
     }
 
+    const storeCount = await Store.countDocuments({
+      isEnabled: true,
+      companyId: company._id
+    })
+
+    const purchaseCount = await Purchase.countDocuments({
+      'company._id': company._id
+    })
+
     res.status(200).json({
       website: CompanyPageService.serialize(page),
       company: CompanyService.serialize(company),
+      owner: OwnerService.serialize(owner),
+      storeCount,
+      purchaseCount,
     })
 
   } catch (e) {

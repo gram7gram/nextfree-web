@@ -1,20 +1,24 @@
 const path = require('path');
 const express = require('express');
+const template = require('nunjucks');
 
 const views = path.resolve(__dirname, '../views')
 
 const router = new express.Router({mergeParams: true});
 
 router.get('/', (req, res) => {
-  res.sendFile(`${views}/index.html`)
+  const result = template.render(`${views}/index.html.twig`)
+  res.send(result)
 });
 
 router.get('/login', (req, res) => {
-  res.sendFile(`${views}/login.html`)
+  const result = template.render(`${views}/login.html.twig`)
+  res.send(result)
 });
 
 router.get('/privacy', (req, res) => {
-  res.sendFile(`${views}/privacy.html`)
+  const result = template.render(`${views}/privacy.html.twig`)
+  res.send(result)
 });
 
 module.exports = router;
