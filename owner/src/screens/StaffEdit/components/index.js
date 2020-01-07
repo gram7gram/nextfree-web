@@ -72,7 +72,9 @@ class StaffEdit extends React.Component {
       return;
     }
 
-    this.props.dispatch(Upload(file))
+    const {id} = this.props.StaffEdit.model
+
+    this.props.dispatch(Upload(id, file))
 
     e.target.value = null
   }

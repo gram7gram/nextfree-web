@@ -3,7 +3,7 @@ import Props from 'prop-types'
 import fallback from '../assets/img/company-placeholder.png'
 
 const Logotype = ({src}) =>
-  <div className="avatar-container">
+  <div className="logotype-container">
     <LogotypeBody src={src}/>
   </div>
 
@@ -21,7 +21,7 @@ export const LogotypeBody = ({src}) => {
     src={img}
     onError={() => setImg(fallback)}
     alt=""
-    className="img-fluid d-block mx-auto"/>
+    className="img-fluid d-block mx-auto logotype"/>
 
 }
 

@@ -9,6 +9,7 @@ import Store from './screens/Store/sagas';
 import StoreEdit from './screens/StoreEdit/sagas';
 import Company from './screens/Company/sagas';
 import CompanyEdit from './screens/CompanyEdit/sagas';
+import CompanyWebsite from './screens/CompanyWebsite/sagas';
 import Customer from './screens/Customer/sagas';
 import CustomerEdit from './screens/CustomerEdit/sagas';
 import Owner from './screens/Owner/sagas';
@@ -26,6 +27,7 @@ export default function* root() {
     fork(StoreEdit),
     fork(Company),
     fork(CompanyEdit),
+    fork(CompanyWebsite),
     fork(Customer),
     fork(CustomerEdit),
     fork(Owner),

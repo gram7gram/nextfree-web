@@ -21,6 +21,7 @@ import StaffEdit from '../screens/StaffEdit/components';
 
 import Company from '../screens/Company/components';
 import CompanyEdit from '../screens/CompanyEdit/components';
+import CompanyWebsite from '../screens/CompanyWebsite/components';
 
 import Store from '../screens/Store/components';
 import StoreEdit from '../screens/StoreEdit/components';
@@ -58,6 +59,7 @@ export function createRouter() {
             <Route exact path={Pages.COMPANIES} component={Company}/>
             <Route exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>
             <Route path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
+            <Route path={Pages.COMPANY_PAGE} component={CompanyWebsite}/>
 
             <Route exact path={Pages.STORES} component={Store}/>
             <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>

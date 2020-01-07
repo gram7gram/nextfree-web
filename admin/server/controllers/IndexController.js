@@ -13,6 +13,7 @@ const routes = [
   '/customers',
   '/customers/new',
   '/customers/:id/edit',
+  '/customers/:id/page',
 
   '/owners',
   '/owners/new',

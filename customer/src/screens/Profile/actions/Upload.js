@@ -1,20 +1,27 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import {MODEL_CHANGED, SAVE_FAILURE} from '../actions'
+import {SAVE_FAILURE, SAVE_BEFORE} from '../actions'
+import Save from './Save'
 
-export default (file) => (dispatch) => {
+export default (id, file) => (dispatch) => {
 
   const data = new FormData()
   data.append('file', file)
 
+  dispatch({
+    type: SAVE_BEFORE,
+  })
+
   request.post(parameters.storageHost + `/api/v1/media`, data)
     .then(({data}) => {
-      dispatch({
-        type: MODEL_CHANGED,
-        payload: {
-          "user.avatar": data.url
-        },
-      })
+
+      dispatch(Save({
+        id,
+        user: {
+          avatar: data.url
+        }
+      }))
+
     })
     .catch(e => {
       console.log(e);

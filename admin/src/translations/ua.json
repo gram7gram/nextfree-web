@@ -9,6 +9,8 @@
     "qr_scanner": "QR сканер",
     "qr_scanner_by_id": "Пошук по ID",
     "companies": "Компанії",
+    "company_info": "Основна інформація",
+    "company_page": "Сторінка компанії",
     "stores": "Торгові точки",
     "staff": "Співробітники",
     "owners": "Власники",
@@ -64,6 +66,10 @@
     "purchase_success_subtitle": "Чекаємо на наступні покупки"
   },
   "placeholder": {
+    "status": "Статус",
+    "link": "https://",
+    "phone": "380 000 00 00",
+    "createdAt": "Дата створення",
     "date": "Виберіть дату",
     "search": "Знайти...",
     "select": "Виберіть значення",
@@ -203,7 +209,14 @@
     "title": "Компанії",
     "search_action": "Пошук",
     "new_action": "Додати",
-    "not_found_title": "Нічого не знайдено"
+    "not_found_title": "Нічого не знайдено",
+    "enabled_badge": "Активна",
+    "disabled_badge": "Неактивна"
+  },
+  "company_website": {
+    "status_published": "Опубліковано",
+    "status_in_review": "Перевірка",
+    "status_draft": "Чернетка"
   },
   "company_edit": {
     "title": "Редагування",
@@ -215,7 +228,36 @@
     "conditions_subtitle": "Якщо для продажі виконується вказана умова, то ця продажа вважається бонусною.",
     "save_action": "Зберегти",
     "activate_action": "Активувати",
-    "deactivate_action": "Деактивувати"
+    "deactivate_action": "Деактивувати",
+    "page_deactivate_action": "Деактивувати",
+    "page_save_draft_action": "Зберегти чернетку",
+    "page_preview_action": "Відкрити сторінку",
+    "page_save_publish_action": "Опублікувати",
+    "page_create_title": "Сторінка компанії",
+    "page_create_content": "Ваша компанія стане доступною на головному сайті nextfree.com.ua. Також, на сайті буде створена сторінка Вашої компанії з особистим URL. Увага! Сторінка буде перевірена модератором. У разі виявлення порушень, сторінка Вашої компанії буде недоступна.",
+    "page_create_action": "Почати",
+    "page_title": "Контент сторінки",
+    "page_subtitle": "Це перше, що побачать Ваші покупці при відображені сторінки компанії",
+    "meta_title": "SEO інформація",
+    "meta_subtitle": "У разі якщо Вам важливо, щоб пошукові системи знаходили сторінку компанії - заповніть наступні поля",
+    "social_title": "Контакти та посилання",
+    "social_subtitle": "Вкажіть способи зв'язку або посилання на соц.мережі",
+    "page": {
+      "title": "Основний заголовок",
+      "content": "Контент сторінки"
+    },
+    "meta": {
+      "title": "Мета-заголовок",
+      "description": "Мета-опис",
+      "keywords": "Мета-ключові слова"
+    },
+    "social": {
+      "email": "Email",
+      "website": "Вебсайт",
+      "phone": "Номер телефону",
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    }
   },
   "footer": {
     "resources": "Корисно знати",

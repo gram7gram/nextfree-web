@@ -4,15 +4,15 @@ import model from './model'
 
 const serverErrors = (prev = [], action) => {
   switch (action.type) {
-    case Action.SAVE_FAILURE:
+    case Action.SAVE_WEBSITE_FAILURE:
       if (action.payload.data && action.payload.data.message !== undefined) {
         return [
           action.payload.data.message
         ]
       }
       return []
-    case Action.SAVE_SUCCESS:
-    case Action.SAVE_BEFORE:
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.SAVE_WEBSITE_BEFORE:
       return []
     default:
       return prev
@@ -21,8 +21,8 @@ const serverErrors = (prev = [], action) => {
 
 const raw = (prev = null, action) => {
   switch (action.type) {
-    case Action.SAVE_SUCCESS:
-    case Action.FETCH_SUCCESS:
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.FETCH_WEBSITE_SUCCESS:
       return action.flatten
     default:
       return prev
@@ -31,10 +31,10 @@ const raw = (prev = null, action) => {
 
 const isValid = (prev = false, action) => {
   switch (action.type) {
-    case Action.VALIDATE_SUCCESS:
+    case Action.VALIDATE_WEBSITE_SUCCESS:
       return true
-    case Action.VALIDATE_FAILURE:
-    case Action.SAVE_FAILURE:
+    case Action.VALIDATE_WEBSITE_FAILURE:
+    case Action.SAVE_WEBSITE_FAILURE:
       return false
     default:
       return prev
@@ -43,13 +43,13 @@ const isValid = (prev = false, action) => {
 
 const isLoading = (prev = false, action) => {
   switch (action.type) {
-    case Action.FETCH_FAILURE:
-    case Action.FETCH_SUCCESS:
-    case Action.SAVE_SUCCESS:
-    case Action.SAVE_FAILURE:
+    case Action.FETCH_WEBSITE_FAILURE:
+    case Action.FETCH_WEBSITE_SUCCESS:
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.SAVE_WEBSITE_FAILURE:
       return false
-    case Action.FETCH_BEFORE:
-    case Action.SAVE_BEFORE:
+    case Action.FETCH_WEBSITE_BEFORE:
+    case Action.SAVE_WEBSITE_BEFORE:
       return true
     default:
       return prev
@@ -63,11 +63,11 @@ const initialValidator = {
 }
 const validator = (prev = initialValidator, action) => {
   switch (action.type) {
-    case Action.FETCH_BEFORE:
-    case Action.FETCH_SUCCESS:
-    case Action.VALIDATE_SUCCESS:
+    case Action.FETCH_WEBSITE_BEFORE:
+    case Action.FETCH_WEBSITE_SUCCESS:
+    case Action.VALIDATE_WEBSITE_SUCCESS:
       return initialValidator
-    case Action.VALIDATE_FAILURE:
+    case Action.VALIDATE_WEBSITE_FAILURE:
       return action.payload
     default:
       return prev
@@ -76,10 +76,10 @@ const validator = (prev = initialValidator, action) => {
 
 const changes = (prev = {}, action) => {
   switch (action.type) {
-    case Action.FETCH_BEFORE:
-    case Action.FETCH_SUCCESS:
+    case Action.FETCH_WEBSITE_BEFORE:
+    case Action.FETCH_WEBSITE_SUCCESS:
       return {}
-    case Action.MODEL_CHANGED:
+    case Action.WEBSITE_CHANGED:
 
       const changes = {...prev}
 
@@ -94,11 +94,11 @@ const changes = (prev = {}, action) => {
 }
 
 export default combineReducers({
-  raw,
   isValid,
   isLoading,
   validator,
   model,
+  raw,
   changes,
   serverErrors,
 })

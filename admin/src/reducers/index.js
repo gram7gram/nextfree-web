@@ -13,6 +13,7 @@ import Store from '../screens/Store/reducers';
 import StoreEdit from '../screens/StoreEdit/reducers';
 import Company from '../screens/Company/reducers';
 import CompanyEdit from '../screens/CompanyEdit/reducers';
+import CompanyWebsite from '../screens/CompanyWebsite/reducers';
 import QRScanner from '../screens/QRScanner/reducers';
 import Customer from '../screens/Customer/reducers';
 import CustomerEdit from '../screens/CustomerEdit/reducers';
@@ -31,6 +32,7 @@ const createRootReducer = (history) => combineReducers({
   StaffEdit,
   Company,
   CompanyEdit,
+  CompanyWebsite,
   Store,
   StoreEdit,
   QRScanner,

@@ -13,6 +13,7 @@ export const STORE_EDIT = '/stores/:id/edit';
 export const COMPANIES = '/companies';
 export const COMPANY_NEW = '/companies/new';
 export const COMPANY_EDIT = '/companies/:id/edit';
+export const COMPANY_PAGE = '/companies/:id/page';
 
 export const STAFF = '/staff';
 export const STAFF_EDIT = '/staff/:id/edit';

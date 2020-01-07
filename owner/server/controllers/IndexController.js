@@ -14,6 +14,7 @@ const routes = [
   '/scan-by-id',
 
   '/company',
+  '/company/page',
 
   '/stores',
   '/stores/:id',

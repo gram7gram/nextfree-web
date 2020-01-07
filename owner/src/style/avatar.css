@@ -1,9 +1,12 @@
-.avatar-container > img {
-    object-fit: cover;
-}
-
+.logotype-container,
 .avatar-container {
     overflow: hidden;
     min-height: 170px;
     max-height: 170px;
+}
+
+img.avatar,
+img.logotype {
+    object-fit: cover;
+    max-height: 200px;
 }

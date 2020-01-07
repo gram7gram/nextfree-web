@@ -8,6 +8,7 @@ import configureStore, {history} from './store';
 import {ConnectedRouter} from 'connected-react-router'
 import {createRouter} from './router';
 
+import 'react-quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import './style/style.css';
