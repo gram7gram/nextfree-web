@@ -2,7 +2,10 @@
     background-color: #f5f8fa !important;
 }
 
-
+#logo-container {
+    max-height: 200px;
+    object-fit: contain;
+}
 
 #website-content {
     min-height: 300px;

@@ -11,6 +11,7 @@ const Store = require('../../database/model/Store').Store;
 const CompanyService = require('../services/CompanyService');
 const OwnerService = require('../services/OwnerService');
 const CompanyPageService = require('../services/CompanyPageService');
+const StoreService = require('../services/StoreService');
 const i18n = require('../../i18n').i18n;
 
 const router = new express.Router({mergeParams: true});
@@ -107,10 +108,10 @@ router.get('/partner-websites/:id', checkId, async (req, res) => {
       }
     }
 
-    const storeCount = await Store.countDocuments({
+    const stores = await Store.find({
+      companyId: company._id,
       isEnabled: true,
-      companyId: company._id
-    })
+    }).lean()
 
     const purchaseCount = await Purchase.countDocuments({
       'company._id': company._id
@@ -120,7 +121,8 @@ router.get('/partner-websites/:id', checkId, async (req, res) => {
       website: CompanyPageService.serialize(page),
       company: CompanyService.serialize(company),
       owner: OwnerService.serialize(owner),
-      storeCount,
+      stores: stores.map(store => StoreService.serialize(store)),
+      storeCount: stores.length,
       purchaseCount,
     })
 

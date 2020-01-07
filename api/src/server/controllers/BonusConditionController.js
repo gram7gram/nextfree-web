@@ -1,11 +1,10 @@
 const express = require('express');
-const isAuthenticated = require('../services/AuthService').isAuthenticated;
 const i18n = require('../../i18n').i18n;
 const BonusCondition = require('../../BonusCondition');
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/bonus-conditions', isAuthenticated, async (req, res) => {
+router.get('/bonus-conditions', async (req, res) => {
 
   const items = [
     {

@@ -19,10 +19,20 @@ router.get('/partners/:id', async (req, res) => {
       res.status(status).json(data)
     }
 
+    let bonusCondition = null
+
+    const bonusResponse = await axios.get(`${parameters.apiHost}/api/v1/bonus-conditions`)
+    if (bonusResponse.status === 200) {
+      bonusCondition = bonusResponse.data.items.find(item =>
+        item.code === data.company.bonusCondition
+      )
+    }
+
     const result = template.render(`${views}/partner.html.twig`, {
       parameters,
       i18n,
       moment,
+      bonusCondition,
       ...data
     });
 

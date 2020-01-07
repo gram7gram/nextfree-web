@@ -90,9 +90,9 @@ app.use('/api/v1', OwnerPasswordController);
 
 //Public partner website API
 app.use('/api/v1', CompanyPageRESTController);
+app.use('/api/v1', BonusConditionController);
 
 //Private API
-app.use('/api/v1', BonusConditionController);
 app.use('/api/v1', UserRESTController);
 
 //Admin API
