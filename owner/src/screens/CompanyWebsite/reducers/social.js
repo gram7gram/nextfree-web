@@ -1,6 +1,24 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
 
+const email = (prev = null, action) => {
+  switch (action.type) {
+    case Action.SAVE_WEBSITE_SUCCESS:
+    case Action.FETCH_WEBSITE_SUCCESS:
+      if (action.flatten['social.email'] !== undefined) {
+        return action.flatten['social.email']
+      }
+      return null
+    case Action.WEBSITE_CHANGED:
+      if (action.payload['social.email'] !== undefined) {
+        return action.payload['social.email']
+      }
+      return prev
+    default:
+      return prev
+  }
+}
+
 const website = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_WEBSITE_SUCCESS:
@@ -74,6 +92,7 @@ const instagram = (prev = null, action) => {
 }
 
 export default combineReducers({
+  email,
   website,
   phone,
   instagram,

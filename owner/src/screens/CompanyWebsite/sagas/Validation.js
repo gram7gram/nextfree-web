@@ -1,6 +1,6 @@
 import {all, put, select, takeEvery, throttle} from 'redux-saga/effects'
 import {WEBSITE_CHANGED, VALIDATE_WEBSITE_REQUEST, FETCH_WEBSITE_SUCCESS} from '../actions'
-import Validate from '../actions/ValidateWebsite'
+import Validate from '../actions/Validate'
 
 function* requestValidation() {
     yield put({

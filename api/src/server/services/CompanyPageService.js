@@ -24,6 +24,14 @@ const CompanyPageService = {
       _merge(entity.toObject(), content)
     )
 
+    //Admin should moderate pages
+    if (entity.status === 'IN_REVIEW') {
+      entity.status = 'PUBLISHED'
+      entity.publishedAt = new Date()
+    } else {
+      entity.publishedAt = null
+    }
+
     const validator = await entity.validate();
     if (validator) {
       throw {
@@ -31,11 +39,6 @@ const CompanyPageService = {
         message: i18n.t('company.validation_failed'),
         errors: validator.errors
       }
-    }
-
-    //Admin should moderate pages
-    if (entity.status === 'IN_REVIEW') {
-      entity.status = 'PUBLISHED'
     }
 
     await entity.save()

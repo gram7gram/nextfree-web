@@ -1,13 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 import Editor from 'react-quill';
 import {WEBSITE_CHANGED} from '../actions';
-import FetchWebsite from '../actions/FetchWebsite';
-import SaveWebsite from '../actions/SaveWebsite';
+import FetchWebsite from '../actions/Fetch';
+import SaveWebsite from '../actions/Save';
 import i18n from '../../../i18n';
+import parameters from '../../../parameters';
 import {createStructuredSelector} from "reselect";
 import Errors from "../../../components/Errors";
+import Loading from "../../../components/Loading";
 import Sidebar from "../../CompanyEdit/components/Sidebar";
+import Status from "./Status";
 
 class CompanyWebsite extends React.Component {
 
@@ -52,11 +56,17 @@ class CompanyWebsite extends React.Component {
     }
   })
 
-  changeString = name => e => this.change(name, e.target.value)
+  changeString = name => e =>
+    this.change(name, e.target.value)
 
-  changeHtml = name => value => this.change(name, value)
+  changeHtml = name => (value = '') => {
+    const trimmed = value.trim().split('<p><br></p><p><br></p>').join('<br/>')
 
-  enablePage = () => this.change('isEnabled', true)
+    this.change(name, trimmed.split('<p><br></p>').join(''))
+  }
+
+  enablePage = () =>
+    this.change('isEnabled', true)
 
   getError = key => {
     const {errors} = this.props.CompanyWebsite.validator
@@ -68,9 +78,17 @@ class CompanyWebsite extends React.Component {
 
   renderContent() {
 
-    const {model, isValid, isLoading} = this.props.CompanyWebsite
+    const {model, isValid, isLoading, raw} = this.props.CompanyWebsite
 
     const {meta, social} = model
+
+    if (isLoading && !model.id) {
+      return <div className="text-center py-5">
+
+        <Loading/>
+
+      </div>
+    }
 
     if (!model.isEnabled) {
       return <div className="text-center py-5">
@@ -87,23 +105,61 @@ class CompanyWebsite extends React.Component {
       </div>
     }
 
+    const isPublished = raw.status === 'PUBLISHED'
+
+    const buttons = [
+      {
+        text: i18n.t('company_edit.page_save_publish_action'),
+        icon: "fa-check",
+        mainClass: "btn-success",
+        onClick: this.publish,
+        disabled: isLoading || !isValid || isPublished,
+      },
+      {
+        text: i18n.t('company_edit.page_save_draft_action'),
+        icon: "fa-save",
+        mainClass: "btn-outline-warning",
+        onClick: this.draft,
+        disabled: isLoading || !isValid,
+      }
+    ]
+
+    if (isPublished) {
+      buttons.push({
+        text: i18n.t('company_edit.page_deactivate_action'),
+        icon: "fa-times",
+        mainClass: "btn-outline-danger",
+        onClick: this.draft,
+        disabled: isLoading || !isValid,
+      })
+      buttons.push({
+        text: i18n.t('company_edit.page_preview_action'),
+        icon: "fa-eye",
+        mainClass: "btn-info",
+        href: `${parameters.wwwHost}/partners/${model.id}`,
+      })
+    }
+
     return <>
 
       <div className="d-block d-md-none mb-4">
-
-        <button className="btn btn-success btn-block mb-1"
-                onClick={this.publish}
-                disabled={isLoading || !isValid}>
-          <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-          &nbsp;{i18n.t('company_edit.page_save_publish_action')}
-        </button>
-
-        <button className="btn btn-outline-warning btn-block mb-1"
-                onClick={this.draft}
-                disabled={isLoading || !isValid}>
-          <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-          &nbsp;{i18n.t('company_edit.page_save_draft_action')}
-        </button>
+        {buttons.map((btn, i) =>
+          btn.onClick
+            ? <button key={i}
+                      className={`btn ${btn.mainClass} btn-block mb-1`}
+                      onClick={btn.onClick}
+                      disabled={!!btn.disabled}>
+              <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+              &nbsp;{btn.text}
+            </button>
+            : <a key={i}
+                 target="_blank"
+                 className={`btn ${btn.mainClass} btn-block mb-1`}
+                 href={btn.href}>
+              <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+              &nbsp;{btn.text}
+            </a>
+        )}
       </div>
 
       <div className="card mb-4">
@@ -112,22 +168,30 @@ class CompanyWebsite extends React.Component {
           <div className="row">
             <div className="col">
               <h4 className="m-0 text-white">{i18n.t('company_edit.page_title')}</h4>
+              <div>
+                <Status value={model.status}/>
+                &nbsp;{raw.publishedAt ? moment(raw.publishedAt).format('HH:mm DD.MM.YYYY') : ''}
+              </div>
             </div>
 
             <div className="col-auto text-right d-none d-md-block">
-              <button className="btn btn-outline-warning btn-sm mx-1"
-                      onClick={this.draft}
-                      disabled={isLoading || !isValid}>
-                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                &nbsp;{i18n.t('company_edit.page_save_draft_action')}
-              </button>
-
-              <button className="btn btn-success btn-sm mx-1"
-                      onClick={this.publish}
-                      disabled={isLoading || !isValid}>
-                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                &nbsp;{i18n.t('company_edit.page_save_publish_action')}
-              </button>
+              {buttons.map((btn, i) =>
+                btn.onClick
+                  ? <button key={i}
+                            className={`btn ${btn.mainClass} btn-sm mx-1`}
+                            onClick={btn.onClick}
+                            disabled={!!btn.disabled}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+                    &nbsp;{btn.text}
+                  </button>
+                  : <a key={i}
+                       target="_blank"
+                       className={`btn ${btn.mainClass} btn-sm mx-1`}
+                       href={btn.href}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+                    &nbsp;{btn.text}
+                  </a>
+              )}
             </div>
           </div>
 
@@ -183,7 +247,7 @@ class CompanyWebsite extends React.Component {
 
               <div className="form-group">
                 <label className="m-0">{i18n.t('company_edit.meta.description')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
+                <textarea placeholder={i18n.t('placeholder.text')}
                        className="form-control"
                        onChange={this.changeString('meta.description')}
                        value={meta.description || ''}/>
@@ -215,38 +279,82 @@ class CompanyWebsite extends React.Component {
 
               <div className="form-group">
                 <label className="m-0">{i18n.t('company_edit.social.facebook')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('social.facebook')}
-                       value={social.facebook || ''}/>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fab fa-facebook"/>
+                  </span>
+                  </div>
+                  <input type="text" placeholder={i18n.t('placeholder.link')}
+                         className="form-control"
+                         onChange={this.changeString('social.facebook')}
+                         value={social.facebook || ''}/>
+                </div>
                 {this.getError('social.facebook')}
               </div>
 
               <div className="form-group">
                 <label className="m-0">{i18n.t('company_edit.social.instagram')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('social.instagram')}
-                       value={social.instagram || ''}/>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fab fa-instagram"/>
+                  </span>
+                  </div>
+                  <input type="text" placeholder={i18n.t('placeholder.link')}
+                         className="form-control"
+                         onChange={this.changeString('social.instagram')}
+                         value={social.instagram || ''}/>
+                </div>
                 {this.getError('social.instagram')}
               </div>
 
               <div className="form-group">
                 <label className="m-0">{i18n.t('company_edit.social.website')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('social.website')}
-                       value={social.website || ''}/>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fa fa-link"/>
+                  </span>
+                  </div>
+                  <input type="text" placeholder={i18n.t('placeholder.link')}
+                         className="form-control"
+                         onChange={this.changeString('social.website')}
+                         value={social.website || ''}/>
+                </div>
                 {this.getError('social.website')}
               </div>
 
               <div className="form-group">
                 <label className="m-0">{i18n.t('company_edit.social.phone')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('social.phone')}
-                       value={social.phone || ''}/>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fa fa-phone"/>
+                  </span>
+                  </div>
+                  <input type="text" placeholder={i18n.t('placeholder.phone')}
+                         className="form-control"
+                         onChange={this.changeString('social.phone')}
+                         value={social.phone || ''}/>
+                </div>
                 {this.getError('social.phone')}
+              </div>
+
+              <div className="form-group">
+                <label className="m-0">{i18n.t('company_edit.social.email')}</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fa fa-at"/>
+                  </span>
+                  </div>
+                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                         className="form-control"
+                         onChange={this.changeString('social.email')}
+                         value={social.email || ''}/>
+                </div>
+                {this.getError('social.email')}
               </div>
             </div>
 

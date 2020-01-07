@@ -4,6 +4,7 @@ const config = {
   development: {},
   production: {
     host: 'https://owner.nextfree.com.ua',
+    wwwHost: 'https://nextfree.com.ua',
     storageHost: 'https://storage.nextfree.com.ua',
     apiHost: 'https://api.nextfree.com.ua',
     gtm: {

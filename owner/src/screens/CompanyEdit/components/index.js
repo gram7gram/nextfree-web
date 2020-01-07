@@ -97,6 +97,36 @@ class CompanyEdit extends React.Component {
       serverErrors,
     } = this.props.CompanyEdit
 
+    const buttons = []
+
+    if (model.id) {
+      if (model.isEnabled) {
+        buttons.push({
+          text: i18n.t('company_edit.deactivate_action'),
+          icon: "fa-ban",
+          mainClass: "btn-outline-danger",
+          onClick: this.deactivate,
+          disabled: isLoading || !isValid,
+        })
+      } else {
+        buttons.push({
+          text: i18n.t('company_edit.activate_action'),
+          icon: "fa-check",
+          mainClass: "btn-outline-success",
+          onClick: this.activate,
+          disabled: isLoading || !isValid,
+        })
+      }
+    }
+
+    buttons.push({
+      text: i18n.t('company_edit.save_action'),
+      icon: "fa-save",
+      mainClass: "btn-success",
+      onClick: this.submit,
+      disabled: isLoading || !isValid,
+    })
+
     return <div className="container-fluid my-3">
       <div className="row">
 
@@ -110,61 +140,38 @@ class CompanyEdit extends React.Component {
 
           <div className="d-block d-md-none mb-4">
 
-            <button className="btn btn-success btn-block mb-1"
-                    onClick={this.submit}
-                    disabled={isLoading || !isValid}>
-              <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-              &nbsp;{i18n.t('company_edit.save_action')}
-            </button>
-
-            {model.id && model.isEnabled
-              ? <button className="btn btn-outline-danger btn-block mb-1"
-                        onClick={this.deactivate}
-                        disabled={isLoading || !isValid}>
-                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                &nbsp;{i18n.t('company_edit.deactivate_action')}
+            {buttons.map((btn, i) =>
+              <button key={i}
+                      className={`btn ${btn.mainClass} btn-block mb-1`}
+                      onClick={btn.onClick}
+                      disabled={!!btn.disabled}>
+                <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+                &nbsp;{btn.text}
               </button>
-              : null}
+            )}
 
-            {model.id && !model.isEnabled
-              ? <button className="btn btn-outline-success btn-block mb-1"
-                        onClick={this.activate}
-                        disabled={isLoading || !isValid}>
-                <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                &nbsp;{i18n.t('company_edit.activate_action')}
-              </button>
-              : null}
           </div>
 
           <div className="row">
             <div className="col-12">
               <div className="card mb-4">
-                <div className="card-header text-right d-none d-md-block">
-
-                  {model.id && model.isEnabled
-                    ? <button className="btn btn-outline-danger btn-sm mx-1"
-                              onClick={this.deactivate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                      &nbsp;{i18n.t('company_edit.deactivate_action')}
-                    </button>
-                    : null}
-
-                  {model.id && !model.isEnabled
-                    ? <button className="btn btn-outline-success btn-sm mx-1"
-                              onClick={this.activate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                      &nbsp;{i18n.t('company_edit.activate_action')}
-                    </button>
-                    : null}
-
-                  <button className="btn btn-success btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('company_edit.save_action')}
-                  </button>
+                <div className="card-header">
+                  <div className="row">
+                    <div className="col">
+                      <h3 className="m-0 text-white">{i18n.t('navigation.my_company_page')}</h3>
+                    </div>
+                    <div className="col-auto text-right d-none d-md-block">
+                      {buttons.map((btn, i) =>
+                        <button key={i}
+                                className={`btn ${btn.mainClass} btn-sm mx-1`}
+                                onClick={btn.onClick}
+                                disabled={!!btn.disabled}>
+                          <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
+                          &nbsp;{btn.text}
+                        </button>
+                      )}
+                    </div>
+                  </div>
 
                 </div>
                 <div className="card-body">
@@ -213,9 +220,6 @@ class CompanyEdit extends React.Component {
               </div>
             </div>
           </div>
-
-
-
 
 
           <div className="card mb-4">

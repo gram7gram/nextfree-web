@@ -25,6 +25,9 @@ const social = new mongoose.Schema({
   website: {
     type: String,
   },
+  email: {
+    type: String,
+  },
 })
 
 const schema = new mongoose.Schema({
@@ -41,6 +44,9 @@ const schema = new mongoose.Schema({
     type: Boolean,
   },
   updatedAt: {
+    type: Date,
+  },
+  publishedAt: {
     type: Date,
   },
   status: {

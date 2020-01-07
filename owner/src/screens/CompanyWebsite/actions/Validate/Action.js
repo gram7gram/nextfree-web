@@ -14,5 +14,12 @@ export default (model, changes) => {
       validator.errors['title'] = i18n.t('validation.required')
   }
 
+  if (!model.content || model.content === '<p><br></p>') {
+    ++validator.total
+
+    if (changes['content'])
+      validator.errors['content'] = i18n.t('validation.required')
+  }
+
   return validator
 }

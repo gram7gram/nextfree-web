@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>{{ website.meta.title }} - {{ parameters.pageprefix }}</title>
+    <title>{{ website.meta.title }}{{ parameters.pageprefix }}</title>
     <meta name="robots" content="index, follow"/>
 
     <meta name="description" content="{{ website.meta.description }}">
     <meta name="keywords" content="{{ website.meta.keywords }}">
 
-    <meta name="og:title" content="{{ website.meta.title }} - {{ parameters.pageprefix }}">
+    <meta name="og:title" content="{{ website.meta.title }}{{ parameters.pageprefix }}">
     <meta name="og:description" content="{{ website.meta.description }}">
     <meta name="og:image" content="{{ company.logo }}">
 
@@ -82,39 +82,46 @@
             <div class="py-3">
                 <h1 class="mb-2 h2 font-weight-bold">{{ website.title }}</h1>
 
-                <p class="mb-1">
-                    <i class="fa fa-user"></i>&nbsp;{{ owner.user.lastName }} {{ owner.user.firstName }}
+                <p class="mb-1 p-1 text-truncate">
+                    <i class="fa fa-user text-secondary"></i>&nbsp;{{ owner.user.lastName }} {{ owner.user.firstName }}
                 </p>
 
-                <p class="mb-1">
-                    <i class="fa fa-calendar"></i>&nbsp;{{ i18n.t('partner.joined') }} {{ moment(company.createdAt).format('MMM YYYY') }}
+                <p class="mb-1 p-1 text-truncate">
+                    <i class="fa fa-calendar text-secondary"></i>&nbsp;{{ i18n.t('partner.joined') }} {{ moment(company.createdAt).format('MMM YYYY') }}
                 </p>
 
                 {% if website.social.website %}
-                    <p class="mb-1">
+                    <p class="mb-1 p-1 text-truncate">
                         <a href="{{ website.social.website }}" rel="nofollow" target="_blank">
-                            <i class="fa fa-link"></i>&nbsp;{{ website.social.website }}
+                            <i class="fa fa-link text-secondary"></i>&nbsp;{{ website.social.website }}
+                        </a>
+                    </p>
+                {% endif %}
+                {% if website.social.email %}
+                    <p class="mb-1 p-1 text-truncate">
+                        <a href="mailto:{{ website.social.email }}" rel="nofollow" target="_blank">
+                            <i class="fa fa-at text-secondary"></i>&nbsp;{{ website.social.email }}
                         </a>
                     </p>
                 {% endif %}
                 {% if website.social.phone %}
-                    <p class="mb-1">
+                    <p class="mb-1 p-1 text-truncate">
                         <a href="tel:{{ website.social.phone }}" rel="nofollow" target="_blank">
-                            <i class="fa fa-phone"></i>&nbsp;{{ website.social.phone }}
+                            <i class="fa fa-phone text-secondary"></i>&nbsp;{{ website.social.phone }}
                         </a>
                     </p>
                 {% endif %}
                 {% if website.social.facebook %}
-                    <p class="mb-1">
+                    <p class="mb-1 p-1 text-truncate">
                         <a href="{{ website.social.facebook }}" rel="nofollow" target="_blank">
-                            <i class="fab fa-facebook-square"></i>&nbsp;Facebook
+                            <i class="fab fa-facebook-square text-secondary"></i>&nbsp;Facebook
                         </a>
                     </p>
                 {% endif %}
                 {% if website.social.instagram %}
-                    <p class="mb-1">
+                    <p class="mb-1 p-1 text-truncate">
                         <a href="{{ website.social.instagram }}" rel="nofollow" target="_blank">
-                            <i class="fab fa-instagram"></i>&nbsp;Instagram
+                            <i class="fab fa-instagram text-secondary"></i>&nbsp;Instagram
                         </a>
                     </p>
                 {% endif %}
@@ -136,14 +143,14 @@
     </div>
 </div>
 
-<footer class="w-100 border-top py-5 bg-dark">
+<footer class="w-100 border-top py-5">
     <div class="container">
         <div class="row my-3 text-center">
             <div class="col-12 col-md-6 col-lg-4 mx-auto">
-                <a href="/" class="btn btn-link">Next Free</a>
+                <a href="{{ parameters.wwwHost }}/" class="btn btn-link">Next Free</a>
             </div>
             <div class="col-12 col-md-6 col-lg-4 mx-auto">
-                <a href="/privacy" class="btn btn-link">Угода користувача</a>
+                <a href="{{ parameters.wwwHost }}/privacy" class="btn btn-link">Угода користувача</a>
             </div>
         </div>
     </div>
