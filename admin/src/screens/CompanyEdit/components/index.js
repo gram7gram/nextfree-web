@@ -228,6 +228,9 @@ class CompanyEdit extends React.Component {
                   </div>
 
                   <div className="text-muted">
+                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.avatar_info')}
+                  </div>
+                  <div className="text-muted">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
                   </div>
                   <div className="text-muted">
