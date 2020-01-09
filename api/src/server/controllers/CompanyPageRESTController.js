@@ -1,4 +1,5 @@
 const express = require('express');
+const keyBy = require('lodash/keyBy');
 const ErrorHandler = require('../services/ErrorHandler');
 const checkId = require('../services/RequestParamsValidator').checkId;
 
@@ -40,10 +41,40 @@ router.get('/partner-websites', async (req, res) => {
     let items = []
     const total = await CompanyPage.countDocuments(filter)
     if (total > 0) {
-      items = await CompanyPage.find(filter, null, {limit, skip: limit * (page - 1)}).lean()
+      const websites = await CompanyPage.find(filter, null, {
+        sort: {publishedAt: -1},
+        limit,
+        skip: limit * (page - 1)
+      }).lean()
 
-      items = items.map(item => CompanyPageService.serialize(item))
+      const companyIds = websites.map(item => item.companyId.toString())
+
+      let companies = await Company.find({
+        _id: {$in: companyIds}
+      }).lean()
+
+      companies = keyBy(companies, '_id')
+
+      for (const website of websites) {
+
+        website.logo = companies[website.companyId].logo
+
+        items.push({
+          _id: website._id.toString(),
+          logo: companies[website.companyId].logo,
+          title: website.title,
+        })
+
+      }
     }
+
+    const totalStores = await Store.countDocuments({
+      isEnabled: true,
+    })
+
+    const totalCompanies = await Store.countDocuments({
+      isEnabled: true,
+    })
 
     res.status(200).json({
       page,
@@ -51,6 +82,8 @@ router.get('/partner-websites', async (req, res) => {
       total,
       count: items.length,
       items,
+      totalStores,
+      totalCompanies,
     })
 
   } catch (e) {
