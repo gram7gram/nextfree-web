@@ -94,10 +94,6 @@
                 <h1 class="mb-2 h2 font-weight-bold">{{ website.title }}</h1>
 
                 <p class="mb-1 p-1 text-truncate">
-                    <i class="fa fa-user text-light-red"></i>&nbsp;{{ owner.user.lastName }} {{ owner.user.firstName }}
-                </p>
-
-                <p class="mb-1 p-1 text-truncate">
                     <i class="fa fa-calendar text-light-red"></i>&nbsp;{{ i18n.t('partner.joined') }} {{ moment(company.createdAt).format('MMM YYYY') }}
                 </p>
 
