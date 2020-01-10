@@ -17,15 +17,15 @@ router.get('/sitemap.xml', async (req, res) => {
     let routes = [
       {
         url: '/',
-        updatedAt: '2020-01-07'
+        updatedAt: '2020-01-10'
       },
       {
         url: '/login',
-        updatedAt: '2020-01-07'
+        updatedAt: '2020-01-10'
       },
       {
         url: '/privacy',
-        updatedAt: '2020-01-07'
+        updatedAt: '2020-01-10'
       }
     ]
 
