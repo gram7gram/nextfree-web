@@ -1,8 +1,8 @@
-import {all, takeLatest, put, select} from 'redux-saga/effects'
+import {all, put, select, takeLatest} from 'redux-saga/effects'
 import {replace} from 'connected-react-router'
 import Cookie from 'js-cookie'
 import * as Actions from '../actions'
-import * as Pages from '../../../router/Pages'
+import cid from '../../../utils/cid'
 
 function* saveTokenAndRedirect({payload}) {
 
@@ -10,7 +10,7 @@ function* saveTokenAndRedirect({payload}) {
 
   const pathname = yield select(store => store.router.location.pathname)
 
-  yield put(replace(pathname))
+  yield put(replace(pathname, {auth: true, key: cid()}))
 }
 
 function* removeToken() {
@@ -19,7 +19,7 @@ function* removeToken() {
 
   const pathname = yield select(store => store.router.location.pathname)
 
-  yield put(replace(pathname))
+  yield put(replace(pathname, {auth: false}))
 }
 
 export default function* sagas() {

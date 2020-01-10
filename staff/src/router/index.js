@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import {isIPhone} from "../utils/ios";
 
@@ -19,12 +19,34 @@ import Invitation from '../screens/Invitation/components';
 import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
-import Authentication from "../hoc/Authentication";
 
 import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
 
-export function createRouter() {
+import Login from '../screens/Login/components';
+import FirstLogin from "../../../owner/src/hoc/FirstLogin";
+
+export function createRouter(store) {
+
+  const PrivateRoute = ({component: Component, ...rest}) => {
+
+    return <Route {...rest} render={(props) => {
+
+      const state = store.getState()
+
+      if (state.App.isLoadingVisible) {
+        return null
+      }
+
+      if (state.App.isAuthenticated === true) {
+        return <FirstLogin>
+          <Component {...props} />
+        </FirstLogin>
+      }
+
+      return <Redirect to={Pages.LOGIN}/>
+    }}/>
+  }
 
   return <>
 
@@ -37,23 +59,20 @@ export function createRouter() {
         <Switch>
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
+          <Route exact path={Pages.LOGIN} component={Login}/>
 
           <Route path={Pages.INVITATION} component={Invitation}/>
           <Route path={Pages.ACTIVATION} component={Activation}/>
 
-          <Authentication>
-            <Route exact path={Pages.HOME} component={Home}/>
-            <Route exact path={Pages.QR_CODE} component={QR}/>
+          <PrivateRoute exact path={Pages.HOME} component={Home}/>
+          <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
 
-            {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
-            <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
+          {!isIPhone() && <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>}
+          <PrivateRoute exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
-            <Route exact path={Pages.PROFILE} component={Profile}/>
-            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
-            <Redirect path="*" to={Pages.HOME}/>
-
-          </Authentication>
         </Switch>
       </ErrorBoundary>
 

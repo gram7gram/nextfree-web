@@ -30,14 +30,34 @@ import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
-import Authentication from "../hoc/Authentication";
 import FirstLogin from "../hoc/FirstLogin";
 import Loading from "../hoc/Loading";
 
 import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
+import Login from "../screens/Login/components";
 
-export function createRouter() {
+export function createRouter(store) {
+
+  const PrivateRoute = ({component: Component, ...rest}) => {
+
+    return <Route {...rest} render={(props) => {
+
+      const state = store.getState()
+
+      if (state.App.isLoadingVisible) {
+        return null
+      }
+
+      if (state.App.isAuthenticated === true) {
+        return <FirstLogin>
+          <Component {...props} />
+        </FirstLogin>
+      }
+
+      return <Redirect to={Pages.LOGIN}/>
+    }}/>
+  }
 
   return <>
 
@@ -51,37 +71,32 @@ export function createRouter() {
           <Loading>
 
             <Route exact path={Pages.REGISTER} component={Register}/>
+            <Route exact path={Pages.LOGIN} component={Login}/>
 
             <Route path={Pages.ACTIVATION} component={Activation}/>
 
             <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
             <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
 
-            <Authentication>
-              <FirstLogin>
-                <Route exact path={Pages.HOME} component={Home}/>
-                <Route exact path={Pages.QR_CODE} component={QR}/>
+            <PrivateRoute exact path={Pages.HOME} component={Home}/>
+            <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
 
-                {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
-                <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
+            {!isIPhone() && <PrivateRoute exact path={Pages.QR_SCAN} component={QRScanner}/>}
+            <PrivateRoute exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
-                <Route exact path={Pages.PROFILE} component={Profile}/>
-                <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+            <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+            <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
-                <Route exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
-                <Route exact path={Pages.MY_COMPANY_PAGE} component={CompanyWebsite}/>
+            <PrivateRoute exact path={Pages.MY_COMPANY} component={CompanyEdit}/>
+            <PrivateRoute exact path={Pages.MY_COMPANY_PAGE} component={CompanyWebsite}/>
 
-                <Route exact path={Pages.STORES} component={Store}/>
-                <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
-                <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
+            <PrivateRoute exact path={Pages.STORES} component={Store}/>
+            <PrivateRoute exact path={Pages.STORE_NEW} component={StoreEdit}/>
+            <PrivateRoute path={Pages.STORE_EDIT} component={StoreEdit}/>
 
-                <Route exact path={Pages.STAFF} component={Staff}/>
-                <Route exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
-                <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
-
-                <Redirect path="*" to={Pages.HOME}/>
-              </FirstLogin>
-            </Authentication>
+            <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
+            <PrivateRoute exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
+            <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
           </Loading>
         </Switch>
 

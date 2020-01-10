@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import {isIPhone} from "../utils/ios";
 
@@ -76,8 +76,6 @@ export function createRouter() {
             <Route exact path={Pages.CUSTOMERS} component={Customer}/>
             <Route exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
             <Route path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
-
-            <Redirect path="*" to={Pages.HOME}/>
 
           </Authentication>
         </Switch>

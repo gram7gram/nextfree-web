@@ -1,5 +1,6 @@
 export const REGISTER = '/register';
 export const HOME = '/';
+export const LOGIN = '/login';
 export const PROFILE = '/profile';
 export const PROFILE_SECURITY = '/profile/security';
 

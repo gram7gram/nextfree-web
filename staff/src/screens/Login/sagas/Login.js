@@ -10,14 +10,14 @@ function* saveTokenAndRedirect({payload}) {
 
   const pathname = yield select(store => store.router.location.pathname)
 
-  yield put(replace(pathname))
+  yield put(replace(pathname === Pages.LOGIN ? Pages.HOME : pathname, {auth: true}))
 }
 
 function* removeToken() {
 
   Cookie.remove('token')
 
-  yield put(replace(Pages.HOME))
+  yield put(replace(Pages.LOGIN, {auth: false}))
 }
 
 export default function* sagas() {

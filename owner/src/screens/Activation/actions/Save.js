@@ -18,8 +18,6 @@ export default (id) => (dispatch) => {
     .catch(e => {
       console.log(e);
 
-
-
       dispatch({
         type: SAVE_FAILURE,
         payload: {

@@ -108,7 +108,7 @@ class CompanyWebsite extends React.Component {
       </div>
     }
 
-    const isPublished = raw.status === 'PUBLISHED'
+    const isPublished = raw && raw.status === 'PUBLISHED'
 
     const buttons = [
       {
@@ -173,7 +173,7 @@ class CompanyWebsite extends React.Component {
               <h4 className="m-0 text-white">{i18n.t('company_edit.page_title')}</h4>
               <div>
                 <Status value={model.status}/>
-                &nbsp;{raw.publishedAt ? moment(raw.publishedAt).format('HH:mm DD.MM.YYYY') : ''}
+                &nbsp;{raw && raw.publishedAt ? moment(raw.publishedAt).format('HH:mm DD.MM.YYYY') : ''}
               </div>
             </div>
 

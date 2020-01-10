@@ -4,7 +4,7 @@ import {SAVE_BEFORE, SAVE_FAILURE, SAVE_SUCCESS} from '../actions'
 import flatten from "../../../utils/flatten";
 
 const parseBeforeSubmit = model => {
-  const data = {...model}
+  const data = JSON.parse(JSON.stringify(model))
 
   if (data.owner.password1) {
     data.owner.user.password = data.owner.password1
@@ -35,8 +35,6 @@ export default (model) => (dispatch) => {
     })
     .catch(e => {
       console.log(e);
-
-
 
       dispatch({
         type: SAVE_FAILURE,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 
 import * as Pages from './Pages';
@@ -16,11 +16,32 @@ import ProfileSecurity from '../screens/ProfileSecurity/components';
 import PasswordReset from '../screens/PasswordReset/components';
 import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
+import Login from '../screens/Login/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
-import Authentication from "../hoc/Authentication";
+import FirstLogin from "../../../owner/src/hoc/FirstLogin";
 
-export function createRouter() {
+export function createRouter(store) {
+
+  const PrivateRoute = ({component: Component, ...rest}) => {
+
+    return <Route {...rest} render={(props) => {
+
+      const state = store.getState()
+
+      if (state.App.isLoadingVisible) {
+        return null
+      }
+
+      if (state.App.isAuthenticated === true) {
+        return <FirstLogin>
+          <Component {...props} />
+        </FirstLogin>
+      }
+
+      return <Redirect to={Pages.LOGIN}/>
+    }}/>
+  }
 
   return <>
 
@@ -32,21 +53,17 @@ export function createRouter() {
 
         <Switch>
           <Route exact path={Pages.REGISTER} component={Register}/>
+          <Route exact path={Pages.LOGIN} component={Login}/>
 
           <Route path={Pages.ACTIVATION} component={Activation}/>
 
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
 
-          <Authentication>
-              <Route exact path={Pages.QR_CODE} component={QR}/>
+          <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
 
-              <Route exact path={Pages.PROFILE} component={Profile}/>
-              <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
-
-              <Redirect path="*" to={Pages.HOME}/>
-
-          </Authentication>
+          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+          <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
         </Switch>
       </ErrorBoundary>
 
