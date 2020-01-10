@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 
 import * as Pages from './Pages';
@@ -19,7 +19,6 @@ import Activation from '../screens/Activation/components';
 import Login from '../screens/Login/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
-import FirstLogin from "../../../owner/src/hoc/FirstLogin";
 
 export function createRouter(store) {
 
@@ -34,9 +33,7 @@ export function createRouter(store) {
       }
 
       if (state.App.isAuthenticated === true) {
-        return <FirstLogin>
-          <Component {...props} />
-        </FirstLogin>
+        return <Component {...props} />
       }
 
       return <Redirect to={Pages.LOGIN}/>
@@ -60,6 +57,7 @@ export function createRouter(store) {
           <Route exact path={Pages.PASSWORD_RESET} component={PasswordReset}/>
           <Route path={Pages.PASSWORD_SET} component={PasswordSet}/>
 
+          <PrivateRoute exact path={Pages.HOME} component={QR}/>
           <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>

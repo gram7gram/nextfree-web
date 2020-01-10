@@ -41,7 +41,7 @@ const Sidebar = () => {
       </div>
     </div>
 
-    <nav className="bg-primary mb-4">
+    <nav className="bg-dark-gray mb-4">
 
       <Link to={Pages.MY_COMPANY}
             className="btn btn-link btn-block text-left">

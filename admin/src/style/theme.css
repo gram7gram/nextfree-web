@@ -1,0 +1,70 @@
+:root {
+    --light-red: #D98989;
+    --danger: #7C2D2D;
+    --light: #E4E4E4;
+    --dark: #242424;
+    --black: #151515;
+    --gray: #555555;
+    --gray-dark: #363636;
+}
+
+body {
+    background: var(--dark)
+}
+
+.card-footer,
+.card-header {
+    background-color: var(--gray);
+}
+
+.card-body {
+    background-color: var(--gray-dark);
+}
+
+.bg-dark-gray {
+    background-color: var(--gray-dark);
+}
+
+.border-black {
+    border-color: var(--black);
+}
+
+.text-light-red {
+    color: var(--light-red);
+}
+
+.text-gray {
+    color: var(--gray);
+}
+
+.text-black {
+    color: var(--black);
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.bg-dark {
+    background-color: var(--dark);
+}
+
+.bg-light {
+    background-color: var(--light);
+}
+
+.bg-danger {
+    background-color: var(--danger);
+}
+
+.text-dark {
+    color: var(--dark);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.text-danger {
+    color: var(--danger);
+}

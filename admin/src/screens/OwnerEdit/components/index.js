@@ -182,7 +182,7 @@ class OwnerEdit extends React.Component {
 
     if (!model.id) return null
 
-    return <div className="card mb-4 text-danger border-danger">
+    return <div className="card mb-4 border-danger">
       <div className="card-body">
 
         <div className="row">

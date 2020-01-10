@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import {isIPhone} from "../utils/ios";
 
@@ -24,7 +24,6 @@ import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
 
 import Login from '../screens/Login/components';
-import FirstLogin from "../../../owner/src/hoc/FirstLogin";
 
 export function createRouter(store) {
 
@@ -39,9 +38,7 @@ export function createRouter(store) {
       }
 
       if (state.App.isAuthenticated === true) {
-        return <FirstLogin>
-          <Component {...props} />
-        </FirstLogin>
+        return <Component {...props} />
       }
 
       return <Redirect to={Pages.LOGIN}/>

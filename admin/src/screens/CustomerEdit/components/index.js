@@ -182,7 +182,7 @@ class CustomerEdit extends React.Component {
 
     if (!model.id) return null
 
-    return <div className="card mb-4 border-danger text-danger">
+    return <div className="card mb-4 border-danger">
       <div className="card-body">
 
         <div className="row">

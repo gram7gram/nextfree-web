@@ -9,5 +9,5 @@ export const QR_CODE = '/qr';
 export const PROFILE = '/profile';
 export const PROFILE_SECURITY = '/profile/security';
 
-export const HOME = QR_CODE;
+export const HOME = '/';
 export const LOGIN = '/login';

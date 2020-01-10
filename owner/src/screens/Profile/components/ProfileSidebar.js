@@ -54,7 +54,7 @@ const ProfileSidebar = (props) => {
       </div>
     </div>
 
-    <nav className="bg-primary mb-4">
+    <nav className="bg-dark-gray mb-4">
 
       <Link to={Pages.PROFILE}
             className="btn btn-link btn-block text-left">

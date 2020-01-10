@@ -37,11 +37,11 @@ const Navigation = (props) => {
   const {isAuthenticated} = props
   const {isMobileMenuVisible} = props.Nav
 
-  return <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+  return <nav className="navbar navbar-expand-lg bg-dark-gray">
 
     <a className="navbar-brand py-0" href="https://nextfree.com.ua">
       {i18n.t('navigation.logo')}
-      <br/><small className="text-info">{i18n.t('navigation.logo_footer')}</small>
+      <br/><small className="text-light-red">{i18n.t('navigation.logo_footer')}</small>
     </a>
 
     <button className="navbar-toggler"
@@ -55,7 +55,7 @@ const Navigation = (props) => {
 
         {isAuthenticated && !isIPhone() ? <li className="nav-item">
           <Link to={Pages.QR_SCAN}
-                className="nav-link text-white"
+                className="nav-link small text-truncate text-white"
                 onClick={hideMobileNavigation}>
             <i className="fa fa-camera"/>&nbsp;{i18n.t('navigation.qr_scanner')}
           </Link>
@@ -63,7 +63,7 @@ const Navigation = (props) => {
 
         {isAuthenticated ? <li className="nav-item">
           <Link to={Pages.QR_SCAN_BY_ID}
-                className="nav-link text-white"
+                className="nav-link small text-truncate text-white"
                 onClick={hideMobileNavigation}>
             <i className="fa fa-search"/>&nbsp;{i18n.t('navigation.qr_scanner_by_id')}
           </Link>
@@ -71,7 +71,7 @@ const Navigation = (props) => {
 
         {isAuthenticated && <li className="nav-item">
           <Link to={Pages.QR_CODE}
-                className="nav-link text-white"
+                className="nav-link small text-truncate text-white"
                 onClick={hideMobileNavigation}>
             <i className="fa fa-qrcode"/>&nbsp;{i18n.t('navigation.qr')}
           </Link>
@@ -79,7 +79,7 @@ const Navigation = (props) => {
 
         {isAuthenticated && <li className="nav-item">
           <Link to={Pages.PROFILE}
-                className="nav-link text-white"
+                className="nav-link small text-truncate text-white"
                 onClick={hideMobileNavigation}>{i18n.t('navigation.profile')}</Link>
         </li>}
 
@@ -87,13 +87,13 @@ const Navigation = (props) => {
       <ul className="navbar-nav ml-auto text-center">
 
         {!isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
-          <Link className="btn btn-outline-success"
+          <Link className="btn btn-outline-light btn-sm"
                 onClick={hideMobileNavigation}
                 to={Pages.LOGIN}>{i18n.t('navigation.login')}</Link>
         </li>}
 
         {isAuthenticated && <li className="nav-item mx-1 mb-1 mb-lg-0">
-          <button className="btn btn-outline-success"
+          <button className="btn btn-outline-light btn-sm"
                   onClick={logout}>{i18n.t('navigation.logout')}</button>
         </li>}
 

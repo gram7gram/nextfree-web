@@ -2,7 +2,6 @@ import {all, put, select, takeLatest} from 'redux-saga/effects'
 import {replace} from 'connected-react-router'
 import Cookie from 'js-cookie'
 import * as Actions from '../actions'
-import cid from '../../../utils/cid'
 
 function* saveTokenAndRedirect({payload}) {
 
@@ -10,7 +9,7 @@ function* saveTokenAndRedirect({payload}) {
 
   const pathname = yield select(store => store.router.location.pathname)
 
-  yield put(replace(pathname, {auth: true, key: cid()}))
+  yield put(replace(pathname, {auth: true}))
 }
 
 function* removeToken() {

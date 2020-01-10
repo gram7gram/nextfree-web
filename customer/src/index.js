@@ -11,9 +11,10 @@ import {createRouter} from './router';
 import parameters from './parameters';
 
 import 'react-toastify/dist/ReactToastify.min.css';
-import 'bootswatch/dist/slate/bootstrap.min.css';
+import './style/bootstrap.min.css';
 import './style/style.css';
 import './style/avatar.css';
+import './style/theme.css';
 
 import * as Sentry from '@sentry/browser';
 
