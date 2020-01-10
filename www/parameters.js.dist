@@ -6,6 +6,11 @@ const config = {
     pageprefix: ' - nextfree.com.ua',
     host: 'https://nextfree.com.ua',
     apiHost: 'https://api.nextfree.com.ua',
+    indexEmail: 'nextfree.adm@gmail.com',
+    gtm: {
+      enabled: true,
+      code: 'UA-154091628-1'
+    }
   }
 }
 
