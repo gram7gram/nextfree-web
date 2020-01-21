@@ -29,7 +29,7 @@ router.get('/sitemap.xml', async (req, res) => {
       }
     ]
 
-    const response = await axios.get(`${parameters.apiHost}/api/v1/partner-websites?limit=0`)
+    const response = await axios.get(`${parameters.apiPrivateHost}/api/v1/partner-websites?limit=0`)
     if (response.status === 200) {
       routes = routes.concat(response.data.items.map(website => ({
           url: `/partners/${website._id}`,

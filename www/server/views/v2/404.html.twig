@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ua">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Не знайдено{{ parameters.pageprefix }}</title>
+
+    {% include './meta.html.twig' %}
+
+</head>
+<body class="bg-dark text-light">
+
+{% include './nav.html.twig' %}
+
+<div class="container">
+
+    <div class="row space-y">
+        <div class="col-12 text-center">
+            <h2 class="h6 text-lowercase circle-left mb-3">уупс</h2>
+
+            <h1 class="font-weight-bold">Такої сторінки не знайдено</h1>
+        </div>
+    </div>
+
+</div>
+
+{% include './footer.html.twig' %}
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 :root {
     --dark-gray: rgba(255, 255, 255, 0.05);
+    --danger: #F43D3B;
     --dark: #12181F;
     --darker: #0B1119;
     --light: #FFFFFF;
@@ -69,6 +70,14 @@ ul {
     border-radius: 25px;
 }
 
+.bg-danger {
+    background-color: var(--danger);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
 .bg-light-green {
     background-color: var(--light-green);
 }
@@ -107,6 +116,14 @@ ul {
 
 .text-dark {
     color: var(--dark);
+}
+
+.bg-dark-gray {
+    background-color: var(--dark-gray);
+}
+
+.text-dark-gray {
+    color: var(--dark-gray);
 }
 
 .bg-light {

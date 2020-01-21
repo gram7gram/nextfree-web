@@ -12,24 +12,50 @@ const router = new express.Router({mergeParams: true});
 
 const route = async (req, res) => {
 
+  const notFound = () => {
+    const result = template.render(`${views}/${req.abVersion}/404.html.twig`)
+
+    res.status(404).send(result)
+  }
+
+  let partner = {}, bonusCondition = null
   try {
-    const {data, status} = await axios.get(`${parameters.apiHost}/api/v1/partner-websites/${req.params.id}`)
-    if (status !== 200) {
-      res.status(status).json(data)
+
+    try {
+      const {data, status} = await axios.get(`${parameters.apiPrivateHost}/api/v1/partner-websites/${req.params.id}`)
+      if (status !== 200) {
+        notFound()
+        return;
+      }
+
+      partner = data
+    } catch (e) {
+      console.log(JSON.stringify(e));
+
+      notFound()
+      return;
     }
 
-    let bonusCondition = null
+    try {
+      const {data, status} = await axios.get(`${parameters.apiPrivateHost}/api/v1/bonus-conditions`)
+      if (status !== 200) {
+        notFound()
+        return;
+      }
 
-    const bonusResponse = await axios.get(`${parameters.apiHost}/api/v1/bonus-conditions`)
-    if (bonusResponse.status === 200) {
-      bonusCondition = bonusResponse.data.items.find(item =>
-        item.code === data.company.bonusCondition
+      bonusCondition = data.items.find(item =>
+        item.code === partner.company.bonusCondition
       )
+    } catch (e) {
+      console.log(JSON.stringify(e));
+
+      notFound()
+      return;
     }
 
     const result = template.render(`${views}/${req.abVersion}/partner.html.twig`, {
       bonusCondition,
-      ...data
+      ...partner
     });
 
     res.send(result)

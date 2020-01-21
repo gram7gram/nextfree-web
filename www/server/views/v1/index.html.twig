@@ -1,11 +1,8 @@
 <!doctype html>
 <html lang="ua">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Бонусна система NextFree - nextfree.com.ua</title>
-    <meta name="robots" content="index, follow"/>
 
     <meta name="description"
           content="Бонусна система NextFree - система автоматизованого сповіщення продавця про бонусний продаж одиниці товару">
@@ -16,43 +13,8 @@
     <meta name="og:description"
           content="Бонусна система NextFree - система автоматизованого сповіщення продавця про бонусний продаж одиниці товару">
 
-    <link rel="stylesheet" href="/css/slate/bootstrap.min.css?v=1">
-    <link rel="stylesheet" href="/css/style.css?v=2">
+    {% include './meta.html.twig' %}
 
-    <meta name="application-name" content="NextFree"/>
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png"/>
-    <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"/>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
-    <link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128"/>
-    <meta name="msapplication-TileColor" content="#FFFFFF"/>
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png"/>
-    <meta name="msapplication-square70x70logo" content="/mstile-70x70.png"/>
-    <meta name="msapplication-square150x150logo" content="/mstile-150x150.png"/>
-    <meta name="msapplication-wide310x150logo" content="/mstile-310x150.png"/>
-    <meta name="msapplication-square310x310logo" content="/mstile-310x310.png"/>
-
-    {% if parameters.gtm.enabled == true %}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ parameters.gtm.code }}"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-
-          gtag('js', new Date());
-          gtag('config', '{{ parameters.gtm.code }}');
-        </script>
-    {% endif %}
 </head>
 <body class="body-dark">
 
@@ -116,7 +78,7 @@
                     <div class="row justify-content-center">
                         {% for partner in partners %}
                             <div class="col-6 col-lg-3">
-                                <a href="/partners/{{ partner._id }}" class="partner-card text-light">
+                                <a href="/v1/partners/{{ partner._id }}" class="partner-card text-light">
                                     <img src="{% if partner.logo %}{{ partner.logo }}{% else %}/img/nextfree-logo.png{% endif %}"
                                          alt="{{ partner.title }}"
                                          class="img-fluid partner-logo rounded mb-3 bg-light">
@@ -143,8 +105,8 @@
 
             <div class="col-10 col-md-6 col-lg-4 mx-auto text-center">
 
-                <a href="mailto:{{ parameters.indexEmail }}" class="btn btn-lg btn-block btn-light">
-                    {{ parameters.indexEmail }}
+                <a href="mailto:{{ parameters.email }}" class="btn btn-lg btn-block btn-light">
+                    {{ parameters.email }}
                 </a>
 
             </div>

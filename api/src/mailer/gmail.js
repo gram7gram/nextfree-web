@@ -18,7 +18,7 @@ const send = async (to, subject, html) => {
   if (!mailer) return
 
   const data = {
-    from: parameters.mail.senderName,
+    from: parameters.gmail.senderName,
     to,
     subject,
     html,

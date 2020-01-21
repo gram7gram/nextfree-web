@@ -14,7 +14,7 @@
     {% include './meta.html.twig' %}
 
 </head>
-<body class="body-dark">
+<body class="bg-dark text-light">
 
 {% include './nav.html.twig' %}
 
@@ -22,30 +22,36 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-12 col-md-10 col-lg-9 col-xl-8 mx-auto d-flex align-items-center"
-                 style="min-height: 75vh">
-                <div class="py-5 px-0 w-100 text-center text-light">
+            <div class="col-12 col-md-10 col-lg-9 col-xl-8 mx-auto">
+                <div class="space-y w-100 text-center">
 
-                    <h1>Вхід до NextFree</h1>
-                    <h2 class="h5 mb-3">Будь-ласка, вкажіть в ролі якого користувача Ви хочете увійти:</h2>
+                    <div class="mb-5">
+                        <h2 class="h6 text-lowercase circle-left mb-3">логін</h2>
+
+                        <h1 class="h2 font-weight-bolder mb-4">Вхід до NextFree</h1>
+                        <p class="h5 mb-0 text-secondary">
+                            Будь-ласка, вкажіть в ролі якого користувача Ви хочете увійти:
+                        </p>
+
+                    </div>
 
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <a href="{{ parameters.customerHost }}/login"
-                               class="btn btn-warning btn-block btn-lg mb-2">
+                               class="btn btn-primary btn-block btn-lg mb-2">
                                 Я покупець
                             </a>
                         </div>
                         <div class="col-12 col-md-4">
-                            <a href="{{ parameters.staffHost }}/login"
-                               class="btn btn-light btn-block btn-lg mb-2">
-                                Я співробітник
+                            <a href="{{ parameters.ownerHost }}/login"
+                               class="btn btn-secondary btn-block btn-lg mb-2">
+                                Я власник
                             </a>
                         </div>
                         <div class="col-12 col-md-4">
-                            <a href="{{ parameters.ownerHost }}/login"
-                               class="btn btn-success btn-block btn-lg mb-2">
-                                Я власник
+                            <a href="{{ parameters.staffHost }}/login"
+                               class="btn btn-default btn-block btn-lg mb-2">
+                                Я співробітник
                             </a>
                         </div>
                     </div>

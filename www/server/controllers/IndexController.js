@@ -14,7 +14,7 @@ const index = async (req, res) => {
 
   let partners = [], totalCompanies = 0, totalStores = 0;
   try {
-    const {data} = await axios.get(`${parameters.apiHost}/api/v1/partner-websites?limit=12`, {
+    const {data} = await axios.get(`${parameters.apiPrivateHost}/api/v1/partner-websites?limit=12`, {
       timeout: 1000
     })
 

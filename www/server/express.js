@@ -10,6 +10,7 @@ const publicDir = path.resolve(__dirname, '../public')
 const IndexController = require('./controllers/IndexController');
 const SitemapController = require('./controllers/SitemapController');
 const PartnerController = require('./controllers/PartnerController');
+const NotFoundController = require('./controllers/NotFoundController');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.use(IndexController)
 app.use(SitemapController)
 app.use(PartnerController)
+app.use(NotFoundController)
 
 app.use('*', (req, res) => {
   res.status(404).send('Not found')

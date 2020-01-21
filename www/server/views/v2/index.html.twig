@@ -227,25 +227,25 @@
                 <p class="text-secondary mb-4">Пиши в будь-який зручний для тебе месенджер або на пошту.</p>
 
                 {% if parameters.telegram %}
-                    <a href="{{ parameters.telegram }}">
+                    <a href="{{ parameters.telegram }}" rel="nofollow">
                         <i class="fab fa-telegram-plane fa-2x text-primary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.messenger %}
-                    <a href="{{ parameters.messenger }}">
+                    <a href="{{ parameters.messenger }}" rel="nofollow">
                         <i class="fab fa-facebook-messenger fa-2x text-primary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.viber %}
-                    <a href="{{ parameters.viber }}">
+                    <a href="{{ parameters.viber }}" rel="nofollow">
                         <i class="fab fa-viber fa-2x text-primary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.email %}
-                    <a href="mailto:{{ parameters.email }}">
+                    <a href="mailto:{{ parameters.email }}" rel="nofollow">
                         <i class="far fa-envelope fa-2x text-primary p-2"></i>
                     </a>
                 {% endif %}
@@ -254,23 +254,53 @@
             {% if parameters.email %}
                 <div class="col-12 col-md-6">
                     <div class="row">
+                        <div class="col-12 d-none" id="feedback-error">
+
+                            <div class="p-2 bg-danger text-light rounded mb-4">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Неможливо відправити листа
+                            </div>
+
+                        </div>
+                        <div class="col-12 d-none" id="feedback-success">
+
+                            <div class="p-3 bg-light text-center text-dark rounded mb-4">
+                                <p class="my-4">
+                                    <i class="fa fa-check-circle fa-2x text-primary"></i>
+                                </p>
+
+                                <p>Дякуємо! Твоє повідомлення надіслано.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" id="feedback">
+
                         <div class="col-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Ім'я..."/>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Ім'я..."
+                                       name="name"/>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email адреса..."/>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Email адреса..."
+                                       name="email"/>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea id="" class="form-control" placeholder="Повідомлення..."></textarea>
+                                <textarea name="content"
+                                          class="form-control"
+                                          placeholder="Повідомлення..."></textarea>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-default">Надіслати</button>
+                            <button class="btn btn-default" disabled>Надіслати</button>
                         </div>
                     </div>
                 </div>
@@ -285,7 +315,7 @@
 
 {% include './footer.html.twig' %}
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script>
   $(function () {
     var pills = $('#faq .nav-tabs a');
@@ -305,6 +335,78 @@
 
       tab.addClass('d-block');
       pill.addClass('bg-primary text-light');
+    })
+  })
+
+  $(function () {
+    var feedback = $('#feedback');
+    var error = $('#feedback-error');
+    var success = $('#feedback-success');
+    var name = feedback.find('[name="name"]');
+    var email = feedback.find('[name="email"]');
+    var content = feedback.find('[name="content"]');
+    var button = feedback.find('.btn');
+
+    var getModel = function () {
+      return {
+        name: name.val().trim(),
+        email: email.val().trim(),
+        content: content.val().trim(),
+      }
+    }
+
+    var validate = function () {
+      var model = getModel();
+      var validator = {
+        total: 0
+      }
+
+      if (!model.name) {
+        ++validator.total;
+      }
+
+      if (!model.email) {
+        ++validator.total;
+      }
+      if (!model.content) {
+        ++validator.total;
+      }
+
+      button.prop('disabled', validator.total > 0);
+
+      return validator.total === 0;
+    }
+
+    name.on('input', validate);
+    email.on('input', validate);
+    content.on('input', validate);
+
+    button.on('click', function (e) {
+      e.preventDefault();
+
+      if (!validate()) return;
+
+      $.ajax({
+        method: 'POST',
+        url: '{{ parameters.apiHost }}/api/v1/feedback',
+        contentType: 'application/json',
+        data: JSON.stringify(getModel()),
+        beforeSend: function () {
+          button.prop('disabled', true)
+          error.addClass('d-none')
+          success.addClass('d-none')
+        },
+        success: function () {
+          feedback.addClass('d-none')
+          success.removeClass('d-none')
+        },
+        error: function () {
+          error.removeClass('d-none')
+        },
+        complete: function () {
+          button.prop('disabled', false)
+        }
+      })
     })
   })
 </script>

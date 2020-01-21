@@ -1,0 +1,16 @@
+<p>
+    <span style="font-weight: bold">{{ name|escape }}</span>
+    <a href="mailto:{{ email|escape }}">{{ email|escape }}</a>
+</p>
+
+<pre style="padding: 10px; background-color: #f3f3f3;width: 100%">
+    {{- content|escape -}}
+</pre>
+
+<p>
+    <a href="mailto:{{ email|escape }}">Відповісти</a>
+</p>
+
+<p style="color: gray">
+    <small>Дата створення: {{ moment().format('HH:mm DD.MM.YY') }}</small>
+</p>

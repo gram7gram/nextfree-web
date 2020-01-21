@@ -46,6 +46,7 @@ const CustomerSecurityController = require('./controllers/customer/SecurityContr
 const BonusConditionController = require('./controllers/BonusConditionController');
 const UserRESTController = require('./controllers/UserRESTController');
 const CompanyPageRESTController = require('./controllers/CompanyPageRESTController');
+const FeedbackController = require('./controllers/FeedbackController');
 
 const app = express();
 
@@ -67,6 +68,9 @@ app.use((req, res, next) => {
 
   next()
 })
+
+//Public API
+app.use('/api/v1', FeedbackController);
 
 //Public login API
 app.use('/api/v1', AdminLoginController);

@@ -4,8 +4,8 @@
 
             <div class="col-6 col-md-3">
                 <img src="/img/v2/logo.svg" alt="Logo"
-                     class="img-fluid"
-                     style="max-height: 50px">
+                     class="img-fluid w-100"
+                     style="max-height: 75px">
             </div>
 
             <div class="col-6 col-md-3">
@@ -27,25 +27,25 @@
                 <h5 class="mb-3 font-weight-bold">Контакти</h5>
 
                 {% if parameters.telegram %}
-                    <a href="{{ parameters.telegram }}">
+                    <a href="{{ parameters.telegram }}" rel="nofollow">
                         <i class="fab fa-telegram-plane fa-2x text-secondary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.messenger %}
-                    <a href="{{ parameters.messenger }}">
+                    <a href="{{ parameters.messenger }}" rel="nofollow">
                         <i class="fab fa-facebook-messenger fa-2x text-secondary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.viber %}
-                    <a href="{{ parameters.viber }}">
+                    <a href="{{ parameters.viber }}" rel="nofollow">
                         <i class="fab fa-viber fa-2x text-secondary p-2"></i>
                     </a>
                 {% endif %}
 
                 {% if parameters.email %}
-                    <a href="mailto:{{ parameters.email }}">
+                    <a href="mailto:{{ parameters.email }}" rel="nofollow">
                         <i class="far fa-envelope fa-2x text-secondary p-2"></i>
                     </a>
                 {% endif %}

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>{{ website.meta.title }}{{ parameters.pageprefix }}</title>
-    <meta name="robots" content="index, follow"/>
 
     <meta name="description" content="{{ website.meta.description }}">
     <meta name="keywords" content="{{ website.meta.keywords }}">
@@ -14,89 +13,42 @@
     <meta name="og:description" content="{{ website.meta.description }}">
     <meta name="og:image" content="{{ company.logo }}">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
-          integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-          crossorigin="anonymous">
-
-    <link rel="stylesheet" href="/css/slate/bootstrap.min.css?v=1">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="/css/partner.css?v=1">
-
-    <meta name="application-name" content="NextFree"/>
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png"/>
-    <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"/>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
-    <link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128"/>
-    <meta name="msapplication-TileColor" content="#FFFFFF"/>
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png"/>
-    <meta name="msapplication-square70x70logo" content="/mstile-70x70.png"/>
-    <meta name="msapplication-square150x150logo" content="/mstile-150x150.png"/>
-    <meta name="msapplication-wide310x150logo" content="/mstile-310x150.png"/>
-    <meta name="msapplication-square310x310logo" content="/mstile-310x310.png"/>
-
-    {% if parameters.gtm.enabled == true %}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ parameters.gtm.code }}"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '{{ parameters.gtm.code }}');
-        </script>
-    {% endif %}
+    {% include './meta.html.twig' %}
 
 </head>
-<body class="body-dark">
+<body class="bg-dark text-light">
 
-<div class="container-fluid">
+{% include './nav.html.twig' %}
+
+<div class="container">
+
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="h6 text-lowercase circle-left mb-3">партнер</h2>
+
+            <h1 class="font-weight-bold">{{ website.title }}</h1>
+
+        </div>
+    </div>
     <div class="row">
-        <div class="col-6 col-md-4 col-lg-3 text-center">
-            <div id="logo-container">
-                <img src="{% if company.logo %}{{ company.logo }}{% else %}/img/nextfree-logo.png{% endif %}" alt="{{ company.name }}"
-                     id="nav-logo"
-                     class="img-fluid partner-logo rounded bg-light my-3 my-md-0">
+        <div class="col-2">
+            <img src="{% if company.logo %}{{ company.logo }}{% else %}/img/nextfree-logo.png{% endif %}"
+                 alt="{{ company.name }}"
+                 id="nav-logo"
+                 class="img-fluid">
+        </div>
+        <div class="col-6">
+            <h2 class="h1 font-weight-bold mb-4">{{ i18n.t('partner.bio') }}</h2>
+
+            <div class="text-secondary mb-4">
+                {{ website.content|safe }}
             </div>
-        </div>
-    </div>
 
-    <div class="row bg-dark-gray text-light">
-        <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
-            <nav class="navbar navbar-expand p-0 text-center">
-                <ul class="navbar-nav" id="nav-container">
-                    <li class="nav-item">
-                        <div class="nav-link p-2">
-                            <small class="mb-1 text-uppercase">{{ i18n.t('partner.shops') }}</small>
-                            <div class="h5 m-0 text-light-red text-truncate">{{ storeCount }}</div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="nav-link p-2">
-                            <small class="mb-1 text-uppercase">{{ i18n.t('partner.purchases') }}</small>
-                            <div class="h5 m-0 text-light-red text-truncate">{{ purchaseCount }}</div>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+            <h3 class="h5 font-weight-bold mb-4">
+                {{ i18n.t('partner.joined') }} {{ moment(company.createdAt).format('MMM YYYY') }}
+            </h3>
 
-    <div class="row bg-dark text-light">
-        <div class="col-12 col-md-4 col-lg-3">
-            <div class="py-3">
-                <h1 class="mb-2 h2 font-weight-bold">{{ website.title }}</h1>
-
-                <p class="mb-1 p-1 text-truncate">
-                    <i class="fa fa-calendar text-light-red"></i>&nbsp;{{ i18n.t('partner.joined') }} {{ moment(company.createdAt).format('MMM YYYY') }}
-                </p>
-
+            <div class="space-b">
                 {% if website.social.website %}
                     <p class="mb-1 p-1 text-truncate">
                         <a href="{{ website.social.website }}" rel="nofollow" target="_blank">
@@ -133,92 +85,39 @@
                     </p>
                 {% endif %}
             </div>
-        </div>
-
-        <div class="col-12 col-md-8 col-lg-9">
-            <div class="row mt-md-3">
-
-                {% if bonusCondition != null %}
-                    <div class="col-12">
-                        <div class="card mb-3 shadow-sm bg-dark-gray" id="website-bonusCondition">
-                            <div class="card-body p-0">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-3 col-md-2 col-lg-1 h-100">
-                                        <h4 class="m-0 p-3 text-light-red text-center">{{ bonusCondition.title }}</h4>
-                                    </div>
-                                    <div class="col-9 col-md-10 col-lg-11 h-100">
-                                        <p class="m-0 p-3 text-left">{{ bonusCondition.description }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-
-                <div class="col-12">
-                    <h3>{{ i18n.t('partner.bio') }}</h3>
-                </div>
-
-                <div class="col-12">
-                    <div class="card mb-3 bg-dark-gray" id="website-content">
-                        <div class="card-body p-3 shadow-sm">
-                            <p>{{ website.content|safe }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {% if stores|length > 0 %}
-                <div class="row">
+                <div class="row space-b">
                     <div class="col-12">
-                        <h3>{{ i18n.t('partner.shops') }}</h3>
+                        <h3 class="font-weight-bold mb-4">{{ stores|length }} {{ i18n.t('partner.shops') }}</h3>
                     </div>
                     {% for store in stores %}
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <div class="card shadow-sm mb-3 bg-dark-gray">
-                                <div class="card-body p-3"><span class="text-light-red">{{ store.city }},</span> {{ store.address }}</div>
-                            </div>
+                        <div class="col-12 col-md-6">
+                            <a href="https://google.com.ua/maps?search={{ store.city }},{{ store.address }}"
+                               target="_blank"
+                               rel="nofollow"
+                               class="bg-dark-gray rounded p-2 mb-3 d-block">
+                                <p class="font-weight-bold font-2 mb-1">{{ store.city }}</p>
+                                <p class="font-2 m-0">{{ store.address }}</p>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
         </div>
+        <div class="col-4">
+            {% if bonusCondition != null %}
+                <div class="bg-dark-gray rounded p-3">
+                    <h3 class="text-primary font-weight-bold">{{ bonusCondition.title }}</h3>
+                    <p class="text-secondary font-weight-bold">{{ bonusCondition.description }}</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
+
 </div>
 
-<footer class="w-100 bg-black text-light">
-    <div class="container">
-        <div class="row py-5">
-            <div class="col-6 col-md-4">
-                <h5 class="mb-3">Ресурси</h5>
-                <ul>
-                    <li><a href="/privacy">Умови користування</a></li>
-                    <li><a href="/sitemap.xml">Карта сайту</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-4">
-                <h5 class="mb-3">Контакти</h5>
-                <ul>
-                    <li><a href="mailto:{{ parameters.indexEmail }}">Зворотній зв'язок</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-4 text-right d-none d-md-block">
-                <a href="/">
-                    <img src="/img/nextfree-logo.png" alt="" class="img-fluid"
-                         style="max-height: 100px">
-                </a>
-            </div>
-        </div>
-        <div class="row text-gray text-center">
-            <div class="col-12">
-                <div class="red-line"></div>
-
-                <p class="my-3">{{ moment().format('YYYY') }} NextFree Україна. Всі права захищено</p>
-            </div>
-        </div>
-    </div>
-
-</footer>
+{% include './footer.html.twig' %}
 
 </body>
 </html>
