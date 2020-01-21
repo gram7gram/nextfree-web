@@ -1,16 +1,13 @@
 const path = require('path');
-const moment = require('moment');
 const axios = require('axios');
-const express = require('express');
 const parameters = require('../../parameters');
 const template = require('../templating');
 const ab = require('../middleware/ab');
 
 const views = path.resolve(__dirname, '../views')
 
-const router = new express.Router({mergeParams: true});
-
 const index = async (req, res) => {
+  console.log('index');
 
   let partners = [], totalCompanies = 0, totalStores = 0;
   try {
@@ -37,6 +34,7 @@ const index = async (req, res) => {
 };
 
 const login = (req, res) => {
+  console.log('login');
 
   const result = template.render(`${views}/${req.abVersion}/login.html.twig`)
 
@@ -44,18 +42,20 @@ const login = (req, res) => {
 }
 
 const privacy = (req, res) => {
+  console.log('privacy');
 
   const result = template.render(`${views}/${req.abVersion}/privacy.html.twig`)
 
   res.send(result)
 };
 
-router.get('/login', ab.defaultVersion, login);
-router.get('/:v/login', ab.detectVersion, login);
-router.get('/privacy', ab.defaultVersion, privacy);
-router.get('/:v/privacy', ab.detectVersion, privacy);
-router.get('/', ab.defaultVersion, index);
-router.get('/:v', ab.detectVersion, index);
+module.exports = router => {
+  router.get('/:v/privacy', ab.detectVersion, privacy);
+  router.get('/:v/login', ab.detectVersion, login);
+  router.get('/:v', ab.detectVersion, index);
 
-module.exports = router;
+  router.get('/login', ab.defaultVersion, login);
+  router.get('/privacy', ab.defaultVersion, privacy);
+  router.get('/', ab.defaultVersion, index);
+};
 

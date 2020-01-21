@@ -1,6 +1,5 @@
 const path = require('path');
 const axios = require('axios');
-const express = require('express');
 const moment = require('moment');
 const template = require('nunjucks');
 const parameters = require('../../parameters');
@@ -8,9 +7,7 @@ const ErrorHandler = require('../ErrorHandler');
 
 const views = path.resolve(__dirname, '../views')
 
-const router = new express.Router({mergeParams: true});
-
-router.get('/sitemap.xml', async (req, res) => {
+const route = async (req, res) => {
 
   try {
 
@@ -39,7 +36,6 @@ router.get('/sitemap.xml', async (req, res) => {
     }
 
     const result = template.render(`${views}/sitemap.xml.twig`, {
-      parameters,
       routes
     });
 
@@ -47,7 +43,9 @@ router.get('/sitemap.xml', async (req, res) => {
   } catch (e) {
     ErrorHandler.handle(res, e);
   }
-});
+}
 
-module.exports = router;
+module.exports = router => {
+  router.get('/sitemap.xml', route);
+};
 

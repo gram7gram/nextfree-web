@@ -1,4 +1,3 @@
-const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const template = require('../templating');
@@ -8,9 +7,8 @@ const ab = require('../middleware/ab');
 
 const views = path.resolve(__dirname, '../views')
 
-const router = new express.Router({mergeParams: true});
-
 const route = async (req, res) => {
+  console.log('partner');
 
   const notFound = () => {
     const result = template.render(`${views}/${req.abVersion}/404.html.twig`)
@@ -64,8 +62,9 @@ const route = async (req, res) => {
   }
 }
 
-router.get('/partners/:id', ab.defaultVersion, route);
-router.get('/:v/partners/:id', ab.detectVersion, route);
+module.exports = router => {
 
-module.exports = router;
+  router.get('/:v/partners/:id', ab.detectVersion, route);
+  router.get('/partners/:id', ab.defaultVersion, route);
+};
 
