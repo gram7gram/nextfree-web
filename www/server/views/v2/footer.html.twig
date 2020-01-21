@@ -1,0 +1,68 @@
+<footer class="w-100 bg-darker text-light">
+    <div class="container">
+        <div class="row py-5">
+
+            <div class="col-6 col-md-3">
+                <img src="/img/v2/logo.svg" alt="Logo"
+                     class="img-fluid"
+                     style="max-height: 50px">
+            </div>
+
+            <div class="col-6 col-md-3">
+                <h5 class="mb-3 font-weight-bold">Ресурси</h5>
+                <a href="/privacy"
+                   class="text-secondary py-2 d-block">Умови користування</a>
+
+                <a href="{{ parameters.customerHost }}"
+                   class="text-secondary py-2 d-block">Для покупців</a>
+
+                <a href="{{ parameters.ownerHost }}"
+                   class="text-secondary py-2 d-block">Для власників</a>
+
+                <a href="{{ parameters.staffHost }}"
+                   class="text-secondary py-2 d-block">Для співробітників</a>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <h5 class="mb-3 font-weight-bold">Контакти</h5>
+
+                {% if parameters.telegram %}
+                    <a href="{{ parameters.telegram }}">
+                        <i class="fab fa-telegram-plane fa-2x text-secondary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.messenger %}
+                    <a href="{{ parameters.messenger }}">
+                        <i class="fab fa-facebook-messenger fa-2x text-secondary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.viber %}
+                    <a href="{{ parameters.viber }}">
+                        <i class="fab fa-viber fa-2x text-secondary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.email %}
+                    <a href="mailto:{{ parameters.email }}">
+                        <i class="far fa-envelope fa-2x text-secondary p-2"></i>
+                    </a>
+                {% endif %}
+
+            </div>
+            <div class="col-6 col-md-3">
+                <h5 class="mb-3 font-weight-bold">Соц. мережі</h5>
+
+                <a href="{{ parameters.fbLink }}"
+                   class="text-secondary py-2 d-block">Facebook</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-secondary">{{ moment().format('YYYY') }} NextFree Україна. Всі права захищено</p>
+            </div>
+        </div>
+    </div>
+
+</footer>

@@ -1,17 +1,16 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const template = require('nunjucks');
-const moment = require('moment');
+const template = require('../templating');
 const ErrorHandler = require('../ErrorHandler');
 const parameters = require('../../parameters');
-const i18n = require('../i18n').i18n;
+const ab = require('../middleware/ab');
 
 const views = path.resolve(__dirname, '../views')
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/partners/:id', async (req, res) => {
+const route = async (req, res) => {
 
   try {
     const {data, status} = await axios.get(`${parameters.apiHost}/api/v1/partner-websites/${req.params.id}`)
@@ -28,10 +27,7 @@ router.get('/partners/:id', async (req, res) => {
       )
     }
 
-    const result = template.render(`${views}/partner.html.twig`, {
-      parameters,
-      i18n,
-      moment,
+    const result = template.render(`${views}/${req.abVersion}/partner.html.twig`, {
       bonusCondition,
       ...data
     });
@@ -40,7 +36,10 @@ router.get('/partners/:id', async (req, res) => {
   } catch (e) {
     ErrorHandler.handle(res, e)
   }
-});
+}
+
+router.get('/partners/:id', ab.defaultVersion, route);
+router.get('/:v/partners/:id', ab.detectVersion, route);
 
 module.exports = router;
 

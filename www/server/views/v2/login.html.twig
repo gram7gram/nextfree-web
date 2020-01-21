@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ua">
+<head>
+
+    <title>Вхід{{ parameters.pageprefix }}</title>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta name="og:title" content="">
+    <meta name="og:description" content="">
+    <meta name="og:image" content="">
+
+    {% include './meta.html.twig' %}
+
+</head>
+<body class="body-dark">
+
+{% include './nav.html.twig' %}
+
+<section>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-9 col-xl-8 mx-auto d-flex align-items-center"
+                 style="min-height: 75vh">
+                <div class="py-5 px-0 w-100 text-center text-light">
+
+                    <h1>Вхід до NextFree</h1>
+                    <h2 class="h5 mb-3">Будь-ласка, вкажіть в ролі якого користувача Ви хочете увійти:</h2>
+
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <a href="{{ parameters.customerHost }}/login"
+                               class="btn btn-warning btn-block btn-lg mb-2">
+                                Я покупець
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <a href="{{ parameters.staffHost }}/login"
+                               class="btn btn-light btn-block btn-lg mb-2">
+                                Я співробітник
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <a href="{{ parameters.ownerHost }}/login"
+                               class="btn btn-success btn-block btn-lg mb-2">
+                                Я власник
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include './footer.html.twig' %}
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ua">
+<head>
+
+    <title>Бонусна система NextFree{{ parameters.pageprefix }}</title>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta name="og:title" content="">
+    <meta name="og:description" content="">
+    <meta name="og:image" content="">
+
+    {% include './meta.html.twig' %}
+</head>
+<body class="bg-dark text-light">
+
+{% include './nav.html.twig' %}
+
+<section>
+
+    <section class="container">
+
+        <div class="row space-y">
+            <div class="col-12 col-md-7">
+                <div class="mb-5">
+                    <h2 class="h6 text-lowercase circle-left mb-3">зустрічай</h2>
+
+                    <h1 class="font-weight-bold">
+                        Твоя наступна покупка за <span class="text-primary">безцінок.</span>
+                    </h1>
+
+                    <p class="m-0 text-secondary">
+                        Створи свою єдину бонусну картку для всіх точок продажу компаній-партнерів. Для цього — просто
+                        зареєструйся на сайті
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <a href="{{ parameters.customerHost }}/register"
+                           class="btn btn-lg btn-block btn-primary mb-2">Я покупець</a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <a href="{{ parameters.ownerHost }}/register"
+                           class="btn btn-lg btn-block btn-default mb-2">Я власник компанії</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-5 text-center">
+                <img src="/img/v2/main.svg" alt="Main" class="img-fluid">
+            </div>
+        </div>
+
+    </section>
+
+    {% macro step(i, title, text) %}
+        <div class="step border-radius-25 bg-light p-4 d-inline-block mb-5">
+            <span class="font-weight-bold text-primary">{{ i }}</span>
+        </div>
+
+        <h3 class="h4 font-weight-bold mb-4">{{ title }}</h3>
+        <p class="font-2 text-secondary">{{ text }}</p>
+    {% endmacro %}
+
+    <section class="container-fluid" id="faq">
+
+        <div class="row mb-5 text-center">
+            <div class="col-12 col-md-10 mx-auto">
+                <h2 class="h6 text-lowercase circle-left mb-3">Як це працює</h2>
+
+                <h3 class="h2 font-weight-bolder mb-4">QR-коди замість накопичувальних карт</h3>
+                <p class="font-2 m-0 text-light-gray">Cкануй свій QR-код у продавця або код торговельної точки своїм
+                    смартфоном,та набирай певну кількість
+                    балів, які потім обмінюй на безкоштовний товар.</p>
+
+            </div>
+        </div>
+
+        <div class="row space-b">
+            <div class="col-10 col-md-6 col-lg-5 mx-auto">
+                <ul class="nav nav-tabs nav-justified p-1 border-radius-15 bg-light-green m-0">
+                    <li class="nav-item">
+                        <a class="btn btn-block border-radius-15 font-weight-bold font-2 bg-primary text-light active"
+                           id="faq-tab-customer"
+                           href="#faq-tabcontent-customer">Для покупця</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-block border-radius-15 font-weight-bold font-2 bg-light-green text-primary"
+                           id="contact-tab"
+                           href="#faq-tabcontent-owner">Для власника</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row space-b">
+            <div class="col-12">
+
+                <div class="tab-content">
+                    <div class="tab-pane d-block"
+                         id="faq-tabcontent-customer">
+
+                        <div class="row steps">
+                            <div class="col-12 col-md-4 text-center">
+                                {{ step('01', 'Реєструєшся', 'Зареєструйся в системі як покупець та отримай ідентифікатор до свого профілю.') }}
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                {{ step('02', 'Скануєш', 'Покажи ідентифікатор на точці продажу товару') }}
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                {{ step('03', 'Отримуєш', 'Отримай бонусний товар') }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane d-none"
+                         id="faq-tabcontent-owner">
+
+                        <div class="row steps">
+                            <div class="col-12 col-md-3 text-center">
+                                {{ step('01', 'Реєструєшся', 'Зареєструйся в системі як власник') }}
+                            </div>
+                            <div class="col-12 col-md-3 text-center">
+                                {{ step('02', 'Налаштовуєш', 'Обери умову надання бонусного товару') }}
+                            </div>
+                            <div class="col-12 col-md-3 text-center">
+                                {{ step('03', 'Скануєш', 'Скануй QR-код/Вводь ID покупця') }}
+                            </div>
+                            <div class="col-12 col-md-3 text-center">
+                                {{ step('04', 'Отримуєш', 'Подякуй покупця за лояльність та подаруй йому бонусний товар') }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="container" id="partners">
+
+        <div class="row space-y">
+            <div class="col-12 mb-5">
+                <h2 class="h6 text-lowercase circle-left mb-3">партнери</h2>
+
+                <h3 class="h2 font-weight-bolder m-0">
+                    {{ totalCompanies }} компаній та {{ totalStores }} торгових точок
+                </h3>
+            </div>
+
+            <div class="col-12">
+                {% if partners|length > 0 %}
+
+                    {% macro card(url, logo, title) %}
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <a href="/partners/{{ url }}"
+                               class="partner-card text-light h-100 d-flex align-items-center p-3">
+                                <img src="{% if logo %}{{ logo }}{% else %}/img/nextfree-logo.png{% endif %}"
+                                     alt="{{ title }}"
+                                     class="img-fluid partner-logo rounded bg-light">
+                            </a>
+                        </div>
+                    {% endmacro %}
+
+                    <div class="row justify-content-center">
+                        {% for partner in partners %}
+                            {{ card(partner._id, partner.logo, partner.title) }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="h4 text-center">Парнерів на знайдено. Будьте першим!</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+    <section class="container-fluid bg-darker" id="join">
+
+        <div class="row space-y text-center">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <h2 class="h6 text-lowercase circle-left mb-3">Приєднуйся</h2>
+
+                        <h3 class="h2 font-weight-bolder mb-4">Годі думати, давай реєструйся</h3>
+                        <p class="text-secondary m-0">
+                            Приєднуйся до нашої бонусної системи та надавай або отримуй бонуси.
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{{ parameters.customerHost }}/register"
+                                   class="btn btn-lg btn-block btn-primary mb-3 mb-md-0">
+                                    <div>Я покупець</div>
+                                    <div class="font-weight-normal small">і хочу отримувати бонуси за покупки</div>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ parameters.ownerHost }}/register"
+                                   class="btn btn-lg btn-block btn-default mb-3 mb-md-0">
+                                    <div>Я власник компанії</div>
+                                    <div class="font-weight-normal small">і хочу надавати бонуси за покупки</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="container" id="contacts">
+
+        <div class="row space-y">
+            <div class="col-12 col-md-6">
+                <h2 class="h6 text-lowercase circle-left mb-3">Контакти</h2>
+
+                <h3 class="h2 font-weight-bolder mb-4">Маєш запитання або пропозиції?</h3>
+                <p class="text-secondary mb-4">Пиши в будь-який зручний для тебе месенджер або на пошту.</p>
+
+                {% if parameters.telegram %}
+                    <a href="{{ parameters.telegram }}">
+                        <i class="fab fa-telegram-plane fa-2x text-primary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.messenger %}
+                    <a href="{{ parameters.messenger }}">
+                        <i class="fab fa-facebook-messenger fa-2x text-primary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.viber %}
+                    <a href="{{ parameters.viber }}">
+                        <i class="fab fa-viber fa-2x text-primary p-2"></i>
+                    </a>
+                {% endif %}
+
+                {% if parameters.email %}
+                    <a href="mailto:{{ parameters.email }}">
+                        <i class="far fa-envelope fa-2x text-primary p-2"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if parameters.email %}
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Ім'я..."/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Email адреса..."/>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <textarea id="" class="form-control" placeholder="Повідомлення..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-default">Надіслати</button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+</section>
+
+{% include './footer.html.twig' %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type="text/javascript"></script>
+<script>
+  $(function () {
+    var pills = $('#faq .nav-tabs a');
+    var tabs = $('#faq .tab-pane');
+
+    pills.on('click', function (e) {
+      e.preventDefault();
+
+      var pill = $(e.target);
+      var tab = $(pill.attr('href'));
+
+      pills.removeClass('bg-light-green text-primary bg-primary text-light');
+      pills.addClass('bg-light-green text-primary');
+
+      tabs.removeClass('d-block');
+      tabs.addClass('d-none');
+
+      tab.addClass('d-block');
+      pill.addClass('bg-primary text-light');
+    })
+  })
+</script>
+
+</body>
+</html>

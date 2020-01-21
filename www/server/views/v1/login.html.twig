@@ -52,30 +52,7 @@
 </head>
 <body class="body-dark">
 
-<nav class="navbar navbar-expand bg-dark-gray">
-    <a class="navbar-brand py-0 border-0" href="/">
-        <img src="/img/nextfree-logo-sm.jpg" alt="Logo" class="img-fluid"
-             style="max-height: 60px">
-    </a>
-
-    <ul class="navbar-nav ml-auto text-center">
-
-        <li class="nav-item mb-1 mb-lg-0">
-            <a class="btn btn-link"
-               href="/#partners">Партнери</a>
-        </li>
-
-        <li class="nav-item mb-1 mb-lg-0">
-            <a class="btn btn-link"
-               href="/#contacts">Контакти</a>
-        </li>
-
-        <li class="nav-item mb-1 mb-lg-0">
-            <a class="btn btn-outline-light"
-               href="/login">Вхід</a>
-        </li>
-    </ul>
-</nav>
+{% include './nav.html.twig' %}
 
 <section>
     <div class="container">
@@ -116,39 +93,7 @@
     </div>
 </section>
 
-<footer class="w-100 bg-black text-light">
-    <div class="container">
-        <div class="row py-5">
-            <div class="col-6 col-md-4">
-                <h5 class="mb-3">Ресурси</h5>
-                <ul>
-                    <li><a href="/privacy">Умови користування</a></li>
-                    <li><a href="/sitemap.xml">Карта сайту</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-4">
-                <h5 class="mb-3">Контакти</h5>
-                <ul>
-                    <li><a href="mailto:{{ parameters.indexEmail }}">Зворотній зв'язок</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-4 text-right d-none d-md-block">
-                <a href="/">
-                    <img src="/img/nextfree-logo.png" alt="" class="img-fluid"
-                         style="max-height: 100px">
-                </a>
-            </div>
-        </div>
-        <div class="row text-gray text-center">
-            <div class="col-12">
-                <div class="red-line"></div>
-
-                <p class="my-3">{{ moment().format('YYYY') }} NextFree Україна. Всі права захищено</p>
-            </div>
-        </div>
-    </div>
-
-</footer>
+{% include './footer.html.twig' %}
 
 </body>
 </html>
