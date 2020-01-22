@@ -49,7 +49,7 @@
 
             </div>
             <div class="col-12 col-md-5 text-center">
-                <img src="/img/v2/main.svg" alt="Main" class="img-fluid">
+                <img src="{{ parameters.storageHost }}/img/v2/main.svg" alt="Main" class="img-fluid">
             </div>
         </div>
 
@@ -158,7 +158,7 @@
                         <div class="col-6 col-md-4 col-lg-2 mb-4">
                             <a href="/partners/{{ url }}"
                                class="partner-card text-light h-100 d-flex align-items-center p-3">
-                                <img src="{% if logo %}{{ logo }}{% else %}/img/nextfree-logo.png{% endif %}"
+                                <img src="{% if logo %}{{ logo }}{% else %}{{ parameters.storageHost }}/img/nextfree-logo.png{% endif %}"
                                      alt="{{ title }}"
                                      class="img-fluid partner-logo rounded bg-light">
                             </a>

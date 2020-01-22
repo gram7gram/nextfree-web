@@ -10,7 +10,7 @@ const publicDir = path.resolve(__dirname, '../../public')
 const uploadOptions = {
   uploadTimeout: 30 * 1000, //30 sec
   abortOnLimit: true,
-  limits: {fileSize: 1 * 1024 * 1024}, // 1MB
+  limits: {fileSize: 1024 * 1024}, // 1MB
 }
 
 router.post('/media', fileUpload(uploadOptions), (req, res) => {

@@ -32,7 +32,7 @@
     </div>
     <div class="row">
         <div class="col-2">
-            <img src="{% if company.logo %}{{ company.logo }}{% else %}/img/nextfree-logo.png{% endif %}"
+            <img src="{% if company.logo %}{{ company.logo }}{% else %}{{ parameters.storageHost }}/img/nextfree-logo.png{% endif %}"
                  alt="{{ company.name }}"
                  id="nav-logo"
                  class="img-fluid">
@@ -49,41 +49,47 @@
             </h3>
 
             <div class="space-b">
-                {% if website.social.website %}
-                    <p class="mb-1 p-1 text-truncate">
-                        <a href="{{ website.social.website }}" rel="nofollow" target="_blank">
-                            <i class="fa fa-link text-light-red"></i>&nbsp;{{ website.social.website }}
-                        </a>
-                    </p>
-                {% endif %}
-                {% if website.social.email %}
-                    <p class="mb-1 p-1 text-truncate">
-                        <a href="mailto:{{ website.social.email }}" rel="nofollow" target="_blank">
-                            <i class="fa fa-at text-light-red"></i>&nbsp;{{ website.social.email }}
-                        </a>
-                    </p>
-                {% endif %}
-                {% if website.social.phone %}
-                    <p class="mb-1 p-1 text-truncate">
-                        <a href="tel:{{ website.social.phone }}" rel="nofollow" target="_blank">
-                            <i class="fa fa-phone text-light-red"></i>&nbsp;{{ website.social.phone }}
-                        </a>
-                    </p>
-                {% endif %}
-                {% if website.social.facebook %}
-                    <p class="mb-1 p-1 text-truncate">
-                        <a href="{{ website.social.facebook }}" rel="nofollow" target="_blank">
-                            <i class="fab fa-facebook-square text-light-red"></i>&nbsp;Facebook
-                        </a>
-                    </p>
-                {% endif %}
-                {% if website.social.instagram %}
-                    <p class="mb-1 p-1 text-truncate">
-                        <a href="{{ website.social.instagram }}" rel="nofollow" target="_blank">
-                            <i class="fab fa-instagram text-light-red"></i>&nbsp;Instagram
-                        </a>
-                    </p>
-                {% endif %}
+                <div class="row">
+                    <div class="col-6">
+                        {% if website.social.website %}
+                            <p class="mb-1 p-1 text-truncate">
+                                <a href="{{ website.social.website }}" rel="nofollow" target="_blank">
+                                    <i class="fa fa-link text-light-red"></i>&nbsp;{{ website.social.website }}
+                                </a>
+                            </p>
+                        {% endif %}
+                        {% if website.social.email %}
+                            <p class="mb-1 p-1 text-truncate">
+                                <a href="mailto:{{ website.social.email }}" rel="nofollow" target="_blank">
+                                    <i class="fa fa-at text-light-red"></i>&nbsp;{{ website.social.email }}
+                                </a>
+                            </p>
+                        {% endif %}
+                        {% if website.social.phone %}
+                            <p class="mb-1 p-1 text-truncate">
+                                <a href="tel:{{ website.social.phone }}" rel="nofollow" target="_blank">
+                                    <i class="fa fa-phone text-light-red"></i>&nbsp;{{ website.social.phone }}
+                                </a>
+                            </p>
+                        {% endif %}
+                    </div>
+                    <div class="col-6">
+                        {% if website.social.facebook %}
+                            <p class="mb-1 p-1 text-truncate">
+                                <a href="{{ website.social.facebook }}" rel="nofollow" target="_blank">
+                                    <i class="fab fa-facebook-square text-light-red"></i>&nbsp;Facebook
+                                </a>
+                            </p>
+                        {% endif %}
+                        {% if website.social.instagram %}
+                            <p class="mb-1 p-1 text-truncate">
+                                <a href="{{ website.social.instagram }}" rel="nofollow" target="_blank">
+                                    <i class="fab fa-instagram text-light-red"></i>&nbsp;Instagram
+                                </a>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
 
             {% if stores|length > 0 %}
@@ -93,7 +99,7 @@
                     </div>
                     {% for store in stores %}
                         <div class="col-12 col-md-6">
-                            <a href="https://google.com.ua/maps?search={{ store.city }},{{ store.address }}"
+                            <a href="{{ store.googleMapsUrl }}"
                                target="_blank"
                                rel="nofollow"
                                class="bg-dark-gray rounded p-2 mb-3 d-block">

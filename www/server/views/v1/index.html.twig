@@ -79,7 +79,7 @@
                         {% for partner in partners %}
                             <div class="col-6 col-lg-3">
                                 <a href="/v1/partners/{{ partner._id }}" class="partner-card text-light">
-                                    <img src="{% if partner.logo %}{{ partner.logo }}{% else %}/img/nextfree-logo.png{% endif %}"
+                                    <img src="{% if partner.logo %}{{ partner.logo }}{% else %}{{ parameters.storageHost }}/img/nextfree-logo.png{% endif %}"
                                          alt="{{ partner.title }}"
                                          class="img-fluid partner-logo rounded mb-3 bg-light">
                                     <h4 class="partner-title">{{ partner.title }}</h4>

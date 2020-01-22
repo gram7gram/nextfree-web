@@ -5,7 +5,14 @@ const i18n = require('../../i18n').i18n
 const StoreService = {
 
   serialize: entity => {
-    return {...entity}
+
+    let query = [entity.city, entity.address].filter(item => !!item)
+      .join(',').replace(/\s/g, '+')
+
+    return {
+      ...entity,
+      googleMapsUrl: `https://www.google.com/maps/search/${encodeURIComponent(query)}`
+    }
   },
 
   create: async (content) => {
