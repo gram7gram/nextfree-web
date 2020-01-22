@@ -30,7 +30,7 @@ const ProfileSidebar = (props) => {
   return <>
 
     <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body bg-dark-gray">
         <AvatarBody src={model.user.avatar}/>
       </div>
 
@@ -57,12 +57,12 @@ const ProfileSidebar = (props) => {
     <nav className="bg-dark-gray mb-4">
 
       <Link to={Pages.PROFILE}
-            className="btn btn-link btn-block text-left">
+            className="btn-nav p-3 text-left">
         {i18n.t('navigation.profile')}
       </Link>
 
       <Link to={Pages.PROFILE_SECURITY}
-            className="btn btn-link btn-block text-left">
+            className="btn-nav p-3 text-left">
         {i18n.t('navigation.profile_security')}
       </Link>
 

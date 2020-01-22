@@ -11,15 +11,6 @@ footer {
     background-color: #1c1e22;
 }
 
-.condition-card {
-    border-width: 3px;
-    cursor: pointer;
-}
-
-.condition-card:hover {
-    background-color: #8e989f !important;
-}
-
 .store-card img {
     max-height: 150px;
 }

@@ -42,7 +42,7 @@ class Store extends React.Component {
 
   render() {
 
-    return <div className="container">
+    return <div className="container-fluid">
       <div className="row">
         <div className="col-12">
           <div className="card shadow-sm my-3">
@@ -56,7 +56,7 @@ class Store extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="card-body">
+            <div className="card-body px-0">
               <div className="row">
                 <div className="col-12">
                   {this.renderContent()}

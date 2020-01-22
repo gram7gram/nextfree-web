@@ -10,7 +10,7 @@ const QR = (props) => {
 
   const data = JSON.stringify({owner: _id, user: user.displayId})
 
-  return <div className="container py-5">
+  return <div className="container-fluid py-5">
     <div className="row">
       <div className="col-11 col-md-8 col-lg-6 cpl-xl-5 mx-auto text-center">
 

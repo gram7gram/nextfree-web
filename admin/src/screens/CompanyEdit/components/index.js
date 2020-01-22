@@ -135,42 +135,35 @@ class CompanyEdit extends React.Component {
 
             <div className="col-12">
               <div className="card mb-4">
-                <div className="card-header">
-                  <div className="row">
-                    <div className="col">
-                      <h3 className="m-0">{title}</h3>
-                    </div>
-                    <div className="col-12 col-md-auto text-right">
+                <div className="card-header text-right">
 
-                      {model.id && model.isEnabled
-                        ? <button className="btn btn-outline-danger btn-sm mx-1"
-                                  onClick={this.deactivate}
-                                  disabled={isLoading || !isValid}>
-                          <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                          &nbsp;{i18n.t('company_edit.deactivate_action')}
-                        </button>
-                        : null}
-
-                      {model.id && !model.isEnabled
-                        ? <button className="btn btn-outline-success btn-sm mx-1"
-                                  onClick={this.activate}
-                                  disabled={isLoading || !isValid}>
-                          <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                          &nbsp;{i18n.t('company_edit.activate_action')}
-                        </button>
-                        : null}
-
-                      <button className="btn btn-success btn-sm mx-1"
-                              onClick={this.submit}
+                  {model.id && model.isEnabled
+                    ? <button className="btn btn-default btn-sm mx-1"
+                              onClick={this.deactivate}
                               disabled={isLoading || !isValid}>
-                        <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                        &nbsp;{i18n.t('company_edit.save_action')}
-                      </button>
+                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
+                      &nbsp;{i18n.t('company_edit.deactivate_action')}
+                    </button>
+                    : null}
 
-                    </div>
-                  </div>
+                  {model.id && !model.isEnabled
+                    ? <button className="btn btn-primary btn-sm mx-1"
+                              onClick={this.activate}
+                              disabled={isLoading || !isValid}>
+                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
+                      &nbsp;{i18n.t('company_edit.activate_action')}
+                    </button>
+                    : null}
+
+                  <button className="btn btn-primary btn-sm mx-1"
+                          onClick={this.submit}
+                          disabled={isLoading || !isValid}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
+                    &nbsp;{i18n.t('company_edit.save_action')}
+                  </button>
+
                 </div>
-                <div className="card-body">
+                <div className="card-body px-0">
 
                   <div className="row">
                     <div className="col-12">
@@ -213,7 +206,7 @@ class CompanyEdit extends React.Component {
 
             <div className="col-12 col-md-6">
               <div className="card mb-3">
-                <div className="card-body">
+                <div className="card-body bg-dark-gray">
                   <LogotypeBody src={model.logo}/>
                 </div>
                 <div className="card-footer p-1">
@@ -242,7 +235,7 @@ class CompanyEdit extends React.Component {
 
             <div className="col-12">
               <div className="card mb-4">
-                <div className="card-body">
+                <div className="card-body px-0">
 
                   <h4 className="card-title">{i18n.t('company_edit.conditions_title')}</h4>
                   <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>

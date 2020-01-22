@@ -104,7 +104,7 @@ class CompanyEdit extends React.Component {
         buttons.push({
           text: i18n.t('company_edit.deactivate_action'),
           icon: "fa-ban",
-          mainClass: "btn-outline-danger",
+          mainClass: "btn-default",
           onClick: this.deactivate,
           disabled: isLoading || !isValid,
         })

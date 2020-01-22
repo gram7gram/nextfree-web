@@ -1,0 +1,162 @@
+@font-face {
+    font-family: "Marker";
+    src: url('/fonts/MarkerFelt-Thin.otf')
+}
+
+:root {
+    --light-red: #D98989;
+    --danger: #7C2D2D;
+    --light: #E4E4E4;
+    --dark: #242424;
+    --black: #151515;
+    --gray: #555555;
+    --gray-dark: #363636;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+}
+
+body {
+    font-family: "Marker", sans-serif !important;
+    background: var(--dark) url(/img/starts-sm.png) repeat
+}
+
+.font-default {
+    font-family: sans-serif !important;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.space-y {
+    padding-bottom: 5rem !important;
+    padding-top: 5rem !important;
+}
+
+.text-small {
+    font-size: 75%;
+}
+
+.partner-card {
+
+}
+
+.partner-logo {
+    border: 3px solid var(--black);
+    max-height: 200px;
+    object-fit: contain;
+}
+
+.partner-title {
+
+}
+
+.bg-dark-gray {
+    background-color: var(--gray-dark);
+}
+
+.border-black {
+    border-color: var(--black);
+}
+
+.text-light-red {
+    color: var(--light-red);
+}
+
+.text-gray {
+    color: var(--gray);
+}
+
+.text-black {
+    color: var(--black);
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.bg-dark {
+    background-color: var(--dark);
+}
+
+.bg-light {
+    background-color: var(--light);
+}
+
+.bg-danger {
+    background-color: var(--danger);
+}
+
+.text-dark {
+    color: var(--dark);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
+.red-line {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--danger);
+}
+
+.sentence-secondary {
+    font-size: 30px;
+    position: relative;
+    top: 3px;
+    color: var(--light);
+}
+
+.sentence-secondary::before,
+.sentence-secondary::after {
+    content:'';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--light);
+    margin-bottom: 8px;
+}
+
+.sentence-secondary::before {
+    margin-right: 20px;
+}
+
+.sentence-secondary::after {
+    margin-left: 20px;
+}
+
+.sentence-primary {
+    font-size: 50px;
+    position: relative;
+    top: 3px;
+    color: var(--light);
+}
+
+.index-main {
+    min-height: 400px;
+}
+
+.index-main-img {
+    background: url('/img/index-main.jpg') no-repeat center top;
+    background-size: cover;
+}
+
+.index-main-bg {
+    background-color: #4fa6d1;
+}
+
+.navbar {
+    min-height: 58px
+}

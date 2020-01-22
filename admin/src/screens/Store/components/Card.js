@@ -14,8 +14,8 @@ const Card = ({model, companies}) => {
     <Link to={Pages.STORE_EDIT.replace(':id', model._id)}
           className="card shadow-sm mb-1 mr-1 store-card">
 
-      <div className="card-header p-1 text-truncate bg-light text-dark">
-        <i className="fa fa-share-alt"/>&nbsp;{company ? company.name : "???"}
+      <div className="card-header p-1 text-truncate">
+        <i className="fa fa-cub"/>&nbsp;{company ? company.name : "???"}
       </div>
 
       <div className="card-image">

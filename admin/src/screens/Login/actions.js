@@ -3,6 +3,7 @@ const prefix = 'Login'
 export const LOGOUT = prefix + '/LOGOUT';
 
 export const TOGGLE_MENU = prefix + '/TOGGLE_MENU';
+export const TOGGLE_MENU_MINIMIZE = prefix + '/TOGGLE_MENU_MINIMIZE';
 
 export const LOGIN_BEFORE = prefix + '/LOGIN_BEFORE';
 export const LOGIN_SUCCESS = prefix + '/LOGIN_SUCCESS';

@@ -3073,34 +3073,34 @@ a.btn.disabled, fieldset:disabled a.btn {
     box-shadow: 0 0 0 0.2rem rgba(248, 148, 6, 0.5)
 }
 
-.btn-outline-danger {
+.btn-default {
     color: #ee5f5b;
     border-color: #ee5f5b
 }
 
-.btn-outline-danger:hover {
+.btn-default:hover {
     color: #fff;
     background-color: #ee5f5b;
     border-color: #ee5f5b
 }
 
-.btn-outline-danger:focus, .btn-outline-danger.focus {
+.btn-default:focus, .btn-default.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(238, 95, 91, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(238, 95, 91, 0.5)
 }
 
-.btn-outline-danger.disabled, .btn-outline-danger:disabled {
+.btn-default.disabled, .btn-default:disabled {
     color: #ee5f5b;
     background-color: transparent
 }
 
-.btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active, .show > .btn-outline-danger.dropdown-toggle {
+.btn-default:not(:disabled):not(.disabled):active, .btn-default:not(:disabled):not(.disabled).active, .show > .btn-default.dropdown-toggle {
     color: #fff;
     background-color: #ee5f5b;
     border-color: #ee5f5b
 }
 
-.btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-danger.dropdown-toggle:focus {
+.btn-default:not(:disabled):not(.disabled):active:focus, .btn-default:not(:disabled):not(.disabled).active:focus, .show > .btn-default.dropdown-toggle:focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(238, 95, 91, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(238, 95, 91, 0.5)
 }

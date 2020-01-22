@@ -125,7 +125,7 @@ class StaffEdit extends React.Component {
 
             <p className="text-danger">{i18n.t('staff_edit.remove_content')}</p>
 
-            <button className="btn btn-outline-danger btn-sm"
+            <button className="btn btn-default btn-sm"
                     onClick={this.remove}
                     disabled={isLoading}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-trash"}/>
@@ -248,7 +248,7 @@ class StaffEdit extends React.Component {
                 <div className="col-12 text-right">
 
                   {model.id && model.isEnabled
-                    ? <button className="btn btn-outline-danger btn-sm mx-1"
+                    ? <button className="btn btn-default btn-sm mx-1"
                               onClick={this.deactivate}
                               disabled={isLoading || !isValid}>
                       <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>

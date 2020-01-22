@@ -2,7 +2,9 @@ import React from 'react'
 import Props from 'prop-types'
 
 const BonusCondition = ({title, content, selected, onClick}) => {
-  return <div className={"card condition-card mb-2 bg-secondary text-white" + (selected ? " border-success" : "")} onClick={onClick}>
+  return <div className={"card condition-card mb-2"
+  + (selected ? " active" : "")}
+              onClick={onClick}>
 
     <div className="card-body">
       <div className="row">

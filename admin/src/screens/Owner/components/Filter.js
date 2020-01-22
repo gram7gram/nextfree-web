@@ -61,7 +61,7 @@ const Filter = () => {
 
     <div className="input-group-append">
 
-      <Link className="btn btn-success"
+      <Link className="btn btn-primary"
             to={Pages.OWNER_NEW}>
         <i className="fa fa-plus"/>&nbsp;{i18n.t('owner.new_action')}
       </Link>

@@ -5,11 +5,24 @@ const config = {
   production: {
     pageprefix: ' - nextfree.com.ua',
     host: 'https://nextfree.com.ua',
+    apiPrivateHost: 'http://api',
     apiHost: 'https://api.nextfree.com.ua',
-    indexEmail: 'nextfree.adm@gmail.com',
+    storageHost: 'https://storage.nextfree.com.ua',
+    ownerHost: 'https://owner.nextfree.com.ua',
+    customerHost: 'https://customer.nextfree.com.ua',
+    staffHost: 'https://staff.nextfree.com.ua',
+    email: 'nextfree.adm@gmail.com',
+    viber: 'viber://chat/?number=380986159269',
+    telegram: 'https://t.me/nextfree_ua',
+    messenger: 'https://t.me/test',
+    fbLink: 'https://www.facebook.com/nextfree.ua',
     gtm: {
       enabled: true,
       code: 'UA-154091628-1'
+    },
+    facebookChat: {
+      enabled: true,
+      pageId: '112342516915349'
     }
   }
 }

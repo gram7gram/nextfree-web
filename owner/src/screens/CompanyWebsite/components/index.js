@@ -128,7 +128,7 @@ class CompanyWebsite extends React.Component {
       buttons.push({
         text: i18n.t('company_edit.page_deactivate_action'),
         icon: "fa-times",
-        mainClass: "btn-outline-danger",
+        mainClass: "btn-default",
         onClick: this.draft,
         disabled: isLoading || !isValid,
       })

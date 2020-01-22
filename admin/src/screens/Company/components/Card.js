@@ -22,8 +22,8 @@ const Card = ({model, owners}) => {
     <Link to={Pages.COMPANY_EDIT.replace(':id', model._id)}
           className="card shadow-sm mb-1 mr-1 company-card">
 
-      <div className="card-header p-1 text-truncate bg-light text-dark">
-        <i className="fa fa-user-circle"/>&nbsp;{name}
+      <div className="card-header p-1 text-truncate">
+        <i className="fa fa-user-secret"/>&nbsp;{name}
       </div>
 
       <div className="card-image">

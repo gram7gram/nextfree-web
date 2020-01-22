@@ -1,29 +1,29 @@
 import React from 'react';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import i18n from "../../../i18n";
 import * as Pages from "../../../router/Pages";
 import {useSelector} from "react-redux";
 
-const Sidebar = () => {
+const Sidebar = ({match}) => {
 
   const {raw, model} = useSelector(state => state.CompanyEdit)
 
   return <>
 
-    <div className="card mb-4">
-      <div className="card-body p-2">
+    {raw && raw.id ? <div className="card mb-4">
+      <div className="card-body p-2 bg-dark-gray">
         <h2 className="text-center">{model.name}</h2>
 
         <div className="row">
           <div className="col-6">{i18n.t('placeholder.status')}:</div>
           <div className="col-6">
-            {raw && raw.isEnabled
+            {raw.isEnabled
               ? <div className="badge badge-success">
                 <i className="fa fa-check"/>&nbsp;{i18n.t('company.enabled_badge')}
               </div> : null}
 
-            {raw && !raw.isEnabled
+            {!raw.isEnabled
               ? <div className="badge badge-danger">
                 <i className="fa fa-times"/>&nbsp;{i18n.t('company.disabled_badge')}
               </div> : null}
@@ -32,24 +32,22 @@ const Sidebar = () => {
         <div className="row">
           <div className="col-6">{i18n.t('placeholder.createdAt')}:</div>
           <div className="col-6">
-            {raw
-              ? moment(raw.createdAt).format('HH:mm DD.MM.YYYY')
-              : null}
+            {moment(raw.createdAt).format('HH:mm DD.MM.YYYY')}
           </div>
         </div>
 
       </div>
-    </div>
+    </div> : null}
 
     <nav className="bg-dark-gray mb-4">
 
-      <Link to={Pages.COMPANY_EDIT.replace(':id', model.id)}
-            className="btn btn-link btn-block text-left">
+      <Link to={Pages.COMPANY_EDIT.replace(':id', match.params.id)}
+            className="btn-nav p-3">
         {i18n.t('navigation.company_info')}
       </Link>
 
-      <Link to={Pages.COMPANY_PAGE.replace(':id', model.id)}
-            className="btn btn-link btn-block text-left">
+      <Link to={Pages.COMPANY_PAGE.replace(':id', match.params.id)}
+            className="btn-nav p-3">
         {i18n.t('navigation.company_page')}
       </Link>
 
@@ -57,4 +55,4 @@ const Sidebar = () => {
   </>
 }
 
-export default Sidebar
+export default withRouter(Sidebar)

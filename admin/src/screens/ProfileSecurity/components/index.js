@@ -68,7 +68,7 @@ class ProfileSecurity extends React.Component {
                   <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
-                  <button className="btn btn-success btn-sm"
+                  <button className="btn btn-primary btn-sm"
                           onClick={this.submit}
                           disabled={isLoading || !isValid}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>

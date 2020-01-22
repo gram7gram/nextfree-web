@@ -87,7 +87,7 @@ class Login extends React.Component {
                 </div>
                 <div className="form-group text-right">
 
-                  <button className="btn btn-success"
+                  <button className="btn btn-primary"
                           onClick={this.submit}
                           disabled={!isValid || isLoading}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>

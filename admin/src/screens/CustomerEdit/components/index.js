@@ -158,13 +158,13 @@ class CustomerEdit extends React.Component {
             <p>{i18n.t('customer_edit.is_admin_title')}</p>
 
             {!model.user.isAdmin
-              ? <button className="btn btn-outline-warning btn-sm"
+              ? <button className="btn btn-default btn-sm"
                         onClick={this.grantAdmin}
                         disabled={isLoading}>
                 <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-plus"}/>
                 &nbsp;{i18n.t('customer_edit.grant_admin_action')}
               </button>
-              : <button className="btn btn-outline-warning btn-sm"
+              : <button className="btn btn-default btn-sm"
                         onClick={this.ungrantAdmin}
                         disabled={isLoading}>
                 <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
@@ -190,7 +190,7 @@ class CustomerEdit extends React.Component {
 
             <p>{i18n.t('customer_edit.remove_content')}</p>
 
-            <button className="btn btn-outline-danger btn-sm"
+            <button className="btn btn-default btn-sm"
                     onClick={this.remove}
                     disabled={isLoading}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-trash"}/>
@@ -219,7 +219,7 @@ class CustomerEdit extends React.Component {
           </div>
           <div className="col-auto">
 
-            {model.id ? <button className="btn btn-success btn-sm"
+            {model.id ? <button className="btn btn-primary btn-sm"
                                 onClick={this.submitSecurity}
                                 disabled={isLoading || !isValid}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-key"}/>
@@ -324,7 +324,7 @@ class CustomerEdit extends React.Component {
                 <div className="col-12 col-md-auto text-right">
 
                   {model.id && model.isEnabled
-                    ? <button className="btn btn-outline-danger btn-sm mx-1"
+                    ? <button className="btn btn-default btn-sm mx-1"
                               onClick={this.deactivate}
                               disabled={isLoading || !isValid}>
                       <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
@@ -333,7 +333,7 @@ class CustomerEdit extends React.Component {
                     : null}
 
                   {model.id && !model.isEnabled
-                    ? <button className="btn btn-outline-success btn-sm mx-1"
+                    ? <button className="btn btn-primary btn-sm mx-1"
                               onClick={this.activate}
                               disabled={isLoading || !isValid}>
                       <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
@@ -341,7 +341,7 @@ class CustomerEdit extends React.Component {
                     </button>
                     : null}
 
-                  <button className="btn btn-success btn-sm mx-1"
+                  <button className="btn btn-primary btn-sm mx-1"
                           onClick={this.submit}
                           disabled={isLoading || !isValid}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>

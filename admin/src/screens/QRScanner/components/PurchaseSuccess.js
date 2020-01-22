@@ -17,7 +17,7 @@ const PurchaseSuccess = () => {
     <h4>{i18n.t('qr_scanner.purchase_success_title')}</h4>
     <p>{i18n.t('qr_scanner.purchase_success_subtitle')}</p>
 
-    <button className="btn btn-success" onClick={setDefaults}>
+    <button className="btn btn-primary" onClick={setDefaults}>
       {i18n.t('qr_scanner.again_action')}
     </button>
   </div>

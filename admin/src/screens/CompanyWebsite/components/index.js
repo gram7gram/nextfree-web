@@ -100,7 +100,7 @@ class CompanyWebsite extends React.Component {
         <p>{i18n.t('company_edit.page_create_content')}</p>
 
         <button
-          className="btn btn-outline-success"
+          className="btn btn-primary"
           onClick={this.enablePage}>
           {i18n.t('company_edit.page_create_action')}
         </button>
@@ -114,14 +114,14 @@ class CompanyWebsite extends React.Component {
       {
         text: i18n.t('company_edit.page_save_publish_action'),
         icon: "fa-check",
-        mainClass: "btn-success",
+        mainClass: "btn-primary",
         onClick: this.publish,
-        disabled: isLoading || !isValid || isPublished,
+        disabled: isLoading || !isValid,
       },
       {
         text: i18n.t('company_edit.page_save_draft_action'),
         icon: "fa-save",
-        mainClass: "btn-outline-warning",
+        mainClass: "btn-secondary",
         onClick: this.draft,
         disabled: isLoading || !isValid,
       }
@@ -131,7 +131,7 @@ class CompanyWebsite extends React.Component {
       buttons.push({
         text: i18n.t('company_edit.page_deactivate_action'),
         icon: "fa-times",
-        mainClass: "btn-outline-danger",
+        mainClass: "btn-default",
         onClick: this.draft,
         disabled: isLoading || !isValid,
       })
@@ -169,7 +169,7 @@ class CompanyWebsite extends React.Component {
         <div className="card-header">
 
           <div className="row">
-            <div className="col">
+            <div className="col-12 mb-2">
               <h4 className="m-0 text-white">{i18n.t('company_edit.page_title')}</h4>
               <div>
                 <Status value={model.status}/>
@@ -177,7 +177,7 @@ class CompanyWebsite extends React.Component {
               </div>
             </div>
 
-            <div className="col-auto text-right d-none d-md-block">
+            <div className="col-12 text-center d-none d-md-block">
               {buttons.map((btn, i) =>
                 btn.onClick
                   ? <button key={i}
@@ -200,9 +200,9 @@ class CompanyWebsite extends React.Component {
 
         </div>
 
-        <div className="card-body">
+        <div className="card-body px-0">
 
-          <p>
+          <p className="text-secondary">
             <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.page_subtitle')}
           </p>
 
@@ -233,9 +233,9 @@ class CompanyWebsite extends React.Component {
             <div className="card-header">
               <h3 className="m-0 text-white">{i18n.t('company_edit.meta_title')}</h3>
             </div>
-            <div className="card-body">
+            <div className="card-body px-0">
 
-              <p>
+              <p className="text-secondary">
                 <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.meta_subtitle')}
               </p>
 
@@ -274,9 +274,9 @@ class CompanyWebsite extends React.Component {
             <div className="card-header">
               <h3 className="m-0 text-white">{i18n.t('company_edit.social_title')}</h3>
             </div>
-            <div className="card-body">
+            <div className="card-body px-0">
 
-              <p>
+              <p className="text-secondary">
                 <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.social_subtitle')}
               </p>
 

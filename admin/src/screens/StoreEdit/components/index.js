@@ -118,7 +118,7 @@ class StoreEdit extends React.Component {
                 <div className="col-12 col-md-auto text-right">
 
                   {model.id && model.isEnabled
-                    ? <button className="btn btn-outline-danger btn-sm mx-1"
+                    ? <button className="btn btn-default btn-sm mx-1"
                               onClick={this.deactivate}
                               disabled={isLoading || !isValid}>
                       <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
@@ -127,7 +127,7 @@ class StoreEdit extends React.Component {
                     : null}
 
                   {model.id && !model.isEnabled
-                    ? <button className="btn btn-outline-success btn-sm mx-1"
+                    ? <button className="btn btn-primary btn-sm mx-1"
                               onClick={this.activate}
                               disabled={isLoading || !isValid}>
                       <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
@@ -135,7 +135,7 @@ class StoreEdit extends React.Component {
                     </button>
                     : null}
 
-                  <button className="btn btn-success btn-sm mx-1"
+                  <button className="btn btn-primary btn-sm mx-1"
                           onClick={this.submit}
                           disabled={isLoading || !isValid}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
