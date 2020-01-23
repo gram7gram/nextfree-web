@@ -8,9 +8,9 @@ import Save from '../actions/Save';
 import FetchStores from '../../Store/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
 import Upload from "../actions/Upload";
 import {AvatarBody} from "../../../components/Avatar";
+import PageTitle from "../../../components/PageTitle";
 
 class StaffEdit extends React.Component {
 
@@ -144,10 +144,14 @@ class StaffEdit extends React.Component {
     const {model} = this.props.StaffEdit
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-header">
+        <h5 className="m-0">{i18n.t('staff_edit.position_title')}</h5>
+      </div>
+      <div className="card-body px-0">
 
-        <h4 className="card-title">{i18n.t('staff_edit.position_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_edit.position_subtitle')}</h6>
+        <p className="text-secondary">
+          <i className="fa fa-info-circle"/>&nbsp;{i18n.t('staff_edit.position_subtitle')}
+        </p>
 
         <form noValidate autoComplete="off">
           <div className="row">
@@ -208,12 +212,52 @@ class StaffEdit extends React.Component {
       serverErrors,
     } = this.props.StaffEdit
 
+    const buttons = []
+
+    if (model.id) {
+      if (model.isEnabled) {
+        buttons.push({
+          text: i18n.t('staff_edit.deactivate_action'),
+          icon: "fa-ban",
+          mainClass: "btn-default",
+          onClick: this.deactivate,
+          disabled: isLoading || !isValid,
+          isLoading
+        })
+      } else {
+        buttons.push({
+          text: i18n.t('staff_edit.activate_action'),
+          icon: "fa-check",
+          mainClass: "btn-primary",
+          onClick: this.activate,
+          disabled: isLoading || !isValid,
+          isLoading
+        })
+      }
+    }
+
+    buttons.push({
+      text: i18n.t('staff_edit.save_action'),
+      icon: "fa-save",
+      mainClass: "btn-primary",
+      onClick: this.submit,
+      disabled: isLoading || !isValid,
+      isLoading
+    })
+
     return <div className="container my-3">
       <div className="row">
 
+        <div className="col-12">
+          <PageTitle
+            title={model.user.email}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
+
         <div className="col-12 col-md-4 col-lg-3">
 
-          <div className="card">
+          <div className="card mb-4 bg-dark-gray">
             <div className="card-body">
               <AvatarBody src={model.user.avatar}/>
             </div>
@@ -228,10 +272,10 @@ class StaffEdit extends React.Component {
                 </label>
               </div>
 
-              <div className="text-muted">
+              <div className="text-secondary">
                 <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
               </div>
-              <div className="text-muted">
+              <div className="text-secondary">
                 <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
               </div>
             </div>
@@ -240,69 +284,32 @@ class StaffEdit extends React.Component {
 
         <div className="col-12 col-md-8 col-lg-9">
 
-          <Errors errors={serverErrors}/>
+          <div className="mb-4">
+            <table className="table table-sm">
+              <tbody>
+              <tr>
+                <th>{i18n.t('staff_edit.email')}</th>
+                <td>{model.user.email}</td>
+              </tr>
+              <tr>
+                <th>{i18n.t('staff_edit.lastName')}</th>
+                <td>{model.user.lastName}</td>
+              </tr>
+              <tr>
+                <th>{i18n.t('staff_edit.firstName')}</th>
+                <td>{model.user.firstName}</td>
+              </tr>
+              <tr>
+                <th>{i18n.t('staff_edit.phone')}</th>
+                <td>{model.user.phone}</td>
+              </tr>
+              <tr>
+                <th>{i18n.t('staff_edit.birthday')}</th>
+                <td>{model.user.birthday}</td>
+              </tr>
+              </tbody>
+            </table>
 
-          <div className="card mb-4">
-            <div className="card-header">
-              <div className="row">
-                <div className="col-12 text-right">
-
-                  {model.id && model.isEnabled
-                    ? <button className="btn btn-default btn-sm mx-1"
-                              onClick={this.deactivate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                      &nbsp;{i18n.t('staff_edit.deactivate_action')}
-                    </button>
-                    : null}
-
-                  {model.id && !model.isEnabled
-                    ? <button className="btn btn-outline-success btn-sm mx-1"
-                              onClick={this.activate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                      &nbsp;{i18n.t('staff_edit.activate_action')}
-                    </button>
-                    : null}
-
-                  <button className="btn btn-success btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('staff_edit.save_action')}
-                  </button>
-
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
-
-              <table className="table table-sm">
-                <tbody>
-                <tr>
-                  <th>{i18n.t('staff_edit.email')}</th>
-                  <td>{model.user.email}</td>
-                </tr>
-                <tr>
-                  <th>{i18n.t('staff_edit.lastName')}</th>
-                  <td>{model.user.lastName}</td>
-                </tr>
-                <tr>
-                  <th>{i18n.t('staff_edit.firstName')}</th>
-                  <td>{model.user.firstName}</td>
-                </tr>
-                <tr>
-                  <th>{i18n.t('staff_edit.phone')}</th>
-                  <td>{model.user.phone}</td>
-                </tr>
-                <tr>
-                  <th>{i18n.t('staff_edit.birthday')}</th>
-                  <td>{model.user.birthday}</td>
-                </tr>
-                </tbody>
-              </table>
-
-            </div>
           </div>
 
           {this.renderPosition()}

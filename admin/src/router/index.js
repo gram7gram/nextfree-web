@@ -35,68 +35,57 @@ import OwnerEdit from '../screens/OwnerEdit/components';
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
 import Sidebar from "../components/Sidebar";
-import Layout from "../components/Layout";
 
 export function createRouter() {
 
   return <>
 
-    <div className="container-fluid p-0">
-      <div className="row no-gutters">
+    <Sidebar/>
 
-        <Sidebar/>
+    <Navigation/>
 
-        <Layout>
+    <main>
 
-          <Navigation/>
+      <ErrorBoundary>
 
-          <main>
+        <Switch>
+          <Authentication>
+            <Route exact path={Pages.HOME} component={Home}/>
+            <Route exact path={Pages.QR_CODE} component={QR}/>
 
-            <ErrorBoundary>
+            {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
+            <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
 
-              <Switch>
-                <Authentication>
-                  <Route exact path={Pages.HOME} component={Home}/>
-                  <Route exact path={Pages.QR_CODE} component={QR}/>
+            <Route exact path={Pages.PROFILE} component={Profile}/>
+            <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
 
-                  {!isIPhone() && <Route exact path={Pages.QR_SCAN} component={QRScanner}/>}
-                  <Route exact path={Pages.QR_SCAN_BY_ID} component={QRScannerById}/>
+            <Route exact path={Pages.COMPANIES} component={Company}/>
+            <Route exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>
+            <Route path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
+            <Route path={Pages.COMPANY_PAGE} component={CompanyWebsite}/>
 
-                  <Route exact path={Pages.PROFILE} component={Profile}/>
-                  <Route exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+            <Route exact path={Pages.STORES} component={Store}/>
+            <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
+            <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
 
-                  <Route exact path={Pages.COMPANIES} component={Company}/>
-                  <Route exact path={Pages.COMPANY_NEW} component={CompanyEdit}/>
-                  <Route path={Pages.COMPANY_EDIT} component={CompanyEdit}/>
-                  <Route path={Pages.COMPANY_PAGE} component={CompanyWebsite}/>
+            <Route exact path={Pages.STAFF} component={Staff}/>
+            <Route exact path={Pages.STAFF_NEW} component={StaffEdit}/>
+            <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
 
-                  <Route exact path={Pages.STORES} component={Store}/>
-                  <Route exact path={Pages.STORE_NEW} component={StoreEdit}/>
-                  <Route path={Pages.STORE_EDIT} component={StoreEdit}/>
+            <Route exact path={Pages.OWNERS} component={Owner}/>
+            <Route exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
+            <Route path={Pages.OWNER_EDIT} component={OwnerEdit}/>
 
-                  <Route exact path={Pages.STAFF} component={Staff}/>
-                  <Route exact path={Pages.STAFF_NEW} component={StaffEdit}/>
-                  <Route path={Pages.STAFF_EDIT} component={StaffEdit}/>
+            <Route exact path={Pages.CUSTOMERS} component={Customer}/>
+            <Route exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
+            <Route path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
 
-                  <Route exact path={Pages.OWNERS} component={Owner}/>
-                  <Route exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
-                  <Route path={Pages.OWNER_EDIT} component={OwnerEdit}/>
+          </Authentication>
+        </Switch>
 
-                  <Route exact path={Pages.CUSTOMERS} component={Customer}/>
-                  <Route exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>
-                  <Route path={Pages.CUSTOMER_EDIT} component={CustomerEdit}/>
+      </ErrorBoundary>
 
-                </Authentication>
-              </Switch>
-
-            </ErrorBoundary>
-
-          </main>
-        </Layout>
-
-      </div>
-
-    </div>
+    </main>
 
     <Footer/>
 

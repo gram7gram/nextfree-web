@@ -17,7 +17,7 @@ const Card = ({model, companies}) => {
 
   return <div className="col-6 col-md-3 col-lg-2">
     <Link to={Pages.STAFF_EDIT.replace(':id', model._id)}
-          className="card shadow-sm mb-1 mr-1 staff-card">
+          className="card mb-1 mr-1 bg-dark-gray staff-card">
 
       <div className="card-header p-1 text-truncate">
         <i className="fa fa-share-alt"/>&nbsp;{company ? company.name : "???"}

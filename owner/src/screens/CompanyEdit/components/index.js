@@ -6,11 +6,11 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
-import Errors from "../../../components/Errors";
 import FetchConditions from "../../App/actions/FetchConditions";
 import {LogotypeBody} from "../../../components/Logotype";
 import Upload from "../actions/Upload";
 import Sidebar from "./Sidebar";
+import PageTitle from "../../../components/PageTitle";
 
 class CompanyEdit extends React.Component {
 
@@ -107,14 +107,16 @@ class CompanyEdit extends React.Component {
           mainClass: "btn-default",
           onClick: this.deactivate,
           disabled: isLoading || !isValid,
+          isLoading
         })
       } else {
         buttons.push({
           text: i18n.t('company_edit.activate_action'),
           icon: "fa-check",
-          mainClass: "btn-outline-success",
+          mainClass: "btn-primary",
           onClick: this.activate,
           disabled: isLoading || !isValid,
+          isLoading
         })
       }
     }
@@ -122,13 +124,21 @@ class CompanyEdit extends React.Component {
     buttons.push({
       text: i18n.t('company_edit.save_action'),
       icon: "fa-save",
-      mainClass: "btn-success",
+      mainClass: "btn-primary",
       onClick: this.submit,
       disabled: isLoading || !isValid,
+      isLoading
     })
 
     return <div className="container-fluid my-3">
       <div className="row">
+
+        <div className="col-12">
+          <PageTitle
+            title={i18n.t('navigation.my_company')}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
 
         <div className="col-12 col-md-4 col-lg-3">
           <Sidebar/>
@@ -136,66 +146,23 @@ class CompanyEdit extends React.Component {
 
         <div className="col-12 col-md-8 col-lg-9">
 
-          <Errors errors={serverErrors}/>
+          <div className="mb-4">
 
-          <div className="d-block d-md-none mb-4">
-
-            {buttons.map((btn, i) =>
-              <button key={i}
-                      className={`btn ${btn.mainClass} btn-block mb-1`}
-                      onClick={btn.onClick}
-                      disabled={!!btn.disabled}>
-                <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-                &nbsp;{btn.text}
-              </button>
-            )}
+            <div className="form-group">
+              <label className="m-0 required">{i18n.t('company_edit.name')}</label>
+              <input type="text" placeholder={i18n.t('placeholder.text')}
+                     className="form-control"
+                     onChange={this.changeString('name')}
+                     value={model.name || ''}/>
+              {this.getError('name')}
+            </div>
 
           </div>
 
           <div className="row">
-            <div className="col-12">
-              <div className="card mb-4">
-                <div className="card-header">
-                  <div className="row">
-                    <div className="col">
-                      <h3 className="m-0 text-white">{i18n.t('navigation.my_company_page')}</h3>
-                    </div>
-                    <div className="col-auto text-right d-none d-md-block">
-                      {buttons.map((btn, i) =>
-                        <button key={i}
-                                className={`btn ${btn.mainClass} btn-sm mx-1`}
-                                onClick={btn.onClick}
-                                disabled={!!btn.disabled}>
-                          <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-                          &nbsp;{btn.text}
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                </div>
-                <div className="card-body">
-
-                  <div className="row">
-                    <div className="col-12">
-
-                      <div className="form-group">
-                        <label className="m-0 required">{i18n.t('company_edit.name')}</label>
-                        <input type="text" placeholder={i18n.t('placeholder.text')}
-                               className="form-control"
-                               onChange={this.changeString('name')}
-                               value={model.name || ''}/>
-                        {this.getError('name')}
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
             <div className="col-12 col-md-6">
-              <div className="card mb-4">
+
+              <div className="card mb-4 bg-dark-gray">
                 <div className="card-body">
                   <LogotypeBody src={model.logo}/>
                 </div>
@@ -210,26 +177,26 @@ class CompanyEdit extends React.Component {
                     </label>
                   </div>
 
-                  <div className="text-muted">
+                  <div className="text-secondary">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.avatar_info')}
                   </div>
-                  <div className="text-muted">
+                  <div className="text-secondary">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
                   </div>
-                  <div className="text-muted">
+                  <div className="text-secondary">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
 
-
           <div className="card mb-4">
-            <div className="card-body">
+            <div className="card-body px-0">
 
               <h4 className="card-title">{i18n.t('company_edit.conditions_title')}</h4>
-              <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
+              <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('company_edit.conditions_subtitle')}</h6>
 
               <div className="row">
                 {conditions.map(condition =>

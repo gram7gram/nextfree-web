@@ -7,7 +7,7 @@ const Card = ({model}) => {
 
   return <div className="col-6 col-md-3 col-lg-2">
     <Link to={Pages.STORE_EDIT.replace(':id', model._id)}
-          className="card shadow-sm mb-1 mr-1 store-card">
+          className="card mb-1 mr-1 bg-dark-gray store-card">
       <div className="card-image">
         <img src={avatar} alt="" className="img-fluid p-4"/>
       </div>

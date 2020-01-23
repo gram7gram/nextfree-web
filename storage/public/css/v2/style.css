@@ -428,3 +428,100 @@ footer .logo {
 .sidebar .sidebar-link:focus {
     outline: none;
 }
+
+.qr-steps .step .circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.id-inputs .id-cell {
+     width: 100%;
+     max-width: 50px;
+     height: 50px;
+     margin: 0 auto
+ }
+
+
+
+.qr-scanner-container,
+.qr-scanner-overlay {
+    position: absolute;
+    left: 0;
+}
+
+.qr-scanner-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-area {
+    width: 75vw;
+    height: 75vw;
+}
+
+@media (min-width: 768px) {
+    .qr-area {
+        width: 50vw;
+        height: 50vw;
+    }
+}
+
+@media (min-width: 1440px) {
+    .qr-area {
+        width: 33vw;
+        height: 33vw;
+    }
+}
+
+.qr-area td {
+    width: 33%;
+    height: 33%;
+    border-spacing: 0;
+}
+
+.qr-area.no-result .has-border {
+    border-color: #b35252 !important;
+    border-width: 5px !important;
+}
+
+.qr-area.has-result .has-border {
+    border-color: #62c462 !important;
+    border-width: 5px !important;
+}
+
+.qr-stack,
+.qr-scanner-overlay,
+.qr-scanner-container video {
+    height: calc(100vh - 55px);
+    width: 100vw;
+}
+
+.qr-scanner-container video {
+    object-fit: cover;
+}
+
+.qr-scanner-container {
+    z-index: 95;
+}
+
+.qr-scanner-overlay {
+    z-index: 100;
+}
+
+.logotype-container,
+.avatar-container {
+    overflow: hidden;
+    min-height: 170px;
+    max-height: 170px;
+}
+
+img.avatar,
+img.logotype {
+    object-fit: cover;
+    max-height: 200px;
+}

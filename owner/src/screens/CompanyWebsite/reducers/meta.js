@@ -3,6 +3,8 @@ import * as Action from '../actions'
 
 const title = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['meta.title'] !== undefined) {
@@ -21,6 +23,8 @@ const title = (prev = null, action) => {
 
 const description = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['meta.description'] !== undefined) {
@@ -39,6 +43,8 @@ const description = (prev = null, action) => {
 
 const keywords = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['meta.keywords'] !== undefined) {

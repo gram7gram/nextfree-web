@@ -45,7 +45,7 @@ class Activation extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div className="col-12 col-md-10 col-lg-6 mx-auto">
 
           <div className="row">
             <div className="col-12">

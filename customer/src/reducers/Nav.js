@@ -1,17 +1,19 @@
 import {combineReducers} from 'redux';
 import * as LoginActions from "../screens/Login/actions";
 
-const isMobileMenuVisible = (prev = true, action) => {
+const isVisible = (prev = true, action) => {
   switch (action.type) {
-    case "@@router/LOCATION_CHANGE":
-      return false
     case LoginActions.TOGGLE_MENU:
       return !!action.payload
+    case LoginActions.LOGIN_SUCCESS:
+    case LoginActions.LOGIN_CHECK_SUCCESS:
+    case "@@router/LOCATION_CHANGE":
+      return true
     default:
       return prev
   }
 }
 
 export default combineReducers({
-  isMobileMenuVisible,
+  isVisible,
 });

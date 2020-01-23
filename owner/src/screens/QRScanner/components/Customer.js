@@ -12,7 +12,7 @@ const Customer = () => {
   if (isLoadingUser) {
     return <div className="row">
       <div className="col-12">
-        <div className="card mb-4">
+        <div className="card mb-4 bg-dark-gray">
           <div className="card-body p-4 text-center">
             <i className="fa fa-2x fa-spin fa-circle-notch"/>
           </div>
@@ -26,7 +26,7 @@ const Customer = () => {
 
     return <div className="row">
       <div className="col-12">
-        <div className="card mb-4">
+        <div className="card mb-4 bg-dark-gray">
           <div className="card-body p-4 text-center">
             <p>{i18n.t('qr_scanner.no_user_found')}</p>
             <i className="fa fa-2x fa-times"/>
@@ -38,7 +38,7 @@ const Customer = () => {
 
   return <div className="row">
     <div className="col-12">
-      <div className="card mb-3">
+      <div className="card mb-4 bg-dark-gray">
         <div className="card-body p-1">
           <div className="row">
             <div className="col-4 col-md-3">
@@ -55,7 +55,7 @@ const Customer = () => {
                   <i className="fa fa-times"/>&nbsp;{i18n.t('profile.disabled_badge')}
                 </div>}
 
-              <p className="text-muted m-0">ID: {match.user.displayId}</p>
+              <p className="text-secondary m-0">ID: {match.user.displayId}</p>
             </div>
           </div>
         </div>

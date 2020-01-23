@@ -21,6 +21,8 @@ const serverErrors = (prev = [], action) => {
 
 const raw = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       return action.flatten
@@ -33,6 +35,7 @@ const isValid = (prev = false, action) => {
   switch (action.type) {
     case Action.VALIDATE_WEBSITE_SUCCESS:
       return true
+    case Action.RESET:
     case Action.VALIDATE_WEBSITE_FAILURE:
     case Action.SAVE_WEBSITE_FAILURE:
       return false
@@ -43,6 +46,7 @@ const isValid = (prev = false, action) => {
 
 const isLoading = (prev = false, action) => {
   switch (action.type) {
+    case Action.RESET:
     case Action.FETCH_WEBSITE_FAILURE:
     case Action.FETCH_WEBSITE_SUCCESS:
     case Action.SAVE_WEBSITE_SUCCESS:
@@ -63,6 +67,7 @@ const initialValidator = {
 }
 const validator = (prev = initialValidator, action) => {
   switch (action.type) {
+    case Action.RESET:
     case Action.FETCH_WEBSITE_BEFORE:
     case Action.FETCH_WEBSITE_SUCCESS:
     case Action.VALIDATE_WEBSITE_SUCCESS:
@@ -76,6 +81,7 @@ const validator = (prev = initialValidator, action) => {
 
 const changes = (prev = {}, action) => {
   switch (action.type) {
+    case Action.RESET:
     case Action.FETCH_WEBSITE_BEFORE:
     case Action.FETCH_WEBSITE_SUCCESS:
       return {}

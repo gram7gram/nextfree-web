@@ -36,6 +36,7 @@ import Loading from "../hoc/Loading";
 import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
 import Login from "../screens/Login/components";
+import Sidebar from "../components/Sidebar";
 
 export function createRouter(store) {
 
@@ -61,9 +62,11 @@ export function createRouter(store) {
 
   return <>
 
+    <Sidebar/>
+
     <Navigation/>
 
-    <main id="main-content">
+    <main>
 
       <ErrorBoundary>
 

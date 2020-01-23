@@ -2,10 +2,10 @@ import React from 'react';
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
 import {connect, useDispatch} from "react-redux";
-import {LOGOUT, TOGGLE_MENU_MINIMIZE} from "../screens/Login/actions";
+import {LOGOUT, TOGGLE_MENU} from "../screens/Login/actions";
 import parameters from "../parameters";
 
-const Navigation = ({isAuthenticated, isMinimized}) => {
+const Navigation = ({isAuthenticated, isVisible}) => {
 
   const dispatch = useDispatch()
 
@@ -15,10 +15,10 @@ const Navigation = ({isAuthenticated, isMinimized}) => {
     })
   }
 
-  const toggleMinimize = () => {
+  const toggleMenu = () => {
     dispatch({
-      type: TOGGLE_MENU_MINIMIZE,
-      payload: !isMinimized
+      type: TOGGLE_MENU,
+      payload: !isVisible
     })
   }
 
@@ -30,14 +30,14 @@ const Navigation = ({isAuthenticated, isMinimized}) => {
 
         <div className="col-auto">
           <button className={"sidebar-control p-3 text-truncate"
-          + (isMinimized ? " text-center" : '')}
-                  onClick={toggleMinimize}>
+          + (isVisible ? " text-center" : '')}
+                  onClick={toggleMenu}>
             <i className="fa fa-bars"/>
           </button>
         </div>
 
         <div className="col text-left text-md-center">
-          <a href={parameters.wwwHost}>
+          <a href={parameters.host}>
             <img src={`${parameters.storageHost}/img/v2/logo-admin.svg`}
                  alt=""
                  className="img-fluid"/>
@@ -57,7 +57,7 @@ const Navigation = ({isAuthenticated, isMinimized}) => {
 
 const selectors = createStructuredSelector({
   isAuthenticated: store => store.App.isAuthenticated,
-  isMinimized: store => store.Nav.isMinimized,
+  isVisible: store => store.Nav.isVisible,
 })
 
 export default connect(selectors)(Navigation)

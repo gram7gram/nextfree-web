@@ -3,6 +3,8 @@ import * as Action from '../actions'
 
 const email = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['social.email'] !== undefined) {
@@ -21,6 +23,8 @@ const email = (prev = null, action) => {
 
 const website = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['social.website'] !== undefined) {
@@ -39,6 +43,8 @@ const website = (prev = null, action) => {
 
 const phone = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['social.phone'] !== undefined) {
@@ -57,6 +63,8 @@ const phone = (prev = null, action) => {
 
 const facebook = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['social.facebook'] !== undefined) {
@@ -75,6 +83,8 @@ const facebook = (prev = null, action) => {
 
 const instagram = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['social.instagram'] !== undefined) {

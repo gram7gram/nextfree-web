@@ -60,10 +60,10 @@ class Register extends React.Component {
     const {owner} = this.props.Register
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body px-0">
 
         <h4 className="card-title">{i18n.t('register.owner_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.owner_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('register.owner_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -110,10 +110,10 @@ class Register extends React.Component {
     const {company} = this.props.Register
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body px-0">
 
         <h4 className="card-title">{i18n.t('register.company_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.company_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('register.company_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -137,10 +137,10 @@ class Register extends React.Component {
     const {owner} = this.props.Register
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body px-0">
 
         <h4 className="card-title">{i18n.t('register.security_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.security_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('register.security_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -183,7 +183,7 @@ class Register extends React.Component {
       </div>
     }
 
-    return <React.Fragment>
+    return <>
 
       <div className="row mb-5 text-center text-md-left">
         <div className="col-12">
@@ -195,7 +195,7 @@ class Register extends React.Component {
       </div>
 
       <p className="mb-3">{i18n.t('register.already_have_account')}&nbsp;
-        <Link to={Pages.HOME} className="text-info">
+        <Link to={Pages.HOME} className="text-primary">
           {i18n.t('register.already_have_account_action')}
         </Link>
       </p>
@@ -239,7 +239,7 @@ class Register extends React.Component {
         </div>
         <div className="col-12 text-center">
 
-          <button className="btn btn-success btn-lg"
+          <button className="btn btn-primary btn-lg"
                   onClick={this.submit}
                   disabled={isLoading || !isValid}>
             <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
@@ -249,7 +249,7 @@ class Register extends React.Component {
         </div>
       </div>
 
-    </React.Fragment>
+    </>
   }
 
   render() {

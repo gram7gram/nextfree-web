@@ -1,21 +1,19 @@
-const env = process.env.NODE_ENV || 'production'
 
-const config = {
-  development: {},
-  production: {
-    host: 'https://owner.nextfree.com.ua',
-    wwwHost: 'https://nextfree.com.ua',
-    storageHost: 'https://storage.nextfree.com.ua',
-    apiHost: 'https://api.nextfree.com.ua',
-    gtm: {
-      enabled: true,
-      id: 'UA-154091628-2'
-    }
+export default {
+  host: process.env.REACT_APP_HOST,
+  storageHost: process.env.REACT_APP_STORAGE_HOST,
+  apiHost: process.env.REACT_APP_API_HOST,
+  customerHost: process.env.REACT_APP_CUSTOMER_HOST,
+  staffHost: process.env.REACT_APP_STAFF_HOST,
+  ownerHost: process.env.REACT_APP_OWNER_HOST,
+  wwwHost: process.env.REACT_APP_WWW_HOST,
+  email: 'nextfree.adm@gmail.com',
+  viber: 'viber://chat/?number=380986159269',
+  telegram: 'https://t.me/nextfree_ua',
+  messenger: 'https://t.me/test',
+  fbLink: 'https://www.facebook.com/nextfree.ua',
+  gtm: {
+    enabled: true,
+    id: 'UA-154091628-2'
   }
 }
-
-if (config[env] === undefined) {
-  throw new Error(`Missing parameters for ${env} environment`)
-}
-
-export default config[env]

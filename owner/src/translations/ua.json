@@ -1,7 +1,6 @@
 {
   "navigation": {
-    "logo": "NextFree",
-    "logo_footer": "Власник",
+    "menu": "Меню",
     "register": "Реєстрація",
     "login": "Логін",
     "logout": "Вихід",
@@ -127,6 +126,7 @@
     "save_success": "Запрошення вислане!"
   },
   "staff_edit": {
+    "new_title": "Новий співробітник",
     "position_title": "Посада",
     "upload_action": "Завантажити аватар",
     "position_subtitle": "Вкажіть місце роботи співробітника",
@@ -156,6 +156,8 @@
     "disabled_badge": "Неактивна"
   },
   "company_website": {
+    "sidebar_title": "Сторінка",
+    "date_published": "Дата публікації",
     "status_published": "Опубліковано",
     "status_in_review": "Перевірка",
     "status_draft": "Чернетка"

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
@@ -55,9 +54,9 @@ const Sidebar = ({isAuthenticated, isVisible, match}) => {
 
   if (isAuthenticated) {
     links.push({
-      to: Pages.COMPANIES,
+      to: Pages.MY_COMPANY,
       icon: "fa fa-cubes",
-      text: i18n.t('navigation.companies')
+      text: i18n.t('navigation.my_company')
     })
   }
 
@@ -71,25 +70,9 @@ const Sidebar = ({isAuthenticated, isVisible, match}) => {
 
   if (isAuthenticated) {
     links.push({
-      to: Pages.OWNERS,
-      icon: "fa fa-user-secret",
-      text: i18n.t('navigation.owners')
-    })
-  }
-
-  if (isAuthenticated) {
-    links.push({
       to: Pages.STAFF,
       icon: "fa fa-user-tie",
       text: i18n.t('navigation.staff')
-    })
-  }
-
-  if (isAuthenticated) {
-    links.push({
-      to: Pages.CUSTOMERS,
-      icon: "fa fa-child",
-      text: i18n.t('navigation.customers')
     })
   }
 
@@ -114,10 +97,6 @@ const Sidebar = ({isAuthenticated, isVisible, match}) => {
       )}
     </nav>
   </div>
-}
-
-Sidebar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
 }
 
 const selectors = createStructuredSelector({

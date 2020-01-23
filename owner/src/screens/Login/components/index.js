@@ -53,7 +53,7 @@ class Login extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div className="col-12 col-md-10 col-lg-6 mx-auto">
 
           <div className="row">
             <div className="col-12">
@@ -88,19 +88,31 @@ class Login extends React.Component {
                     onKeyDown={this.submitIfEnter}
                     value={password || ''}/>
                 </div>
-                <div className="form-group text-right">
+                <div className="form-group">
 
-                  <Link to={Pages.PASSWORD_RESET}
-                        className="btn mr-1 btn-outline-warning">
-                    <i className="fa fa-key"/>&nbsp;{i18n.t('login.reset_password')}
-                  </Link>
+                  <div className="row">
+                    <div className="col-12 col-md-6 text-center mx-auto">
 
-                  <button className="btn btn-success"
-                          onClick={this.submit}
-                          disabled={!isValid || isLoading}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>
-                    &nbsp;{i18n.t('login.action')}
-                  </button>
+                      <button className="btn btn-primary btn-block"
+                              onClick={this.submit}
+                              disabled={!isValid || isLoading}>
+                        <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>
+                        &nbsp;{i18n.t('login.action')}
+                      </button>
+
+                      <Link to={Pages.PASSWORD_RESET}
+                            className="btn btn-default btn-block">
+                        <i className="fa fa-key"/>&nbsp;{i18n.t('login.reset_password')}
+                      </Link>
+
+                      <Link to={Pages.REGISTER}
+                            className="btn btn-secondary btn-block">
+                        <i className="fa fa-key"/>&nbsp;{i18n.t('navigation.register')}
+                      </Link>
+
+                    </div>
+                  </div>
+
                 </div>
               </form>
 

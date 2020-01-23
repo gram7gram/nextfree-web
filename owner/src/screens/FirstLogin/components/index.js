@@ -32,7 +32,7 @@ const Ua = () => {
     <p className="mt-3">Вдалих Вам продажів!</p>
 
     <div className="text-center">
-      <Link className="btn btn-success btn-lg"
+      <Link className="btn btn-primary btn-lg"
             onClick={setViewed}
             to={Pages.HOME}>Зрозуміло!</Link>
     </div>

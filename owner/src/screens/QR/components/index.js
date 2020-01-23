@@ -22,7 +22,7 @@ const QR = (props) => {
           <QrCode data={data}/>
         </div>
 
-        <p className="text-muted">{i18n.t('qr.help')}</p>
+        <p className="text-secondary">{i18n.t('qr.help')}</p>
 
       </div>
     </div>

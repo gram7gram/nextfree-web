@@ -178,7 +178,7 @@ class CompanyEdit extends React.Component {
         <div className="card-body px-0">
 
           <h4 className="card-title">{i18n.t('company_edit.conditions_title')}</h4>
-          <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
+          <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('company_edit.conditions_subtitle')}</h6>
 
           <div className="row">
             {conditions.map(condition =>

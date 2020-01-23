@@ -61,7 +61,7 @@ class ProfileSecurity extends React.Component {
 
           <Errors errors={serverErrors}/>
 
-          <div className="card shadow-sm mb-3">
+          <div className="card mb-3">
             <div className="card-header">
               <div className="row">
                 <div className="col">

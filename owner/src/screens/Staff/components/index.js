@@ -41,7 +41,7 @@ class Staff extends React.Component {
     return <div className="container">
       <div className="row">
         <div className="col-12">
-          <div className="card shadow-sm my-3">
+          <div className="card my-3">
             <div className="card-header">
               <div className="row">
                 <div className="col">
@@ -52,7 +52,7 @@ class Staff extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="card-body">
+            <div className="card-body px-0">
               <div className="row">
                 <div className="col-12">
                   {this.renderContent()}

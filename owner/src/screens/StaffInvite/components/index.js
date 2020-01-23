@@ -5,8 +5,8 @@ import Save from '../actions/Save';
 import FetchStores from '../../Store/actions/Fetch';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
-import {RESET, MODEL_CHANGED} from "../actions";
+import {MODEL_CHANGED, RESET} from "../actions";
+import PageTitle from "../../../components/PageTitle";
 
 class StaffInvite extends React.Component {
 
@@ -64,10 +64,14 @@ class StaffInvite extends React.Component {
     const {model} = this.props.StaffInvite
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-header">
+        <h5 className="m-0">{i18n.t('staff_invite.position_title')}</h5>
+      </div>
+      <div className="card-body px-0">
 
-        <h4 className="card-title">{i18n.t('staff_invite.position_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_invite.position_subtitle')}</h6>
+        <p className="text-secondary">
+          <i className="fa fa-info-circle"/>&nbsp;{i18n.t('staff_invite.position_subtitle')}
+        </p>
 
         <div className="row">
 
@@ -124,41 +128,42 @@ class StaffInvite extends React.Component {
       serverErrors,
     } = this.props.StaffInvite
 
+    const buttons = [
+      {
+        text: i18n.t('staff_invite.save_action'),
+        icon: "fa-save",
+        mainClass: "btn-primary",
+        onClick: this.submit,
+        disabled: isLoading || !isValid,
+        isLoading
+      }
+    ]
+
     return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
+          <PageTitle
+            title={i18n.t('staff_invite.title')}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
 
-          <Errors errors={serverErrors}/>
+        <div className="col-12">
 
-          <div className="card mb-4">
-            <div className="card-body">
-              <div className="row">
-                <div className="col">
-                  <h4 className="card-title">{i18n.t('staff_invite.title')}</h4>
-                  <h6 className="card-subtitle mb-2 text-muted">{i18n.t('staff_invite.subtitle')}</h6>
-                </div>
-                <div className="col-12 col-md-auto text-right">
+          <div className="mb-4">
 
-                  <button className="btn btn-success btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('staff_invite.save_action')}
-                  </button>
+            <h6 className="text-secondary">
+              <i className="fa fa-info-circle"/>&nbsp;{i18n.t('staff_invite.subtitle')}
+            </h6>
 
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="m-0 required">{i18n.t('staff_invite.email')}</label>
-                <input type="text" placeholder={i18n.t('placeholder.text')}
-                       className="form-control"
-                       onChange={this.changeString('user.email')}
-                       value={model.user.email || ''}/>
-                {this.getError('user.email')}
-              </div>
-
+            <div className="form-group">
+              <label className="m-0 required">{i18n.t('staff_invite.email')}</label>
+              <input type="text" placeholder={i18n.t('placeholder.text')}
+                     className="form-control"
+                     onChange={this.changeString('user.email')}
+                     value={model.user.email || ''}/>
+              {this.getError('user.email')}
             </div>
           </div>
 

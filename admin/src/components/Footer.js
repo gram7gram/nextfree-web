@@ -12,8 +12,10 @@ const Footer = () => {
       <div className="row py-5">
 
         <div className="col-md-3 d-none d-md-flex">
-          <img src={`${parameters.storageHost}/img/v2/logo.svg`} alt="Logo"
-               className="img-fluid w-100 logo"/>
+          <a href={parameters.wwwHost}>
+            <img src={`${parameters.storageHost}/img/v2/logo.svg`} alt="Logo"
+                 className="img-fluid w-100 logo"/>
+          </a>
         </div>
 
         <div className="col-12 col-md-3 mb-4">

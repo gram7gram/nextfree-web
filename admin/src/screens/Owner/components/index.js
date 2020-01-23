@@ -41,7 +41,7 @@ class Owner extends React.Component {
     return <div className="container-fluid">
       <div className="row">
         <div className="col-12">
-          <div className="card shadow-sm my-3">
+          <div className="card my-3">
             <div className="card-header">
               <div className="row">
                 <div className="col">

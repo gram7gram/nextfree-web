@@ -9,13 +9,7 @@ import {ConnectedRouter} from 'connected-react-router'
 import {createRouter} from './router';
 
 import 'react-toastify/dist/ReactToastify.min.css';
-import './style/bootstrap.min.css';
 import './style/style.css';
-import './style/qr-scan.css';
-import './style/avatar.css';
-import './style/steps.css';
-import './style/id-input.css';
-import './style/theme.css';
 
 import * as Sentry from '@sentry/browser';
 import TagManager from "react-gtm-module";

@@ -50,7 +50,7 @@ class PasswordReset extends React.Component {
 
     return <div className="container py-5">
       <div className="row no-gutters">
-        <div className="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <div className="col-12 col-md-10 col-lg-6 mx-auto">
 
           <div className="row">
             <div className="col-12">
@@ -78,7 +78,7 @@ class PasswordReset extends React.Component {
                          value={email || ''}/>
                 </div>
                 <div className="form-group text-right">
-                  <button className="btn btn-success"
+                  <button className="btn btn-primary"
                           onClick={this.submit}
                           disabled={!isValid || isLoading}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>

@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {MODEL_CHANGED, FETCH_SUCCESS, RESET} from '../actions';
+import {FETCH_SUCCESS, MODEL_CHANGED, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
 import Remove from '../actions/Remove';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
+import PageTitle from "../../../components/PageTitle";
 
 class StoreEdit extends React.Component {
 
@@ -140,107 +140,107 @@ class StoreEdit extends React.Component {
         : i18n.t('store_edit.new_title')
     }
 
+    const buttons = []
+
+    if (model.id) {
+      if (model.isEnabled) {
+        buttons.push({
+          text: i18n.t('store_edit.deactivate_action'),
+          icon: "fa-ban",
+          mainClass: "btn-default",
+          onClick: this.deactivate,
+          disabled: isLoading || !isValid,
+          isLoading
+        })
+      } else {
+        buttons.push({
+          text: i18n.t('store_edit.activate_action'),
+          icon: "fa-check",
+          mainClass: "btn-primary",
+          onClick: this.activate,
+          disabled: isLoading || !isValid,
+          isLoading
+        })
+      }
+    }
+
+    buttons.push({
+      text: i18n.t('store_edit.save_action'),
+      icon: "fa-save",
+      mainClass: "btn-primary",
+      onClick: this.submit,
+      disabled: isLoading || !isValid,
+      isLoading
+    })
+
     return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
+          <PageTitle
+            title={title}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
 
-          <Errors errors={serverErrors}/>
+        <div className="col-12">
 
-          <div className="card mb-4">
-            <div className="card-header">
-              <div className="row">
-                <div className="col">
-                  <h3 className="m-0">{title}</h3>
+          <div className="mb-4">
+
+            {defaultCompany ? <div className="form-group">
+              <label className="m-0 required">{i18n.t('store_edit.company')}</label>
+              <select
+                value={defaultCompany._id}
+                disabled={true}
+                className="form-control">
+                <option value={defaultCompany._id}>{defaultCompany.name}</option>
+              </select>
+            </div> : null}
+
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('store_edit.city')}</label>
+                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                         className="form-control"
+                         onChange={this.changeString('city')}
+                         value={model.city || ''}/>
+                  {this.getError('city')}
                 </div>
-                <div className="col-12 col-md-auto text-right">
+              </div>
 
-                  {model.id && model.isEnabled
-                    ? <button className="btn btn-default btn-sm mx-1"
-                              onClick={this.deactivate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                      &nbsp;{i18n.t('store_edit.deactivate_action')}
-                    </button>
-                    : null}
-
-                  {model.id && !model.isEnabled
-                    ? <button className="btn btn-outline-success btn-sm mx-1"
-                              onClick={this.activate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                      &nbsp;{i18n.t('store_edit.activate_action')}
-                    </button>
-                    : null}
-
-                  <button className="btn btn-success btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('store_edit.save_action')}
-                  </button>
-
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('store_edit.address')}</label>
+                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                         className="form-control"
+                         onChange={this.changeString('address')}
+                         value={model.address || ''}/>
+                  {this.getError('address')}
                 </div>
+
               </div>
             </div>
-            <div className="card-body">
 
-              {defaultCompany ? <div className="form-group">
-                <label className="m-0 required">{i18n.t('store_edit.company')}</label>
-                <select
-                  value={defaultCompany._id}
-                  disabled={true}
-                  className="form-control">
-                  <option value={defaultCompany._id}>{defaultCompany.name}</option>
-                </select>
-              </div> : null}
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0">{i18n.t('store_edit.coordinates')}</label>
 
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('store_edit.city')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                  <div className="input-group">
+                    <input type="text" placeholder={i18n.t('store_edit.lat')}
                            className="form-control"
-                           onChange={this.changeString('city')}
-                           value={model.city || ''}/>
-                    {this.getError('city')}
-                  </div>
-                </div>
-
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('store_edit.address')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
+                           onChange={this.changeFloat('lat')}
+                           value={model.lat || ''}/>
+                    <input type="text" placeholder={i18n.t('store_edit.lng')}
                            className="form-control"
-                           onChange={this.changeString('address')}
-                           value={model.address || ''}/>
-                    {this.getError('address')}
+                           onChange={this.changeFloat('lng')}
+                           value={model.lng || ''}/>
                   </div>
+                  {this.getError('coordinates')}
 
                 </div>
               </div>
-
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('store_edit.coordinates')}</label>
-
-                    <div className="input-group">
-                      <input type="text" placeholder={i18n.t('store_edit.lat')}
-                             className="form-control"
-                             onChange={this.changeFloat('lat')}
-                             value={model.lat || ''}/>
-                      <input type="text" placeholder={i18n.t('store_edit.lng')}
-                             className="form-control"
-                             onChange={this.changeFloat('lng')}
-                             value={model.lng || ''}/>
-                    </div>
-                    {this.getError('coordinates')}
-
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 

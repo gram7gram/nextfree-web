@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import * as LoginActions from "../screens/Login/actions";
 
-const isMinimized = (prev = true, action) => {
+const isVisible = (prev = true, action) => {
   switch (action.type) {
-    case LoginActions.TOGGLE_MENU_MINIMIZE:
+    case LoginActions.TOGGLE_MENU:
       return !!action.payload
     case LoginActions.LOGIN_SUCCESS:
     case LoginActions.LOGIN_CHECK_SUCCESS:
@@ -15,5 +15,5 @@ const isMinimized = (prev = true, action) => {
 }
 
 export default combineReducers({
-  isMinimized,
+  isVisible,
 });
