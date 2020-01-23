@@ -1,14 +1,16 @@
 <footer class="w-100 bg-darker text-light">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row py-5">
 
-            <div class="col-6 col-md-3">
-                <img src="{{ parameters.storageHost }}/img/v2/logo.svg" alt="Logo"
-                     class="img-fluid w-100"
-                     style="max-height: 75px">
+            <div class="col-md-3 d-none d-md-flex">
+                <a href="/">
+                    <img src="{{ parameters.storageHost }}/img/v2/logo.svg" alt="Logo"
+                         class="img-fluid w-100"
+                         style="max-height: 75px">
+                </a>
             </div>
 
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3 mb-4">
                 <h5 class="mb-3 font-weight-bold">Ресурси</h5>
                 <a href="/privacy"
                    class="text-secondary py-2 d-block">Умови користування</a>
@@ -23,7 +25,7 @@
                    class="text-secondary py-2 d-block">Для співробітників</a>
 
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3 mb-4">
                 <h5 class="mb-3 font-weight-bold">Контакти</h5>
 
                 {% if parameters.telegram %}
@@ -51,12 +53,14 @@
                 {% endif %}
 
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3 mb-4">
                 <h5 class="mb-3 font-weight-bold">Соц. мережі</h5>
 
-                <a href="{{ parameters.fbLink }}"
-                   rel="nofollow"
-                   class="text-secondary py-2 d-block">Facebook</a>
+                {% if parameters.fbLink %}
+                    <a href="{{ parameters.fbLink }}"
+                       rel="nofollow"
+                       class="text-secondary py-2 d-block">Facebook</a>
+                {% endif %}
             </div>
         </div>
         <div class="row">
