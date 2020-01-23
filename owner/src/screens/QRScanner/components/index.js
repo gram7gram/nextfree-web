@@ -224,7 +224,7 @@ class QRScanner extends React.PureComponent {
       <div className="row no-gutters">
         <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
-          <div className="card">
+          <div className="card bg-dark">
             <div className="card-body px-2">
 
               <h5 className="text-center">
