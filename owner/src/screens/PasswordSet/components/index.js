@@ -57,8 +57,8 @@ class PasswordSet extends React.Component {
     if (!isTokenValid) {
       return <div className="row">
         <div className="col-12">
-          <div className="alert alert-danger text-center">
-            <h3>{i18n.t('password_set.not_found_title')}</h3>
+          <div className="text-center">
+            <h3 className="text-danger">{i18n.t('password_set.not_found_title')}</h3>
             <p>{i18n.t('password_set.not_found_subtitle')}</p>
 
             <Link to={Pages.HOME} className="btn btn-default">{i18n.t('password_set.not_found_action')}</Link>

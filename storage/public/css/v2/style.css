@@ -402,6 +402,12 @@ footer .logo {
     height: 100vh;
     overflow: auto;
     position: fixed;
+    left: -250px;
+    animation: slide .2s forwards;
+}
+
+@keyframes slide {
+    100% { left: 0; }
 }
 
 .btn-nav,

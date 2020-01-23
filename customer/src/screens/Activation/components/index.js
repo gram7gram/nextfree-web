@@ -25,18 +25,18 @@ class Activation extends React.Component {
     }
 
     if (isSuccess) {
-      return <div className="alert alert-success text-center">
+      return <div className="text-center">
         <h3>{i18n.t('activation.success_title')}</h3>
         <p>{i18n.t('activation.success_subtitle')}</p>
 
-        <Link to={Pages.HOME} className="btn btn-light">{i18n.t('activation.success_action')}</Link>
+        <Link to={Pages.HOME} className="btn btn-secondary">{i18n.t('activation.success_action')}</Link>
       </div>
     } else {
-      return <div className="alert alert-danger text-center">
-        <h3>{i18n.t('activation.not_found_title')}</h3>
+      return <div className="text-center">
+        <h3 className="text-danger">{i18n.t('activation.not_found_title')}</h3>
         <p>{i18n.t('activation.not_found_subtitle')}</p>
 
-        <Link to={Pages.HOME} className="btn btn-light">{i18n.t('activation.not_found_action')}</Link>
+        <Link to={Pages.HOME} className="btn btn-secondary">{i18n.t('activation.not_found_action')}</Link>
       </div>
     }
   }
@@ -46,16 +46,6 @@ class Activation extends React.Component {
     return <div className="container py-5">
       <div className="row no-gutters">
         <div className="col-12 col-md-10 col-lg-6 mx-auto">
-
-          <div className="row">
-            <div className="col-12">
-
-              <div className="mb-4">
-                <h2 className="h3">{i18n.t('activation.title')}</h2>
-              </div>
-
-            </div>
-          </div>
 
           {this.renderContent()}
 

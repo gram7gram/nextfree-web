@@ -173,11 +173,11 @@ class Register extends React.Component {
     if (isRegisterSuccess) {
       return <div className="row">
         <div className="col-12 col-md-10 col-lg-6 mx-auto">
-          <div className="alert alert-success text-center">
+          <div className="text-center">
             <h3>{i18n.t('register.success_title')}</h3>
             <p>{i18n.t('register.success_subtitle')}</p>
 
-            <Link to={Pages.HOME} className="btn btn-light">{i18n.t('register.success_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-secondary">{i18n.t('register.success_action')}</Link>
           </div>
         </div>
       </div>

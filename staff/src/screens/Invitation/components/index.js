@@ -180,11 +180,11 @@ class Invitation extends React.Component {
 
       return <div className="row">
         <div className="col-12 col-md-10 col-lg-6 mx-auto">
-          <div className="alert alert-danger text-center">
-            <h3>{i18n.t('invitation.not_found_title')}</h3>
+          <div className="text-center">
+            <h3 className="text-danger">{i18n.t('invitation.not_found_title')}</h3>
             <p>{i18n.t('invitation.not_found_subtitle')}</p>
 
-            <Link to={Pages.HOME} className="btn btn-decondary">{i18n.t('invitation.not_found_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-secondary">{i18n.t('invitation.not_found_action')}</Link>
           </div>
         </div>
       </div>
@@ -193,11 +193,11 @@ class Invitation extends React.Component {
     if (isInvitationSuccess) {
       return <div className="row">
         <div className="col-12 col-md-10 col-lg-6 mx-auto">
-          <div className="alert alert-success text-center">
+          <div className="text-center">
             <h3>{i18n.t('invitation.success_title')}</h3>
             <p>{i18n.t('invitation.success_subtitle')}</p>
 
-            <Link to={Pages.HOME} className="btn btn-light">{i18n.t('invitation.success_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-secondary">{i18n.t('invitation.success_action')}</Link>
           </div>
         </div>
       </div>
