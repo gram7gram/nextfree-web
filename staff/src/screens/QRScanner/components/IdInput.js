@@ -107,7 +107,7 @@ const IdInput = ({onSubmit}) => {
 
   return <div className="row justify-content-center id-inputs no-gutters">
 
-    <div className="col-2">
+    <div className="col col-md-2">
       <input type="number"
              ref={cell0}
              className="form-control text-center p-1 id-cell"
@@ -115,7 +115,7 @@ const IdInput = ({onSubmit}) => {
              onKeyDown={submitIfEnter}
              value={inputValue0}/>
     </div>
-    <div className="col-2">
+    <div className="col col-md-2">
       <input type="number"
              ref={cell1}
              className="form-control text-center p-1 id-cell"
@@ -123,7 +123,7 @@ const IdInput = ({onSubmit}) => {
              onKeyDown={submitIfEnter}
              value={inputValue1}/>
     </div>
-    <div className="col-2">
+    <div className="col col-md-2">
       <input type="number"
              ref={cell2}
              className="form-control text-center p-1 id-cell"
@@ -131,7 +131,7 @@ const IdInput = ({onSubmit}) => {
              onKeyDown={submitIfEnter}
              value={inputValue2}/>
     </div>
-    <div className="col-2">
+    <div className="col col-md-2">
       <input type="number"
              ref={cell3}
              className="form-control text-center p-1 id-cell"
@@ -139,7 +139,7 @@ const IdInput = ({onSubmit}) => {
              onKeyDown={submitIfEnter}
              value={inputValue3}/>
     </div>
-    <div className="col-2">
+    <div className="col col-md-2">
       <input type="number"
              ref={cell4}
              className="form-control text-center p-1 id-cell"

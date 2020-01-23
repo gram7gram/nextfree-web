@@ -205,7 +205,7 @@ class Register extends React.Component {
         </div>
         <div className="col-12 text-center">
 
-          <button className="btn btn-success btn-lg"
+          <button className="btn btn-primary btn-lg"
                   onClick={this.submit}
                   disabled={isLoading || !isValid}>
             <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>

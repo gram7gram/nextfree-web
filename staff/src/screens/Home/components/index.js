@@ -22,9 +22,9 @@ const Home = (props) => {
         <img src={img} alt="" className="img-fluid shadow mb-4"/>
 
         {iphone
-          ? <Link className="btn btn-success btn-lg"
+          ? <Link className="btn btn-primary btn-lg"
                   to={Pages.QR_SCAN_BY_ID}>{i18n.t('home.id_action')}</Link>
-          : <Link className="btn btn-success btn-lg"
+          : <Link className="btn btn-primary btn-lg"
                   to={Pages.QR_SCAN}>{i18n.t('home.action')}</Link>}
       </div>
     </div>

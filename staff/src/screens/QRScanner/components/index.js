@@ -195,11 +195,11 @@ class QRScanner extends React.PureComponent {
       <Customer/>
 
       <div className="text-center text-md-right">
-        <button className="btn btn-sm btn-outline-warning mr-1"
+        <button className="btn btn-sm btn-default mr-1"
                 onClick={this.setDefaults}>
           <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
         </button>
-        <button className={"btn btn-sm " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
+        <button className={"btn btn-sm " + (!isValid || isLoading ? "btn-primary" : "btn-primary")}
                 onClick={this.purchase}
                 disabled={!isValid || isLoading}>
           <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>

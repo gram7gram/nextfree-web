@@ -90,12 +90,25 @@ class QRScannerById extends React.PureComponent {
 
       <Customer/>
 
-      <div className="text-center text-md-right">
-        <button className="btn btn-sm btn-outline-warning mr-1"
+      <div className="text-right d-none d-md-block">
+        <button className="btn btn-sm btn-default mr-1"
                 onClick={this.setDefaults}>
           <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
         </button>
-        <button className={"btn btn-sm " + (!isValid || isLoading ? "btn-outline-success" : "btn-success")}
+        <button className="btn btn-sm btn-primary"
+                onClick={this.purchase}
+                disabled={!isValid || isLoading}>
+          <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
+          &nbsp;{i18n.t('qr_scanner.purchase_action')}
+        </button>
+      </div>
+
+      <div className="d-block d-md-none">
+        <button className="btn btn-block mb-3 btn-default"
+                onClick={this.setDefaults}>
+          <i className="fa fa-times"/>&nbsp;{i18n.t('qr_scanner.discard')}
+        </button>
+        <button className="btn btn-block mb-3 btn-primary"
                 onClick={this.purchase}
                 disabled={!isValid || isLoading}>
           <i className={"fa " + (isLoading ? "fa-spin fa-circle-notch" : "fa-check")}/>
@@ -113,12 +126,12 @@ class QRScannerById extends React.PureComponent {
       <div className="row">
         <div className="col-8 mx-auto">
 
-          <div className="row text-center steps my-4">
+          <div className="row text-center qr-steps my-4">
             <div className="col-6">
               <div className="step">
                 <h4 className="circle mx-auto p-2">
                   {model.userId && model.match && model.match.isEnabled
-                    ? <i className="fa fa-check text-success"/>
+                    ? <i className="fa fa-check text-primary"/>
                     : '1'}
                 </h4>
                 <h5>{i18n.t('qr_scanner.step2')}</h5>
@@ -128,7 +141,7 @@ class QRScannerById extends React.PureComponent {
               <div className="step">
                 <h4 className="circle mx-auto p-2">
                   {purchase && purchase._id
-                    ? <i className="fa fa-check text-success"/>
+                    ? <i className="fa fa-check text-primary"/>
                     : '2'}
                 </h4>
                 <h5>{i18n.t('qr_scanner.step3')}</h5>

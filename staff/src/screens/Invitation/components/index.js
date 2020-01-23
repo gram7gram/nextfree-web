@@ -184,7 +184,7 @@ class Invitation extends React.Component {
             <h3>{i18n.t('invitation.not_found_title')}</h3>
             <p>{i18n.t('invitation.not_found_subtitle')}</p>
 
-            <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('invitation.not_found_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-decondary">{i18n.t('invitation.not_found_action')}</Link>
           </div>
         </div>
       </div>
@@ -243,7 +243,7 @@ class Invitation extends React.Component {
         </div>
         <div className="col-12 text-center">
 
-          <button className="btn btn-success btn-lg"
+          <button className="btn btn-primary btn-lg"
                   onClick={this.submit}
                   disabled={isLoading || !isValid}>
             <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>

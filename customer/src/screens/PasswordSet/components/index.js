@@ -61,7 +61,7 @@ class PasswordSet extends React.Component {
             <h3>{i18n.t('password_set.not_found_title')}</h3>
             <p>{i18n.t('password_set.not_found_subtitle')}</p>
 
-            <Link to={Pages.HOME} className="btn btn-warning">{i18n.t('password_set.not_found_action')}</Link>
+            <Link to={Pages.HOME} className="btn btn-decondary">{i18n.t('password_set.not_found_action')}</Link>
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@ class PasswordSet extends React.Component {
           </div>
 
           <div className="form-group text-right">
-            <button className="btn btn-success"
+            <button className="btn btn-primary"
                     onClick={this.submit}
                     disabled={!isValid || isLoading}>
               <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>

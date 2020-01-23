@@ -91,11 +91,11 @@ class Login extends React.Component {
                 <div className="form-group text-right">
 
                   <Link to={Pages.PASSWORD_RESET}
-                        className="btn mr-1 btn-outline-warning">
+                        className="btn mr-1 btn-default">
                     <i className="fa fa-key"/>&nbsp;{i18n.t('login.reset_password')}
                   </Link>
 
-                  <button className="btn btn-success"
+                  <button className="btn btn-primary"
                           onClick={this.submit}
                           disabled={!isValid || isLoading}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>

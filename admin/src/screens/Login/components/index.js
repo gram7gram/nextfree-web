@@ -85,14 +85,20 @@ class Login extends React.Component {
                     onKeyDown={this.submitIfEnter}
                     value={password || ''}/>
                 </div>
-                <div className="form-group text-right">
+                <div className="form-group">
 
-                  <button className="btn btn-primary"
-                          onClick={this.submit}
-                          disabled={!isValid || isLoading}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>
-                    &nbsp;{i18n.t('login.action')}
-                  </button>
+                  <div className="row">
+                    <div className="col-12 col-md-6 text-center mx-auto">
+
+                      <button className="btn btn-primary btn-block"
+                              onClick={this.submit}
+                              disabled={!isValid || isLoading}>
+                        <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-lock"}/>
+                        &nbsp;{i18n.t('login.action')}
+                      </button>
+
+                    </div>
+                  </div>
                 </div>
               </form>
 
