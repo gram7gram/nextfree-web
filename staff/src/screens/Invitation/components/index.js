@@ -75,7 +75,7 @@ class Invitation extends React.Component {
       <div className="card-body">
 
         <h4 className="card-title">{i18n.t('invitation.staff_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('invitation.staff_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('invitation.staff_subtitle')}</h6>
 
         <h4>{model.user.email}</h4>
 
@@ -137,7 +137,7 @@ class Invitation extends React.Component {
       <div className="card-body">
 
         <h4 className="card-title">{i18n.t('invitation.security_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('invitation.security_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('invitation.security_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -206,7 +206,7 @@ class Invitation extends React.Component {
     return <React.Fragment>
 
       <p className="mb-3">{i18n.t('invitation.already_have_account')}&nbsp;
-        <Link to={Pages.HOME} className="text-info">
+        <Link to={Pages.HOME} className="text-primary">
           {i18n.t('invitation.already_have_account_action')}
         </Link>
       </p>

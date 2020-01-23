@@ -50,10 +50,10 @@ class Register extends React.Component {
     const {customer} = this.props.Register
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body px-0">
 
         <h4 className="card-title">{i18n.t('register.customer_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.customer_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('register.customer_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -100,10 +100,10 @@ class Register extends React.Component {
     const {customer} = this.props.Register
 
     return <div className="card mb-4">
-      <div className="card-body">
+      <div className="card-body px-0">
 
         <h4 className="card-title">{i18n.t('register.security_title')}</h4>
-        <h6 className="card-subtitle mb-2 text-muted">{i18n.t('register.security_subtitle')}</h6>
+        <h6 className="card-subtitle mb-2 text-secondary">{i18n.t('register.security_subtitle')}</h6>
 
         <form noValidate autoComplete="off">
           <div className="form-group">
@@ -164,7 +164,7 @@ class Register extends React.Component {
       </div>
 
       <p className="mb-3">{i18n.t('register.already_have_account')}&nbsp;
-        <Link to={Pages.HOME} className="text-info">
+        <Link to={Pages.HOME} className="text-primary">
           {i18n.t('register.already_have_account_action')}
         </Link>
       </p>

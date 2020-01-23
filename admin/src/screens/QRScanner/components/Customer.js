@@ -55,7 +55,7 @@ const Customer = () => {
                   <i className="fa fa-times"/>&nbsp;{i18n.t('profile.disabled_badge')}
                 </div>}
 
-              <p className="text-muted m-0">ID: {match.user.displayId}</p>
+              <p className="text-secondary m-0">ID: {match.user.displayId}</p>
             </div>
           </div>
         </div>

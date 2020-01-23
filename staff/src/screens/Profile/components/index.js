@@ -168,10 +168,10 @@ class Profile extends React.Component {
                     </label>
                   </div>
 
-                  <div className="text-muted">
+                  <div className="text-secondary">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
                   </div>
-                  <div className="text-muted">
+                  <div className="text-secondary">
                     <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
                   </div>
                 </div>

@@ -254,7 +254,7 @@ class QRScanner extends React.PureComponent {
               : null}
 
             {this.state.hasCameraPermission === null
-              ? <div className="text-muted mb-2">
+              ? <div className="text-secondary mb-2">
                 <i className="fa fa-spin fa-circle-notch"/>&nbsp;{i18n.t('qr_scanner.checking_camera_permission')}
               </div>
               : null}

@@ -19,6 +19,7 @@ import Activation from '../screens/Activation/components';
 import Login from '../screens/Login/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
+import Sidebar from "../components/Sidebar";
 
 export function createRouter(store) {
 
@@ -42,9 +43,11 @@ export function createRouter(store) {
 
   return <>
 
+    <Sidebar/>
+
     <Navigation/>
 
-    <main id="main-content">
+    <main>
 
       <ErrorBoundary>
 

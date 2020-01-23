@@ -225,7 +225,7 @@ class CustomerEdit extends React.Component {
       </div>
       <div className="card-body px-0">
 
-        <p className="text-muted">
+        <p className="text-secondary">
           <i className="fa fa-info-circle"/>&nbsp;{i18n.t('customer_edit.security_subtitle')}
         </p>
 
