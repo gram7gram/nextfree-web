@@ -3,6 +3,8 @@ import * as Action from '../actions'
 
 const id = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['_id'] !== undefined) {
@@ -36,6 +38,8 @@ const logo = (prev = null, action) => {
 
 const ownerId = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['ownerId'] !== undefined) {
@@ -54,6 +58,8 @@ const ownerId = (prev = null, action) => {
 
 const name = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['name'] !== undefined) {
@@ -72,6 +78,8 @@ const name = (prev = null, action) => {
 
 const bonusCondition = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['bonusCondition'] !== undefined) {
@@ -90,6 +98,8 @@ const bonusCondition = (prev = null, action) => {
 
 const isEnabled = (prev = false, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return false
     case Action.SAVE_SUCCESS:
     case Action.FETCH_SUCCESS:
       if (action.flatten['isEnabled'] !== undefined) {

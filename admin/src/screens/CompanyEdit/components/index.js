@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {MODEL_CHANGED, RESET, FETCH_SUCCESS} from '../actions';
+import {FETCH_SUCCESS, MODEL_CHANGED, RESET} from '../actions';
 import Fetch from '../actions/Fetch';
 import FetchConditions from '../../App/actions/FetchConditions';
 import FetchOwners from '../../Owner/actions/Fetch';
@@ -9,10 +9,10 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import BonusCondition from "../../../components/BonusCondition";
-import Errors from "../../../components/Errors";
 import {LogotypeBody} from "../../../components/Logotype";
 import Upload from "../actions/Upload";
 import Sidebar from "./Sidebar";
+import PageTitle from "../../../components/PageTitle";
 
 class CompanyEdit extends React.Component {
 
@@ -102,9 +102,102 @@ class CompanyEdit extends React.Component {
     return <small className="feedback invalid-feedback d-block">{errors[key]}</small>
   }
 
-  render() {
+  renderContent = () => {
 
     const {owners, conditions} = this.props
+
+    const {
+      model,
+      isLoading,
+    } = this.props.CompanyEdit
+
+    return <>
+      <div className="mb-4">
+        <div className="form-group">
+          <label className="m-0 required">{i18n.t('company_edit.name')}</label>
+          <input type="text" placeholder={i18n.t('placeholder.text')}
+                 className="form-control"
+                 onChange={this.changeString('name')}
+                 value={model.name || ''}/>
+          {this.getError('name')}
+        </div>
+
+
+        <div className="form-group">
+          <label className="m-0 required">{i18n.t('company_edit.owner')}</label>
+          <select
+            className="form-control"
+            onChange={this.changeString('ownerId')}
+            value={model.ownerId || ''}>
+            <option value="">{i18n.t('placeholder.select')}</option>
+            {owners.map(item =>
+              <option key={item._id} value={item._id}>
+                {item.user.lastName} {item.user.firstName} ({item.user.email})
+              </option>
+            )}
+          </select>
+          {this.getError('ownerId')}
+        </div>
+
+      </div>
+
+      <div className="row">
+        <div className="col-12 col-md-6">
+
+          <div className="card mb-4 bg-dark-gray">
+            <div className="card-body">
+              <LogotypeBody src={model.logo}/>
+            </div>
+            <div className="card-footer p-1">
+              <div className="form-group text-center">
+                <label className="btn btn-secondary btn-sm m-0">
+                  <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
+                  <input type="file" className="d-none"
+                         accept="image/*" max={1} min={1}
+                         onChange={this.setLogotype}
+                         disabled={isLoading}/>
+                </label>
+              </div>
+
+              <div className="text-secondary">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.avatar_info')}
+              </div>
+              <div className="text-secondary">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
+              </div>
+              <div className="text-secondary">
+                <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div className="card mb-4">
+        <div className="card-body px-0">
+
+          <h4 className="card-title">{i18n.t('company_edit.conditions_title')}</h4>
+          <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
+
+          <div className="row">
+            {conditions.map(condition =>
+              <div key={condition.code} className="col-12 col-md-6">
+                <BonusCondition
+                  onClick={this.setCondition(condition.code)}
+                  title={condition.title}
+                  content={condition.description}
+                  selected={model.bonusCondition === condition.code}/>
+              </div>)}
+          </div>
+        </div>
+      </div>
+    </>
+  }
+
+  render() {
+
+    const {id} = this.props.match.params
 
     const {
       model,
@@ -120,142 +213,67 @@ class CompanyEdit extends React.Component {
         : i18n.t('company_edit.new_title')
     }
 
-    return <div className="container-fluid my-3">
+    const buttons = []
+
+    if (model.id && model.isEnabled) {
+      buttons.push({
+        mainClass: "btn-primary",
+        disabled: isLoading || !isValid,
+        onClick: this.activate,
+        icon: "fa-check",
+        text: i18n.t('company_edit.activate_action'),
+        isLoading
+      })
+
+    }
+
+    if (model.id && !model.isEnabled) {
+      buttons.push({
+        mainClass: "btn-default",
+        disabled: isLoading || !isValid,
+        onClick: this.deactivate,
+        icon: "fa-ban",
+        text: i18n.t('company_edit.deactivate_action'),
+        isLoading
+      })
+    }
+
+    buttons.push({
+      mainClass: "btn-primary",
+      disabled: isLoading || !isValid,
+      onClick: this.submit,
+      icon: "fa-save",
+      text: i18n.t('company_edit.save_action'),
+      isLoading
+    })
+
+    return <div className="container my-3">
       <div className="row">
 
-        <div className="col-12 col-md-4 col-lg-3">
-          <Sidebar/>
+        <div className="col-12">
+          <PageTitle
+            title={title}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
         </div>
 
-        <div className="col-12 col-md-8 col-lg-9">
-
-          <Errors errors={serverErrors}/>
-
-          <div className="row">
-
-            <div className="col-12">
-              <div className="card mb-4">
-                <div className="card-header text-right">
-
-                  {model.id && model.isEnabled
-                    ? <button className="btn btn-default btn-sm mx-1"
-                              onClick={this.deactivate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                      &nbsp;{i18n.t('company_edit.deactivate_action')}
-                    </button>
-                    : null}
-
-                  {model.id && !model.isEnabled
-                    ? <button className="btn btn-primary btn-sm mx-1"
-                              onClick={this.activate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                      &nbsp;{i18n.t('company_edit.activate_action')}
-                    </button>
-                    : null}
-
-                  <button className="btn btn-primary btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('company_edit.save_action')}
-                  </button>
-
-                </div>
-                <div className="card-body px-0">
-
-                  <div className="row">
-                    <div className="col-12">
-
-                      <div className="form-group">
-                        <label className="m-0 required">{i18n.t('company_edit.name')}</label>
-                        <input type="text" placeholder={i18n.t('placeholder.text')}
-                               className="form-control"
-                               onChange={this.changeString('name')}
-                               value={model.name || ''}/>
-                        {this.getError('name')}
-                      </div>
-
-                    </div>
-
-                    <div className="col-12">
-
-                      <div className="form-group">
-                        <label className="m-0 required">{i18n.t('company_edit.owner')}</label>
-                        <select
-                          className="form-control"
-                          onChange={this.changeString('ownerId')}
-                          value={model.ownerId || ''}>
-                          <option value="">{i18n.t('placeholder.select')}</option>
-                          {owners.map(item =>
-                            <option key={item._id} value={item._id}>
-                              {item.user.lastName} {item.user.firstName} ({item.user.email})
-                            </option>
-                          )}
-                        </select>
-                        {this.getError('ownerId')}
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+        {id
+          ? <>
+            <div className="col-12 col-md-4 col-lg-3">
+              <Sidebar/>
             </div>
 
-            <div className="col-12 col-md-6">
-              <div className="card mb-3">
-                <div className="card-body bg-dark-gray">
-                  <LogotypeBody src={model.logo}/>
-                </div>
-                <div className="card-footer p-1">
-                  <div className="form-group text-center">
-                    <label className="btn btn-secondary btn-sm m-0">
-                      <i className="fa fa-upload"/>&nbsp;{i18n.t('company_edit.upload_action')}
-                      <input type="file" className="d-none"
-                             accept="image/*" max={1} min={1}
-                             onChange={this.setLogotype}
-                             disabled={isLoading}/>
-                    </label>
-                  </div>
+            <div className="col-12 col-md-8 col-lg-9">
 
-                  <div className="text-muted">
-                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.avatar_info')}
-                  </div>
-                  <div className="text-muted">
-                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_size')}
-                  </div>
-                  <div className="text-muted">
-                    <i className="fa fa-info-circle"/>&nbsp;{i18n.t('validation.avatar_rule_aspect')}
-                  </div>
-                </div>
-              </div>
+              {this.renderContent()}
+
             </div>
+          </>
+          : <div className="col-12">
 
-            <div className="col-12">
-              <div className="card mb-4">
-                <div className="card-body px-0">
+            {this.renderContent()}
 
-                  <h4 className="card-title">{i18n.t('company_edit.conditions_title')}</h4>
-                  <h6 className="card-subtitle mb-2 text-muted">{i18n.t('company_edit.conditions_subtitle')}</h6>
-
-                  <div className="row">
-                    {conditions.map(condition =>
-                      <div key={condition.code} className="col-12 col-md-6">
-                        <BonusCondition
-                          onClick={this.setCondition(condition.code)}
-                          title={condition.title}
-                          content={condition.description}
-                          selected={model.bonusCondition === condition.code}/>
-                      </div>)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+          </div>}
       </div>
     </div>
   }

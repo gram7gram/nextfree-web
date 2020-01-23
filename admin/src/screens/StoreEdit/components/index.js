@@ -7,7 +7,7 @@ import FetchCompanies from '../../Company/actions/Fetch';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
+import PageTitle from "../../../components/PageTitle";
 
 class StoreEdit extends React.Component {
 
@@ -102,113 +102,115 @@ class StoreEdit extends React.Component {
         : i18n.t('store_edit.new_title')
     }
 
+    const buttons = []
+
+    if (model.id && model.isEnabled) {
+      buttons.push({
+        mainClass: "btn-primary",
+        disabled: isLoading || !isValid,
+        onClick: this.activate,
+        icon: "fa-check",
+        text: i18n.t('store_edit.activate_action'),
+        isLoading
+      })
+
+    }
+
+    if (model.id && !model.isEnabled) {
+      buttons.push({
+        mainClass: "btn-default",
+        disabled: isLoading || !isValid,
+        onClick: this.deactivate,
+        icon: "fa-ban",
+        text: i18n.t('store_edit.deactivate_action'),
+        isLoading
+      })
+    }
+
+    buttons.push({
+      mainClass: "btn-primary",
+      disabled: isLoading || !isValid,
+      onClick: this.submit,
+      icon: "fa-save",
+      text: i18n.t('store_edit.save_action'),
+      isLoading
+    })
+
     return <div className="container my-3">
       <div className="row">
 
         <div className="col-12">
-
-          <Errors errors={serverErrors}/>
-
-          <div className="card mb-4">
-            <div className="card-header">
-              <div className="row">
-                <div className="col">
-                  <h3 className="m-0">{title}</h3>
-                </div>
-                <div className="col-12 col-md-auto text-right">
-
-                  {model.id && model.isEnabled
-                    ? <button className="btn btn-default btn-sm mx-1"
-                              onClick={this.deactivate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-ban"}/>
-                      &nbsp;{i18n.t('store_edit.deactivate_action')}
-                    </button>
-                    : null}
-
-                  {model.id && !model.isEnabled
-                    ? <button className="btn btn-primary btn-sm mx-1"
-                              onClick={this.activate}
-                              disabled={isLoading || !isValid}>
-                      <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                      &nbsp;{i18n.t('store_edit.activate_action')}
-                    </button>
-                    : null}
-
-                  <button className="btn btn-primary btn-sm mx-1"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-save"}/>
-                    &nbsp;{i18n.t('store_edit.save_action')}
-                  </button>
-
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
-
-              <div className="form-group">
-                <label className="m-0 required">{i18n.t('store_edit.company')}</label>
-                <select
-                  value={model.companyId || ''}
-                  onChange={this.changeString('companyId')}
-                  className="form-control">
-                  <option value="">{i18n.t('placeholder.select')}</option>
-                  {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
-                </select>
-                {this.getError('companyId')}
-              </div>
-
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('store_edit.city')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changeString('city')}
-                           value={model.city || ''}/>
-                    {this.getError('city')}
-                  </div>
-                </div>
-
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0 required">{i18n.t('store_edit.address')}</label>
-                    <input type="text" placeholder={i18n.t('placeholder.text')}
-                           className="form-control"
-                           onChange={this.changeString('address')}
-                           value={model.address || ''}/>
-                    {this.getError('address')}
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('store_edit.coordinates')}</label>
-
-                    <div className="input-group">
-                      <input type="text" placeholder={i18n.t('store_edit.lat')}
-                             className="form-control"
-                             onChange={this.changeFloat('lat')}
-                             value={model.lat || ''}/>
-                      <input type="text" placeholder={i18n.t('store_edit.lng')}
-                             className="form-control"
-                             onChange={this.changeFloat('lng')}
-                             value={model.lng || ''}/>
-                    </div>
-                    {this.getError('coordinates')}
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
+          <PageTitle
+            title={title}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
         </div>
+
+        <div className="col-12">
+
+          <div className="mb-4">
+
+            <div className="form-group">
+              <label className="m-0 required">{i18n.t('store_edit.company')}</label>
+              <select
+                value={model.companyId || ''}
+                onChange={this.changeString('companyId')}
+                className="form-control">
+                <option value="">{i18n.t('placeholder.select')}</option>
+                {companies.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+              </select>
+              {this.getError('companyId')}
+            </div>
+
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('store_edit.city')}</label>
+                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                         className="form-control"
+                         onChange={this.changeString('city')}
+                         value={model.city || ''}/>
+                  {this.getError('city')}
+                </div>
+              </div>
+
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('store_edit.address')}</label>
+                  <input type="text" placeholder={i18n.t('placeholder.text')}
+                         className="form-control"
+                         onChange={this.changeString('address')}
+                         value={model.address || ''}/>
+                  {this.getError('address')}
+                </div>
+
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <div className="form-group">
+                  <label className="m-0">{i18n.t('store_edit.coordinates')}</label>
+
+                  <div className="input-group">
+                    <input type="text" placeholder={i18n.t('store_edit.lat')}
+                           className="form-control"
+                           onChange={this.changeFloat('lat')}
+                           value={model.lat || ''}/>
+                    <input type="text" placeholder={i18n.t('store_edit.lng')}
+                           className="form-control"
+                           onChange={this.changeFloat('lng')}
+                           value={model.lng || ''}/>
+                  </div>
+                  {this.getError('coordinates')}
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   }

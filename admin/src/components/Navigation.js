@@ -38,7 +38,9 @@ const Navigation = ({isAuthenticated, isMinimized}) => {
 
         <div className="col text-left text-md-center">
           <a href={parameters.wwwHost}>
-            <img src={`${parameters.storageHost}/img/v2/logo-admin.svg`} alt=""/>
+            <img src={`${parameters.storageHost}/img/v2/logo-admin.svg`}
+                 alt=""
+                 className="img-fluid"/>
           </a>
         </div>
 

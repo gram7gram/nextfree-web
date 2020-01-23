@@ -1,18 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import moment from 'moment';
 import Editor from 'react-quill';
-import {WEBSITE_CHANGED, FETCH_WEBSITE_SUCCESS} from '../actions';
+import {FETCH_WEBSITE_SUCCESS, WEBSITE_CHANGED, RESET} from '../actions';
 import FetchWebsite from '../actions/Fetch';
 import SaveWebsite from '../actions/Save';
 import i18n from '../../../i18n';
-import parameters from '../../../parameters';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
 import Loading from "../../../components/Loading";
 import Sidebar from "../../CompanyEdit/components/Sidebar";
-import Status from "./Status";
+import PageTitle from "../../../components/PageTitle";
 
 class CompanyWebsite extends React.Component {
 
@@ -29,6 +26,12 @@ class CompanyWebsite extends React.Component {
         flatten: {},
       })
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: RESET,
+    })
   }
 
   draft = () => {
@@ -81,7 +84,7 @@ class CompanyWebsite extends React.Component {
 
   renderContent() {
 
-    const {model, isValid, isLoading, raw} = this.props.CompanyWebsite
+    const {model, isLoading} = this.props.CompanyWebsite
 
     const {meta, social} = model
 
@@ -108,122 +111,26 @@ class CompanyWebsite extends React.Component {
       </div>
     }
 
-    const isPublished = raw && raw.status === 'PUBLISHED'
-
-    const buttons = [
-      {
-        text: i18n.t('company_edit.page_save_publish_action'),
-        icon: "fa-check",
-        mainClass: "btn-primary",
-        onClick: this.publish,
-        disabled: isLoading || !isValid,
-      },
-      {
-        text: i18n.t('company_edit.page_save_draft_action'),
-        icon: "fa-save",
-        mainClass: "btn-secondary",
-        onClick: this.draft,
-        disabled: isLoading || !isValid,
-      }
-    ]
-
-    if (isPublished) {
-      buttons.push({
-        text: i18n.t('company_edit.page_deactivate_action'),
-        icon: "fa-times",
-        mainClass: "btn-default",
-        onClick: this.draft,
-        disabled: isLoading || !isValid,
-      })
-      buttons.push({
-        text: i18n.t('company_edit.page_preview_action'),
-        icon: "fa-eye",
-        mainClass: "btn-info",
-        href: `${parameters.wwwHost}/partners/${model.id}`,
-      })
-    }
-
     return <>
 
-      <div className="d-block d-md-none mb-4">
-        {buttons.map((btn, i) =>
-          btn.onClick
-            ? <button key={i}
-                      className={`btn ${btn.mainClass} btn-block mb-1`}
-                      onClick={btn.onClick}
-                      disabled={!!btn.disabled}>
-              <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-              &nbsp;{btn.text}
-            </button>
-            : <a key={i}
-                 target="_blank"
-                 className={`btn ${btn.mainClass} btn-block mb-1`}
-                 href={btn.href}>
-              <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-              &nbsp;{btn.text}
-            </a>
-        )}
-      </div>
-
-      <div className="card mb-4">
-        <div className="card-header">
-
-          <div className="row">
-            <div className="col-12 mb-2">
-              <h4 className="m-0 text-white">{i18n.t('company_edit.page_title')}</h4>
-              <div>
-                <Status value={model.status}/>
-                &nbsp;{raw && raw.publishedAt ? moment(raw.publishedAt).format('HH:mm DD.MM.YYYY') : ''}
-              </div>
-            </div>
-
-            <div className="col-12 text-center d-none d-md-block">
-              {buttons.map((btn, i) =>
-                btn.onClick
-                  ? <button key={i}
-                            className={`btn ${btn.mainClass} btn-sm mx-1`}
-                            onClick={btn.onClick}
-                            disabled={!!btn.disabled}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-                    &nbsp;{btn.text}
-                  </button>
-                  : <a key={i}
-                       target="_blank"
-                       className={`btn ${btn.mainClass} btn-sm mx-1`}
-                       href={btn.href}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : `fa ${btn.icon}`}/>
-                    &nbsp;{btn.text}
-                  </a>
-              )}
-            </div>
-          </div>
-
+      <div className="mb-4">
+        <div className="form-group">
+          <label className="m-0 required">{i18n.t('company_edit.page.title')}</label>
+          <input type="text" placeholder={i18n.t('placeholder.text')}
+                 className="form-control"
+                 onChange={this.changeString('title')}
+                 value={model.title || ''}/>
+          {this.getError('title')}
         </div>
 
-        <div className="card-body px-0">
-
-          <p className="text-secondary">
-            <i className="fa fa-info-circle"/>&nbsp;{i18n.t('company_edit.page_subtitle')}
-          </p>
-
-          <div className="form-group">
-            <label className="m-0">{i18n.t('company_edit.page.title')}</label>
-            <input type="text" placeholder={i18n.t('placeholder.text')}
-                   className="form-control"
-                   onChange={this.changeString('title')}
-                   value={model.title || ''}/>
-            {this.getError('title')}
-          </div>
-
-          <div className="form-group">
-            <label className="m-0">{i18n.t('company_edit.page.content')}</label>
-            <Editor
-              theme="snow"
-              className="bg-light text-dark"
-              onChange={this.changeHtml('content')}
-              value={model.content || ''}/>
-            {this.getError('content')}
-          </div>
+        <div className="form-group">
+          <label className="m-0 required">{i18n.t('company_edit.page.content')}</label>
+          <Editor
+            theme="snow"
+            className="bg-light text-dark"
+            onChange={this.changeHtml('content')}
+            value={model.content || ''}/>
+          {this.getError('content')}
         </div>
       </div>
 
@@ -231,7 +138,7 @@ class CompanyWebsite extends React.Component {
         <div className="col-12 col-md-6">
           <div className="card mb-4">
             <div className="card-header">
-              <h3 className="m-0 text-white">{i18n.t('company_edit.meta_title')}</h3>
+              <h5 className="m-0 text-white">{i18n.t('company_edit.meta_title')}</h5>
             </div>
             <div className="card-body px-0">
 
@@ -272,7 +179,7 @@ class CompanyWebsite extends React.Component {
         <div className="col-12 col-md-6">
           <div className="card mb-4">
             <div className="card-header">
-              <h3 className="m-0 text-white">{i18n.t('company_edit.social_title')}</h3>
+              <h5 className="m-0 text-white">{i18n.t('company_edit.social_title')}</h5>
             </div>
             <div className="card-body px-0">
 
@@ -365,26 +272,67 @@ class CompanyWebsite extends React.Component {
         </div>
       </div>
 
-
     </>
   }
 
   render() {
 
     const {
+      raw,
+      model,
+      isLoading,
+      isValid,
       serverErrors,
     } = this.props.CompanyWebsite
 
-    return <div className="container-fluid my-3">
+
+    const isPublished = raw && raw.status === 'PUBLISHED'
+
+    const buttons = [
+      {
+        text: i18n.t('company_edit.page_save_publish_action'),
+        icon: "fa-check",
+        mainClass: "btn-primary",
+        onClick: this.publish,
+        disabled: isLoading || !isValid,
+        isLoading
+      },
+      {
+        text: i18n.t('company_edit.page_save_draft_action'),
+        icon: "fa-save",
+        mainClass: "btn-secondary",
+        onClick: this.draft,
+        disabled: isLoading || !isValid,
+        isLoading
+      }
+    ]
+
+    if (isPublished) {
+      buttons.push({
+        text: i18n.t('company_edit.page_deactivate_action'),
+        icon: "fa-times",
+        mainClass: "btn-default",
+        onClick: this.draft,
+        disabled: isLoading || !isValid,
+        isLoading
+      })
+    }
+
+    return <div className="container my-3">
       <div className="row">
+
+        <div className="col-12">
+          <PageTitle
+            title={i18n.t('company_edit.page_title')}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
 
         <div className="col-12 col-md-4 col-lg-3">
           <Sidebar/>
         </div>
 
         <div className="col-12 col-md-8 col-lg-9">
-
-          <Errors errors={serverErrors}/>
 
           {this.renderContent()}
 

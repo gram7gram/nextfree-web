@@ -15,7 +15,7 @@ const Card = ({model, companies}) => {
           className="card shadow-sm mb-1 mr-1 store-card">
 
       <div className="card-header p-1 text-truncate">
-        <i className="fa fa-cub"/>&nbsp;{company ? company.name : "???"}
+        <i className="fa fa-cubes"/>&nbsp;{company ? company.name : "???"}
       </div>
 
       <div className="card-image">

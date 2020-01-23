@@ -5,6 +5,8 @@ import meta from './meta'
 
 const id = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       return action.flatten['_id']
@@ -15,6 +17,8 @@ const id = (prev = null, action) => {
 
 const status = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['status'] !== undefined) {
@@ -33,12 +37,14 @@ const status = (prev = null, action) => {
 
 const isEnabled = (prev = false, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return false
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['isEnabled'] !== undefined) {
         return action.flatten['isEnabled']
       }
-      return null
+      return false
     case Action.WEBSITE_CHANGED:
       if (action.payload['isEnabled'] !== undefined) {
         return action.payload['isEnabled']
@@ -51,6 +57,8 @@ const isEnabled = (prev = false, action) => {
 
 const title = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['title'] !== undefined) {
@@ -69,6 +77,8 @@ const title = (prev = null, action) => {
 
 const content = (prev = null, action) => {
   switch (action.type) {
+    case Action.RESET:
+      return null
     case Action.SAVE_WEBSITE_SUCCESS:
     case Action.FETCH_WEBSITE_SUCCESS:
       if (action.flatten['content'] !== undefined) {

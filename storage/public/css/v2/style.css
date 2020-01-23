@@ -1,6 +1,7 @@
 :root {
     --dark-gray: rgba(255, 255, 255, 0.05);
     --danger: #F43D3B;
+    --danger-dark: #9c2726;
     --dark: #12181F;
     --darker: #0B1119;
     --light: #FFFFFF;
@@ -54,7 +55,6 @@ ul {
 }
 
 .condition-card {
-    border: 2px solid var(--secondary);
     cursor: pointer;
     color: var(--light);
     background-color: var(--dark-gray);
@@ -95,12 +95,35 @@ ul {
     padding-bottom: 5rem !important;
 }
 
+.border-1 {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.border-2 {
+    border-width: 2px;
+    border-style: solid;
+}
+
+.border-3 {
+    border-width: 3px;
+    border-style: solid;
+}
+
 .border-radius-15 {
     border-radius: 15px;
 }
 
 .border-radius-25 {
     border-radius: 25px;
+}
+
+.border-primary {
+    border-color: var(--primary);
+}
+
+.border-danger {
+    border-color: var(--danger);
 }
 
 .border-primary {
@@ -266,6 +289,35 @@ ul {
     background-color: transparent;
     color: var(--light);
     border-color: var(--light);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: var(--light);
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger);
+    color: var(--light-gray);
+    border: none;
+}
+
+.btn-danger.disabled,
+.btn-danger:disabled {
+    background-color: transparent;
+    color: var(--light-gray);
+    border-color: var(--danger-dark);
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+.btn-danger:not(:disabled):not(.disabled):active,
+.btn-danger:not(:disabled):not(.disabled).active,
+.show > .btn-danger.dropdown-toggle {
+    background-color: var(--danger);
+    color: var(--light);
+    border: none;
 }
 
 .circle-left:before {

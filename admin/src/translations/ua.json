@@ -93,6 +93,7 @@
     "not_found_title": "Нічого не знайдено"
   },
   "staff_edit": {
+    "new_title": "Новий співробітник",
     "position_title": "Посада",
     "upload_action": "Завантажити аватар",
     "admin_badge": "Адміністратор",
@@ -151,6 +152,7 @@
     "not_found_title": "Нічого не знайдено"
   },
   "customer_edit": {
+    "new_title": "Новий покупець",
     "security_title": "Безпека",
     "upload_action": "Завантажити аватар",
     "admin_badge": "Адміністратор",
@@ -182,6 +184,7 @@
     "not_found_title": "Нічого не знайдено"
   },
   "owner_edit": {
+    "new_title": "Новий власник",
     "security_title": "Безпека",
     "upload_action": "Завантажити аватар",
     "admin_badge": "Адміністратор",
@@ -214,6 +217,8 @@
     "disabled_badge": "Неактивна"
   },
   "company_website": {
+    "sidebar_title": "Сторінка",
+    "date_published": "Дата публікації",
     "status_published": "Опубліковано",
     "status_in_review": "Перевірка",
     "status_draft": "Чернетка"

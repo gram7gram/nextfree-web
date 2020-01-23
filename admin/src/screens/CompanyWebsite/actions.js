@@ -13,3 +13,4 @@ export const VALIDATE_WEBSITE_SUCCESS = prefix + '/VALIDATE_WEBSITE_SUCCESS';
 export const VALIDATE_WEBSITE_FAILURE = prefix + '/VALIDATE_WEBSITE_FAILURE';
 
 export const WEBSITE_CHANGED = prefix + '/WEBSITE_CHANGED';
+export const RESET = prefix + '/RESET';

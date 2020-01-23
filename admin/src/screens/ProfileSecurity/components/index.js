@@ -4,10 +4,10 @@ import {MODEL_CHANGED, RESET} from '../actions';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
-import Errors from "../../../components/Errors";
 import Password from "../../../components/PasswordInput";
 import ProfileSidebar from "../../Profile/components/ProfileSidebar";
 import password from "../../../utils/password";
+import PageTitle from "../../../components/PageTitle";
 
 class ProfileSecurity extends React.Component {
 
@@ -49,9 +49,27 @@ class ProfileSecurity extends React.Component {
       model, isLoading, isValid, serverErrors,
     } = this.props.ProfileSecurity
 
+    const buttons = [
+      {
+        mainClass: "btn-primary",
+        disabled: isLoading || !isValid,
+        onClick: this.submit,
+        icon: "fa-check",
+        text: i18n.t('profile.action'),
+        isLoading
+      }
+    ]
+
     return <div className="container-fluid my-3">
 
       <div className="row">
+
+        <div className="col-12">
+          <PageTitle
+            title={i18n.t('profile.security_title')}
+            buttons={buttons}
+            serverErrors={serverErrors}/>
+        </div>
 
         <div className="col-12 col-md-4 col-lg-3">
           <ProfileSidebar/>
@@ -59,71 +77,52 @@ class ProfileSecurity extends React.Component {
 
         <div className="col-12 col-md-8 col-lg-9">
 
-          <Errors errors={serverErrors}/>
+          <div className="mb-4">
 
-          <div className="card shadow-sm mb-3">
-            <div className="card-header">
+            <form noValidate autoComplete="off">
               <div className="row">
-                <div className="col">
-                  <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
-                </div>
-                <div className="col-12 col-md-auto text-right">
-                  <button className="btn btn-primary btn-sm"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
-                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                    &nbsp;{i18n.t('profile.action')}
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="card-body">
+                <div className="col-12 col-md-10 col-lg-6 mx-auto">
 
-              <form noValidate autoComplete="off">
-                <div className="row">
-                  <div className="col-12 col-md-10 col-lg-6 mx-auto">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.currentPassword')}</label>
+                    <Password
+                      name="currentPassword"
+                      onChange={this.changeString('currentPassword')}
+                      value={model.currentPassword || ''}/>
+                    {this.getError('currentPassword')}
+                  </div>
 
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('profile.currentPassword')}</label>
-                      <Password
-                        name="currentPassword"
-                        onChange={this.changeString('currentPassword')}
-                        value={model.currentPassword || ''}/>
-                      {this.getError('currentPassword')}
-                    </div>
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.password1')}</label>
+                    <Password
+                      name="password1"
+                      disabled={!model.currentPassword}
+                      onChange={this.changeString('password1')}
+                      value={model.password1 || ''}/>
+                    {this.getError('password1')}
 
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('profile.password1')}</label>
-                      <Password
-                        name="password1"
-                        disabled={!model.currentPassword}
-                        onChange={this.changeString('password1')}
-                        value={model.password1 || ''}/>
-                      {this.getError('password1')}
-
-                      {model.password1 && password.validate(model.password1)
-                        ? <small className="feedback valid-feedback d-block">
-                          {i18n.t('validation.strong_password')}
-                        </small>
-                        : null}
-
-                    </div>
-
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('profile.password2')}</label>
-                      <Password
-                        name="password2"
-                        disabled={!model.password1}
-                        onChange={this.changeString('password2')}
-                        value={model.password2 || ''}/>
-                      {this.getError('password2')}
-                    </div>
+                    {model.password1 && password.validate(model.password1)
+                      ? <small className="feedback valid-feedback d-block">
+                        {i18n.t('validation.strong_password')}
+                      </small>
+                      : null}
 
                   </div>
-                </div>
-              </form>
 
-            </div>
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.password2')}</label>
+                    <Password
+                      name="password2"
+                      disabled={!model.password1}
+                      onChange={this.changeString('password2')}
+                      value={model.password2 || ''}/>
+                    {this.getError('password2')}
+                  </div>
+
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
       </div>
