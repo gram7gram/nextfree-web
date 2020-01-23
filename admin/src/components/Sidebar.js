@@ -102,10 +102,12 @@ const Sidebar = ({isAuthenticated, isMinimized, match}) => {
 
   if (isMinimized || links.length === 0) return null;
 
-  console.log(match);
-
   return <div className="sidebar-container" onClick={toggleMinimize}>
     <nav className="sidebar bg-darker">
+
+      <button className="sidebar-control p-3 text-truncate">
+        {i18n.t('navigation.menu')}
+      </button>
 
       {links.map(link =>
         <Link key={link.to}

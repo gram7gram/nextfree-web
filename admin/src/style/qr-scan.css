@@ -47,9 +47,10 @@
     border-width: 5px !important;
 }
 
+.qr-stack,
 .qr-scanner-overlay,
 .qr-scanner-container video {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 55px);
     width: 100vw;
 }
 

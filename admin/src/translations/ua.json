@@ -1,6 +1,7 @@
 {
   "navigation": {
     "logo": "NextFree",
+    "menu": "Меню",
     "logo_footer": "Адміністратор",
     "register": "Реєстрація",
     "login": "Логін",
@@ -280,7 +281,7 @@
     "placeholder": "Введіть емейл",
     "password": "Пароль",
     "action": "Увійти",
-    "subtitle": "Система управління бонусами для власника компанії"
+    "subtitle": "Керування системою"
   },
   "home": {
     "welcome_title": "Ласкаво просимо, _NAME_!",
