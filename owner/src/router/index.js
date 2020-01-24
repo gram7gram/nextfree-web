@@ -29,6 +29,8 @@ import PasswordReset from '../screens/PasswordReset/components';
 import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
 
+import Purchases from '../screens/Purchases/components';
+
 import ErrorBoundary from "../components/ErrorBoundary";
 import FirstLogin from "../hoc/FirstLogin";
 import Loading from "../hoc/Loading";
@@ -100,6 +102,8 @@ export function createRouter(store) {
             <PrivateRoute exact path={Pages.STAFF} component={Staff}/>
             <PrivateRoute exact path={Pages.STAFF_INVITE} component={StaffInvite}/>
             <PrivateRoute path={Pages.STAFF_EDIT} component={StaffEdit}/>
+
+            <PrivateRoute exact path={Pages.PURCHASES} component={Purchases}/>
           </Loading>
         </Switch>
 

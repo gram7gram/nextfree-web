@@ -1,5 +1,6 @@
 :root {
     --dark-gray: #1e242a;
+    --dark-gray-lighter: #2a323b;
     --danger: #F43D3B;
     --danger-dark: #9c2726;
     --dark: #12181F;
@@ -84,6 +85,27 @@ ul {
 .card-image,
 .card-footer {
     background-color: var(--dark-gray);
+}
+
+.badge-primary {
+    color: var(--light);
+    background-color: var(--primary);
+}
+
+.badge-secondary {
+    color: var(--dark);
+    background-color: var(--light);
+}
+
+.badge-danger {
+    color: var(--light);
+    background-color: var(--danger);
+}
+
+.badge-default {
+    color: var(--light);
+    background-color: transparent;
+    border: 1px solid var(--light);
 }
 
 .space-y {
@@ -342,8 +364,8 @@ ul {
 
 .form-control:focus {
     color: var(--light);
-    background-color: var(--dark-gray);
-    border-color: var(--dark-gray);
+    background-color: var(--dark-gray-lighter);
+    border-color: var(--dark-gray-lighter);
 }
 
 .bg-primary.text-light:hover,

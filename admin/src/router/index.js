@@ -32,6 +32,8 @@ import CustomerEdit from '../screens/CustomerEdit/components';
 import Owner from '../screens/Owner/components';
 import OwnerEdit from '../screens/OwnerEdit/components';
 
+import Purchases from '../screens/Purchases/components';
+
 import ErrorBoundary from "../components/ErrorBoundary";
 import Authentication from "../hoc/Authentication";
 import Sidebar from "../components/Sidebar";
@@ -75,6 +77,8 @@ export function createRouter() {
             <Route exact path={Pages.OWNERS} component={Owner}/>
             <Route exact path={Pages.OWNER_NEW} component={OwnerEdit}/>
             <Route path={Pages.OWNER_EDIT} component={OwnerEdit}/>
+
+            <Route exact path={Pages.PURCHASES} component={Purchases}/>
 
             <Route exact path={Pages.CUSTOMERS} component={Customer}/>
             <Route exact path={Pages.CUSTOMER_NEW} component={CustomerEdit}/>

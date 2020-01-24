@@ -47,6 +47,7 @@ const BonusConditionController = require('./controllers/BonusConditionController
 const UserRESTController = require('./controllers/UserRESTController');
 const CompanyPageRESTController = require('./controllers/CompanyPageRESTController');
 const FeedbackController = require('./controllers/FeedbackController');
+const PurchaseRESTController = require('./controllers/PurchaseRESTController');
 
 const app = express();
 
@@ -99,6 +100,7 @@ app.use('/api/v1', BonusConditionController);
 
 //Private API
 app.use('/api/v1', UserRESTController);
+app.use('/api/v1', PurchaseRESTController);
 
 //Admin API
 app.use('/api/v1/admin', AdminCompanyRESTController);

@@ -8,6 +8,7 @@
     "qr_scanner": "QR сканер",
     "qr_scanner_by_id": "Пошук по ID",
     "profile": "Профіль",
+    "purchases": "Мої покупки",
     "profile_security": "Безпека"
   },
   "profile": {
@@ -154,6 +155,16 @@
     "password1": "Новий пароль",
     "password2": "Повторіть пароль",
     "action": "Зберегти"
+  },
+  "purchases": {
+    "title": "Мої покупки",
+    "not_found_title": "Нічого не знайдено",
+    "location": "Місце",
+    "condition": "Умова бонусу",
+    "date": "Дата",
+    "bonus": "Бонус",
+    "is_bonus": "Бонус!",
+    "is_not_bonus": "Покупка"
   },
   "view_error": {
     "title": "Неможливо відобразити інформацію. Вибачте",

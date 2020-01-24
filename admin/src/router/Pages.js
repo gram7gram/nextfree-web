@@ -26,3 +26,5 @@ export const OWNER_NEW = '/owners/new';
 export const CUSTOMERS = '/customers';
 export const CUSTOMER_EDIT = '/customers/:id/edit';
 export const CUSTOMER_NEW = '/customers/new';
+
+export const PURCHASES = '/purchases';

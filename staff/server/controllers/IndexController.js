@@ -7,12 +7,12 @@ const routes = [
   '/',
 
   '/login',
-  '/register',
 
   '/qr',
   '/scan',
   '/scan-by-id',
 
+  '/purchases',
   '/profile',
   '/profile/security',
   '/logout',

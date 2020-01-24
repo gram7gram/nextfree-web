@@ -55,6 +55,14 @@ const Sidebar = ({isAuthenticated, isVisible, match}) => {
 
   if (isAuthenticated) {
     links.push({
+      to: Pages.PURCHASES,
+      icon: "fa fa-shopping-cart",
+      text: i18n.t('navigation.purchases')
+    })
+  }
+
+  if (isAuthenticated) {
+    links.push({
       to: Pages.COMPANIES,
       icon: "fa fa-cubes",
       text: i18n.t('navigation.companies')

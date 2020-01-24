@@ -2,6 +2,7 @@ export const REGISTER = '/register';
 export const HOME = '/';
 export const LOGIN = '/login';
 export const PROFILE = '/profile';
+export const PURCHASES = '/purchases';
 export const PROFILE_SECURITY = '/profile/security';
 
 export const PASSWORD_SET = '/password-set/:id';

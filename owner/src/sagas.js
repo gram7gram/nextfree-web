@@ -14,6 +14,7 @@ import CompanyWebsite from './screens/CompanyWebsite/sagas';
 import PasswordSet from './screens/PasswordSet/sagas';
 import PasswordReset from './screens/PasswordReset/sagas';
 import QRScanner from './screens/QRScanner/sagas';
+import Purchases from './screens/Purchases/sagas';
 
 export default function* root() {
   yield all([
@@ -31,5 +32,6 @@ export default function* root() {
     fork(PasswordSet),
     fork(PasswordReset),
     fork(QRScanner),
+    fork(Purchases),
   ]);
 }

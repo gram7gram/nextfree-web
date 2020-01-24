@@ -6,6 +6,7 @@ import ProfileSecurity from './screens/ProfileSecurity/sagas';
 import Register from './screens/Register/sagas';
 import PasswordReset from './screens/PasswordReset/sagas';
 import PasswordSet from './screens/PasswordSet/sagas';
+import Purchases from './screens/Purchases/sagas';
 
 export default function* root() {
   yield all([
@@ -15,5 +16,6 @@ export default function* root() {
     fork(Register),
     fork(PasswordReset),
     fork(PasswordSet),
+    fork(Purchases),
   ]);
 }

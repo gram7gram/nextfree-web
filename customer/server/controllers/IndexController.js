@@ -11,6 +11,7 @@ const routes = [
 
   '/qr',
 
+  '/purchases',
   '/profile',
   '/profile/security',
   '/logout',

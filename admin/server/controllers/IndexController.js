@@ -31,6 +31,8 @@ const routes = [
   '/staff/invite',
   '/staff/:id/edit',
 
+  '/purchases',
+  '/login',
   '/profile',
   '/profile/security',
   '/logout',

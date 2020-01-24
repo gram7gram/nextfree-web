@@ -20,6 +20,7 @@ import Activation from '../screens/Activation/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 
+import Purchases from '../screens/Purchases/components';
 import QRScanner from '../screens/QRScanner/components';
 import QRScannerById from '../screens/QRScanner/components/ById';
 
@@ -72,6 +73,8 @@ export function createRouter(store) {
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
           <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>
+
+          <PrivateRoute exact path={Pages.PURCHASES} component={Purchases}/>
 
         </Switch>
       </ErrorBoundary>

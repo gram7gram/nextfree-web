@@ -23,6 +23,7 @@ const routes = [
   '/staff/invite',
   '/staff/:id',
 
+  '/purchases',
   '/profile',
   '/profile/security',
   '/logout',

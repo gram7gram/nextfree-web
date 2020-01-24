@@ -12,6 +12,7 @@
     "my_company_page": "Сторінка компанії",
     "stores": "Торгові точки",
     "staff": "Співробітники",
+    "purchases": "Мої покупки",
     "profile": "Профіль",
     "profile_security": "Безпека"
   },
@@ -284,6 +285,16 @@
     "password1": "Новий пароль",
     "password2": "Повторіть пароль",
     "action": "Зберегти"
+  },
+  "purchases": {
+    "title": "Мої покупки",
+    "not_found_title": "Нічого не знайдено",
+    "condition": "Умова бонусу",
+    "location": "Місце",
+    "date": "Дата",
+    "bonus": "Бонус",
+    "is_bonus": "Бонус!",
+    "is_not_bonus": "Покупка"
   },
   "view_error": {
     "title": "Неможливо відобразити інформацію. Вибачте",

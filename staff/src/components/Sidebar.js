@@ -52,6 +52,14 @@ const Sidebar = ({isAuthenticated, isVisible, match}) => {
     })
   }
 
+  if (isAuthenticated) {
+    links.push({
+      to: Pages.PURCHASES,
+      icon: "fa fa-shopping-cart",
+      text: i18n.t('navigation.purchases')
+    })
+  }
+
   if (isVisible || links.length === 0) return null;
 
   return <div className="sidebar-container" onClick={toggleMenu}>

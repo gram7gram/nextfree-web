@@ -6,6 +6,7 @@
     "logout": "Вихід",
     "qr": "QR код",
     "profile": "Профіль",
+    "purchases": "Мої покупки",
     "profile_security": "Безпека"
   },
   "profile": {
@@ -114,6 +115,16 @@
   "home": {
     "welcome_title": "Ласкаво просимо, _NAME_!",
     "action": "Мій профіль"
+  },
+  "purchases": {
+    "title": "Мої покупки",
+    "not_found_title": "Нічого не знайдено",
+    "location": "Місце",
+    "condition": "Умова бонусу",
+    "date": "Дата",
+    "bonus": "Бонус",
+    "is_bonus": "Бонус!",
+    "is_not_bonus": "Покупка"
   },
   "view_error": {
     "title": "Неможливо відобразити інформацію. Вибачте",

@@ -10,6 +10,7 @@ import Register from '../screens/Register/reducers';
 import PasswordReset from '../screens/PasswordReset/reducers';
 import PasswordSet from '../screens/PasswordSet/reducers';
 import Activation from '../screens/Activation/reducers';
+import Purchases from '../screens/Purchases/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -22,6 +23,7 @@ const createRootReducer = (history) => combineReducers({
   PasswordReset,
   PasswordSet,
   Activation,
+  Purchases,
 });
 
 export default createRootReducer

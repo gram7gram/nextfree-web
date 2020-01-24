@@ -17,6 +17,7 @@ import PasswordReset from '../screens/PasswordReset/components';
 import PasswordSet from '../screens/PasswordSet/components';
 import Activation from '../screens/Activation/components';
 import Login from '../screens/Login/components';
+import Purchases from '../screens/Purchases/components';
 
 import ErrorBoundary from "../components/ErrorBoundary";
 import Sidebar from "../components/Sidebar";
@@ -62,6 +63,8 @@ export function createRouter(store) {
 
           <PrivateRoute exact path={Pages.HOME} component={QR}/>
           <PrivateRoute exact path={Pages.QR_CODE} component={QR}/>
+
+          <PrivateRoute exact path={Pages.PURCHASES} component={Purchases}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
           <PrivateRoute exact path={Pages.PROFILE_SECURITY} component={ProfileSecurity}/>

@@ -7,6 +7,7 @@ export const ACTIVATION = '/activation/:id';
 
 export const QR_CODE = '/qr';
 export const PROFILE = '/profile';
+export const PURCHASES = '/purchases';
 export const PROFILE_SECURITY = '/profile/security';
 
 export const HOME = '/';

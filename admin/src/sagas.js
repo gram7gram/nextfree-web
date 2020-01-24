@@ -15,6 +15,7 @@ import CustomerEdit from './screens/CustomerEdit/sagas';
 import Owner from './screens/Owner/sagas';
 import OwnerEdit from './screens/OwnerEdit/sagas';
 import QRScanner from './screens/QRScanner/sagas';
+import Purchases from './screens/Purchases/sagas';
 
 export default function* root() {
   yield all([
@@ -33,5 +34,6 @@ export default function* root() {
     fork(Owner),
     fork(OwnerEdit),
     fork(QRScanner),
+    fork(Purchases),
   ]);
 }
