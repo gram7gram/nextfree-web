@@ -21,18 +21,56 @@
 
     <section class="container">
 
-        <div class="row space-y">
+        {% set mainBlock = [ 1, 2, 3, 4, 5 ]|random %}
+
+        <div class="row space-y" id="main-variant-{{ mainBlock }}">
             <div class="col-12 col-md-7">
                 <div class="mb-5">
                     <h2 class="h6 text-lowercase circle-left mb-3">зустрічай</h2>
 
-                    <h1 class="font-weight-bold">
-                        Твоя наступна покупка за <span class="text-primary">безцінок.</span>
-                    </h1>
+                    {% if mainBlock == 1 %}
+                        <h1 class="font-weight-bold">
+                            Твоя наступна покупка за <span class="text-primary">
+                                <span id="main-typed">безцінок.</span>
+                            </span>
+                        </h1>
+                    {% endif %}
+
+                    {% if mainBlock == 2 %}
+                        <h1 class="font-weight-bold">
+                            Кожна 4 покупка безкоштовно! <span class="text-primary">
+                                Гарантовано.
+                            </span>
+                        </h1>
+                    {% endif %}
+
+                    {% if mainBlock == 3 %}
+                        <h1 class="font-weight-bold">
+                            Кожна 5 покупка безкоштовно! <span class="text-primary">
+                                Гарантовано.
+                            </span>
+                        </h1>
+                    {% endif %}
+
+                    {% if mainBlock == 4 %}
+                        <h1 class="font-weight-bold">
+                            Кожна 6 покупка безкоштовно! <span class="text-primary">
+                                Гарантовано.
+                            </span>
+                        </h1>
+                    {% endif %}
+
+                    {% if mainBlock == 5 %}
+                        <h1 class="font-weight-bold">
+                            Кожна 7 покупка безкоштовно! <span class="text-primary">
+                                Гарантовано.
+                            </span>
+                        </h1>
+                    {% endif %}
 
                     <p class="m-0 text-secondary">
-                        Створи свою єдину бонусну картку для всіх точок продажу компаній-партнерів. Для цього — просто
-                        зареєструйся на сайті
+                        Створи свій єдиний аккаунт для всіх точок продажу компаній-партнерів.
+                        <br/>Для цього — просто зареєструйся на сайті
                     </p>
                 </div>
 
