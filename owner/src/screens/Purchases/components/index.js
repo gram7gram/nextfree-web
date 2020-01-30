@@ -5,6 +5,7 @@ import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import Card from "./Card";
 import Filter from "./Filter";
+import Stats from "./Stats";
 
 class Purchases extends React.Component {
 
@@ -65,6 +66,9 @@ class Purchases extends React.Component {
               </div>
             </div>
             <div className="card-body px-0">
+
+              <Stats/>
+
               <div className="row">
                 <div className="col-12">
                   {this.renderContent()}

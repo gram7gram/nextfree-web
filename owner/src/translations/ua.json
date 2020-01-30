@@ -293,6 +293,12 @@
     "location": "Місце",
     "date": "Дата",
     "bonus": "Бонус",
+    "next_bonus_in": "До бонусу",
+    "purchase": {
+      "single": "покупка",
+      "plural1": "покупок",
+      "plural2": "покупки"
+    },
     "is_bonus": "Бонус!",
     "is_not_bonus": "Покупка"
   },

@@ -17,11 +17,13 @@ const PurchaseBonus = () => {
 
   const buyer = purchase.buyer.user.lastName + ' ' + purchase.buyer.user.firstName
 
-  return <div className="text-center">
-    <h4>{i18n.t('qr_scanner.purchase_bonus_title')}</h4>
+  return <div className="text-center my-4">
+    <h2 className="text-primary">
+      <i className="fa fa-check"/>&nbsp;{i18n.t('qr_scanner.purchase_bonus_title')}
+    </h2>
     <p>{i18n.t('qr_scanner.purchase_bonus_subtitle').replace('__NAME__', buyer)}</p>
 
-    <button className="btn btn-secondary" onClick={setDefaults}>
+    <button className="btn btn-primary" onClick={setDefaults}>
       {i18n.t('qr_scanner.again_action')}
     </button>
   </div>

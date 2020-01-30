@@ -107,7 +107,7 @@ class Login extends React.Component {
 
                       <Link to={Pages.REGISTER}
                             className="btn btn-secondary btn-block">
-                        <i className="fa fa-key"/>&nbsp;{i18n.t('navigation.register')}
+                        <i className="fa fa-child"/>&nbsp;{i18n.t('navigation.register')}
                       </Link>
 
                     </div>

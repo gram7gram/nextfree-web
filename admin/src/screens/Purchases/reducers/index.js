@@ -10,6 +10,15 @@ const items = (prev = [], action) => {
   }
 }
 
+const meta = (prev = [], action) => {
+  switch (action.type) {
+    case Action.FETCH_SUCCESS:
+      return action.payload.meta
+    default:
+      return prev
+  }
+}
+
 const search = (prev = '', action) => {
   switch (action.type) {
     case Action.FILTER_CHANGED:
@@ -63,6 +72,7 @@ const isLoading = (prev = false, action) => {
 
 export default combineReducers({
   items,
+  meta,
   search,
   isLoading,
   page,

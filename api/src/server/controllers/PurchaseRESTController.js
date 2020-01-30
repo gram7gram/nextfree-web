@@ -40,12 +40,14 @@ router.get('/purchases', isAuthenticated, async (req, res) => {
       }
     }
 
-    let items = []
+    let items = [], meta = []
     const total = await PurchaseRepository.countByFilter(filter)
     if (total > 0) {
       items = await PurchaseRepository.findByFilter(filter, page, limit)
 
       items = items.map(item => PurchaseService.serialize(item))
+
+      meta = await PurchaseService.groupByCompany(buyer._id)
     }
 
     res.status(200).json({
@@ -54,8 +56,8 @@ router.get('/purchases', isAuthenticated, async (req, res) => {
       total,
       count: items.length,
       items,
+      meta
     })
-
 
   } catch (e) {
     ErrorHandler.handle(res, e)

@@ -3,17 +3,17 @@ const Company = require('../model/Company').Company
 const findByFilter = async (filter, page, limit) => {
   const skip = page > 0 && limit > 0 ? limit * (page - 1) : 0
 
-  return await Company.find(filter, null, {skip, limit})
+  return Company.find(filter, null, {skip, limit})
     .sort({createdAt: 'desc'})
     .lean()
 }
 
 const findOneByFilter = async (filter) => {
-  return await Company.findOne(filter).lean()
+  return Company.findOne(filter).lean()
 }
 
 const countByFilter = async (filter) => {
-  return await Company.countDocuments(filter)
+  return Company.countDocuments(filter)
 }
 
 module.exports = {

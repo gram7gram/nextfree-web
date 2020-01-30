@@ -3,20 +3,20 @@ const Staff = require('../model/Staff').Staff
 const findByFilter = async (filter, page, limit) => {
   const skip = page > 0 && limit > 0 ? limit * (page - 1) : 0
 
-  return await Staff.find(filter, null, {skip, limit})
+  return Staff.find(filter, null, {skip, limit})
     .select('-user.password')
     .sort({createdAt: 'desc'})
     .lean()
 }
 
 const findOneByFilter = async (filter) => {
-  return await Staff.findOne(filter)
+  return Staff.findOne(filter)
     .select('-user.password')
     .lean()
 }
 
 const countByFilter = async (filter) => {
-  return await Staff.countDocuments(filter)
+  return Staff.countDocuments(filter)
 }
 
 module.exports = {
