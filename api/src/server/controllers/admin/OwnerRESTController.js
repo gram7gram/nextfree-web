@@ -96,7 +96,11 @@ router.post('/owners', isAdmin, async (req, res) => {
 
   try {
 
+    const {password} = req.body.user
+
     const result = await OwnerService.create(req.body)
+
+    await OwnerService.changePassword(result, password)
 
     await OwnerEmailService.onAccountActivation(result)
 

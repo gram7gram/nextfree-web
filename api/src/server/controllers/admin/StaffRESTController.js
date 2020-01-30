@@ -97,7 +97,11 @@ router.post('/staff', isAdmin, async (req, res) => {
 
   try {
 
+    const {password} = req.body.user
+
     const result = await StaffService.create(req.body)
+
+    await StaffService.changePassword(result, password)
 
     await StaffEmailService.onAccountActivation(result)
 

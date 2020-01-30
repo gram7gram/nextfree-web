@@ -96,7 +96,11 @@ router.post('/customers', isAdmin, async (req, res) => {
 
   try {
 
+    const {password} = req.body.user
+
     const result = await CustomerService.create(req.body)
+
+    await CustomerService.changePassword(result, password)
 
     await CustomerEmailService.onAccountActivation(result)
 
