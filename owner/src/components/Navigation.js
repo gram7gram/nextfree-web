@@ -37,7 +37,7 @@ const Navigation = ({isAuthenticated, isVisible}) => {
         </div>
 
         <div className="col text-left text-md-center">
-          <a href={parameters.host}>
+          <a href={parameters.wwwHost}>
             <img src={`${parameters.storageHost}/img/v2/logo-owner.svg`}
                  alt=""
                  className="img-fluid"/>

@@ -416,6 +416,12 @@ footer .logo {
     width: 100vw;
     height: 100vh;
     position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.sidebar-hidden {
+    display: none !important;
 }
 
 .sidebar {
@@ -429,7 +435,9 @@ footer .logo {
 }
 
 @keyframes slide {
-    100% { left: 0; }
+    100% {
+        left: 0;
+    }
 }
 
 .btn-nav,
@@ -467,12 +475,11 @@ footer .logo {
 }
 
 .id-inputs .id-cell {
-     width: 100%;
-     max-width: 50px;
-     height: 50px;
-     margin: 0 auto
- }
-
+    width: 100%;
+    max-width: 50px;
+    height: 50px;
+    margin: 0 auto
+}
 
 
 .qr-scanner-container,

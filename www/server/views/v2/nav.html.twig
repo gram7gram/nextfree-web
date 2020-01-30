@@ -4,7 +4,7 @@
              class="img-fluid logo">
     </a>
 
-    <ul class="navbar-nav ml-auto text-center">
+    <ul class="navbar-nav ml-auto text-center d-none d-md-flex">
 
         <li class="nav-item mb-1 mb-lg-0">
             <a class="btn btn-link font-weight-normal small"
@@ -24,4 +24,12 @@
             <a class="btn btn-secondary font-weight-bold" href="/login">Вхід</a>
         </li>
     </ul>
+
+    <ul class="navbar-nav ml-auto text-right d-flex d-md-none">
+        <i class="fa fa-bars fa-2x p-2" id="toggle-mobile-menu"></i>
+    </ul>
 </nav>
+
+<div class="d-block d-md-none">
+    {% include './sidebar.html.twig' %}
+</div>

@@ -31,13 +31,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-12 col-lg-2">
             <img src="{% if company.logo %}{{ company.logo }}{% else %}{{ parameters.storageHost }}/img/nextfree-logo.png{% endif %}"
                  alt="{{ company.name }}"
                  id="nav-logo"
-                 class="img-fluid">
+                 class="img-fluid mb-4">
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             <h2 class="h1 font-weight-bold mb-4">{{ i18n.t('partner.bio') }}</h2>
 
             <div class="text-secondary mb-4">
@@ -111,9 +111,9 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-4">
+        <div class="col-12 col-lg-4">
             {% if bonusCondition != null %}
-                <div class="bg-dark-gray rounded p-3">
+                <div class="bg-dark-gray rounded p-3 mb-4">
                     <h3 class="text-primary font-weight-bold">{{ bonusCondition.title }}</h3>
                     <p class="text-secondary font-weight-bold">{{ bonusCondition.description }}</p>
                 </div>

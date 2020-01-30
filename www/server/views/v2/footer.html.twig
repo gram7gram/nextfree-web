@@ -71,3 +71,22 @@
     </div>
 
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+
+<script>
+  $(function () {
+    var menu = $('#mobile-menu');
+    var btn = $('#toggle-mobile-menu');
+
+    btn.on('click', function (e) {
+      e.preventDefault();
+
+      menu.toggleClass('sidebar-hidden');
+    })
+
+    menu.on('click', function () {
+      menu.toggleClass('sidebar-hidden');
+    })
+  })
+</script>
