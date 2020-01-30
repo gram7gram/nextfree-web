@@ -345,7 +345,7 @@ class StaffEdit extends React.Component {
 
     const buttons = []
 
-    if (model.id && model.isEnabled) {
+    if (model.id && !model.isEnabled) {
       buttons.push({
         mainClass: "btn-primary",
         disabled: isLoading || !isValid,
@@ -357,7 +357,7 @@ class StaffEdit extends React.Component {
 
     }
 
-    if (model.id && !model.isEnabled) {
+    if (model.id && model.isEnabled) {
       buttons.push({
         mainClass: "btn-default",
         disabled: isLoading || !isValid,
