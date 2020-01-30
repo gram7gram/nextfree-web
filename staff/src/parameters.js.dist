@@ -10,7 +10,7 @@ export default {
   email: 'nextfree.adm@gmail.com',
   viber: 'viber://chat/?number=380986159269',
   telegram: 'https://t.me/nextfree_ua',
-  messenger: 'https://t.me/test',
+  messenger: null, //'https://t.me/test',
   fbLink: 'https://www.facebook.com/nextfree.ua',
   gtm: {
     enabled: process.env.NODE_ENV === 'production',
