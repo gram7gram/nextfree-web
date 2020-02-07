@@ -44,4 +44,4 @@ certbot certonly \
     -d admin.nextfree.com.ua
 
 crontab -e
-0 0 1 * * certbot renew
+0 0 1 * * cd /var/www/nextfree-web/boot && bash ./05-ssl-renew.sh
