@@ -50,6 +50,7 @@ router.get('/partner-websites', async (req, res) => {
       const companyIds = websites.map(item => item.companyId.toString())
 
       let companies = await Company.find({
+        isEnabled: true,
         _id: {$in: companyIds}
       }).lean()
 
@@ -165,4 +166,3 @@ router.get('/partner-websites/:id', checkId, async (req, res) => {
 })
 
 module.exports = router;
-

@@ -21,52 +21,16 @@
 
     <section class="container">
 
-        {% set mainBlock = [ 1, 2, 3, 4, 5 ]|random %}
-
         <div class="row space-y" id="main-variant-{{ mainBlock }}">
             <div class="col-12 col-md-7">
                 <div class="mb-5">
                     <h2 class="h6 text-lowercase circle-left mb-3">зустрічай</h2>
 
-                    {% if mainBlock == 1 %}
-                        <h1 class="font-weight-bold">
-                            Твоя наступна покупка за <span class="text-primary">
-                                <span id="main-typed">безцінок.</span>
-                            </span>
-                        </h1>
-                    {% endif %}
-
-                    {% if mainBlock == 2 %}
-                        <h1 class="font-weight-bold">
-                            Кожна 4 покупка безкоштовно! <span class="text-primary">
-                                Гарантовано.
-                            </span>
-                        </h1>
-                    {% endif %}
-
-                    {% if mainBlock == 3 %}
-                        <h1 class="font-weight-bold">
-                            Кожна 5 покупка безкоштовно! <span class="text-primary">
-                                Гарантовано.
-                            </span>
-                        </h1>
-                    {% endif %}
-
-                    {% if mainBlock == 4 %}
-                        <h1 class="font-weight-bold">
-                            Кожна 6 покупка безкоштовно! <span class="text-primary">
-                                Гарантовано.
-                            </span>
-                        </h1>
-                    {% endif %}
-
-                    {% if mainBlock == 5 %}
-                        <h1 class="font-weight-bold">
-                            Кожна 7 покупка безкоштовно! <span class="text-primary">
-                                Гарантовано.
-                            </span>
-                        </h1>
-                    {% endif %}
+                    <h1 class="font-weight-bold">
+                        Кожна <span id="promo-count" class="text-primary"></span> покупка безкоштовно! <span class="text-primary">
+                            Гарантовано.
+                        </span>
+                    </h1>
 
                     <p class="m-0 text-secondary">
                         Створи свій єдиний аккаунт для всіх точок продажу компаній-партнерів.
@@ -375,6 +339,30 @@
       tab.addClass('d-block');
       pill.addClass('bg-primary text-light');
     })
+  })
+
+  $(function () {
+      var count = $('#promo-count')
+      var intervalId
+
+      var numbers = [4,5,6,7,8,9,10]
+      var index = -1
+
+      var setNumber = function () {
+
+          ++index
+          if (index >= numbers.length) index = 0
+
+          //var number = numbers[Math.floor(Math.random() * numbers.length)];
+          var number = numbers[index];
+
+          count.text(number)
+      }
+
+      setNumber()
+
+      clearInterval(intervalId)
+      intervalId = setInterval(setNumber, 3000)
   })
 
   $(function () {
